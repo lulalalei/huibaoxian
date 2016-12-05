@@ -5,4 +5,6 @@ package com.bb.hbx.base.v;
  */
 
 public interface BaseView {
+
+     void showMsg(String  msg);
 }
