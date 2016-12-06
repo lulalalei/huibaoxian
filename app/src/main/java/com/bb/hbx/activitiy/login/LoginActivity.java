@@ -1,12 +1,19 @@
 package com.bb.hbx.activitiy.login;
 
+import android.os.Handler;
+
 import com.bb.hbx.base.BaseActivity;
 
 /**
- * Created by Administrator on 2016/12/5.
+ * 登录
+ * Created by fancl
  */
 
 public class LoginActivity extends BaseActivity<LoginPresenter,LoginModel> implements LoginContract.View {
+
+
+
+
     @Override
     public int getLayoutId() {
         return 0;
