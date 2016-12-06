@@ -8,34 +8,84 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
+import com.bb.hbx.base.v.BaseView;
+import com.bb.hbx.utils.InstanceUtil;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
- * Created by Administrator on 2016/12/5.
+ * fragment基础类
+ * Created by fancl
  */
 
-public class BaseFragment<P extends BasePresenter,M extends BaseModel> extends Fragment {
+public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
 
+
+    public P mPresenter;
     public Context mContext;
-
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext=getActivity();
+        mContext = getActivity();
+        mPresenter = InstanceUtil.getInstance(this, 0);
+        if (this instanceof BaseView && mPresenter != null)
+            mPresenter.setVM(this, InstanceUtil.getInstance(this, 1));
     }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(getLayoutId(), container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initdate(savedInstanceState);
+    }
+
+
+    public void onStart() {
+        super.onStart();
 
     }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (unbinder != null)
+            unbinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null)
+            mPresenter.onDetached();
+
+    }
+
+    /**
+     * 布局加载
+     *
+     * @return
+     */
+    public abstract int getLayoutId();
+
+    /**
+     * 数据填充
+     */
+
+    protected abstract void initdate(Bundle savedInstanceState);
+
 }
