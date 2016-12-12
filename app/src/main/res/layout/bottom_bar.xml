@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+   <!-- <include layout="@layout/line_e5" />-->
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/tab1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivTab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/day_icon" />
+
+            <TextView
+                android:id="@+id/tvTab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today2"
+                android:textAppearance="@style/TextAppear.Theme.cb6_Size12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivTab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:src="@drawable/grid_icon" />
+
+            <TextView
+                android:id="@+id/tvTab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bottom_cms"
+                android:textAppearance="@style/TextAppear.Theme.cb6_Size12" />
+        </LinearLayout>
+
+         <RelativeLayout
+             android:id="@+id/tab3"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:clickable="true" >
+
+             <LinearLayout
+                 android:id="@+id/llTab3"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerInParent="true"
+                 android:gravity="center"
+                 android:orientation="vertical" >
+
+                 <ImageView
+                     android:id="@+id/ivTab3"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_centerHorizontal="true"
+                     android:layout_marginBottom="1dp"
+                     android:src="@drawable/menu_message" />
+
+                 <TextView
+                     android:id="@+id/tvTab3"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/duolian41"
+                     android:textAppearance="@style/TextAppear.Theme.A_Size10" />
+             </LinearLayout>
+
+             <RelativeLayout
+                 android:id="@+id/relNum3"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignRight="@id/llTab3"
+                 android:layout_marginRight="-13dp"
+                 android:visibility="gone" >
+
+                 <ImageView
+                     android:layout_width="19dp"
+                     android:layout_height="19dp"
+                     android:layout_centerInParent="true"
+                     android:src="@drawable/icon_message1" />
+
+                 <TextView
+                     android:id="@+id/tvMsgNum3"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_centerInParent="true"
+                     android:maxLength="2"
+                     android:text="80"
+                     android:textAppearance="@style/TextAppear.Theme.A_Size12" />
+             </RelativeLayout>
+         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/tab4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivTab4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:src="@drawable/center_icon" />
+
+            <TextView
+                android:id="@+id/tvTab4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bottom_mine"
+                android:textAppearance="@style/TextAppear.Theme.cb6_Size12" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>-->
+
+
+</LinearLayout>

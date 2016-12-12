@@ -18,4 +18,9 @@ public class LoadingActivity extends BaseActivity {
     public void initView() {
 
     }
+
+    @Override
+    public void initdata() {
+
+    }
 }

@@ -25,6 +25,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter,LoginModel> imple
     }
 
     @Override
+    public void initdata() {
+
+    }
+
+    @Override
     public void loginSuccess() {
 
     }
