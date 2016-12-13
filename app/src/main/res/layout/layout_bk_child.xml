@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/holder" />
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/img"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/img"
+        tools:text="养老保险" />
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_name"
+        android:layout_alignStart="@+id/tv_name"
+        android:layout_centerVertical="true"
+        tools:text="超值保险/全国通赔" />
+
+    <TextView
+        tools:text="￥2500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img"
+        android:layout_alignLeft="@+id/tv_detail"
+        android:layout_alignStart="@+id/tv_detail"
+        android:id="@+id/tv_price_start" />
+
+    <TextView
+        android:text="起"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_price_start"
+        android:layout_toRightOf="@+id/tv_price_start"
+        android:layout_toEndOf="@+id/tv_price_start"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_other" />
+
+    <TextView
+        tools:text="推广费"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_other"
+        android:layout_toRightOf="@+id/tv_other"
+        android:layout_toEndOf="@+id/tv_other"
+        android:id="@+id/tv_added" />
+
+</RelativeLayout>

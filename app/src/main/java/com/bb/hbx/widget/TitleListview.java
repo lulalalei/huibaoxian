@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
@@ -23,9 +24,11 @@ import java.util.TimerTask;
 public class TitleListview extends ListView {
 
 
+    private final static String TAG = TitleListview.class.getSimpleName();
+
     private int height = 100;//给定列表的高度固定
 
-    private int mPosition;//按下时的item
+    private int mPosition = -1;//按下时的item
 
     private int count = 1;//自动滚动下标
 
@@ -50,6 +53,7 @@ public class TitleListview extends ListView {
     }
 
     private void initdata() {
+        Log.i(TAG, "initdata");
         timeTaskScroll = new TimeTaskScroll(this);
         height = MyApplication.dp2px(getContext(), 50);
     }
@@ -57,6 +61,8 @@ public class TitleListview extends ListView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        int heightMeasureSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+//                MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(widthMeasureSpec, height);
 
@@ -72,8 +78,12 @@ public class TitleListview extends ListView {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        Log.i(TAG, "onDetachedFromWindow");
         stopTimeScoll();
+        count = 1;
+
     }
+
 
     //开始滚动
     public void startTimeScoll() {
@@ -88,15 +98,15 @@ public class TitleListview extends ListView {
 
     }
 
-    @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
-        if (visibility == VISIBLE) {
-            startTimeScoll();
-        } else if (visibility == INVISIBLE) {
-            stopTimeScoll();
-        }
-    }
+//    @Override
+//    protected void onVisibilityChanged(View changedView, int visibility) {
+//        super.onVisibilityChanged(changedView, visibility);
+//        if (visibility == VISIBLE) {
+//            startTimeScoll();
+//        } else if (visibility == INVISIBLE) {
+//            stopTimeScoll();
+//        }
+//    }
 
 
     @Override
@@ -141,6 +151,7 @@ public class TitleListview extends ListView {
         public void run() {
             TitleListview view = mTitleListview.get();
             if (view != null) {
+                Log.i(TAG, count + "");
                 view.smoothScrollToPositionFromTop(count++, 0, 200);
                 view.startTimeScoll();
             }
