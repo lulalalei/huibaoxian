@@ -18,11 +18,14 @@ import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BKchildItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
+import com.bb.hbx.bean.JxItem;
 import com.bb.hbx.bean.ModleItem;
+import com.bb.hbx.bean.SafeKind_Item;
 import com.bb.hbx.provide.BKItemProvide;
 import com.bb.hbx.provide.BKchildItemProvide;
 import com.bb.hbx.provide.BannerProvide;
 import com.bb.hbx.provide.BobaoProvide;
+import com.bb.hbx.provide.JxItemProvide;
 import com.bb.hbx.provide.ModleItemProvide;
 import com.bb.hbx.widget.TitleListview;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
@@ -90,6 +93,7 @@ public class HomeActivity extends BaseActivity {
         adapter.register(BobaoItem.class, new BobaoProvide());
         adapter.register(BKItem.class, new BKItemProvide());
         adapter.register(BKchildItem.class, new BKchildItemProvide());
+        adapter.register(JxItem.class, new JxItemProvide());
         rc_list.setAdapter(adapter);
         BannerBean b = new BannerBean();
         List<Integer> list = new ArrayList<>();
@@ -164,6 +168,26 @@ public class HomeActivity extends BaseActivity {
         item.setSafe_add("推广费4");
         items.add(item);
         items.add(new BKItem());
+
+
+        List<SafeKind_Item>its=new ArrayList<>();
+        SafeKind_Item safeKind_item=new SafeKind_Item("家庭意外保险1","买5W赔10w","￥3000",R.drawable.holder);
+        its.add(safeKind_item);
+        SafeKind_Item safeKind_item1=new SafeKind_Item("家庭意外保险2","买5W赔10w","￥3000",R.drawable.holder);
+        its.add(safeKind_item1);
+
+
+
+        JxItem jxItem=new JxItem(R.drawable.holder,its);
+
+
+        List<JxItem>jxItems=new ArrayList<>();
+        jxItems.add(jxItem);
+        jxItems.add(jxItem);
+
+
+
+        items.addAll(jxItems);
         adapter.setItems(items);
 
 
