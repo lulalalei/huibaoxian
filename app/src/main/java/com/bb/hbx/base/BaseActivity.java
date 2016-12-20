@@ -45,6 +45,7 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         mContext = this;
         mPresenter = InstanceUtil.getInstance(this, 0);
         this.initView();
+        this.initListener();
         if (this instanceof BaseView && mPresenter != null)
             mPresenter.setVM(this, InstanceUtil.getInstance(this, 1));
         this.initdata();
@@ -99,10 +100,6 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
     }
 
 
-
-
-
-
     /**
      * 布局加载
      *
@@ -114,6 +111,9 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
      * 初始化控件
      */
     public abstract void initView();
+
+
+    public abstract void initListener();
 
     /**
      * 初始数据

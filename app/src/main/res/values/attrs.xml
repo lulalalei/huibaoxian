@@ -60,4 +60,13 @@
         <attr name="banner_isNeedShowIndicatorOnOnlyOnePage" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="LoginTelEdit">
+
+        <!-- 输入框的开始说明图标和结束图标 -->
+        <attr name="edit_startDrawable" format="reference" />
+        <attr name="edit_endDrawable" format="reference"/>
+
+    </declare-styleable>
+
+
 </resources>

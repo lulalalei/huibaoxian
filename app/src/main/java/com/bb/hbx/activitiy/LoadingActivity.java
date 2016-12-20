@@ -20,6 +20,11 @@ public class LoadingActivity extends BaseActivity {
     }
 
     @Override
+    public void initListener() {
+
+    }
+
+    @Override
     public void initdata() {
 
     }

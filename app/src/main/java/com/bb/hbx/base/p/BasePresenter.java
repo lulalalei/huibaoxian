@@ -4,7 +4,7 @@ package com.bb.hbx.base.p;
  * Created by Administrator on 2016/12/5.
  */
 
-public abstract class BasePresenter<V,M> {
+public abstract class BasePresenter<M,V> {
 
     public M mModel;
 
