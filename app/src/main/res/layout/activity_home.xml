@@ -9,33 +9,28 @@
 
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"/>
+        android:orientation="vertical">
 
 
-
-
-
-
-
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
-
-
-        <!--<FrameLayout-->
-            <!--android:id="@+id/tab_content"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1.0" />-->
+        <FrameLayout
+            android:id="@+id/tab_content"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0" />
 
         <!--<include layout="@layout/bottom_bar" android:id="@+id/bottom1"/>-->
-    <!--</LinearLayout>-->
+
+
+        <com.bb.hbx.widget.BottomBar
+            android:id="@+id/bb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

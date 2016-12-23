@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         implements FlatTypeAdapter, TypePool {
 
 
-    protected  List<? extends Item> items;
+    protected List<? extends Item> items;
 
     private LayoutInflater inflater;
 
@@ -54,6 +55,8 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.items = items;
         notifyDataSetChanged();
     }
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

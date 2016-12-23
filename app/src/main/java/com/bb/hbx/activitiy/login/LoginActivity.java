@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.HomeActivity;
 import com.bb.hbx.activitiy.RegisteActivity;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.utils.AppManager;
@@ -137,8 +138,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_login:
-                if (isverTel() && isverCode())
+                if (isverTel() && isverCode()) {
                     mPresenter.login(et_tel.getText().toString().trim(), et_code.getText().toString().trim());
+                    AppManager.getInstance().showActivity(HomeActivity.class,null);
+                }
                 else
                     showTip("手机号码或验证码有误");
                 break;
@@ -176,7 +179,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
 
 
     private boolean isverCode() {
-        if (!TextUtils.isEmpty(et_code.getText()) && et_tel.getText().toString().trim().length() == 6) {
+        if (!TextUtils.isEmpty(et_code.getText()) && et_code.getText().toString().trim().length() == 6) {
             return true;
         }
         return false;

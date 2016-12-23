@@ -1,5 +1,7 @@
 package com.bb.hbx.activitiy.login;
 
+import android.support.annotation.NonNull;
+
 import com.bb.hbx.base.m.BaseModel;
 
 /**
@@ -12,4 +14,6 @@ public class LoginModel implements LoginContract.Model {
     public void login(String name, String pass) {
 
     }
+
+
 }

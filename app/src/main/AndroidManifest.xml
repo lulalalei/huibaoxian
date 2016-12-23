@@ -15,26 +15,20 @@
             android:name=".activitiy.LoadingActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-           <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
 
         <activity
             android:name=".activitiy.login.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
 
         <activity
-            android:name=".activitiy.home.HomeActivity"
+            android:name=".activitiy.home.Home2Activity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -42,6 +36,23 @@
 
 
 
+        <activity android:name=".activitiy.RegisteActivity"
+            ></activity>
+
+        <activity android:name=".activitiy.HomeActivity"
+            >
+
+
+        </activity>
+
+        <activity android:name=".activitiy.SquareActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <activity
             android:name=".MainActivity"
