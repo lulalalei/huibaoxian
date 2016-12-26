@@ -27,4 +27,10 @@
     <string name="title_activity_main2">Main2Activity</string>
 
 
+
+
+
+    <!-- behavior -->
+
+    <string name="ToolbarAlphaBehavior">com.bb.hbx.behavior.ToolbarAlphaBehavior</string>
 </resources>

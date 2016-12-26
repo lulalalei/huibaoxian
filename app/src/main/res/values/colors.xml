@@ -3,6 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
     <color name="white">#ffffff</color>
+
+
+    <!-- UI配色 -->
+    <color name="A">#2dce8f</color>
+
+    <color name="B">#ff7d37</color>
+
+    <color name="C">#484c4a</color>
+
+    <color name="D">#a8afac</color>
+
+    <color name="E">#c4cac7</color>
+
+
+
 </resources>
