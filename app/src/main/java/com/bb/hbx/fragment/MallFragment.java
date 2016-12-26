@@ -3,8 +3,11 @@ package com.bb.hbx.fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 
 
 import com.bb.hbx.R;
@@ -18,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 
 import static android.os.Build.VERSION_CODES.M;
+import static com.bb.hbx.R.id.toolbar;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -26,10 +30,12 @@ import static android.os.Build.VERSION_CODES.M;
 public class MallFragment extends BaseFragment {
 
 
+    private final static String TAG=MallFragment.class.getSimpleName();
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-   @BindView(R.id.tabs)
+    @BindView(R.id.tabs)
     TabLayout tabs;
 
     @BindView(R.id.viewpager)
@@ -47,6 +53,16 @@ public class MallFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setTitle("");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"haha");
+            }
+        });
 
     }
 
@@ -67,5 +83,15 @@ public class MallFragment extends BaseFragment {
         viewpager.setAdapter(adapter);
         tabs.setupWithViewPager(viewpager);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Log.i(TAG,"haha");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

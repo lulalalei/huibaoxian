@@ -22,7 +22,7 @@ public abstract class BasePageAdapter<T extends BaseFragment> extends FragmentSt
 
     private List<String> listtitle;
 
-    private List<BaseFragment> list = new ArrayList<>();
+    public List<BaseFragment> list = new ArrayList<>();
 
 
     public BasePageAdapter(FragmentManager fm, List<String> listtitle) {

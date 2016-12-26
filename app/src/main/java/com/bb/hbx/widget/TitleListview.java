@@ -151,7 +151,7 @@ public class TitleListview extends ListView {
         public void run() {
             TitleListview view = mTitleListview.get();
             if (view != null) {
-                Log.i(TAG, count + "");
+//                Log.i(TAG, count + "");
                 view.smoothScrollToPositionFromTop(count++, 0, 200);
                 view.startTimeScoll();
             }
