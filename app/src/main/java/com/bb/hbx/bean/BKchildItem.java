@@ -20,6 +20,8 @@ public class BKchildItem implements Item{
 
     private String safe_add;
 
+    private boolean isLine=true;
+
     public BKchildItem(){
 
     }
@@ -63,5 +65,13 @@ public class BKchildItem implements Item{
 
     public void setSafe_add(String safe_add) {
         this.safe_add = safe_add;
+    }
+
+    public boolean isLine() {
+        return isLine;
+    }
+
+    public void setLine(boolean line) {
+        isLine = line;
     }
 }

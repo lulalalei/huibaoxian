@@ -39,7 +39,8 @@ public class BKItemProvide extends ItemViewProvider<BKItem, BKItemProvide.ViewHo
     static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-
+        @BindView(R.id.img_icon)
+        ImageView img_icon;
 
 
         ViewHolder(@NonNull View itemView) {
@@ -50,7 +51,7 @@ public class BKItemProvide extends ItemViewProvider<BKItem, BKItemProvide.ViewHo
 
 
         void setData(@NonNull final BKItem modleItem) {
-
+            img_icon.setImageResource(modleItem.getImg_Id());
         }
     }
 

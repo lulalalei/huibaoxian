@@ -13,6 +13,7 @@
     <color name="A2">#ff7d37</color>
 
     <color name="A3">#484c4a</color>
+    <color name="a3">#484c4a</color>
 
     <color name="A4">#a8afac</color>
 
@@ -27,4 +28,7 @@
 
     <color name="Z56">#ff5d59</color>
 
+    <!-- 透明度-->
+
+    <color name="bg_f">#CCffffff</color>
 </resources>

@@ -24,7 +24,9 @@
     <string name="condition_price">价格排序</string>
     <string name="condition_sale">销量排序</string>
     <string name="condition_filter">筛选</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="searchproduct">搜索产品</string>
+    <string name="howPrice">￥ %1$s</string>
+
 
 
 
@@ -33,4 +35,5 @@
     <!-- behavior -->
 
     <string name="ToolbarAlphaBehavior">com.bb.hbx.behavior.ToolbarAlphaBehavior</string>
+    <string name="SearchViewAlphaBehavior">com.bb.hbx.behavior.SearchViewAlphaBehavior</string>
 </resources>

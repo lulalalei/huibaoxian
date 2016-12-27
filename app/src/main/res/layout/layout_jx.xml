@@ -4,7 +4,10 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
+    android:layout_marginBottom="7dp"
+    android:layout_marginTop="@dimen/y42"
+    android:layout_marginLeft="@dimen/x26"
+    android:layout_marginRight="@dimen/x26"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="10dp"
@@ -19,7 +22,7 @@
         <ImageView
             android:id="@+id/img_kind_res"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/y300"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop" />
 

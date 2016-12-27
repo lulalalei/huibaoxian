@@ -55,7 +55,7 @@ public class TitleListview extends ListView {
     private void initdata() {
         Log.i(TAG, "initdata");
         timeTaskScroll = new TimeTaskScroll(this);
-        height = MyApplication.dp2px(getContext(), 50);
+        //height = MyApplication.dp2px(getContext(), 50);
     }
 
 
@@ -64,7 +64,7 @@ public class TitleListview extends ListView {
 //        int heightMeasureSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
 //                MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(widthMeasureSpec, height);
+//        setMeasuredDimension(widthMeasureSpec, height);
 
     }
 

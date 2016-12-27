@@ -21,6 +21,8 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 
+import static com.bb.hbx.R.id.v_xx;
+
 /**
  * Created by fancl.
  */
@@ -43,17 +45,12 @@ public class JxItemProvide extends ItemViewProvider<JxItem, JxItemProvide.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-//
+        //
         @BindView(R.id.img_kind_res)
         ImageView img_kind_res;
 
         @BindView(R.id.lin_add)
         LinearLayout lin_add;
-
-
-
-
-
 
 
         ViewHolder(@NonNull View itemView) {
@@ -66,31 +63,33 @@ public class JxItemProvide extends ItemViewProvider<JxItem, JxItemProvide.ViewHo
         void setData(@NonNull final JxItem jxItem) {
             img_kind_res.setImageResource(jxItem.getRes_Id());
 
-            if (jxItem.getItems() != null && jxItem.getItems().size() > 0 && lin_add!=null) {
+            if (jxItem.getItems() != null && jxItem.getItems().size() > 0 && lin_add != null) {
                 lin_add.removeAllViews();
                 for (int i = 0; i < jxItem.getItems().size(); i++) {
                     View view = View.inflate(itemView.getContext(), R.layout.layout_jx_item, null);
 
-                    TextView tv_name= (TextView) view.findViewById(R.id.tv_name);
-                    TextView tv_detail= (TextView) view.findViewById(R.id.tv_detail);
-                    TextView tv_price= (TextView) view.findViewById(R.id.tv_price);
-                    ImageView img_right= (ImageView) view.findViewById(R.id.img_right);
+                    TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
+                    TextView tv_detail = (TextView) view.findViewById(R.id.tv_detail);
+                    TextView tv_price = (TextView) view.findViewById(R.id.tv_price);
+                    ImageView img_right = (ImageView) view.findViewById(R.id.img_right);
 
+                    View v_xx = view.findViewById(R.id.v_xx);
                     tv_name.setText(jxItem.getItems().get(i).getKind_name());
                     tv_detail.setText(jxItem.getItems().get(i).getKind_detail());
                     tv_price.setText(jxItem.getItems().get(i).getKind_price());
                     img_right.setImageResource(jxItem.getItems().get(i).getKind_resId());
                     lin_add.addView(view);
+                    if (i == jxItem.getItems().size() - 1) {
+                        v_xx.setVisibility(View.GONE);
+                    } else {
+                        v_xx.setVisibility(View.VISIBLE);
+                    }
                 }
-
-
 
 
             }
         }
     }
-
-
 
 
 }

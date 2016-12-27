@@ -2,8 +2,14 @@ package com.bb.hbx.fragment;
 
 ;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseFragment;
@@ -28,11 +34,19 @@ import java.util.List;
 
 import butterknife.BindView;
 
+
 /**
  * Created by Administrator on 2016/12/20.
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
+
+
+    @BindView(R.id.lin_bg)
+    LinearLayout rel_tool;
+
+    @BindView(R.id.lin_search)
+    LinearLayout lin_search;
 
 
     @BindView(R.id.list)
@@ -42,6 +56,11 @@ public class HomeFragment extends BaseFragment {
 
     private MultiTypeAdapter adapter;
 
+    private float mDistanceY;
+
+    private float endOffset;
+
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home;
@@ -49,6 +68,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        rel_tool.getBackground().mutate().setAlpha(0);//toolbar透明度初始化为0
         final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 5);
         GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -69,6 +89,39 @@ public class HomeFragment extends BaseFragment {
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
         rc_list.setLayoutManager(layoutManager);
+
+        endOffset = getResources().getDimensionPixelOffset(R.dimen.y500) -
+                rel_tool.getHeight();
+        rc_list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                //滑动的距离
+                mDistanceY += dy;
+
+                if (mDistanceY == 0) {
+                    rel_tool.getBackground().mutate().setAlpha(0);
+                } else if (mDistanceY > 0 && mDistanceY < endOffset) {
+                    float precent = mDistanceY / endOffset;
+                    int alpha = Math.round(precent * 255);
+                    rel_tool.getBackground().mutate().setAlpha(alpha);
+                    if (alpha > 125) {
+                        lin_search.setBackgroundResource(R.drawable.shape_alpha_a6);
+                    } else {
+                        lin_search.setBackgroundResource(R.drawable.shape_alpha_white);
+                    }
+                } else if (mDistanceY >= endOffset) {
+                    rel_tool.getBackground().mutate().setAlpha(255);
+
+                }
+
+            }
+        });
+
+        lin_search.setOnClickListener(this);
     }
 
     @Override
@@ -93,11 +146,11 @@ public class HomeFragment extends BaseFragment {
         b.setList(list);
         items = new ArrayList<>();
         items.add(b);
-        items.add(new ModleItem(R.mipmap.ic_launcher, "1"));
-        items.add(new ModleItem(R.mipmap.ic_launcher, "2"));
-        items.add(new ModleItem(R.mipmap.ic_launcher, "3"));
-        items.add(new ModleItem(R.mipmap.ic_launcher, "4"));
-        items.add(new ModleItem(R.mipmap.ic_launcher, "5"));
+        items.add(new ModleItem(R.drawable.chexian, "车险"));
+        items.add(new ModleItem(R.drawable.renshouxian, "人寿险"));
+        items.add(new ModleItem(R.drawable.jiankangxian, "健康险"));
+        items.add(new ModleItem(R.drawable.yiwaixian, "意外险"));
+        items.add(new ModleItem(R.drawable.caichanxian, "财产险"));
 
         List<String> list1 = new ArrayList<>();
         list1.add("今天是星期一" + 111);
@@ -105,7 +158,8 @@ public class HomeFragment extends BaseFragment {
         list1.add("今天是星期三" + 333);
         list1.add("今天是星期四" + 444);
         items.add(new BobaoItem(list1));
-        items.add(new BKItem());
+
+        items.add(new BKItem(R.drawable.baokuantuijian));
 
         BKchildItem item = new BKchildItem();
         item.setRedId(R.drawable.holder);
@@ -153,8 +207,9 @@ public class HomeFragment extends BaseFragment {
         item.setSafe_detail("超值保险/全国通赔4");
         item.setSafe_price("￥2600");
         item.setSafe_add("推广费4");
+        item.setLine(false);
         items.add(item);
-        items.add(new BKItem());
+        items.add(new BKItem(R.drawable.jingxuanzhuanti));
 
 
         List<SafeKind_Item> its = new ArrayList<>();
@@ -174,5 +229,13 @@ public class HomeFragment extends BaseFragment {
 
         items.addAll(jxItems);
         adapter.setItems(items);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.lin_search:
+                break;
+        }
     }
 }

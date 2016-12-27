@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
+
     android:orientation="vertical">
 
 
@@ -11,7 +11,63 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         app:layoutManager="LinearLayoutManager" />
+
+
+    <LinearLayout
+        android:id="@+id/lin_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:background="@color/white"
+        >
+        
+        
+        <LinearLayout
+            android:id="@+id/lin_search"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/shape_alpha_white">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sousuo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppear.Theme.Z55_Size12"
+                android:text="@string/searchproduct"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="11dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tongzhi"/>
+
+        <TextView
+            android:layout_marginTop="-8dp"
+            android:layout_gravity="center"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:text="5"
+            android:gravity="center"
+            android:layout_marginLeft="-5dp"
+            android:textAppearance="@style/TextAppear.Theme.Z55_Size8"
+            android:background="@drawable/shape_z56"/>
+
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

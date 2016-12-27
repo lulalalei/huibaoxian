@@ -3,65 +3,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="@dimen/y264"
+        android:paddingLeft="@dimen/x22"
+        android:paddingRight="@dimen/x22">
 
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            tools:src="@drawable/holder"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
+            android:id="@+id/img_right"
+            android:layout_width="@dimen/x240"
+            android:layout_height="@dimen/y180"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="23dp"
-            android:layout_marginEnd="23dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/img_right" />
-
-        <TextView
-            tools:text="少儿意外险"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="37dp"
-            android:id="@+id/tv_name" />
-
-        <TextView
-            tools:text="少于多少不能保险"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:id="@+id/tv_detail" />
+            android:scaleType="centerCrop"
+            tools:src="@drawable/holder" />
 
         <TextView
-            tools:text="￥2700"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="37dp"
-            android:id="@+id/tv_price" />
+            android:layout_alignTop="@+id/img_right"
+            android:layout_marginTop="5dp"
+            android:textAppearance="@style/TextAppear.Theme.A3_Size16"
+            tools:text="少儿意外险" />
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppear.Theme.A4_Size11"
+            tools:text="少于多少不能保险" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/img_right"
+            android:textAppearance="@style/TextAppear.Theme.A1_Size16"
+            tools:text="@string/howPrice" />
+
+        <TextView
+            android:id="@+id/tv_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_price"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_toEndOf="@+id/tv_price"
+            android:layout_toRightOf="@+id/tv_price"
+            android:text="起"
+            android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+
+        <TextView
+            android:id="@+id/tv_added"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_other"
+            android:layout_marginLeft="@dimen/x32"
+            android:layout_toEndOf="@+id/tv_other"
+            android:layout_toRightOf="@+id/tv_other"
+            android:background="@drawable/tuiguangfeibiaoqian"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppear.Theme.white_Size11"
+            tools:text="推广费" />
+
+        <View
+            android:id="@+id/v_xx"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_below="@+id/img_right"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_gapline"
+            android:layerType="software" />
 
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

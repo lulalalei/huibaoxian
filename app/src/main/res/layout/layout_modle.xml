@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
-
+    android:paddingTop="@dimen/y46"
+    android:paddingBottom="@dimen/y46"
     android:orientation="vertical">
 
 
@@ -22,9 +21,8 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="@dimen/y28"
+        android:textAppearance="@style/TextAppear.Theme.A3_Size13"
         tools:text="title"/>
 
 </LinearLayout>

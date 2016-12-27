@@ -3,15 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/x26"
+    android:paddingRight="@dimen/x26"
+    android:paddingTop="@dimen/y42">
 
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/y180"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
         tools:src="@drawable/holder" />
@@ -21,47 +23,71 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/img"
-        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="@dimen/y22"
+        android:layout_marginLeft="@dimen/x26"
+        android:layout_marginTop="@dimen/y20"
         android:layout_toRightOf="@+id/img"
+        android:textAppearance="@style/TextAppear.Theme.A3_Size16"
         tools:text="养老保险" />
 
     <TextView
         android:id="@+id/tv_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tv_name"
-        android:layout_alignStart="@+id/tv_name"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x26"
+        android:layout_toRightOf="@+id/img"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppear.Theme.A4_Size11"
         tools:text="超值保险/全国通赔" />
 
     <TextView
-        tools:text="￥2500"
+        android:id="@+id/tv_price_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/img"
         android:layout_alignLeft="@+id/tv_detail"
         android:layout_alignStart="@+id/tv_detail"
-        android:id="@+id/tv_price_start" />
+        android:layout_marginBottom="@dimen/y20"
+        android:textAppearance="@style/TextAppear.Theme.A1_Size16"
+        tools:text="@string/howPrice" />
 
     <TextView
-        android:text="起"
+        android:id="@+id/tv_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tv_price_start"
-        android:layout_toRightOf="@+id/tv_price_start"
+        android:layout_marginLeft="@dimen/x15"
         android:layout_toEndOf="@+id/tv_price_start"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/tv_other" />
+        android:layout_toRightOf="@+id/tv_price_start"
+        android:text="起"
+        android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
     <TextView
-        tools:text="推广费"
-        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_added"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tv_other"
-        android:layout_toRightOf="@+id/tv_other"
+        android:layout_marginLeft="@dimen/x32"
         android:layout_toEndOf="@+id/tv_other"
-        android:id="@+id/tv_added" />
+        android:layout_toRightOf="@+id/tv_other"
+        android:background="@drawable/tuiguangfeibiaoqian"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppear.Theme.white_Size11"
+        tools:text="推广费" />
+
+
+    <View
+        android:id="@+id/v_xx"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@+id/img"
+        android:layout_marginTop="@dimen/y42"
+        android:background="@drawable/shape_gapline"
+        android:layerType="software" />
+
+
+
 
 </RelativeLayout>

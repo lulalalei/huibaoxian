@@ -8,40 +8,37 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+    <include layout="@layout/line_e" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/y86"
         android:orientation="horizontal">
 
 
-        <TextView
-
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="小汇报"
-            android:textColor="@color/colorPrimary" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/x36"
+            android:src="@drawable/xioahuibao" />
+
 
         <LinearLayout
             android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorAccent"></LinearLayout>
+            android:layout_height="@dimen/y30"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/x22"
+            android:background="@color/A6">
+
+        </LinearLayout>
 
 
         <com.bb.hbx.widget.TitleListview
             android:id="@+id/tl"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
+            android:layout_height="@dimen/y86"
+            android:listSelector="@null"
             android:divider="@null">
 
         </com.bb.hbx.widget.TitleListview>
@@ -49,8 +46,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+    <include layout="@layout/line_e" />
 </LinearLayout>
