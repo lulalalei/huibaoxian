@@ -12,19 +12,18 @@
         <activity
             android:name=".activitiy.LoadingActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activitiy.login.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activitiy.home.Home2Activity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activitiy.RegisteActivity" />
         <activity
             android:name=".activitiy.HomeActivity"
-
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +31,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activitiy.SquareActivity"></activity>
+        <activity android:name=".activitiy.SquareActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activitiy.PerInsuOrderActivity" />
+        <activity android:name=".activitiy.OrderDetailActivity" />
+        <activity android:name=".activitiy.MyAssertActivity" />
+        <activity android:name=".activitiy.CashActivity" />
+        <activity android:name=".activitiy.AddBankCardActivity" />
+        <activity android:name=".activitiy.SettlementActivity" />
+        <activity android:name=".activitiy.AllIncomeActivity" />
+        <activity android:name=".activitiy.ScoreActivity" />
+        <activity android:name=".activitiy.RedPacketActivity"></activity>
     </application>
 
 </manifest>

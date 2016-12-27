@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/id_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="购买保险(商品编号:23234)"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_tv"
+        android:layout_alignLeft="@id/id_tv"
+        android:layout_marginTop="10dp"
+        android:text="2016-12-08 12:23:53"/>
+    <TextView
+        android:id="@+id/price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textSize="20sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="50dp"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

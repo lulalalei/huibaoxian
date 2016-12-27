@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_all_income"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bb.hbx.activitiy.AllIncomeActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/toolbar">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="累计收入"
+            android:textSize="20sp"
+            android:gravity="center"/>
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/back_iv"
+        android:src="@mipmap/right_arrow"
+        android:layout_margin="10dp"
+        android:onClick="backMethod"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_below="@id/toolbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="2341.56"
+                android:textSize="20sp"
+                android:id="@+id/allIncome_tv"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/divider_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="最近六个月收入"
+                android:padding="10dp"
+                android:background="@android:color/darker_gray" />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerView"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
