@@ -7,16 +7,23 @@
 
 
     <!-- UI配色 -->
-    <color name="A">#2dce8f</color>
+    <color name="A1">#2dce8f</color>
 
-    <color name="B">#ff7d37</color>
+    <color name="A2">#ff7d37</color>
 
-    <color name="C">#484c4a</color>
+    <color name="A3">#484c4a</color>
 
-    <color name="D">#a8afac</color>
+    <color name="A4">#a8afac</color>
 
-    <color name="E">#c4cac7</color>
+    <color name="A5">#c4cac7</color>
+
+    <color name="A6">#e3e3e3</color>
+
+    <color name="A7">#f5f5f5</color>
 
 
+    <color name="Z55">#f0fff9</color>
+
+    <color name="Z56">#ff5d59</color>
 
 </resources>
