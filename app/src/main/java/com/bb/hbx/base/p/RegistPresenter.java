@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.bb.hbx.base.v.RegistContract;
 
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Administrator on 2016/12/5.

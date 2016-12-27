@@ -1,17 +1,8 @@
 package com.bb.hbx.base.p;
 
-import android.os.CountDownTimer;
-import android.util.Log;
-
-import com.bb.hbx.base.m.BaseModel;
-import com.bb.hbx.base.v.RegistContract;
 import com.bb.hbx.base.v.SquareContract;
-import com.bb.hbx.bean.SquareBean;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
+//import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by fancl.

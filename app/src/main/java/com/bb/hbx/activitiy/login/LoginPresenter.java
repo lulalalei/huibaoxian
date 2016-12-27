@@ -3,7 +3,7 @@ package com.bb.hbx.activitiy.login;
 import android.os.CountDownTimer;
 import android.util.Log;
 
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Administrator on 2016/12/5.

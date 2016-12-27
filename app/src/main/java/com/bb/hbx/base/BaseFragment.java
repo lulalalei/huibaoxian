@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
 import com.bb.hbx.base.v.BaseView;
@@ -43,6 +42,9 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if(getLayoutId()==0){
+            return null;
+        }
         View view = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();

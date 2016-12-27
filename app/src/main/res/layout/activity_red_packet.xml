@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_red_packet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bb.hbx.activitiy.RedPacketActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/toolbar">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="我的红包"
+            android:textSize="20sp"
+            android:gravity="center"/>
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/back_iv"
+        android:src="@mipmap/right_arrow"
+        android:layout_margin="10dp"
+        android:onClick="backMethod"/>
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        android:id="@+id/menu_iv"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:onClick="menuMethod"/>
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewPager"
+        android:layout_below="@id/toolbar">
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/tablayout"></android.support.design.widget.TabLayout>
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>

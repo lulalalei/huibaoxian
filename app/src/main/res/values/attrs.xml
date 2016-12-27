@@ -68,5 +68,28 @@
 
     </declare-styleable>
 
+    <declare-styleable name="IncomeTableView">
 
+        <!--坐标轴线条粗细-->
+        <attr name="coordinatesLineWidth" format="dimension"></attr>
+        <!--坐标轴字体大小-->
+        <attr name="coordinatesTextSize" format="dimension"></attr>
+        <!--坐标轴字体颜色-->
+        <attr name="coordinatesTextColor" format="color"></attr>
+        <!--折线颜色-->
+        <attr name="lineColor" format="color" />
+        <!--折线粗细-->
+        <attr name="lineWidth" format="dimension" />
+        <!--小圆点半径-->
+        <attr name="averageCircleradius" format="dimension" />
+        <!--表格的数据类型-->
+        <attr name="tableType" format="string" />
+        <!--大圆点颜色-->
+        <attr name="maxcircleColor" format="color" />
+        <!--小圆点颜色-->
+        <attr name="mincircleColor" format="color" />
+        <!--背景颜色-->
+        <attr name="bgColor" format="color" />
+
+    </declare-styleable>
 </resources>
