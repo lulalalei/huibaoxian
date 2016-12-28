@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
+import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
+import com.bb.hbx.activitiy.login.LoginActivity;
 import com.bb.hbx.base.BaseFragment;
 
 import butterknife.BindView;
@@ -40,6 +42,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     RelativeLayout score_layout;
     @BindView(R.id.redPacket_layout)
     RelativeLayout redPacket_layout;
+    @BindView(R.id.hasLogin)
+    RelativeLayout hasLogin;
+    @BindView(R.id.userName)
+    TextView userName;
+    @BindView(R.id.identify_tv)
+    TextView identify_tv;
+    @BindView(R.id.notLogin_tv)
+    TextView notLogin_tv;
     @BindView(R.id.pCount_tv)
     TextView pCount_tv;
 
@@ -64,6 +74,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         pInsurance_layout.setOnClickListener(this);
         myAsset_layout.setOnClickListener(this);
         score_layout.setOnClickListener(this);
+        redPacket_layout.setOnClickListener(this);
+        notLogin_tv.setOnClickListener(this);
     }
 
     @Override
@@ -102,18 +114,27 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         {
             case R.id.pInsurance_layout:
                 intent.setClass(mContext,PerInsuOrderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.myAsset_layout:
                 intent.setClass(mContext,MyAssertActivity.class);
+                startActivity(intent);
                 break;
             case R.id.score_layout:
                 intent.setClass(mContext, ScoreActivity.class);
+                startActivity(intent);
                 break;
             case R.id.redPacket_layout:
+                intent.setClass(mContext, RedPacketActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.notLogin_tv:
+                //Toast.makeText(mContext,"登录",Toast.LENGTH_SHORT).show();
+                intent.setClass(mContext, LoginActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
         }
-        startActivity(intent);
     }
 }

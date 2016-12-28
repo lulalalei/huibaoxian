@@ -44,7 +44,9 @@
         <activity android:name=".activitiy.SettlementActivity" />
         <activity android:name=".activitiy.AllIncomeActivity" />
         <activity android:name=".activitiy.ScoreActivity" />
-        <activity android:name=".activitiy.RedPacketActivity"></activity>
+        <activity android:name=".activitiy.RedPacketActivity" />
+        <activity android:name=".activitiy.PwdLoginActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 </manifest>

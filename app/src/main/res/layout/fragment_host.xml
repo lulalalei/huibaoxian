@@ -40,7 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/hasLogin"
-                        android:visibility="visible">
+                        android:visibility="gone">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                         android:id="@+id/notLogin_tv"
                         android:text="点击登录"
                         android:gravity="center_vertical"
-                        android:visibility="gone"/>
+                        android:visibility="visible"/>
                 </FrameLayout>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -75,8 +75,8 @@
             </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@android:color/darker_gray"/>
+                android:layout_height="13dp"
+                android:background="@color/colorDivider"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -108,8 +108,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:gravity="center"
-                    android:onClick="pInsuranceMethod">
+                    android:gravity="center">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
@@ -166,8 +165,8 @@
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@android:color/darker_gray"/>
+                android:layout_height="13dp"
+                android:background="@color/colorDivider"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -207,6 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="520"
+                        android:textSize="18dp"
                         android:id="@+id/score_tv"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -225,6 +225,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="520"
+                        android:textSize="18dp"
                         android:id="@+id/redPacket_tv"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -242,6 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="520"
+                        android:textSize="18dp"
                         android:id="@+id/income_tv"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -258,7 +260,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="52000.5"
+                        android:text="5200.5"
+                        android:textSize="18dp"
                         android:id="@+id/leftMoney_tv"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -270,8 +273,8 @@
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@android:color/darker_gray"/>
+                android:layout_height="13dp"
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp">

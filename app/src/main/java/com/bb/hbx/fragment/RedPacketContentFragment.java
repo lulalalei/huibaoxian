@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.cans.Can;
 
 import butterknife.BindView;
 
@@ -15,7 +16,7 @@ import butterknife.BindView;
 
 public class RedPacketContentFragment extends BaseFragment {
 
-    private Context mContext;
+    Context mContext;
     @BindView(R.id.content_layout)
     LinearLayout content_layout;
 
@@ -37,7 +38,7 @@ public class RedPacketContentFragment extends BaseFragment {
 
     @Override
     protected void initdate(Bundle savedInstanceState) {
-       /* Bundle bundle = getArguments();
+        Bundle bundle = getArguments();
         int position = bundle.getInt("position", -1);
         switch (position)
         {
@@ -77,6 +78,6 @@ public class RedPacketContentFragment extends BaseFragment {
             default:
                 break;
         }
-        Can.preFragmentPositionInRedP=position;*/
+        Can.preFragmentPositionInRedP=position;
     }
 }

@@ -1,54 +1,34 @@
 package com.bb.hbx.activitiy.home;
 
-import android.content.Context;
-
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import com.bb.hbx.MyApplication;
-import com.bb.hbx.R;
-import com.bb.hbx.adapter.ListAdapter;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.bean.BKItem;
-import com.bb.hbx.bean.BKchildItem;
-import com.bb.hbx.bean.BannerBean;
-import com.bb.hbx.bean.BobaoItem;
-import com.bb.hbx.bean.JxItem;
-import com.bb.hbx.bean.ModleItem;
-import com.bb.hbx.bean.SafeKind_Item;
-import com.bb.hbx.provide.BKItemProvide;
-import com.bb.hbx.provide.BKchildItemProvide;
-import com.bb.hbx.provide.BannerProvide;
-import com.bb.hbx.provide.BobaoProvide;
-import com.bb.hbx.provide.JxItemProvide;
-import com.bb.hbx.provide.ModleItemProvide;
-import com.bb.hbx.widget.HomeItemDecoration;
-import com.bb.hbx.widget.TitleListview;
-import com.bb.hbx.widget.multitype.MultiTypeAdapter;
-import com.bb.hbx.widget.multitype.data.Item;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-
-import butterknife.BindView;
-import butterknife.internal.Utils;
 
 /**
  * Created by Administrator on 2016/12/12.
  */
 
 public class Home2Activity extends BaseActivity {
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initdata() {
+
+    }
 
 
-    List<Item> items;
+   /* List<Item> items;
 
     @BindView(R.id.list)
     RecyclerView rc_list;
@@ -196,7 +176,7 @@ public class Home2Activity extends BaseActivity {
         adapter.setItems(items);
 
 
-    }
+    }*/
 
 
 }

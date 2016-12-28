@@ -4,8 +4,11 @@ import android.support.v4.app.Fragment;
 
 import com.bb.hbx.fragment.AllInPIOFragment;
 import com.bb.hbx.fragment.HadPaiedInPIOFragment;
+import com.bb.hbx.fragment.RecordInRedPaFragment;
 import com.bb.hbx.fragment.UnEfficientInPIOFragment;
+import com.bb.hbx.fragment.UnEfficientInRedPaFragment;
 import com.bb.hbx.fragment.UnPayInPIOFragment;
+import com.bb.hbx.fragment.UnUsedInRedPaFragment;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,14 @@ public class Can {
         fragmentList.add(UnPayInPIOFragment.getInstance());
         fragmentList.add(HadPaiedInPIOFragment.getInstance());
         fragmentList.add(UnEfficientInPIOFragment.getInstance());
+        return fragmentList;
+    }
+    public static ArrayList<Fragment> getFragmentListInRedP()
+    {
+        ArrayList<Fragment> fragmentList=new ArrayList<>();
+        fragmentList.add(UnUsedInRedPaFragment.getInstance());
+        fragmentList.add(RecordInRedPaFragment.getInstance());
+        fragmentList.add(UnEfficientInRedPaFragment.getInstance());
         return fragmentList;
     }
 }
