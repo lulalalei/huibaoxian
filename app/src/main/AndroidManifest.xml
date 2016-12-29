@@ -63,7 +63,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activitiy.PersonInfoSettingActivity" />
         <activity android:name=".activitiy.EditNameActivity" />
-        <activity android:name=".activitiy.SexActivity"></activity>
+        <activity android:name=".activitiy.SexActivity" />
+        <activity android:name=".activitiy.AddressManagerActivity"></activity>
     </application>
 
 </manifest>

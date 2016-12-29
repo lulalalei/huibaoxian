@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_address_manager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bb.hbx.activitiy.AddressManagerActivity">
+
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_iv"
+            android:src="@drawable/fanhui"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="18dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地址管理"
+            android:textSize="22sp"
+            android:textColor="@color/A1"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@id/divider_tv"
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:background="@color/colorDivider"
+        android:layout_below="@id/topbar_layout"/>
+
+</RelativeLayout>

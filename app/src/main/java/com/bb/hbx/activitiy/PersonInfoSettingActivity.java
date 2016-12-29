@@ -14,10 +14,12 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
 
     @BindView(R.id.name_layout)
     RelativeLayout name_layout;
-    @BindView(R.id.countSafe_layout)
-    RelativeLayout countSafe_layout;
     @BindView(R.id.sex_layout)
     RelativeLayout sex_layout;
+    @BindView(R.id.address_layout)
+    RelativeLayout address_layout;
+    @BindView(R.id.countSafe_layout)
+    RelativeLayout countSafe_layout;
 
     @Override
     public int getLayoutId() {
@@ -31,8 +33,9 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
     @Override
     public void initListener() {
         name_layout.setOnClickListener(this);
-        countSafe_layout.setOnClickListener(this);
         sex_layout.setOnClickListener(this);
+        address_layout.setOnClickListener(this);
+        countSafe_layout.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +54,10 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.sex_layout:
                 intent.setClass(PersonInfoSettingActivity.this,SexActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.address_layout:
+                intent.setClass(PersonInfoSettingActivity.this,AddressManagerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.countSafe_layout:
