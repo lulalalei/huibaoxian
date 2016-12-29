@@ -2,6 +2,7 @@ package com.bb.hbx.fragment;
 
 import android.os.Bundle;
 
+import com.bb.hbx.R;
 import com.bb.hbx.base.BaseFragment;
 
 /**
@@ -13,7 +14,7 @@ public class ClassFragment extends BaseFragment {
     
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.condition;
     }
 
     @Override

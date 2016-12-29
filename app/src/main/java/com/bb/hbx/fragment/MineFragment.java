@@ -17,12 +17,14 @@ import android.widget.Toast;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
+import com.bb.hbx.activitiy.PersonInfoSettingActivity;
 import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
 import com.bb.hbx.activitiy.login.LoginActivity;
 import com.bb.hbx.base.BaseFragment;
 
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -32,12 +34,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.userIcon_civ)
+    CircleImageView userIcon_civ;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     @BindView(R.id.pInsurance_layout)
     RelativeLayout pInsurance_layout;
-    @BindView(R.id.myAsset_layout)
-    RelativeLayout myAsset_layout;
+    @BindView(R.id.myAsset_tv)
+    TextView myAsset_tv;
     @BindView(R.id.score_layout)
     RelativeLayout score_layout;
     @BindView(R.id.redPacket_layout)
@@ -70,12 +74,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         toolbar.setTitle("");
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
+        toolbar.inflateMenu(R.menu.menu_host);
 
+        userIcon_civ.setOnClickListener(this);
         pInsurance_layout.setOnClickListener(this);
-        myAsset_layout.setOnClickListener(this);
+        myAsset_tv.setOnClickListener(this);
         score_layout.setOnClickListener(this);
         redPacket_layout.setOnClickListener(this);
         notLogin_tv.setOnClickListener(this);
+
+        toolbar.setNavigationIcon(R.drawable.message);
     }
 
     @Override
@@ -94,7 +102,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case R.id.notification_menu:
+            case android.R.id.home:
                 Toast.makeText(mContext,"通知",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.setting_menu:
@@ -116,7 +124,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 intent.setClass(mContext,PerInsuOrderActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.myAsset_layout:
+            case R.id.userIcon_civ:
+                intent.setClass(mContext,PersonInfoSettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.myAsset_tv:
                 intent.setClass(mContext,MyAssertActivity.class);
                 startActivity(intent);
                 break;

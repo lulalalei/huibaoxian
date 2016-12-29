@@ -56,7 +56,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="32dp"
-                android:layout_below="@id/logo_layout">
+                android:layout_below="@id/logo_layout"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
                 <ImageView
                     android:id="@+id/phone_iv"
                     android:layout_width="wrap_content"
@@ -69,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:edit_endDrawable="@mipmap/ic_launcher"
+                    android:background="@null"
                     android:hint="请输入手机号"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
@@ -80,7 +83,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@drawable/shape_alpha_a10"
-                android:layout_below="@id/phone_layout">
+                android:layout_below="@id/phone_layout"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
                 <ImageView
                     android:id="@+id/pwd_iv"
                     android:layout_width="wrap_content"

@@ -28,7 +28,15 @@
     <string name="searchproduct">搜索产品</string>
     <string name="howPrice">￥ %1$s</string>
 
-
+    <string name="myOrder">我的订单</string>
+    <string name="perInsure">个险保障</string>
+    <string name="carInsure">车险保障</string>
+    <string name="myAsset">我的资产</string>
+    <string name="turnToMoney">提现</string>
+    <string name="canCash">可提现</string>
+    <string name="leftMoney">余额</string>
+    <string name="score">积分</string>
+    <string name="redPacket">红包</string>
 
     <!-- behavior -->
 

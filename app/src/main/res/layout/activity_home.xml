@@ -29,6 +29,7 @@
 
         <com.bb.hbx.widget.BottomBar
             android:id="@+id/bb"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

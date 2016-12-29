@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
     <color name="colorTextBg">#3eaaef</color>
+    <color name="colorUnIndetifyBg">#9a9aff</color>
+    <color name="colorTextSub">#1d825b</color>
 
 
     <!-- UI配色 -->
@@ -29,7 +31,9 @@
 
     <color name="Z55">#f0fff9</color>
 
-    <color name="Z56">#ff5d59</color>
+    <color name="Z54">#ff5d59</color>
+
+
 
     <!-- 透明度-->
 
