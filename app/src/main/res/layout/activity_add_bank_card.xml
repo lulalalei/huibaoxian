@@ -18,13 +18,13 @@
             android:gravity="center"/>
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/back_iv"
-        android:src="@mipmap/right_arrow"
-        android:layout_margin="10dp"
-        android:onClick="backMethod"/>
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/back_iv"-->
+        <!--android:src="@mipmap/right_arrow"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:onClick="backMethod"/>-->
     <TextView
         android:id="@+id/show_tv"
         android:layout_width="match_parent"

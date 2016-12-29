@@ -64,7 +64,17 @@
 
         <!-- 输入框的开始说明图标和结束图标 -->
         <attr name="edit_startDrawable" format="reference" />
-        <attr name="edit_endDrawable" format="reference"/>
+        <attr name="edit_endDrawable" format="reference" />
+
+    </declare-styleable>
+
+    <declare-styleable name="LoginPswEdit">
+
+        <!-- 输入框的开始说明图标和结束图标 -->
+        <attr name="edit_Drawable" format="reference" />
+        <attr name="edit_lookDrawable" format="reference" />
+        <attr name="edit_unLookDrawable" format="reference" />
+        <attr name="islook" format="boolean" />
 
     </declare-styleable>
 
@@ -92,4 +102,6 @@
         <attr name="bgColor" format="color" />
 
     </declare-styleable>
+
+
 </resources>

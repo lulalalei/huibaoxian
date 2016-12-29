@@ -1,7 +1,12 @@
 package com.bb.hbx.activitiy;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
@@ -15,6 +20,7 @@ import com.bb.hbx.widget.BottomBar;
 import butterknife.BindView;
 
 import static android.R.attr.fragment;
+import static android.view.Window.FEATURE_NO_TITLE;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -39,8 +45,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
-
     }
 
     @Override

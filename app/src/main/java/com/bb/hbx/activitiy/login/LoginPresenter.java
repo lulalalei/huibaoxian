@@ -12,21 +12,7 @@ import static android.content.ContentValues.TAG;
 public class LoginPresenter extends LoginContract.Presenter {
 
 
-    private CountDownTimer mCountDownTimer = new CountDownTimer(60000, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            int progress = (int) millisUntilFinished / 1000;
-            Log.i(TAG, "progress:" + progress);
-            mView.processTime(progress);
 
-
-        }
-
-        @Override
-        public void onFinish() {
-            mView.endTime();
-        }
-    };
 
 
     @Override
@@ -34,15 +20,5 @@ public class LoginPresenter extends LoginContract.Presenter {
 
     }
 
-    @Override
-    public void startTime() {
-        mCountDownTimer.start();
-    }
 
-    @Override
-    public void cancelTime() {
-        if(mCountDownTimer!=null){
-            mCountDownTimer.cancel();
-        }
-    }
 }

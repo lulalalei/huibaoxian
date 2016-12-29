@@ -86,7 +86,7 @@ public class BKchildItemProvide extends ItemViewProvider<BKchildItem, BKchildIte
             tv_price_start.setText(bKchildItem.getSafe_price());
             tv_added.setText(bKchildItem.getSafe_add());
             if (!bKchildItem.isLine()) {
-                v_xx.setVisibility(View.GONE);
+                v_xx.setVisibility(View.INVISIBLE);
             } else {
                 v_xx.setVisibility(View.VISIBLE);
 

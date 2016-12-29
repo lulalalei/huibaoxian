@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">汇报险</string>
+    <string name="app_name">汇保险</string>
     <string name="action_settings">Settings</string>
     <string name="home">首页</string>
     <string name="telphone">手机号</string>
     <string name="VerificationCode">短信验证码</string>
     <string name="getVerificationCode">获取验证码</string>
     <string name="agreement">已阅读并同意</string>
-    <string name="agreementProtocal">《会保险注册协议》</string>
+    <string name="agreementProtocal">《汇保险注册协议》</string>
     <string name="login">立即登录</string>
     <string name="processTime">重发(%1$s秒)</string>
     <string name="passwordlogin">密码登录</string>
-    <string name="passworddetail">密码(6-20位数字、字母组合)</string>
+    <string name="passworddetail">请输入密码(6-20位数字、字母组合)</string>
     <string name="regist">立即注册</string>
     <string name="gologin">已有账号,去登录</string>
     <string name="iregist">我要注册</string>
@@ -27,6 +27,11 @@
     <string name="condition_filter">筛选</string>
     <string name="searchproduct">搜索产品</string>
     <string name="howPrice">￥ %1$s</string>
+    <string name="hotsearch">热门搜索</string>
+
+    <string name="hintphone">请输入手机号码</string>
+    <string name="otherlogin">其他登录方式</string>
+    <string name="hasaccount">已有账号,去登录</string>
 
     <string name="myOrder">我的订单</string>
     <string name="perInsure">个险保障</string>

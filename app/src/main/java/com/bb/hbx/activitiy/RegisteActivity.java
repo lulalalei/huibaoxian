@@ -4,47 +4,58 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.login.LoginActivity;
+import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.m.RegistModel;
 import com.bb.hbx.base.p.RegistPresenter;
 import com.bb.hbx.base.v.RegistContract;
+import com.bb.hbx.interfaces.LoginTextWatcher;
+import com.bb.hbx.utils.AppManager;
+import com.bb.hbx.widget.CountDownTextView;
+import com.bb.hbx.widget.LoginPswEdit;
 import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
 
-import static com.bb.hbx.R.id.tv_getcode;
-import static com.bb.hbx.R.id.tv_gologin;
-import static com.bb.hbx.R.id.tv_regist;
 
 /**
  * Created by fancl on 2016/12/20.
  */
 
-public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> implements RegistContract.View, View.OnClickListener {
+public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> implements LoginContract.View, View.OnClickListener {
 
 
-    @BindView(R.id.et_tel)
-    LoginTelEdit et_tel;
+    @BindView(R.id.back_iv)
+    ImageView back_iv;
 
-    @BindView(R.id.et_code)
-    EditText et_code;
+    @BindView(R.id.et_phone)
+    LoginTelEdit et_phone;
 
-    @BindView(R.id.et_password)
-    LoginTelEdit et_password;
+    @BindView(R.id.et_yzm)
+    EditText et_yzm;
 
+    @BindView(R.id.tv_getcode)
+    CountDownTextView tv_getcode;
+
+    @BindView(R.id.et_psw)
+    LoginPswEdit et_psw;
+
+    @BindView(R.id.ck_agree)
+    CheckBox ck_agree;
 
     @BindView(R.id.tv_regist)
     TextView tv_regist;
-    @BindView(R.id.tv_getcode)
-    TextView tv_getcode;
 
-
-    @BindView(R.id.tv_gologin)
-    TextView tv_gologin;
+    @BindView(R.id.tv_passwordlogin)
+    TextView tv_passwordlogin;
 
 
     @Override
@@ -60,30 +71,22 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
     @Override
     public void initListener() {
         tv_getcode.setOnClickListener(this);
-        tv_gologin.setOnClickListener(this);
         tv_regist.setOnClickListener(this);
-
-        et_tel.addTextChangedListener(new TextWatcher() {
+        tv_passwordlogin.setOnClickListener(this);
+        back_iv.setOnClickListener(this);
+        et_phone.addTextChangedListener(new LoginTextWatcher(tv_regist, this));
+        et_yzm.addTextChangedListener(new LoginTextWatcher(tv_regist, this));
+        et_psw.addTextChangedListener(new LoginTextWatcher(tv_regist, this));
+        ck_agree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (TextUtils.isEmpty(s)) {
-                    et_tel.setCompoundDrawables(null, null, null, null);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isverTel() && isverCode() && isverpassword() && isChecked) {
+                    tv_regist.setBackgroundResource(R.drawable.shape_btn_a1);
                 } else {
-                    et_tel.setCompoundDrawables(null, null, et_tel.getEdit_endDrawable(), null);
+                    tv_regist.setBackgroundResource(R.drawable.shape_btn_a6);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
-
     }
 
     @Override
@@ -96,30 +99,11 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
 
     }
 
-    public void startTime() {
-        tv_getcode.setEnabled(false);
-    }
-
-
-    @Override
-    public void processTime(int time) {
-        if (tv_getcode != null) {
-            tv_getcode.setText(getString(R.string.processTime, time + ""));
-        }
-    }
-
-    @Override
-    public void endTime() {
-        if (tv_getcode != null) {
-            tv_getcode.setEnabled(true);
-            tv_getcode.setText(getString(R.string.getVerificationCode));
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.cancelTime();
+
     }
 
 
@@ -128,14 +112,13 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
         switch (v.getId()) {
             case R.id.tv_getcode:
                 if (isverTel()) {
-                    startTime();
-                    mPresenter.startTime();
+                    tv_getcode.startTime();
                 } else
                     showTip("请输入正确的手机号码");
                 break;
 
-            case R.id.tv_gologin:
-                finish();
+            case R.id.tv_passwordlogin:
+                AppManager.getInstance().showActivity(LoginActivity.class, null);
                 break;
             case R.id.tv_regist:
                 if (!isverTel()) {
@@ -151,34 +134,51 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
                     showTip("密码不正确");
                     return;
                 }
-                mPresenter.regist(et_tel.getText().toString().trim(), et_password.getText().toString().trim(),
-                        et_code.getText().toString().trim());
+                mPresenter.regist(et_phone.getText().toString().trim(), et_psw.getText().toString().trim(),
+                        et_yzm.getText().toString().trim());
+                break;
+
+            case R.id.back_iv:
+                finish();
                 break;
 
         }
     }
 
-    private boolean isverTel() {
-        if (!TextUtils.isEmpty(et_tel.getText()) && et_tel.getText().toString().trim().length() == 11) {
+    @Override
+    public void loginSuccess() {
+
+    }
+
+    @Override
+    public boolean isverTel() {
+        if (!TextUtils.isEmpty(et_phone.getText()) && et_phone.getText().toString().trim().length() == 11) {
             return true;
         }
         return false;
     }
 
-
-    private boolean isverCode() {
-        if (!TextUtils.isEmpty(et_code.getText()) && et_tel.getText().toString().trim().length() == 6) {
+    @Override
+    public boolean isverCode() {
+        if (!TextUtils.isEmpty(tv_getcode.getText())) {
             return true;
         }
         return false;
     }
 
-    private boolean isverpassword() {
-        if (!TextUtils.isEmpty(et_password.getText()) && et_password.getText().toString().trim().length() >= 6
-                && et_password.getText().toString().trim().length() <= 20) {
+    @Override
+    public boolean isverpassword() {
+        if (!TextUtils.isEmpty(et_psw.getText()) && et_psw.getText().toString().trim().length() >= 6
+                && et_psw.getText().toString().trim().length() <= 20) {
             return true;
         }
         return false;
     }
+
+    @Override
+    public boolean isCheckbx() {
+        return ck_agree.isChecked();
+    }
+
 
 }

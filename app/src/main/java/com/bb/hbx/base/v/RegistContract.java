@@ -17,22 +17,24 @@ public interface RegistContract {
         void regist(String tel, String pass, String code);
     }
 
-    interface View extends BaseView {
+//    interface View extends BaseView {
+//
+//
+//        boolean isverTel();
+//
+//        boolean isverCode();
+//
+//        boolean isverpassword();
+//
+//        boolean isCheckbx();
+//
+//
+//    }
 
-        void processTime(int time);
-
-        void endTime();
-
-
-    }
-
-    abstract class Presenter extends BasePresenter<Model, View> {
+    abstract class Presenter extends BasePresenter<Model, LoginContract.View> {
 
         public abstract void regist(String tel, String pass, String code);
 
-        public abstract void startTime();
-
-        public abstract void cancelTime();
 
     }
 }

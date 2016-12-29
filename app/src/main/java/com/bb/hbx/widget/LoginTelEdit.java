@@ -3,6 +3,9 @@ package com.bb.hbx.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,7 +51,28 @@ public class LoginTelEdit extends EditText {
             edit_endDrawable.setBounds(0, 0, edit_endDrawable.getMinimumWidth(), edit_endDrawable.getMinimumHeight());//对图片进行压缩
         }
 
-        LoginTelEdit.this.setCompoundDrawables(null, null, startDrawable, null);
+        LoginTelEdit.this.setCompoundDrawables(startDrawable, null, null, null);
+
+        this.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(s)) {
+                    LoginTelEdit.this.setCompoundDrawables(startDrawable, null, null, null);
+                } else {
+                    LoginTelEdit.this.setCompoundDrawables(startDrawable, null, edit_endDrawable, null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         this.setOnTouchListener(new OnTouchListener() {
             @Override
@@ -91,4 +115,6 @@ public class LoginTelEdit extends EditText {
     public void setEdit_endDrawable(Drawable edit_endDrawable) {
         this.edit_endDrawable = edit_endDrawable;
     }
+
+
 }

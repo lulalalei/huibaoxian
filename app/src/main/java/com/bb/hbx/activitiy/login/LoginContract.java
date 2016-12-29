@@ -21,18 +21,22 @@ public interface LoginContract {
 
         void loginSuccess();
 
-        void processTime(int time);
 
-        void endTime();
+        boolean isverTel();
+
+        boolean isverCode();
+
+        boolean isverpassword();
+
+        boolean isCheckbx();
+
 
     }
 
     abstract class Presenter extends BasePresenter<Model, View> {
         public abstract void login(String name, String pass);
 
-        public abstract void startTime();
 
-        public abstract void cancelTime();
 
         @Override
         public void onAttached() {}

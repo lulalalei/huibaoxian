@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.SearchActivity;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BKchildItem;
@@ -26,6 +27,7 @@ import com.bb.hbx.provide.BannerProvide;
 import com.bb.hbx.provide.BobaoProvide;
 import com.bb.hbx.provide.JxItemProvide;
 import com.bb.hbx.provide.ModleItemProvide;
+import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -235,6 +237,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.lin_search:
+                AppManager.getInstance().showActivity(SearchActivity.class,null);
                 break;
         }
     }

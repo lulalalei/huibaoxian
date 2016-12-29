@@ -22,6 +22,11 @@
         <item name="android:textColor">@color/A4</item>
     </style>
 
+    <style name="TextAppear.Theme.A3_Size11" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/A3</item>
+    </style>
+
     <style name="TextAppear.Theme.A1_Size16" parent="android:TextAppearance.Theme">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/A1</item>
@@ -42,6 +47,60 @@
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/A3</item>
     </style>
+
+    <style name="TextAppear.Theme.A1_Size11" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/A1</item>
+    </style>
+
+
+    <style name="TextAppear.Theme.A3_Size14" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/A3</item>
+
+    </style>
+
+    <style name="TextAppear.Theme.A1_Size14" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/A1</item>
+
+    </style>
+
+
+    <style name="TextAppear.Theme.white_Size18" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppear.Theme.A4_Size12" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/A4</item>
+    </style>
+
+    <style name="TextAppear.Theme.A6_Size12" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/A6</item>
+    </style>
+
+
+
+    <style name="TextAppear.Theme.Size14" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorHint">@color/A5</item>
+    </style>
+    <style name="TextAppear.Theme.Size12" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColorHint">@color/A5</item>
+    </style>
+
+
+    <style name="mycheckbox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/agree_select</item>
+
+    </style>
+
+
+
 
 
 
