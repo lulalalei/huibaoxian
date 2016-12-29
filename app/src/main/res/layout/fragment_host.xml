@@ -42,8 +42,8 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:id="@+id/hasLogin"
-                        android:visibility="gone"
+                        android:id="@+id/notLogin_layout"
+                        android:visibility="visible"
                         android:layout_gravity="center_horizontal">
                         <TextView
                             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                         android:id="@+id/notLogin_tv"
                         android:text="点击登录"
                         android:gravity="center_vertical"
-                        android:visibility="visible"/>
+                        android:visibility="gone"/>
                 </FrameLayout>
 
                 <LinearLayout

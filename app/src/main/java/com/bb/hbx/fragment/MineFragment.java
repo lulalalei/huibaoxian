@@ -46,8 +46,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     RelativeLayout score_layout;
     @BindView(R.id.redPacket_layout)
     RelativeLayout redPacket_layout;
-    @BindView(R.id.hasLogin)
-    RelativeLayout hasLogin;
+    @BindView(R.id.notLogin_layout)
+    RelativeLayout notLogin_layout;
     @BindView(R.id.userName)
     TextView userName;
     @BindView(R.id.identify_tv)
@@ -81,7 +81,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         myAsset_tv.setOnClickListener(this);
         score_layout.setOnClickListener(this);
         redPacket_layout.setOnClickListener(this);
-        notLogin_tv.setOnClickListener(this);
+        notLogin_layout.setOnClickListener(this);
 
         toolbar.setNavigationIcon(R.drawable.message);
     }
@@ -140,7 +140,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 intent.setClass(mContext, RedPacketActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.notLogin_tv:
+            case R.id.notLogin_layout:
                 //Toast.makeText(mContext,"登录",Toast.LENGTH_SHORT).show();
                 intent.setClass(mContext, LoginActivity.class);
                 startActivity(intent);
