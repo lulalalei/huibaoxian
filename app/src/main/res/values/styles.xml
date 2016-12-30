@@ -82,6 +82,11 @@
         <item name="android:textColor">@color/A6</item>
     </style>
 
+    <style name="TextAppear.Theme.A3_Size19" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@color/A3</item>
+    </style>
+
 
 
     <style name="TextAppear.Theme.Size14" parent="android:TextAppearance.Theme">
@@ -169,4 +174,12 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_marginLeft">16dp</item>
     </style>
+
+
+    <!--<style name="loginActivityAnim" parent="@android:style/Animation.Activity">-->
+        <!--<item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>-->
+        <!--<item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>-->
+        <!--<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
+    <!--</style>-->
 </resources>

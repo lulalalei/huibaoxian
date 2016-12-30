@@ -141,9 +141,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.notLogin_tv:
-                //Toast.makeText(mContext,"登录",Toast.LENGTH_SHORT).show();
+
                 intent.setClass(mContext, LoginActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_from_bottom,R.anim.activity_stay);
                 break;
             default:
                 break;

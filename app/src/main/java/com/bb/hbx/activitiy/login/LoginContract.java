@@ -34,9 +34,20 @@ public interface LoginContract {
     }
 
     abstract class Presenter extends BasePresenter<Model, View> {
+
+
         public abstract void login(String name, String pass);
 
 
+
+        public void regist(String tel,String code,String psw){
+
+        }
+
+        //找回密码
+        public  void getPsw(String tel,String code){
+
+        }
 
         @Override
         public void onAttached() {}

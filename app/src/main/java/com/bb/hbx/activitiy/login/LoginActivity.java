@@ -4,6 +4,8 @@ import android.animation.ObjectAnimator;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -28,7 +30,7 @@ import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static com.bb.hbx.R.id.activity_smss_login;
 
 
 /**
@@ -39,6 +41,8 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> implements LoginContract.View,
         View.OnClickListener, View.OnLayoutChangeListener {
 
+
+    private final  String TAG=LoginActivity.class.getSimpleName();
 
     @BindView(R.id.activity_smss_login)
     LinearLayout activity_smss_login;
@@ -147,9 +151,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
         tv_regist.setOnClickListener(this);
         tv_passwordlogin.setOnClickListener(this);
         tv_regist.setOnClickListener(this);
-
-        et_phone.addTextChangedListener(new LoginTextWatcher(tv_login,this));
-        et_pwd.addTextChangedListener(new LoginTextWatcher(tv_login,this));
+        back_iv.setOnClickListener(this);
+        et_phone.addTextChangedListener(new LoginTextWatcher(tv_login, this));
+        et_pwd.addTextChangedListener(new LoginTextWatcher(tv_login, this));
 
         ck_agree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -180,12 +184,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
         switch (v.getId()) {
             case R.id.back_iv:
                 finish();
+                overridePendingTransition(0, R.anim.slide_out_to_bottom);
                 break;
             case R.id.tv_regist:
                 AppManager.getInstance().showActivity(RegisteActivity.class, null);
                 break;
 
-            case R.id.activity_pwd_login:
+            case R.id.tv_passwordlogin:
                 AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
                 break;
             case R.id.tv_login:
@@ -234,7 +239,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
         LoginAnimHelp helpstart = new LoginAnimHelp();
 
         helpstart.addTranslationY(lin_ed, 0, -60);
-        helpstart.addTranslationY(scrollView, 0, -60);
+        //helpstart.addTranslationY(scrollView, 0, -60);
         helpstart.addTranslationY(logoIcon_iv, 0, -40);
         helpstart.addTranslationY(logoText_iv, 0, -120);
         helpstart.addScaleX(logoIcon_iv, 1, 0.5f);
@@ -248,7 +253,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     private void resetAnimator() {
         LoginAnimHelp helpstart = new LoginAnimHelp();
         helpstart.addTranslationY(lin_ed, -60, 0);
-        helpstart.addTranslationY(scrollView, -60, 0);
+        //helpstart.addTranslationY(scrollView, -60, 0);
         helpstart.addTranslationY(logoIcon_iv, -40, 0);
         helpstart.addTranslationY(logoText_iv, -120, 0);
         helpstart.addScaleX(logoIcon_iv, 0.5f, 1);
@@ -257,5 +262,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
         helpstart.addScaleY(logoText_iv, 0.5f, 1);
         helpstart.addRotation(logoIcon_iv, 180, 0);
         helpstart.startAnim(300);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, R.anim.slide_out_to_bottom);
     }
 }

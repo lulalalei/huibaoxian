@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_smss_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/x36"
+    android:paddingRight="@dimen/x36"
+    tools:context=".activitiy.login.LoginActivity">
+
+    <ImageView
+        android:id="@+id/back_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:src="@drawable/fanhui" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/y46"
+        android:singleLine="true"
+        android:text="@string/getpsw"
+        android:textAppearance="@style/TextAppear.Theme.A3_Size19" />
+
+
+    <LinearLayout
+        android:id="@+id/lin_ed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y64"
+        android:background="@drawable/shape_c3_a6"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/x36"
+        android:paddingRight="@dimen/x36">
+
+
+        <com.bb.hbx.widget.LoginPswEdit
+            android:id="@+id/et_psw"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y110"
+            android:background="@null"
+            android:drawablePadding="@dimen/x26"
+            android:hint="@string/hintphone"
+            android:inputType="numberPassword"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppear.Theme.A3_Size14"
+            android:textColorHint="@color/A5"
+            app:edit_Drawable="@drawable/mimasuo"
+            app:edit_lookDrawable="@drawable/mimakejian"
+            app:edit_unLookDrawable="@drawable/mimabukejian"
+            app:islook="false" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_complete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y88"
+        android:layout_marginTop="@dimen/y63"
+        android:background="@drawable/shape_btn_a6"
+        android:gravity="center"
+        android:text="@string/complete"
+        android:textAppearance="@style/TextAppear.Theme.white_Size18" />
+
+
+</LinearLayout>
+
