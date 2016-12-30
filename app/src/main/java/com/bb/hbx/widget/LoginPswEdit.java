@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
@@ -99,6 +100,12 @@ public class LoginPswEdit extends EditText {
                         LoginPswEdit.this.setCompoundDrawables(startDrawable, null, edit_unLookDrawable, null);
                         setInputType((InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD));
                     }
+
+                    int  index=0;
+                    if(!TextUtils.isEmpty(LoginPswEdit.this.getText())){
+                        index=LoginPswEdit.this.getText().toString().trim().length();
+                    }
+                    setSelection(index);
 
                     return false;
                 }

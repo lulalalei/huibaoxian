@@ -42,6 +42,11 @@
     <string name="leftMoney">余额</string>
     <string name="score">积分</string>
     <string name="redPacket">红包</string>
+    <string name="yzmlogin">短信登录</string>
+    <string name="losspsw">忘记密码</string>
+    <string name="getpsw">找回密码</string>
+    <string name="next">下一步</string>
+    <string name="complete">完成</string>
 
     <!-- behavior -->
 

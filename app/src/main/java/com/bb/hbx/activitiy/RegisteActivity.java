@@ -118,7 +118,7 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
                 break;
 
             case R.id.tv_passwordlogin:
-                AppManager.getInstance().showActivity(LoginActivity.class, null);
+                AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
                 break;
             case R.id.tv_regist:
                 if (!isverTel()) {
