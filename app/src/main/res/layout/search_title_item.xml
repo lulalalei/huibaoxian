@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:background="@color/A5"
+    android:layout_height="@dimen/y86"
+    android:background="@color/A7"
+    android:gravity="center_vertical"
     android:orientation="vertical">
 
     <TextView
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="5dp"
+
+        android:layout_marginLeft="@dimen/x36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="@style/TextAppear.Theme.A4_Size12"
         android:text="@string/hotsearch"/>
 </LinearLayout>

@@ -4,10 +4,12 @@ import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.BaseFragment;
@@ -45,6 +47,9 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        MyApplication.widthPixels = dm.widthPixels;
     }
 
     @Override

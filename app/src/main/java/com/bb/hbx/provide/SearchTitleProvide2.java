@@ -5,29 +5,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.AcitBean;
 import com.bb.hbx.bean.SearchTitleBean;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
- * Created by fancl.
- * 热门搜索 标题
+ * Created by fancl
+ * 历史搜索标题item
  */
 
-public class SearchTitleProvide extends ItemViewProvider<SearchTitleBean, SearchTitleProvide.ViewHolder> {
+public class SearchTitleProvide2 extends ItemViewProvider<SearchTitleBean, SearchTitleProvide2.ViewHolder> {
 
 
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View view = inflater.inflate(R.layout.search_title_item, parent, false);
+        View view = inflater.inflate(R.layout.search_title_item_other, parent, false);
         return new ViewHolder(view);
     }
 

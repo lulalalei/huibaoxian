@@ -28,6 +28,8 @@
     <string name="searchproduct">搜索产品</string>
     <string name="howPrice">￥ %1$s</string>
     <string name="hotsearch">热门搜索</string>
+    <string name="lishisearch">历史搜索</string>
+    <string name="qk">清空</string>
 
     <string name="hintphone">请输入手机号码</string>
     <string name="otherlogin">其他登录方式</string>
