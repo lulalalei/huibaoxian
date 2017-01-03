@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y86"
+    android:background="@color/A7"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/x36"
+        android:layout_weight="1"
+        android:text="@string/lishisearch"
+        android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/qingkong_sousuoyeman" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x36"
+            android:text="@string/qk"
+            android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+    </LinearLayout>
+
+</LinearLayout>

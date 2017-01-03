@@ -6,15 +6,13 @@ import com.bb.hbx.widget.multitype.data.Item;
  * Created by Administrator on 2016/12/28.
  */
 
-public class HotSearchBean implements Item {
-
+public class LishiSearchBean implements Item {
 
     private String name;
 
-    public  HotSearchBean(String name){
-        this.name=name;
+    public LishiSearchBean(String name) {
+        this.name = name;
     }
-
 
     public String getName() {
         return name;
