@@ -8,18 +8,18 @@
 
 
     <com.bb.hbx.widget.ConditionLayout
+        android:id="@+id/cl_condit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y72"
-        android:background="@color/white"
-        />
+        android:background="@color/white" />
 
-    <include layout="@layout/line_e"/>
+    <include layout="@layout/line_e" />
 
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/rl_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
 

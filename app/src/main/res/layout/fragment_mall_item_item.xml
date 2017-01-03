@@ -38,7 +38,7 @@
                 android:gravity="bottom"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppear.Theme.A3_Size16"
-                tools:text="少儿重大疾病医疗险" />
+                android:text="少儿重大疾病医疗险" />
 
             <TextView
                 android:id="@+id/tv_detail2"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y15"
                 android:textAppearance="@style/TextAppear.Theme.A4_Size11"
-                tools:text="投保年龄:28天-17周岁" />
+                android:text="投保年龄:28天-17周岁" />
 
             <TextView
                 android:id="@+id/tv_detail3"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y15"
                 android:textAppearance="@style/TextAppear.Theme.A4_Size11"
-                tools:text="住院津贴:50元一天" />
+                android:text="住院津贴:50元一天" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppear.Theme.A1_Size16"
-                    tools:text="￥1000" />
+                    android:text="￥1000" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -47,6 +47,7 @@
             android:layout_height="@dimen/y98"
             android:background="@color/Z53"
             app:tabGravity="fill"
+            android:paddingLeft="20dp"
             style="@style/MyCustomTabLayout"
             app:tabMode="scrollable" />
 

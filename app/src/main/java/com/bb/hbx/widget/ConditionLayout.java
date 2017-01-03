@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-import static android.R.attr.type;
+
 import static com.bb.hbx.widget.ConditionLayout.STATE.FILTER;
 import static com.bb.hbx.widget.ConditionLayout.STATE.PRICE_DOWN;
 import static com.bb.hbx.widget.ConditionLayout.STATE.PRICE_NULL;
@@ -123,7 +123,7 @@ public class ConditionLayout extends LinearLayout implements View.OnClickListene
                     typeS++;
                 }
                 stateUi(allState[typeS]);
-                //listener.priceListener(type);
+                listener.priceListener(allState[typeS]);
                 break;
             case R.id.lin_l2:
 
@@ -133,7 +133,7 @@ public class ConditionLayout extends LinearLayout implements View.OnClickListene
                     typeS = 4;
                 }
                 stateUi(allState[typeS]);
-                //listener.saleListener(type);
+                listener.saleListener(allState[typeS]);
                 break;
             case R.id.lin_l3:
                 //listener.filterListener(type);
@@ -141,13 +141,13 @@ public class ConditionLayout extends LinearLayout implements View.OnClickListene
         }
     }
 
-    private interface ConditionListener {
+    public interface ConditionListener {
 
-        void priceListener(int operat);
+        void priceListener(STATE operat);
 
-        void saleListener(int operat);
+        void saleListener(STATE operat);
 
-        void filterListener(int operat);
+        void filterListener(STATE operat);
     }
 
 
@@ -199,7 +199,15 @@ public class ConditionLayout extends LinearLayout implements View.OnClickListene
 
     }
 
-    enum STATE {
+
+
+
+
+    public void setSate(STATE sate){
+        stateUi(sate);
+    }
+
+    public  enum STATE {
 
         DEFAULT,
 

@@ -7,4 +7,6 @@ import com.bb.hbx.widget.multitype.data.Item;
  */
 
 public class MallAllBean implements Item {
+
+
 }

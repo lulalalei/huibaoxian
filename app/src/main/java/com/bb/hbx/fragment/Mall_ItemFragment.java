@@ -10,6 +10,7 @@ import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.MallAllBean;
 import com.bb.hbx.provide.MallAllProvide;
 import com.bb.hbx.utils.Constants;
+import com.bb.hbx.widget.ConditionLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -35,6 +36,15 @@ public class Mall_ItemFragment extends BaseFragment {
     private int pageType;
 
 
+    private int conditType;//筛选条件
+
+
+    private ConditionLayout.STATE state = ConditionLayout.STATE.DEFAULT;
+
+    @BindView(R.id.cl_condit)
+    ConditionLayout cl_condit;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +64,23 @@ public class Mall_ItemFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        cl_condit.setSate(state);
+        cl_condit.setListener(new ConditionLayout.ConditionListener() {
+            @Override
+            public void priceListener(ConditionLayout.STATE operat) {
+                state = operat;
+            }
+
+            @Override
+            public void saleListener(ConditionLayout.STATE operat) {
+                state = operat;
+            }
+
+            @Override
+            public void filterListener(ConditionLayout.STATE operat) {
+
+            }
+        });
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         rl_view.setLayoutManager(manager);
         adapter = new MultiTypeAdapter();
