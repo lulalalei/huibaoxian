@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#2dce8f</color>
     <color name="white">#ffffff</color>
     <color name="colorTextBg">#3eaaef</color>
     <color name="colorUnIndetifyBg">#9a9aff</color>
@@ -33,6 +33,7 @@
 
     <color name="Z54">#ff5d59</color>
     <color name="Z53">#fafafa</color>
+    <color name="Z52">#ffae22</color>
 
 
 

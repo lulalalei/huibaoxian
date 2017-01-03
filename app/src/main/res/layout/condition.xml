@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/y72"
     android:orientation="horizontal">
 
 
     <LinearLayout
         android:id="@+id/lin_l1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -17,19 +17,21 @@
             android:id="@+id/tv_t1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppear.Theme.A4_Size14"
             android:text="@string/condition_price" />
 
         <ImageView
             android:id="@+id/img_i1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:visibility="invisible"
+            android:src="@drawable/paixu_xia" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lin_l2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -39,19 +41,21 @@
             android:id="@+id/tv_t2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/condition_price" />
+            android:textAppearance="@style/TextAppear.Theme.A4_Size14"
+            android:text="@string/condition_sale" />
 
         <ImageView
             android:id="@+id/img_i2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:visibility="invisible"
+            android:src="@drawable/paixu_xia" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lin_l3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -61,13 +65,14 @@
             android:id="@+id/tv_t3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/condition_price" />
+            android:textAppearance="@style/TextAppear.Theme.A4_Size14"
+            android:text="@string/condition_filter" />
 
         <ImageView
             android:id="@+id/img_i3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/sanxuan_shancgheng" />
 
     </LinearLayout>
 

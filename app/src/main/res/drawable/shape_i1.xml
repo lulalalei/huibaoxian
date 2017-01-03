@@ -18,9 +18,9 @@
     android:shape="rectangle"
     >
     <!-- 线圈内颜色 -->
-    <solid android:color="@color/colorPrimary"/>
+    <solid android:color="@color/A2"/>
     <!-- 虚线颜色 -->
-    <stroke android:width="1dip" android:color="@color/colorPrimary"
+    <stroke android:width="1dip" android:color="@color/A2"
             android:dashWidth="0dip" android:dashGap="2dip" />
     <!-- padding -->
     <padding android:left="1dip" android:top="1dip"
