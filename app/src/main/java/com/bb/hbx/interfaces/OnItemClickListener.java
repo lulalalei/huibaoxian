@@ -7,3 +7,7 @@ package com.bb.hbx.interfaces;
 public interface OnItemClickListener {
     void onMyItemClickListener(int position);
 }
+
+/*public interface OnItemChangeStateClickListener {
+    void onMyItemChangeStateClickListener(int position,int prePosition);
+}*/

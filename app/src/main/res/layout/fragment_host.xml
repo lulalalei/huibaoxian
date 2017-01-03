@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:id="@+id/scrollView">
+        android:id="@+id/scrollView"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,8 +24,9 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="226dp"
-                android:background="@drawable/wodebeijingchahua">
+                android:layout_height="250dp"
+                android:background="@drawable/wodebeijingchahua"
+                android:paddingTop="20dp">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -56,14 +58,15 @@
                         <TextView
                             android:id="@+id/identify_tv"
                             android:layout_width="59dp"
-                            android:layout_height="17dp"
+                            android:layout_height="18dp"
                             android:layout_centerHorizontal="true"
                             android:text="未认证"
-                            android:textSize="12sp"
+                            android:textSize="11sp"
                             android:textColor="@color/A2"
-                            android:gravity="center_horizontal"
+                            android:gravity="center"
+                            android:background="@drawable/identify_shape"
                             android:layout_below="@id/userName"
-                            android:layout_marginTop="8dp"/>
+                            android:layout_marginTop="6dp"/>
                     </RelativeLayout>
                     <TextView
                         android:layout_width="wrap_content"
@@ -98,18 +101,18 @@
                             android:textColor="@color/white"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@id/myOrder_iv"
-                            android:layout_marginTop="10dp"/>
+                            android:layout_marginTop="8dp"/>
                     </RelativeLayout>
-                    <TextView
-                        android:layout_width="1dp"
-                        android:layout_height="59dp"
-                        android:background="@android:color/white"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/lineline"/>
                     <RelativeLayout
                         android:id="@+id/pInsurance_layout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="18dp"
                             android:layout_height="20dp"
                             android:src="@drawable/gexian"
@@ -124,7 +127,7 @@
                             android:textColor="@color/white"
                             android:id="@+id/pInsurance_tv"
                             android:layout_below="@id/pInsurance_civ"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:layout_centerHorizontal="true"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -135,17 +138,17 @@
                             android:id="@+id/pCount_tv"
                             android:layout_below="@id/pInsurance_tv"
                             android:gravity="center_horizontal"
-                            android:layout_marginTop="5dp"/>
+                            android:layout_marginTop="2dp"/>
                     </RelativeLayout>
-                    <TextView
-                        android:layout_width="1dp"
-                        android:layout_height="59dp"
-                        android:background="@android:color/white"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/line"/>
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="18dp"
                             android:layout_height="20dp"
                             android:src="@drawable/chexian"
@@ -161,7 +164,7 @@
                             android:gravity="center_horizontal"
                             android:id="@+id/cInsurance_tv"
                             android:layout_below="@id/cInsurance_civ"
-                            android:layout_marginTop="10dp"/>
+                            android:layout_marginTop="8dp"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -171,7 +174,7 @@
                             android:id="@+id/cCount_tv"
                             android:layout_below="@id/cInsurance_tv"
                             android:gravity="center_horizontal"
-                            android:layout_marginTop="5dp"/>
+                            android:layout_marginTop="2dp"/>
                     </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -211,7 +214,7 @@
             <TextView
                 android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:background="@color/colorDivider"
                 android:layout_marginLeft="18dp"/>
             <LinearLayout
@@ -229,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:text="100.00"
                         android:textSize="16sp"
-                        android:textColor="@color/A1"
+                        android:textColor="@color/A3"
                         android:layout_centerHorizontal="true"
                         android:id="@+id/canCash_tv"/>
                     <TextView
@@ -244,7 +247,7 @@
                 </RelativeLayout>
                 <TextView
                     android:layout_width="1dp"
-                    android:layout_height="37dp"
+                    android:layout_height="40dp"
                     android:background="@color/colorDivider"/>
                 <RelativeLayout
                     android:id="@+id/leftMoney_layout"
@@ -256,7 +259,7 @@
                         android:layout_height="wrap_content"
                         android:text="200.00"
                         android:textSize="16sp"
-                        android:textColor="@color/A1"
+                        android:textColor="@color/A3"
                         android:id="@+id/leftMoney_tv"
                         android:layout_centerHorizontal="true"/>
                     <TextView
@@ -271,7 +274,7 @@
                 </RelativeLayout>
                 <TextView
                     android:layout_width="1dp"
-                    android:layout_height="37dp"
+                    android:layout_height="40dp"
                     android:background="@color/colorDivider"/>
                 <RelativeLayout
                     android:id="@+id/score_layout"
@@ -283,7 +286,7 @@
                         android:layout_height="wrap_content"
                         android:text="280"
                         android:textSize="16sp"
-                        android:textColor="@color/A1"
+                        android:textColor="@color/A3"
                         android:id="@+id/score_tv"
                         android:layout_centerHorizontal="true"/>
                     <TextView
@@ -298,7 +301,7 @@
                 </RelativeLayout>
                 <TextView
                     android:layout_width="1dp"
-                    android:layout_height="37dp"
+                    android:layout_height="40dp"
                     android:background="@color/colorDivider"/>
                 <RelativeLayout
                     android:id="@+id/redPacket_layout"
@@ -310,7 +313,7 @@
                         android:layout_height="wrap_content"
                         android:text="3"
                         android:textSize="16sp"
-                        android:textColor="@color/A1"
+                        android:textColor="@color/A3"
                         android:id="@+id/redPacket_tv"
                         android:layout_centerHorizontal="true"/>
                     <TextView
@@ -326,7 +329,7 @@
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="13dp"
+                android:layout_height="10dp"
                 android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -356,7 +359,7 @@
                     android:layout_centerVertical="true"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginLeft="18dp"
                     android:background="@color/colorDivider"
                     android:layout_alignParentBottom="true"/>
@@ -389,7 +392,7 @@
                     android:layout_centerVertical="true"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginLeft="18dp"
                     android:background="@color/colorDivider"
                     android:layout_alignParentBottom="true"/>
@@ -422,7 +425,7 @@
                     android:layout_centerVertical="true"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginLeft="18dp"
                     android:background="@color/colorDivider"
                     android:layout_alignParentBottom="true"/>
@@ -466,12 +469,13 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginLeft="18dp"
                     android:background="@color/colorDivider"
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/service_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
                 <ImageView
@@ -510,7 +514,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginLeft="18dp"
                     android:background="@color/colorDivider"
                     android:layout_alignParentBottom="true"/>

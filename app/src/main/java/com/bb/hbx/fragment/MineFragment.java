@@ -18,6 +18,7 @@ import com.bb.hbx.R;
 import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
 import com.bb.hbx.activitiy.PersonInfoSettingActivity;
+import com.bb.hbx.activitiy.PurchaseDetailActivity;
 import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
 import com.bb.hbx.activitiy.login.LoginActivity;
@@ -57,6 +58,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     @BindView(R.id.pCount_tv)
     TextView pCount_tv;
 
+    @BindView(R.id.service_layout)
+    RelativeLayout service_layout;
     Context mContext;
     @Override
     public void onAttach(Context context) {
@@ -83,6 +86,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         redPacket_layout.setOnClickListener(this);
         notLogin_layout.setOnClickListener(this);
 
+        service_layout.setOnClickListener(this);
         toolbar.setNavigationIcon(R.drawable.message);
     }
 
@@ -141,12 +145,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.notLogin_layout:
-                //Toast.makeText(mContext,"登录",Toast.LENGTH_SHORT).show();
+
             case R.id.notLogin_tv:
 
                 intent.setClass(mContext, LoginActivity.class);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_in_from_bottom,R.anim.activity_stay);
+                break;
+            case R.id.service_layout:
+                intent.setClass(mContext, PurchaseDetailActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

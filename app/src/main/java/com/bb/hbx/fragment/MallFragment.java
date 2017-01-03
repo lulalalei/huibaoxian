@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.BasePageAdapter;
 import com.bb.hbx.adapter.MallPageAdapter;
@@ -19,9 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-
-import static android.os.Build.VERSION_CODES.M;
-import static com.bb.hbx.R.id.toolbar;
 
 /**
  * Created by Administrator on 2016/12/20.

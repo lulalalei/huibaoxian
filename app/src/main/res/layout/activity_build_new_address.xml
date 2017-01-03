@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_person_info_setting"
+    android:id="@+id/activity_build_new_address"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.bb.hbx.activitiy.PersonInfoSettingActivity">
+    tools:context="com.bb.hbx.activitiy.BuildNewAddressActivity">
 
     <RelativeLayout
         android:id="@+id/topbar_layout"
@@ -24,53 +23,57 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="个人资料设置"
+            android:text="新建地址"
             android:textSize="22sp"
             android:textColor="@color/A1"
             android:layout_centerHorizontal="true"
             android:gravity="center"/>
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/divider_tv"
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:background="@color/colorDivider"
+        android:layout_below="@id/topbar_layout"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView"
-        android:layout_below="@id/topbar_layout">
+        android:layout_below="@id/divider_tv"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:background="@color/colorDivider" />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:paddingLeft="18dp">
+                android:layout_height="55dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp">
                 <TextView
+                    android:id="@+id/showName_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="头像"
+                    android:text="收货人"
                     android:textSize="14sp"
                     android:textColor="@color/A3"
                     android:layout_centerVertical="true"/>
-
+                <EditText
+                    android:id="@+id/name_et"
+                    android:layout_toRightOf="@id/showName_tv"
+                    android:layout_marginLeft="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请输入真实姓名"
+                    android:textSize="13sp"
+                    android:textColor="@color/A4"
+                    android:layout_centerVertical="true"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/nextstep"
+                    android:src="@drawable/contacts"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:id="@+id/userIcon_iv"
-                    android:src="@mipmap/ic_launcher"
-                    android:scaleType="centerCrop"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="33dp"
                     android:layout_centerVertical="true"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -82,190 +85,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:paddingLeft="18dp"
-                android:id="@+id/name_layout">
+                android:paddingRight="18dp">
                 <TextView
+                    android:id="@+id/showPhone_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="昵称"
+                    android:text="联系方式"
                     android:textSize="14sp"
                     android:textColor="@color/A3"
                     android:layout_centerVertical="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/phone_et"
+                    android:layout_toRightOf="@id/showPhone_tv"
+                    android:layout_marginLeft="13dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/nextstep"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/name_tv"
-                    android:text="罗伟"
+                    android:background="@null"
+                    android:textSize="13sp"
                     android:textColor="@color/A4"
-                    android:textSize="13sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="33dp"
                     android:layout_centerVertical="true"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/colorDivider"
-                    android:layout_alignParentBottom="true"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/sex_layout"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:paddingLeft="18dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="性别"
-                    android:textSize="14sp"
-                    android:textColor="@color/A3"
-                    android:layout_centerVertical="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/nextstep"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sex_tv"
-                    android:text="男"
-                    android:textColor="@color/A4"
-                    android:textSize="13sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="33dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorDivider"
-                    android:layout_alignParentBottom="true"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:paddingLeft="18dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="手机号"
-                    android:textSize="14sp"
-                    android:textColor="@color/A3"
-                    android:layout_centerVertical="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/nextstep"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/phone_tv"
-                    android:text="15200005679"
-                    android:textColor="@color/A4"
-                    android:textSize="13sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="33dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorDivider"
-                    android:layout_alignParentBottom="true"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:paddingLeft="18dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="邮箱"
-                    android:textSize="14sp"
-                    android:textColor="@color/A3"
-                    android:layout_centerVertical="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/nextstep"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorDivider"
-                    android:layout_alignParentBottom="true"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/address_layout"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:paddingLeft="18dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="地址管理"
-                    android:textSize="14sp"
-                    android:textColor="@color/A3"
-                    android:layout_centerVertical="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/nextstep"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/colorDivider"
-                    android:layout_alignParentBottom="true"/>
-            </RelativeLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:background="@color/colorDivider" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:paddingLeft="18dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="实名认证"
-                    android:textSize="14sp"
-                    android:textColor="@color/A3"
-                    android:layout_centerVertical="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/nextstep"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/realNameIdentify_tv"
-                    android:text="未认证"
-                    android:textColor="@color/Z54"
-                    android:textSize="13sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="33dp"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
                     android:background="@color/colorDivider"
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
@@ -273,14 +114,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:paddingLeft="18dp"
-                android:id="@+id/countSafe_layout"
-                android:background="@drawable/item_select">
+                android:paddingRight="18dp">
                 <TextView
+                    android:id="@+id/showEmail_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="账户安全"
+                    android:text="邮政编码"
                     android:textSize="14sp"
                     android:textColor="@color/A3"
+                    android:layout_centerVertical="true"/>
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_toRightOf="@id/showEmail_tv"
+                    android:layout_marginLeft="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:textSize="13sp"
+                    android:textColor="@color/A4"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDivider"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:paddingLeft="18dp">
+                <TextView
+                    android:id="@+id/showAddress_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="所在地区"
+                    android:textSize="14sp"
+                    android:textColor="@color/A3"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_toRightOf="@id/showAddress_tv"
+                    android:layout_marginLeft="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="省,市,区"
+                    android:textSize="13sp"
+                    android:textColor="@color/A4"
                     android:layout_centerVertical="true"/>
                 <ImageView
                     android:layout_width="wrap_content"
@@ -291,7 +169,69 @@
                     android:layout_centerVertical="true"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDivider"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp">
+                <TextView
+                    android:id="@+id/showStreet_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="详细地址"
+                    android:textSize="14sp"
+                    android:textColor="@color/A3"
+                    android:layout_centerVertical="true"/>
+                <EditText
+                    android:id="@+id/street_et"
+                    android:layout_toRightOf="@id/showStreet_tv"
+                    android:layout_marginLeft="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="街道,楼盘号等"
+                    android:textSize="13sp"
+                    android:textColor="@color/A4"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDivider"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/divider2_tv"
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:background="@color/colorDivider"
+                android:layout_below="@id/topbar_layout"/>
+            <RelativeLayout
+                android:id="@+id/isNormalAddress_layout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设为默认地址"
+                    android:textSize="14sp"
+                    android:textColor="@color/A3"
+                    android:layout_centerVertical="true"/>
+                <ImageView
+                    android:id="@+id/isNormalAddress_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/item_setnormaladdress_select"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:background="@color/colorDivider"
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
