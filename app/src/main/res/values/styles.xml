@@ -12,8 +12,6 @@
     </style>
 
 
-
-
     <style name="TextAppear.Theme.A4_Size11" parent="android:TextAppearance.Theme">
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/A4</item>
@@ -23,8 +21,6 @@
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/A3</item>
     </style>
-
-
 
 
     <style name="TextAppear.Theme.A4_Size14" parent="android:TextAppearance.Theme">
@@ -42,11 +38,15 @@
         <item name="android:textColor">@color/A3</item>
     </style>
 
+    <style name="TextAppear.Theme.A1_Size17" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/A1</item>
+    </style>
+
     <style name="TextAppear.Theme.A3_Size16" parent="android:TextAppearance.Theme">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/A3</item>
     </style>
-
 
 
     <style name="TextAppear.Theme.A1_Size11" parent="android:TextAppearance.Theme">
@@ -72,8 +72,6 @@
         <item name="android:textColor">@color/A3</item>
 
     </style>
-
-
 
 
     <style name="TextAppear.Theme.A1_Size14" parent="android:TextAppearance.Theme">
@@ -103,12 +101,17 @@
         <item name="android:textColor">@color/A3</item>
     </style>
 
+    <style name="TextAppear.Theme.Z52_Size11" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/Z52</item>
+    </style>
 
 
     <style name="TextAppear.Theme.Size14" parent="android:TextAppearance.Theme">
         <item name="android:textSize">14sp</item>
         <item name="android:textColorHint">@color/A5</item>
     </style>
+
     <style name="TextAppear.Theme.Size12" parent="android:TextAppearance.Theme">
         <item name="android:textSize">12sp</item>
         <item name="android:textColorHint">@color/A5</item>
@@ -121,8 +124,23 @@
     </style>
 
 
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <!-- <item name="tabPaddingStart">12dp</item>
+         <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>-->
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+        <item name="tabSelectedTextColor">?attr/colorAccent</item>
+    </style>
 
 
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/A3</item>
+        <!--<item name="textAllCaps">true</item>-->
+    </style>
 
 
     <!-- Base application theme. -->
@@ -193,9 +211,9 @@
 
 
     <!--<style name="loginActivityAnim" parent="@android:style/Animation.Activity">-->
-        <!--<item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>-->
-        <!--<item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
-        <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>-->
-        <!--<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
+    <!--<item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>-->
+    <!--<item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
+    <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>-->
+    <!--<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
     <!--</style>-->
 </resources>

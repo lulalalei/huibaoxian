@@ -87,6 +87,7 @@ public class HomeActivity extends BaseActivity {
                             transaction.show(mallFragment);
                         }
                         break;
+
                     case 2:
                         // 当点击了消息tab时，改变控件的图片和文字颜色
                         if (classFragment == null) {
@@ -99,7 +100,20 @@ public class HomeActivity extends BaseActivity {
                             transaction.show(classFragment);
                         }
                         break;
+
                     case 3:
+                        // 当点击了消息tab时，改变控件的图片和文字颜色
+                        if (classFragment == null) {
+                            // 如果MessageFragment为空，则创建一个并添加到界面上
+                            classFragment = new ClassFragment();
+                            //exfs.add(mineFragment);
+                            transaction.add(R.id.tab_content, classFragment, ClassFragment.class.getName());
+                        } else {
+                            // 如果MessageFragment不为空，则直接将它显示出来
+                            transaction.show(classFragment);
+                        }
+                        break;
+                    case 4:
                         // 当点击了消息tab时，改变控件的图片和文字颜色
                         if (mineFragment == null) {
                             // 如果MessageFragment为空，则创建一个并添加到界面上

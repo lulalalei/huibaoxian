@@ -69,13 +69,11 @@ public class MallFragment extends BaseFragment {
     @Override
     protected void initdate(Bundle savedInstanceState) {
         tabsTitle = new ArrayList<>();
-        tabsTitle.add("全部");
         tabsTitle.add("车险");
-        tabsTitle.add("人寿保险");
-        tabsTitle.add("意外保险");
-        tabsTitle.add("理财保险");
-        tabsTitle.add("健康保险");
-        tabsTitle.add("旅游保险");
+        tabsTitle.add("理财险");
+        tabsTitle.add("意外险");
+        tabsTitle.add("健康险");
+        tabsTitle.add("旅游险");
         adapter = new MallPageAdapter(getActivity().getSupportFragmentManager(), tabsTitle);
         for (int i = 0; i < tabsTitle.size(); i++) {
             adapter.addFragment(new Mall_ItemFragment());

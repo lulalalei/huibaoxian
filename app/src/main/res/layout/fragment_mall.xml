@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,25 +18,39 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="商城"/>
+                android:text="@string/home_mall"
+                android:textAppearance="@style/TextAppear.Theme.A1_Size17" />
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/x36"
+                android:src="@drawable/sousuo_shancgheng" />
+
 
         </android.support.v7.widget.Toolbar>
 
 
+        <include layout="@layout/line_e" />
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y98"
+            android:background="@color/Z53"
             app:tabGravity="fill"
+            style="@style/MyCustomTabLayout"
             app:tabMode="scrollable" />
 
-
+        <include layout="@layout/line_e" />
 
     </android.support.design.widget.AppBarLayout>
 
