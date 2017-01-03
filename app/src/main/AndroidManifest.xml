@@ -20,28 +20,24 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".activitiy.RegisteActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".activitiy.GetPswActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".activitiy.ResetPswActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".activitiy.HomeActivity"
             android:theme="@style/AppTheme">
@@ -64,14 +60,10 @@
         <activity android:name=".activitiy.SettlementActivity" />
         <activity android:name=".activitiy.AllIncomeActivity" />
         <activity android:name=".activitiy.ScoreActivity" />
-        <activity android:name=".activitiy.RedPacketActivity"></activity>
-
+        <activity android:name=".activitiy.RedPacketActivity" />
         <activity
             android:name=".activitiy.SearchActivity"
-
             android:theme="@style/AppTheme" />
-
-
         <activity
             android:name=".activitiy.PwdLoginActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -82,7 +74,9 @@
         <activity android:name=".activitiy.PersonInfoSettingActivity" />
         <activity android:name=".activitiy.EditNameActivity" />
         <activity android:name=".activitiy.SexActivity" />
-        <activity android:name=".activitiy.AddressManagerActivity"></activity>
+        <activity android:name=".activitiy.AddressManagerActivity" />
+        <activity android:name=".activitiy.BuildNewAddressActivity" />
+        <activity android:name=".activitiy.PurchaseDetailActivity"></activity>
     </application>
 
 </manifest>
