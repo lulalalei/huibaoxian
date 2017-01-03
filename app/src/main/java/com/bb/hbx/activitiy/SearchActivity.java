@@ -18,6 +18,7 @@ import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.HotSearchBean;
+import com.bb.hbx.bean.LishiSearchBean;
 import com.bb.hbx.bean.ModleItem;
 import com.bb.hbx.bean.SearchTitleBean;
 import com.bb.hbx.bean.SearchTitleBean2;
@@ -95,7 +96,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         adapter.register(SearchTitleBean.class, new SearchTitleProvide());
         adapter.register(HotSearchBean.class, new HotSearchProvide());
         adapter.register(SearchTitleBean2.class, new SearchTitleProvide2());
-        adapter.register(HotSearchBean.class, new LishiSearchProvide());
+        adapter.register(LishiSearchBean.class, new LishiSearchProvide());
         rl_view.setAdapter(adapter);
     }
 

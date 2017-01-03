@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.bean.HotSearchBean;
+import com.bb.hbx.bean.LishiSearchBean;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
 
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
  * 历史搜索的item
  */
 
-public class LishiSearchProvide extends ItemViewProvider<HotSearchBean, LishiSearchProvide.ViewHolder> {
+public class LishiSearchProvide extends ItemViewProvider<LishiSearchBean, LishiSearchProvide.ViewHolder> {
 
 
 
@@ -46,7 +47,7 @@ public class LishiSearchProvide extends ItemViewProvider<HotSearchBean, LishiSea
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull HotSearchBean hotSearchBean) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull LishiSearchBean hotSearchBean) {
         holder.setData(hotSearchBean);
     }
 
@@ -65,7 +66,7 @@ public class LishiSearchProvide extends ItemViewProvider<HotSearchBean, LishiSea
             ButterKnife.bind(this, itemView);
         }
 
-        void setData(@NonNull final HotSearchBean bean) {
+        void setData(@NonNull final LishiSearchBean bean) {
 
             tv_confim.setText(bean.getName());
 
