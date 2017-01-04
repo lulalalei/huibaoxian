@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ScrollView
+        <com.bb.hbx.widget.MyScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -191,7 +191,7 @@
                     android:layout_height="10dp"
                     android:background="@color/colorDivider"/>
             </LinearLayout>
-        </ScrollView>
+        </com.bb.hbx.widget.MyScrollView>
         <LinearLayout
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
@@ -249,8 +249,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbar"
-        android:paddingRight="18dp"
-        android:paddingTop="15dp">
+        android:background="@color/white"
+        android:paddingRight="18dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -260,14 +260,16 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/fanhui_chanpingxinagqingye"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:layout_centerVertical="true"/>
             <ImageView
                 android:id="@+id/collect_iv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/shoucang_xiangqing"
                 android:scaleType="centerCrop"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

@@ -1,10 +1,16 @@
 package com.bb.hbx.activitiy;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,13 +20,20 @@ import com.bb.hbx.adapter.MyInsuranceItemInDetailAdapter;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MyCustomInfoInDetailBean;
 import com.bb.hbx.bean.MyInsuranceItemInDetailBean;
+import com.bb.hbx.widget.MyScrollView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class PurchaseDetailActivity extends BaseActivity implements View.OnClickListener{
+/*
+* ----------------- 商品详情 --------------页*/
+public class PurchaseDetailActivity extends BaseActivity implements View.OnClickListener,MyScrollView.OnScrollChangedListener{
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.scrollView)
+    MyScrollView scrollView;
     @BindView(R.id.back_iv)
     ImageView back_iv;
     @BindView(R.id.collect_iv)
@@ -53,16 +66,31 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
     MyCustomInfoInDetailAdapter customInfoInDetailAdapter;
     ArrayList<MyInsuranceItemInDetailBean> totalInsuranceItemList=new ArrayList<>();
     ArrayList<MyCustomInfoInDetailBean> totalCustomInfoList=new ArrayList<>();
+
+    private float headerHeight;//顶部高度
+    private float minHeaderHeight;//顶部最低高度，即Bar的高度
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_purchase_detail;
     }
 
     @Override
-    public void initView() {
-
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        scrollView.scrollTo(0,0);
+        headerHeight = getResources().getDimension(R.dimen.y500);
+        minHeaderHeight = getResources().getDimension(R.dimen.abc_action_bar_default_height_material);
+        toolbar.getBackground().mutate().setAlpha(0);
     }
 
+    @Override
+    public void initView() {
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initListener() {
         back_iv.setOnClickListener(this);
@@ -75,6 +103,7 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
         case_layout.setOnClickListener(this);
         share_layout.setOnClickListener(this);
         commit_tv.setOnClickListener(this);
+        scrollView.setmOnScrollChangedListener(this);
     }
 
     @Override
@@ -143,10 +172,61 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
                 Toast.makeText(this,"分享",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.commit_tv:
-                Toast.makeText(this,"我要投保",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                View view = LayoutInflater.from(this).inflate(R.layout.layout_buy_warn, null);
+                ImageView off_iv = (ImageView) view.findViewById(R.id.off_iv);
+                TextView content_tv = (TextView) view.findViewById(R.id.content_tv);
+                TextView wrong_tv = (TextView) view.findViewById(R.id.wrong_tv);
+                TextView right_tv = (TextView) view.findViewById(R.id.right_tv);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+                off_iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                wrong_tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(PurchaseDetailActivity.this,"不符合",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+                right_tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(PurchaseDetailActivity.this,"符合",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
+        //Y轴偏移量
+        float scrollY = who.getScrollY();
+        //Log.e("===onScrollChanged===","======="+scrollY);
+        //变化率
+        float headerBarOffsetY = headerHeight - minHeaderHeight;//Toolbar与header高度的差值
+        //Toolbar背景色透明度
+        if (scrollY==0)
+        {
+            toolbar.getBackground().mutate().setAlpha(0);
+        }
+        else if (scrollY>0)
+        {
+            float offset = 1 - Math.max((headerBarOffsetY - scrollY) / headerBarOffsetY, 0f);
+            toolbar.getBackground().mutate().setAlpha((int) (offset * 255));
+        }
+        else
+        {
+            toolbar.getBackground().mutate().setAlpha(0);
         }
     }
 }
