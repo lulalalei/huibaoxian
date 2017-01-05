@@ -1,5 +1,8 @@
 package com.bb.hbx.activitiy;
 
+import android.util.DisplayMetrics;
+
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 
@@ -16,6 +19,7 @@ public class LoadingActivity extends BaseActivity {
 
     @Override
     public void initView() {
+
 
     }
 

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+
 import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         implements FlatTypeAdapter, TypePool {
 
 
-    protected List<? extends Item> items;
+    protected List<? super Item> items;
 
     private LayoutInflater inflater;
 
@@ -33,29 +34,34 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     }
 
-    public MultiTypeAdapter(@NonNull List<? extends Item> items) {
+    public MultiTypeAdapter(@NonNull List<? super Item> items) {
         this.items = items;
         this.delegate = new MultiTypePool();
 
     }
 
-    public MultiTypeAdapter(@NonNull List<? extends Item> items, TypePool delegate) {
+    public MultiTypeAdapter(@NonNull List<? super Item> items, TypePool delegate) {
         this.items = items;
         this.delegate = delegate;
 
     }
 
 
-    public List<? extends Item> getItems() {
+    public List<? super Item> getItems() {
         return items;
     }
 
 
-    public void setItems(List<? extends Item> items) {
+    public void setItems(List<? super Item> items) {
         this.items = items;
         notifyDataSetChanged();
     }
 
+    public void addItems(List<? extends Item> items) {
+
+        this.items.addAll((Collection)items);
+        notifyDataSetChanged();
+    }
 
 
     @Override
@@ -68,7 +74,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        Item item = items.get(position);
+        Item item = (Item) items.get(position);
         getProviderByClass(onFlattenClass(item)).onBindViewHolder(holder, item);
     }
 
@@ -130,7 +136,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        Item item = items.get(position);
+        Item item = (Item) items.get(position);
         return indexOf(onFlattenClass(item));
     }
 

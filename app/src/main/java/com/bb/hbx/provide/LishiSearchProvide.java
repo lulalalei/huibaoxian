@@ -12,11 +12,11 @@ import com.bb.hbx.R;
 import com.bb.hbx.bean.HotSearchBean;
 import com.bb.hbx.bean.LishiSearchBean;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
+import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 
 
 /**
@@ -27,17 +27,31 @@ import butterknife.ButterKnife;
 public class LishiSearchProvide extends ItemViewProvider<LishiSearchBean, LishiSearchProvide.ViewHolder> {
 
 
+    public interface LishiSearchListener {
 
+        void selectItem(LishiSearchBean bean);
 
-
-
-    private interface  LishiListener {
-
-        void selectItem(String name);
-
-        void deleteItem();
+        void deleteItem(LishiSearchBean bean);
     }
 
+
+    private MultiTypeAdapter adapter;
+
+    public LishiSearchProvide(MultiTypeAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+
+    private LishiSearchListener listener;
+
+
+    public LishiSearchListener getListener() {
+        return listener;
+    }
+
+    public void setListener(LishiSearchListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -64,6 +78,8 @@ public class LishiSearchProvide extends ItemViewProvider<LishiSearchBean, LishiS
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+
         }
 
         void setData(@NonNull final LishiSearchBean bean) {
@@ -74,13 +90,18 @@ public class LishiSearchProvide extends ItemViewProvider<LishiSearchBean, LishiS
                 @Override
                 public void onClick(View v) {
 
+                    adapter.getItems().remove(getPosition());
+                    adapter.notifyItemRemoved(getPosition());
+                    adapter.notifyItemRangeChanged(getPosition(), adapter.getItemCount());
+                    listener.deleteItem(bean);
+
                 }
             });
 
             tv_confim.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    listener.selectItem(bean);
                 }
             });
         }

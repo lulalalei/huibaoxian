@@ -37,6 +37,7 @@
 
 
             <com.bb.hbx.widget.LoginTelEdit
+                android:id="@+id/le_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -44,6 +45,7 @@
                 android:hint="@string/searchproduct"
                 android:paddingRight="@dimen/x28"
                 android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppear.Theme.A3_Size12"
                 android:textColorHint="@color/A4"
                 android:letterSpacing="0.1"
