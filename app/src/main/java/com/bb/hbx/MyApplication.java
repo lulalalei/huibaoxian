@@ -14,7 +14,9 @@ public class MyApplication extends Application {
 
     private static Context context;
 
+    public static String DUID = "";// 设备唯一码
     public static int widthPixels = 321;// 屏幕宽度
+    public static int heightPixels= 481;//屏幕高度
 
     //public static User user;// 用户信息
 

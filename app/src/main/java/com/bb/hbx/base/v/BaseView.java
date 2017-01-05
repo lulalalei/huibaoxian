@@ -6,5 +6,13 @@ package com.bb.hbx.base.v;
 
 public interface BaseView {
 
-     void showMsg(String  msg);
+    void showMsg(String msg);
+
+    void initLoading();
+
+    void showLoading();
+
+    void dissmissLoading();
+
+    void updateLoading();
 }

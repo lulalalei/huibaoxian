@@ -105,12 +105,12 @@ public class SquareFragment extends BaseFragment<SquarePresenter, SquareModel> i
     @Override
     public <T> void setList(T t) {
 
-        adapter.setItems((List<? extends Item>) t);
+       // adapter.setItems((List<? extends Item>) t);
     }
 
     @Override
     public <T> void addList(T t) {
-        adapter.setItems((List<? extends Item>) t);
+       // adapter.setItems((List<? extends Item>) t);
     }
 
 }

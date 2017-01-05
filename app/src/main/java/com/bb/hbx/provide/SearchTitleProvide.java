@@ -5,16 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.AcitBean;
 import com.bb.hbx.bean.SearchTitleBean;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
+import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by fancl.
@@ -22,6 +18,9 @@ import butterknife.ButterKnife;
  */
 
 public class SearchTitleProvide extends ItemViewProvider<SearchTitleBean, SearchTitleProvide.ViewHolder> {
+
+
+
 
 
     @NonNull

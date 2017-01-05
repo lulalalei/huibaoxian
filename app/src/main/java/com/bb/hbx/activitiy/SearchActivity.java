@@ -1,33 +1,28 @@
 package com.bb.hbx.activitiy;
 
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.os.Build;
+
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
-import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.bean.BKItem;
-import com.bb.hbx.bean.BannerBean;
-import com.bb.hbx.bean.BobaoItem;
+import com.bb.hbx.base.m.SearchHistoryModel;
+import com.bb.hbx.base.p.SearchHistoryPresenter;
+import com.bb.hbx.base.v.SearchHistoryContract;
 import com.bb.hbx.bean.HotSearchBean;
 import com.bb.hbx.bean.LishiSearchBean;
-import com.bb.hbx.bean.ModleItem;
 import com.bb.hbx.bean.SearchTitleBean;
 import com.bb.hbx.bean.SearchTitleBean2;
-import com.bb.hbx.provide.BannerProvide;
 import com.bb.hbx.provide.HotSearchProvide;
 import com.bb.hbx.provide.LishiSearchProvide;
-import com.bb.hbx.provide.ModleItemProvide;
 import com.bb.hbx.provide.SearchTitleProvide;
 import com.bb.hbx.provide.SearchTitleProvide2;
+import com.bb.hbx.widget.LoginTelEdit;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -36,20 +31,16 @@ import java.util.List;
 
 import butterknife.BindView;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.KITKAT;
-import static android.view.Window.FEATURE_NO_TITLE;
-import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
-import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
 
 /**
  * Created by Administrator on 2016/12/26.
  */
 
-public class SearchActivity extends BaseActivity implements View.OnClickListener {
+public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchHistoryModel> implements View.OnClickListener
+        , SearchHistoryContract.View {
 
 
-    private final String TAG=SearchActivity.class.getSimpleName();
+    private final String TAG = SearchActivity.class.getSimpleName();
 
     @BindView(R.id.tv_back)
     TextView tv_back;
@@ -57,20 +48,23 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     @BindView(R.id.rl_view)
     RecyclerView rl_view;
 
+    @BindView(R.id.le_search)
+    LoginTelEdit le_search;
+
     private List<Item> items;
-
-
     private MultiTypeAdapter adapter;
+
+
+    private SearchTitleProvide2 searchTitleProvide2;
+    private LishiSearchProvide lishiSearchProvide;
 
     @Override
     public int getLayoutId() {
-
         return R.layout.activity_search;
     }
 
     @Override
     public void initView() {
-
 
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
@@ -83,42 +77,84 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 } else if (item instanceof HotSearchBean) {
                     return 1;
                 }
-                return 5;
+                return 4;
             }
         };
         layoutManager.setSpanSizeLookup(spanSizeLookup);
         rl_view.setLayoutManager(layoutManager);
-        //rl_view.addItemDecoration(new SpaceItemDecoration());
 
 
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
+
+        lishiSearchProvide = new LishiSearchProvide(adapter);
+        searchTitleProvide2 = new SearchTitleProvide2();
         adapter.register(SearchTitleBean.class, new SearchTitleProvide());
         adapter.register(HotSearchBean.class, new HotSearchProvide());
-        adapter.register(SearchTitleBean2.class, new SearchTitleProvide2());
-        adapter.register(LishiSearchBean.class, new LishiSearchProvide());
+        adapter.register(SearchTitleBean2.class, searchTitleProvide2);
+        adapter.register(LishiSearchBean.class, lishiSearchProvide);
         rl_view.setAdapter(adapter);
+
+
     }
 
     @Override
     public void initListener() {
+
         tv_back.setOnClickListener(this);
+        le_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    if (!TextUtils.isEmpty(le_search.getText())) {
+                        mPresenter.addHistoryBean(new LishiSearchBean(le_search.getText().toString().trim()));
+                        showTip("添加成功....");
+
+
+                    }
+                }
+                return true;
+            }
+        });
+
+        lishiSearchProvide.setListener(new LishiSearchProvide.LishiSearchListener() {
+            @Override
+            public void selectItem(LishiSearchBean bean) {
+
+            }
+
+            @Override
+            public void deleteItem(LishiSearchBean bean) {
+                mPresenter.deleteBean(bean);
+            }
+        });
+
+
+        searchTitleProvide2.setListener(new SearchTitleProvide2.DeleteAllSearchListener() {
+            @Override
+            public void deleteAll() {
+                adapter.setItems(items);
+            }
+        });
     }
 
     @Override
     public void initdata() {
         items = new ArrayList<>();
         items.add(new SearchTitleBean());
-
         for (int i = 0; i < 8; i++) {
-            if(i%2==0) {
+            if (i % 2 == 0) {
                 items.add(new HotSearchBean("汇保险"));
-            }else {
+            } else {
                 items.add(new HotSearchBean("健康人寿"));
             }
         }
-
+        items.add(new SearchTitleBean2());
         adapter.setItems(items);
+
+        mPresenter.getHistoryList();
+
+
     }
 
     @Override
@@ -131,50 +167,56 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     }
 
-
-    public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
-
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-
-
-            int pos = parent.getChildAdapterPosition(view);
-
-            if (items.get(pos) instanceof HotSearchBean) {
-                outRect.top = getResources().getDimensionPixelOffset(R.dimen.y26);
-                outRect.bottom = 0;
-
-                outRect.right = 0;
-
-                outRect.left = (MyApplication.widthPixels - (4 * getResources().getDimensionPixelOffset(R.dimen.x160)
-                        + 2 * getResources().getDimensionPixelOffset(R.dimen.x36))) / 3;
-
-
-                if (pos > 0 && (pos - 1) / 4 == 0) {
-                    outRect.top = getResources().getDimensionPixelOffset(R.dimen.y36);
-                }
-
-                if (pos > 0 && (pos - 1) / 4 == 1) {
-                    outRect.bottom = getResources().getDimensionPixelOffset(R.dimen.y36);
-                }
-
-                if (pos > 0 && (pos - 1) % 4 == 0) {
-                    outRect.left = getResources().getDimensionPixelOffset(R.dimen.x36);
-                }
-
-                if (pos > 0 && (pos - 1) % 4 == 3) {
-                    outRect.right = getResources().getDimensionPixelOffset(R.dimen.x36);
-                }
-
-                Log.i(TAG,"left:"+outRect.left);
-                Log.i(TAG,"right:"+outRect.right);
-
-            }
-
-
-        }
-
+    @Override
+    public void getHistoryList(List<LishiSearchBean> lists) {
+        adapter.addItems(lists);
 
     }
+
+
+//    public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+//
+//
+//        @Override
+//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//
+//
+//            int pos = parent.getChildAdapterPosition(view);
+//
+//            if (items.get(pos) instanceof HotSearchBean) {
+//                outRect.top = getResources().getDimensionPixelOffset(R.dimen.y26);
+//                outRect.bottom = 0;
+//
+//                outRect.right = 0;
+//
+//                outRect.left = (MyApplication.widthPixels - (4 * getResources().getDimensionPixelOffset(R.dimen.x160)
+//                        + 2 * getResources().getDimensionPixelOffset(R.dimen.x36))) / 3;
+//
+//
+//                if (pos > 0 && (pos - 1) / 4 == 0) {
+//                    outRect.top = getResources().getDimensionPixelOffset(R.dimen.y36);
+//                }
+//
+//                if (pos > 0 && (pos - 1) / 4 == 1) {
+//                    outRect.bottom = getResources().getDimensionPixelOffset(R.dimen.y36);
+//                }
+//
+//                if (pos > 0 && (pos - 1) % 4 == 0) {
+//                    outRect.left = getResources().getDimensionPixelOffset(R.dimen.x36);
+//                }
+//
+//                if (pos > 0 && (pos - 1) % 4 == 3) {
+//                    outRect.right = getResources().getDimensionPixelOffset(R.dimen.x36);
+//                }
+//
+//                Log.i(TAG, "left:" + outRect.left);
+//                Log.i(TAG, "right:" + outRect.right);
+//
+//            }
+//
+//
+//        }
+//
+//
+//    }
 }

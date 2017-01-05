@@ -22,7 +22,8 @@ import butterknife.Unbinder;
  * Created by fancl
  */
 
-public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
+public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment
+ implements BaseView{
 
 
     public P mPresenter;
@@ -94,4 +95,28 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
 
     protected abstract void initdate(Bundle savedInstanceState);
 
+    @Override
+    public void showMsg(String msg) {
+
+    }
+
+    @Override
+    public void initLoading() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void dissmissLoading() {
+
+    }
+
+    @Override
+    public void updateLoading() {
+
+    }
 }
