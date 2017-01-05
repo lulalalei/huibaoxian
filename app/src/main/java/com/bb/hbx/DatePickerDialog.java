@@ -432,7 +432,7 @@ public class DatePickerDialog extends BaseDialog implements
 	 * 计算每月多少天
 	 * 
 	 * @param month
-	 * @param leayyear
+	 * @param year
 	 */
 	public void calDays(int year, int month) {
 		boolean leayyear = false;

@@ -1,7 +1,10 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -12,6 +15,16 @@ import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.cans.Can;
+import com.bb.hbx.utils.CompressBitmap;
+import com.bb.hbx.utils.ShareSPUtils;
+import com.bumptech.glide.Glide;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,6 +47,8 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
 
     TextView camera_tv;
     TextView mapstorage_tv;
+
+    String picPath;
     @Override
     public int getLayoutId() {
         return R.layout.activity_person_info_setting;
@@ -41,6 +56,13 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void initView() {
+        //ShareSPUtils.readShareSP();
+        Can.hasLogined=ShareSPUtils.sp.getBoolean("hasLogined",false);
+        Can.userName=ShareSPUtils.sp.getString("userName",null);
+        Can.userPhone=ShareSPUtils.sp.getString("userPhone",null);
+        Can.userPwd=ShareSPUtils.sp.getString("userPwd",null);
+        Can.userIcon= ShareSPUtils.sp.getString("userIcon", null);
+        userIcon_civ.setImageBitmap(BitmapFactory.decodeFile(Can.userIcon));
     }
 
     @Override
@@ -75,8 +97,23 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(PersonInfoSettingActivity.this,"相机",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent,101);
+                        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+                        {
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            //以下为了获得原图
+                            String cameraPath= Can.getDefaultUsersIconFile();
+                            File file = new File(cameraPath);
+                            picPath=new File(file,System.currentTimeMillis()+".jpg").getAbsolutePath();
+                            Uri uri = Uri.fromFile(new File(picPath));
+                            //为拍摄的图片指定一个存储的路径
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                            //intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);
+                            startActivityForResult(intent,101);
+                        }
+                        else
+                        {
+                            Toast.makeText(PersonInfoSettingActivity.this,"请检查您的sdk",Toast.LENGTH_SHORT).show();
+                        }
                         dialog.dismiss();
                     }
                 });
@@ -123,9 +160,62 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
             if (data!=null)
                 {
                     Uri uri = data.getData();
-
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                            String mapPath = Can.getDefaultUsersIconFile();
+                            File file = new File(mapPath);
+                            mapPath = new File(file, System.currentTimeMillis() + ".jpg").getAbsolutePath();
+                            FileOutputStream fos = null;
+                            BufferedOutputStream bos = null;
+                            try {
+                                fos = new FileOutputStream(mapPath);
+                                bos = new BufferedOutputStream(fos);
+                                //compressBitmap(mapPath, fos);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG,80,bos);
+                                bos.close();
+                                //fos在压缩完毕后关闭
+                                Bitmap compressBitmap = CompressBitmap.compressBitmap(mapPath, fos,3);
+                                ShareSPUtils.edit.putString("userIcon", mapPath);
+                                ShareSPUtils.edit.commit();
+                                if (compressBitmap!=null)
+                                {
+                                    userIcon_civ.setImageBitmap(compressBitmap);
+                                }
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(PersonInfoSettingActivity.this, "请检查您的sdk", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+        }
+        else if (requestCode==101)
+        {
+            Glide.with(PersonInfoSettingActivity.this).load(new File(picPath)).into(userIcon_civ);
+            /*if (resultCode!=0)
+            {
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeFile(picPath);
+                    File file = new File(Can.getDefaultUsersIconFile());
+                    picPath=new File(file,System.currentTimeMillis()+".jpg").getAbsolutePath();
+                    FileOutputStream fos = new FileOutputStream(picPath);
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,bos);
+                    bos.close();
+                    Bitmap compressBitmap = CompressBitmap.compressBitmap(picPath,fos,3);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }*/
         }
     }
 }

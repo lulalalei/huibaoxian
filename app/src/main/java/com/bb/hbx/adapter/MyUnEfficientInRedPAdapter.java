@@ -40,6 +40,7 @@ public class MyUnEfficientInRedPAdapter extends RecyclerView.Adapter<MyUnEfficie
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Glide.with(mContext).load(list.get(position)).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(holder.pic_iv);
+
     }
 
     @Override

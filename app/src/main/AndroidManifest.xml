@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bb.hbx">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -39,7 +43,7 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".activitiy.HomeActivity"
+            android:name=".activitiy.WelcomeActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,7 +80,8 @@
         <activity android:name=".activitiy.SexActivity" />
         <activity android:name=".activitiy.AddressManagerActivity" />
         <activity android:name=".activitiy.BuildNewAddressActivity" />
-        <activity android:name=".activitiy.PurchaseDetailActivity"></activity>
+        <activity android:name=".activitiy.PurchaseDetailActivity" />
+        <activity android:name=".activitiy.HomeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,15 +1,14 @@
 package com.bb.hbx.activitiy;
 
+import android.database.Cursor;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.login.LoginActivity;
@@ -20,6 +19,8 @@ import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.LoginAnimHelp;
+import com.bb.hbx.utils.MyUsersSqlite;
+import com.bb.hbx.utils.ShareSPUtils;
 import com.bb.hbx.widget.LoginPswEdit;
 import com.bb.hbx.widget.LoginTelEdit;
 
@@ -179,8 +180,23 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                 break;
             case R.id.tv_login:
                 if (isverTel() && isverCode()) {
-                    mPresenter.login(et_phone.getText().toString().trim(), et_psw.getText().toString().trim());
-                    AppManager.getInstance().showActivity(HomeActivity.class, null);
+                    //mPresenter.login(et_phone.getText().toString().trim(), et_psw.getText().toString().trim());
+                    String phone = et_phone.getText().toString();
+                    String pwd = et_psw.getText().toString();
+                    Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where phone = ? and pwd = ?", new String[]{phone, pwd});
+                    if (cursor!=null)
+                    {
+                        if (cursor.moveToNext())//存在此用户,说明登录成功
+                        {
+                            ShareSPUtils.writeShareSp(true, "默认用户名", phone, pwd);
+                            Toast.makeText(this,"登陆成功",Toast.LENGTH_SHORT).show();
+                            AppManager.getInstance().showActivity(HomeActivity.class, null);
+                        }
+                        else
+                        {
+                            Toast.makeText(this,"手机号或密码错误",Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 } else
                     showTip("手机号码或验证码有误");
                 break;

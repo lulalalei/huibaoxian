@@ -23,6 +23,7 @@ import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
 import com.bb.hbx.activitiy.login.LoginActivity;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.utils.ShareSPUtils;
 
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,8 +54,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     TextView userName;
     @BindView(R.id.identify_tv)
     TextView identify_tv;
-    @BindView(R.id.notLogin_tv)
-    TextView notLogin_tv;
+    @BindView(R.id.hasLogin_tv)
+    TextView hasLogin_tv;
     @BindView(R.id.pCount_tv)
     TextView pCount_tv;
 
@@ -85,9 +86,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         score_layout.setOnClickListener(this);
         redPacket_layout.setOnClickListener(this);
         notLogin_layout.setOnClickListener(this);
+        hasLogin_tv.setOnClickListener(this);
 
         service_layout.setOnClickListener(this);
         toolbar.setNavigationIcon(R.drawable.message);
+
+        //ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,hasLogin_tv,mContext);
     }
 
     @Override
@@ -101,6 +105,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         //menu.clear();
         inflater.inflate(R.menu.menu_host,menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -118,6 +123,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,hasLogin_tv,mContext);
+    }
 
     @Override
     public void onClick(View v) {
@@ -145,12 +155,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.notLogin_layout:
-
-            case R.id.notLogin_tv:
-
                 intent.setClass(mContext, LoginActivity.class);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_in_from_bottom,R.anim.activity_stay);
+            case R.id.hasLogin_tv:
+
+
                 break;
             case R.id.service_layout:
                 intent.setClass(mContext, PurchaseDetailActivity.class);

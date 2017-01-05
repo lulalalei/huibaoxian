@@ -1,5 +1,6 @@
 package com.bb.hbx.cans;
 
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 
 import com.bb.hbx.fragment.AllInPIOFragment;
@@ -10,6 +11,7 @@ import com.bb.hbx.fragment.UnEfficientInRedPaFragment;
 import com.bb.hbx.fragment.UnPayInPIOFragment;
 import com.bb.hbx.fragment.UnUsedInRedPaFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +19,27 @@ import java.util.ArrayList;
  */
 
 public class Can {
+
+    //记录用户登录状态
+    public static boolean hasLogined;
+    //记录用户名
+    public static String userName;
+    //记录用户手机号
+    public static String userPhone;
+    //记录用户密码
+    public static String userPwd;
+    //用户头像
+    public static String userIcon;
+    //用户默认头像
+    public static String userIconDefault="http://pic61.nipic.com/file/20150304/20245617_095937129615_2.jpg";
+
+    //存储头像的文件名
+    public static String getDefaultUsersIconFile()
+    {
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + File.separator
+                + "huibx";
+        return path;
+    }
     //在 我的--个险--个险订单 页面中记录上一个fragment的位置,用于hide,show上一个fragment
     public static int preFragmentPositionInPIO;
     //在 我的--红包--我的红包 页面中记录上一个fragment的位置,用于hide,show上一个fragment
