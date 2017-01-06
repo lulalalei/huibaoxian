@@ -5,33 +5,43 @@ package com.bb.hbx.api;
  */
 public class Result_Api<T> {
 
-     private int code;//返回code字段
+    private String respCode;//返回code字段
 
-     private String msg;//返回msg
+    private String respMsg;//返回msg
 
-    private T data;
+    private boolean success;//
 
-    public int getCode() {
-        return code;
+    private T output;
+
+    public String getRespCode() {
+        return respCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setRespCode(String respCode) {
+        this.respCode = respCode;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getRespMsg() {
+        return respMsg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setRespMsg(String respMsg) {
+        this.respMsg = respMsg;
     }
 
-    public T getData() {
-        return data;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public T getOutput() {
+        return output;
+    }
+
+    public void setOutput(T output) {
+        this.output = output;
     }
 }

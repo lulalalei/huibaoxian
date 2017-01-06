@@ -4,7 +4,11 @@ import android.util.Log;
 
 
 import com.bb.hbx.base.v.BaseView;
+import com.bb.hbx.utils.Constants;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -12,11 +16,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 /**
  * Created by Administrator on 2016/12/2.
  */
 
-public abstract class PostCallback<V extends BaseView, T> implements Callback<Result_Api> {
+public abstract class PostCallback<V extends BaseView> implements Callback<Result_Api> {
 
 
     private final static String TAG = PostCallback.class.getSimpleName();
@@ -26,65 +32,46 @@ public abstract class PostCallback<V extends BaseView, T> implements Callback<Re
 
     private V view;
 
-    private Class<T> clazz;
-
+//    private Class<T> clazz;
+//
     public PostCallback(V view) {
-        this.view = view;
-        if (this.getClass().getGenericSuperclass() instanceof ParameterizedType) {
-            clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-
-        }
+          this.view = view;
+//        if (this.getClass().getGenericSuperclass() instanceof ParameterizedType) {
+//            clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+//
+//        }
 
     }
-
 
     public abstract void successCallback(Result_Api api);
 
     public abstract void failCallback();
 
-
-//    @Override
-//    public void onResponse(Call<Result_Api<T>> call, Response<Result_Api<T>> response) {
-//        Log.i(TAG,"onResponse");
-//        view.dissmissLoading();
-//        Result_Api api=response.body();
-//
-//
-//
-//                new Gson().fromJson(api.getData().toString(),clazz);
-//
-//
-//        if(api!=null && api.getCode()==1){
-//            successCallback(api);
-//        }else
-//            view.showTip(ERROR_DATA);
-//
-//    }
-//
-//    @Override
-//    public void onFailure(Call<Result_Api<T>> call, Throwable t) {
-//        view.dissmissLoading();
-//        view.showTip(NET_ERROR);
-//        failCallback();
-//    }
-
-
     @Override
     public void onResponse(Call<Result_Api> call, Response<Result_Api> response) {
-        Log.i(TAG, "response.code():"+response.code()+"%%%%%%%"+response.message());
+        Log.i(TAG, "response.code():" + response.code() + "%%%%%%%" + response.body());
 
         view.dissmissLoading();
         Result_Api api = response.body();
-        if(api != null ) {
-            if (api.getCode() == 1) {
-                if (api.getData() != null) {
-                    T t = new Gson().fromJson(api.getData().toString(), clazz);
-                    api.setData(t);
-                }
+        if (api != null) {
+            if (Constants.SUCCESS.equalsIgnoreCase(api.getRespCode())) {
+//                if (api.getOutput() != null) {
+//
+//                    JSONObject jsonObject= null;
+//                    try {
+//                        jsonObject = new JSONObject(api.getOutput().toString());
+//                        T t = new Gson().fromJson(jsonObject.toString(), clazz);
+//                        api.setOutput(t);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//
+//                }
                 successCallback(api);
             } else
-                view.showMsg(api.getMsg());
-        }else
+                view.showMsg(api.getRespMsg());
+        } else
 
             view.showMsg(ERROR_DATA);
 

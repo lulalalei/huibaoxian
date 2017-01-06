@@ -44,16 +44,16 @@ public class WelcomeActivity extends BaseActivity {
         ShareSPUtils.initShareSP(this);
         MyUsersSqlite.initUsersdb(this);
 
-        if (!ShareSPUtils.sp.getBoolean("hasLogined",false))
-        {
-            new MyAsynctask(this).execute(Can.userIconDefault);
-
-        }
-        else {
+//        if (!ShareSPUtils.sp.getBoolean("hasLogined",false))
+//        {
+//            new MyAsynctask(this).execute(Can.userIconDefault);
+//
+//        }
+        //else {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
-        }
+        //}
     }
 
     class MyAsynctask extends AsyncTask<String,Void,String>{

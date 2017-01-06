@@ -44,7 +44,7 @@ public class RetrofitFactory {
         // 创建Retrofit
         mRetrofit = new Retrofit.Builder()
                 .client(client)
-//                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(new Converter.Factory() {
                     @Override
                     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {

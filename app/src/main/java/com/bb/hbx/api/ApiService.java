@@ -1,5 +1,7 @@
 package com.bb.hbx.api;
 
+import com.bb.hbx.bean.MessageCodeBean;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -11,19 +13,9 @@ import retrofit2.http.POST;
  */
 
 public interface ApiService {
-
-
-
-//
-//    @FormUrlEncoded
-//    @POST("api.do")
-//    Call<String> getVerifyCode(@Field("codeType") String codeType,
-//                                   @Field("mobile") String mobile, @Field("bizType") String bizType,@Field("method") String method,@Field("type") String type );
-
-
-
     @FormUrlEncoded
     @POST("api.do?method=getVerifyCode&type=post")
-    Call<String> getVerifyCode(@Field("input") String input,@Field("sign") String sign);
+    Call<Result_Api<MessageCodeBean>> getVerifyCode(@Field("codeType") String codeType
+            , @Field("mobile") String mobile, @Field("bizType") String bizType);
 
 }

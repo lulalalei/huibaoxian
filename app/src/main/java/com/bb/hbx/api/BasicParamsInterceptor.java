@@ -6,28 +6,24 @@ import android.util.Log;
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.utils.AppUtils;
 import com.bb.hbx.utils.Constants;
-import com.bb.hbx.utils.DeviceUtils;
 import com.bb.hbx.utils.MD5Util;
+import com.google.gson.JsonObject;
 
-import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Comparator;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.ConcurrentHashMap;
-
-
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.Buffer;
+
 
 /**
  * Created by Administrator on 2016/12/1.
@@ -52,25 +48,22 @@ public class BasicParamsInterceptor implements Interceptor {
         requestBuilder.addHeader("deviceNo", MyApplication.DUID);
         requestBuilder.addHeader("deviceName", "10");
 
+        FormBody oldFormBody = (FormBody) request.body();
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        JSONObject jsonObject=new JSONObject();
+        for (int i = 0; i < oldFormBody.size(); i++) {
+            try {
+                jsonObject.put(oldFormBody.name(i),oldFormBody.value(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
-//        FormBody oldFormBody = (FormBody) request.body();
-//
-//        TreeMap<String, String> treeMap = new TreeMap<>();
-//
-//        StringBuilder builder=new StringBuilder();
-//        for (int i = 0; i < oldFormBody.size(); i++) {
-//           treeMap.put(oldFormBody.name(i),oldFormBody.value(i));
-//            if("input".equalsIgnoreCase(oldFormBody.name(i))){
-//                builder.append(oldFormBody.value(i));
-//            }
-//        }
-//
-//        String sign = MD5Util.MD5(builder.toString() + GenApiHashUrl.md5_key).toLowerCase();
-//        treeMap.put("input", builder.toString());
-//        treeMap.put("sign", sign);
-//        RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
-//
-//        requestBuilder.method(request.method(), body);
+        String sign = MD5Util.MD5(jsonObject.toString() + GenApiHashUrl.md5_key).toLowerCase();
+        treeMap.put("input", jsonObject.toString());
+        treeMap.put("sign", sign);
+        RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
+        requestBuilder.method(request.method(), body);
         request = requestBuilder.build();
         return chain.proceed(request);
     }

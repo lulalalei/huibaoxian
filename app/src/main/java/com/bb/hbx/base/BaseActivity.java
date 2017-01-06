@@ -142,7 +142,7 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
 
     @Override
     public void showMsg(String msg) {
-
+        showTip(msg);
     }
 
     @Override
