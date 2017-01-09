@@ -63,6 +63,7 @@
 
 
         <TextView
+            android:id="@+id/tv_bankstatus"
             android:layout_width="@dimen/x148"
             android:layout_height="@dimen/x48"
             android:layout_alignParentRight="true"
@@ -144,7 +145,7 @@
                 android:background="@null"
                 android:drawablePadding="@dimen/x26"
                 android:hint="请输入提现金额"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:maxLength="8"
                 android:textAppearance="@style/TextAppear.Theme.A3_Size36"
                 android:textColorHint="@color/A5"

@@ -44,23 +44,21 @@ public class WelcomeActivity extends BaseActivity {
         ShareSPUtils.initShareSP(this);
         MyUsersSqlite.initUsersdb(this);
 
-        if (!ShareSPUtils.sp.getBoolean("hasLogined",false))
-        {
+        if (!ShareSPUtils.sp.getBoolean("hasLogined", false)) {
             new MyAsynctask(this).execute(Can.userIconDefault);
 
-        }
-        else {
+        } else {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
-    class MyAsynctask extends AsyncTask<String,Void,String>{
+    class MyAsynctask extends AsyncTask<String, Void, String> {
 
         Context context;
-        String iconPath=null;
-        FileOutputStream fos=null;
+        String iconPath = null;
+        FileOutputStream fos = null;
 
         public MyAsynctask(Context context) {
             this.context = context;
@@ -68,51 +66,43 @@ public class WelcomeActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            ByteArrayOutputStream baos=null;
-            String parentPath=null;
+            ByteArrayOutputStream baos = null;
+            String parentPath = null;
 
             try {
                 URL url = new URL(Can.userIconDefault);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.connect();
-                if (conn.getResponseCode()==200)
-                {
+                if (conn.getResponseCode() == 200) {
                     InputStream is = conn.getInputStream();
                     byte[] bytes = new byte[1024];
                     int len;
                     baos = new ByteArrayOutputStream();
-                    while ((len=is.read(bytes))!=-1)
-                    {
-                        baos.write(bytes,0,len);
+                    while ((len = is.read(bytes)) != -1) {
+                        baos.write(bytes, 0, len);
                         baos.flush();
                     }
                     byte[] array = baos.toByteArray();
-                    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-                    {
+                    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                         parentPath = Can.getDefaultUsersIconFile();
                         File file = new File(parentPath);
-                        if (!file.exists())
-                        {
+                        if (!file.exists()) {
                             file.mkdirs();
                         }
                         iconPath = new File(file, Can.userIconDefault.substring(Can.userIconDefault.lastIndexOf("/") + 1)).getAbsolutePath();
                         fos = new FileOutputStream(iconPath);
                         fos.write(array);
                         fos.close();
-                    }
-                    else
-                    {
-                        Toast.makeText(context,"请检查sdk",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "请检查sdk", Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-            finally {
-                if (baos!=null)
-                {
+            } finally {
+                if (baos != null) {
                     try {
                         baos.close();
                     } catch (IOException e) {
@@ -126,15 +116,12 @@ public class WelcomeActivity extends BaseActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (!TextUtils.isEmpty(s))
-            {
+            if (!TextUtils.isEmpty(s)) {
                 Intent intent = new Intent(context, HomeActivity.class);
                 startActivity(intent);
                 finish();
-            }
-            else
-            {
-                Toast.makeText(context,"图片出错啦",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "图片出错啦", Toast.LENGTH_SHORT).show();
             }
         }
     }
