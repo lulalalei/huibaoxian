@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -18,7 +19,6 @@ import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.cans.Can;
 import com.bb.hbx.utils.CompressBitmap;
 import com.bb.hbx.utils.ShareSPUtils;
-import com.bumptech.glide.Glide;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -42,12 +42,15 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
     RelativeLayout sex_layout;
     @BindView(R.id.address_layout)
     RelativeLayout address_layout;
+    @BindView(R.id.realNameIdentify_layout)
+    RelativeLayout realNameIdentify_layout;
     @BindView(R.id.countSafe_layout)
     RelativeLayout countSafe_layout;
 
     TextView camera_tv;
     TextView mapstorage_tv;
 
+    File picFile;
     String picPath;
     @Override
     public int getLayoutId() {
@@ -71,6 +74,7 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
         name_layout.setOnClickListener(this);
         sex_layout.setOnClickListener(this);
         address_layout.setOnClickListener(this);
+        realNameIdentify_layout.setOnClickListener(this);
         countSafe_layout.setOnClickListener(this);
     }
 
@@ -103,10 +107,11 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                             //以下为了获得原图
                             String cameraPath= Can.getDefaultUsersIconFile();
                             File file = new File(cameraPath);
-                            picPath=new File(file,System.currentTimeMillis()+".jpg").getAbsolutePath();
-                            Uri uri = Uri.fromFile(new File(picPath));
+                            picFile = new File(file, System.currentTimeMillis() + ".jpg");
+                            picPath=picFile.getAbsolutePath();
+                            //Uri uri = Uri.fromFile(picFile);
                             //为拍摄的图片指定一个存储的路径
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, picFile);
                             //intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);
                             startActivityForResult(intent,101);
                         }
@@ -139,6 +144,10 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.address_layout:
                 intent.setClass(PersonInfoSettingActivity.this,AddressManagerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.realNameIdentify_layout:
+                intent.setClass(PersonInfoSettingActivity.this,RealNameIdentifyActivity.class);
                 startActivity(intent);
                 break;
             case R.id.countSafe_layout:
@@ -198,7 +207,30 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
         }
         else if (requestCode==101)
         {
-            Glide.with(PersonInfoSettingActivity.this).load(new File(picPath)).into(userIcon_civ);
+                Bundle bundle = data.getExtras();
+                if (bundle!=null)
+                {
+                    try {
+                        Bitmap bitmap = (Bitmap) bundle.get("data");
+                        userIcon_civ.setImageBitmap(bitmap);
+                        ShareSPUtils.edit.putString("userIcon", picPath);
+                        ShareSPUtils.edit.commit();
+                        if (picFile.exists())
+                        {
+                            picFile.delete();
+                        }
+                        picFile.createNewFile();
+                        FileOutputStream fos = new FileOutputStream(picFile);//fos 为毛是null
+                        bitmap.compress(Bitmap.CompressFormat.PNG,100,fos);
+                        fos.flush();
+                        fos.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                //Glide.with(PersonInfoSettingActivity.this).load(new File(picPath)).into(userIcon_civ);
+            }
             /*if (resultCode!=0)
             {
                 try {

@@ -2,6 +2,7 @@ package com.bb.hbx.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,7 @@ public class ShareSPUtils {
         sp = context.getSharedPreferences("usersinfo", Context.MODE_PRIVATE);
         edit = sp.edit();
     }
-    public static void readShareSP(ViewGroup notLogin, ImageView userIcon, TextView hasLogin,Context context)
-    {
+    public static void readShareSP(ViewGroup notLogin, ImageView userIcon, TextView hasLogin,Context context) {
         if (sp!=null)
         {
             Can.hasLogined=sp.getBoolean("hasLogined",false);
@@ -57,8 +57,10 @@ public class ShareSPUtils {
                     hasLogin.setVisibility(View.VISIBLE);
                     notLogin.setVisibility(View.GONE);
                 }
+                Bitmap bitmap = BitmapFactory.decodeFile(Can.userIcon);
+                int byteCount = bitmap.getByteCount();
                 //从本地文件加载图片
-                userIcon.setImageBitmap(BitmapFactory.decodeFile(Can.userIcon));
+                userIcon.setImageBitmap(bitmap);
                 hasLogin.setText(Can.userName);
             }
         }

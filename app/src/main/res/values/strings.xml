@@ -53,6 +53,8 @@
     <string name="next">下一步</string>
     <string name="complete">完成</string>
     <string name="add">+</string>
+    <string name="insureInfo">《投保须知》</string>
+    <string name="insureItem">《保险条款》</string>
 
     <!-- behavior -->
 

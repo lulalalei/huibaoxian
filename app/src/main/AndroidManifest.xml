@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bb.hbx">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -60,7 +61,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activitiy.PerInsuOrderActivity" />
-        <activity android:name=".activitiy.OrderDetailActivity" />
+        <activity android:name=".activitiy.PerOrderDetailActivity" />
         <activity android:name=".activitiy.MyAssertActivity" />
         <activity android:name=".activitiy.CashActivity" />
         <activity android:name=".activitiy.AddBankCardActivity" />
@@ -84,7 +85,10 @@
         <activity android:name=".activitiy.AddressManagerActivity" />
         <activity android:name=".activitiy.BuildNewAddressActivity" />
         <activity android:name=".activitiy.PurchaseDetailActivity" />
-        <activity android:name=".activitiy.HomeActivity"></activity>
+        <activity android:name=".activitiy.HomeActivity" />
+        <activity android:name=".activitiy.RealNameIdentifyActivity" />
+        <activity android:name=".activitiy.RealNameCommitActivity" />
+        <activity android:name=".activitiy.RealNameFinishActivity"></activity>
     </application>
 
 </manifest>

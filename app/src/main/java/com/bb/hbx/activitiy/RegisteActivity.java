@@ -140,32 +140,32 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
                 mPresenter.regist(et_phone.getText().toString().trim(), et_psw.getText().toString().trim(),
                         et_yzm.getText().toString().trim());
 
-//                String userPhone = et_phone.getText().toString();
-//                String userPwd = et_psw.getText().toString();
-//                Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where phone = ?", new String[]{userPhone});
-//                if (cursor!=null)
-//                {
-//                    if (cursor.moveToNext())//已存在用户,注册失败
-//                    {
-//                        Toast.makeText(RegisteActivity.this,"该用户名已被注册,请重新输入用户名",Toast.LENGTH_SHORT).show();
-//                        et_phone.setText("");
-//                        et_yzm.setText("");
-//                    }
-//                    else
-//                    {
-//                        String usersIconPath = ShareSPUtils.writeShareSp(false, "默认用户名", userPhone, userPwd);
-//                        ContentValues values = new ContentValues();
-//                        values.put("name","默认用户名");
-//                        values.put("phone",userPhone);
-//                        values.put("pwd",userPwd);
-//                        //在此设置头像图片为默认
-//                        values.put("usericon", usersIconPath);
-//                        long flag = MyUsersSqlite.db.insert("userstb", null, values);
-//                        values.clear();
-//                        Toast.makeText(RegisteActivity.this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    }
-//                }
+                String userPhone = et_phone.getText().toString();
+                String userPwd = et_psw.getText().toString();
+                Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where phone = ?", new String[]{userPhone});
+                if (cursor!=null)
+                {
+                    if (cursor.moveToNext())//已存在用户,注册失败
+                    {
+                        Toast.makeText(RegisteActivity.this,"该用户名已被注册,请重新输入用户名",Toast.LENGTH_SHORT).show();
+                        et_phone.setText("");
+                        et_yzm.setText("");
+                    }
+                    else
+                    {
+                        String usersIconPath = ShareSPUtils.writeShareSp(false, "默认用户名", userPhone, userPwd);
+                        ContentValues values = new ContentValues();
+                        values.put("name","默认用户名");
+                        values.put("phone",userPhone);
+                        values.put("pwd",userPwd);
+                        //在此设置头像图片为默认
+                        values.put("usericon", usersIconPath);
+                        long flag = MyUsersSqlite.db.insert("userstb", null, values);
+                        values.clear();
+                        Toast.makeText(RegisteActivity.this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
                 break;
 
             case R.id.back_iv:

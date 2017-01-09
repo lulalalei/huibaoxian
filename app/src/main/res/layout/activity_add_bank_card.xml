@@ -6,30 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.bb.hbx.activitiy.AddBankCardActivity">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/toolbar">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_iv"
+            android:src="@drawable/fanhui"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="18dp"/>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="添加银行卡"
-            android:textSize="20sp"
+            android:textSize="22sp"
+            android:textColor="@color/A1"
+            android:layout_centerHorizontal="true"
             android:gravity="center"/>
-    </android.support.v7.widget.Toolbar>
+    </RelativeLayout>
 
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/back_iv"-->
-        <!--android:src="@mipmap/right_arrow"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:onClick="backMethod"/>-->
     <TextView
         android:id="@+id/show_tv"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/topbar_layout"
         android:paddingLeft="10dp"
         android:text="绑卡只用于提现,不会产生扣费"
         android:background="@android:color/darker_gray"
