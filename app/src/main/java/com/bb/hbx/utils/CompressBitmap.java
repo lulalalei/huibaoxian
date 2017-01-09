@@ -55,4 +55,17 @@ public class CompressBitmap {
                 }
         return bitmap;
     }
+    /*
+   * 二次采样图片,不写入文件*/
+    public static Bitmap compressBitmapOnly(final String string,int size)
+    {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds=true;
+        BitmapFactory.decodeFile(string,options);
+        options.inSampleSize=size;
+        options.inPreferredConfig= Bitmap.Config.RGB_565;
+        options.inJustDecodeBounds=false;
+        Bitmap bitmap = BitmapFactory.decodeFile(string, options);
+        return bitmap;
+    }
 }

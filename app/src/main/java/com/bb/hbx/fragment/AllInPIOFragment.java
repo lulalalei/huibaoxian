@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.activitiy.OrderDetailActivity;
+import com.bb.hbx.activitiy.PerOrderDetailActivity;
 import com.bb.hbx.adapter.MyAllInPIOAdapter;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.MyPIOederBean;
@@ -74,7 +74,7 @@ public class AllInPIOFragment extends BaseFragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //Toast.makeText(mContext,"当前条目位置:"+position,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                Intent intent = new Intent(mContext, PerOrderDetailActivity.class);
                 startActivity(intent);
             }
         });

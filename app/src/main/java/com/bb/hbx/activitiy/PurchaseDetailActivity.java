@@ -51,8 +51,6 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
     RelativeLayout share_layout;
     @BindView(R.id.custom_layout)
     RelativeLayout custom_layout;
-    @BindView(R.id.insurance_layout)
-    RelativeLayout insurance_layout;
     @BindView(R.id.askMoney_layout)
     RelativeLayout askMoney_layout;
     @BindView(R.id.issue_layout)
@@ -79,8 +77,8 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         scrollView.scrollTo(0,0);
-        headerHeight = getResources().getDimension(R.dimen.y500);
-        minHeaderHeight = getResources().getDimension(R.dimen.abc_action_bar_default_height_material);
+        headerHeight = getResources().getDimension(R.dimen.y500);//顶部高度
+        minHeaderHeight = getResources().getDimension(R.dimen.abc_action_bar_default_height_material);//顶部最低高度，即Bar的高度
         toolbar.getBackground().mutate().setAlpha(0);
     }
 
@@ -97,7 +95,6 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
         collect_iv.setOnClickListener(this);
         banner_iv.setOnClickListener(this);
         custom_layout.setOnClickListener(this);
-        insurance_layout.setOnClickListener(this);
         askMoney_layout.setOnClickListener(this);
         issue_layout.setOnClickListener(this);
         case_layout.setOnClickListener(this);
@@ -161,9 +158,6 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.askMoney_layout:
                 Toast.makeText(this,"理赔流程",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.insurance_layout:
-                Toast.makeText(this,"保险条款",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.custom_layout:
                 Toast.makeText(this,"投保须知",Toast.LENGTH_SHORT).show();

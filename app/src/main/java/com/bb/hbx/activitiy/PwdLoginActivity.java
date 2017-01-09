@@ -196,6 +196,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                         {
                             Toast.makeText(this,"手机号或密码错误",Toast.LENGTH_SHORT).show();
                         }
+                        cursor.close();
                     }
                 } else
                     showTip("手机号码或验证码有误");

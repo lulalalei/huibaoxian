@@ -1,30 +1,37 @@
 package com.bb.hbx.activitiy;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
+import com.bb.hbx.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class AddBankCardActivity extends AppCompatActivity {
+public class AddBankCardActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.warn_iv)
     ImageView warn_iv;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_bank_card);
-        ButterKnife.bind(this);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+    public int getLayoutId() {
+        return R.layout.activity_add_bank_card;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initdata() {
+
     }
 
     public void backMethod(View view) {
@@ -39,8 +46,9 @@ public class AddBankCardActivity extends AppCompatActivity {
         Toast.makeText(this,"选择银行",Toast.LENGTH_SHORT).show();
     }
 
-   /* public void nextStepMethod(View view) {
-        Intent intent = new Intent(this, SetPwdActivity.class);
-        startActivity(intent);
-    }*/
+    @Override
+    public void onClick(View v) {
+
+    }
+
 }
