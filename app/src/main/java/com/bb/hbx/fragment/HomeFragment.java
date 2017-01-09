@@ -14,6 +14,9 @@ import android.widget.RelativeLayout;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.SearchActivity;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.base.m.HomeModle;
+import com.bb.hbx.base.p.HomePresenter;
+import com.bb.hbx.base.v.HomeContract;
 import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BKchildItem;
 import com.bb.hbx.bean.BannerBean;
@@ -41,7 +44,7 @@ import butterknife.BindView;
  * Created by Administrator on 2016/12/20.
  */
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> implements HomeContract.View, View.OnClickListener {
 
 
     @BindView(R.id.lin_bg)
@@ -231,13 +234,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
         items.addAll(jxItems);
         adapter.setItems(items);
+
+        mPresenter.getTopicList();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.lin_search:
-                AppManager.getInstance().showActivity(SearchActivity.class,null);
+                AppManager.getInstance().showActivity(SearchActivity.class, null);
                 break;
         }
     }

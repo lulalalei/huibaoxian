@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -50,10 +51,10 @@ public class BasicParamsInterceptor implements Interceptor {
 
         FormBody oldFormBody = (FormBody) request.body();
         TreeMap<String, String> treeMap = new TreeMap<>();
-        JSONObject jsonObject=new JSONObject();
+        JSONObject jsonObject = new JSONObject();
         for (int i = 0; i < oldFormBody.size(); i++) {
             try {
-                jsonObject.put(oldFormBody.name(i),oldFormBody.value(i));
+                jsonObject.put(oldFormBody.name(i), oldFormBody.value(i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -65,6 +66,7 @@ public class BasicParamsInterceptor implements Interceptor {
         RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
         requestBuilder.method(request.method(), body);
         request = requestBuilder.build();
+        Log.i("OkHttp", request.headers().toString());
         return chain.proceed(request);
     }
 

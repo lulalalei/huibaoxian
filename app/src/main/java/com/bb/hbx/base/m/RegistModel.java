@@ -33,8 +33,8 @@ public class RegistModel implements RegistContract.Model {
 
 
     @Override
-    public void getVerifyCode(String codeType, String mobile, String bizType, Callback<Result_Api<MessageCodeBean>> mAbsCallback) {
-        Call<Result_Api<MessageCodeBean>> call = service.getVerifyCode(codeType, mobile, bizType);
+    public void getVerifyCode(String codeType, String mobile, String bizType, Callback  mAbsCallback) {
+        Call call = service.getVerifyCode(codeType, mobile, bizType);
         call.enqueue(mAbsCallback);
     }
 

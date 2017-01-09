@@ -20,7 +20,8 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Administrator on 2016/12/20.
+ * Created by facnl .
+ * 商城
  */
 
 public class MallFragment extends BaseFragment {

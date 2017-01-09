@@ -18,4 +18,12 @@ public interface ApiService {
     Call<Result_Api<MessageCodeBean>> getVerifyCode(@Field("codeType") String codeType
             , @Field("mobile") String mobile, @Field("bizType") String bizType);
 
+
+    @FormUrlEncoded
+    @POST("api.do?method=getSpecials&type=post")
+    Call<String> getSpecials(@Field("pageIndex") int pageIndex
+            , @Field("pageSize") int pageSize);
+
+
+
 }
