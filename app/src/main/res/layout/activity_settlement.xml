@@ -6,39 +6,44 @@
     android:layout_height="match_parent"
     tools:context="com.bb.hbx.activitiy.SettlementActivity">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/toolbar">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="结算中"
-            android:textSize="20sp"
-            android:gravity="center"/>
-    </android.support.v7.widget.Toolbar>
-
-    <ImageView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/back_iv"
-        android:src="@mipmap/right_arrow"
-        android:layout_margin="10dp"
-        android:onClick="backMethod"/>
-    <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:src="@mipmap/ic_launcher"
-        android:scaleType="centerCrop"
-        android:id="@+id/menu_iv"
-        android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
-        android:onClick="menuMethod"/>
+        android:background="@color/A1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_iv"
+            android:src="@drawable/jiantou_bai"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结算中"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:gravity="center"/>
+        <ImageView
+            android:id="@+id/menu_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/baiwenhao"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"/>
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView"
-        android:layout_below="@id/toolbar">
+        android:layout_below="@id/topbar_layout">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,18 +51,23 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="148dp"
                 android:text="102.98"
-                android:textSize="20sp"
+                android:textSize="36sp"
+                android:textColor="@color/white"
                 android:id="@+id/settlement_tv"
-                android:gravity="center"/>
+                android:paddingTop="50dp"
+                android:gravity="center_horizontal"
+                android:background="@drawable/wodezichan"/>
             <TextView
                 android:id="@+id/divider_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="本月"
-                android:padding="10dp"
-                android:background="@android:color/darker_gray" />
+                android:textColor="@color/A3"
+                android:textSize="13sp"
+                android:padding="18dp"
+                android:background="@color/colorDivider" />
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

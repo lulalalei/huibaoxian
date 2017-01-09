@@ -7,164 +7,203 @@
     android:layout_height="match_parent"
     tools:context="com.bb.hbx.activitiy.MyAssertActivity">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/toolbar">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="我的资产"
-            android:textSize="20sp"
-            android:gravity="center"/>
-    </android.support.v7.widget.Toolbar>
-    <ImageView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/back_iv"
-        android:src="@mipmap/right_arrow"
-        android:layout_margin="10dp"
-        android:onClick="backMethod"/>
+        android:background="@color/A1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_iv"
+            android:src="@drawable/jiantou_bai"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的资产"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/detail_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="明细"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="18dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/makeMoney_layout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@id/toolbar">
+        android:layout_height="260dp"
+        android:layout_below="@id/topbar_layout"
+        android:background="@drawable/wodezichan"
+        android:paddingTop="30dp">
         <TextView
             android:id="@+id/income_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="本月暂无收入"
-            android:textSize="20dp"
-            android:layout_marginTop="10dp"
+            android:textSize="36sp"
+            android:textColor="@color/white"
             android:layout_centerHorizontal="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="去赚钱"
-            android:background="@drawable/identify_shape"
-            android:padding="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/income_tv"
-            android:layout_centerHorizontal="true"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/darker_gray"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/money_layout"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@id/makeMoney_layout"
-        android:orientation="horizontal">
         <RelativeLayout
             android:id="@+id/cash_layout"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:onClick="onClick">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/income_tv"
+            android:layout_marginTop="10dp">
             <TextView
-                android:id="@+id/cashShow_tv"
+                android:id="@+id/state_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/identify_shape"
-                android:padding="5dp"
-                android:text="可提现"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"/>
+                android:text="可提现(元)"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:layout_centerHorizontal="true"/>
             <TextView
-                android:id="@+id/cash_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/cashShow_tv"
-                android:layout_marginTop="10dp"
-                android:text="0.00"/>
+                android:layout_width="59dp"
+                android:layout_height="20dp"
+                android:text="提现"
+                android:textColor="@color/A1"
+                android:textSize="12sp"
+                android:background="@drawable/cash_myassert_shape"
+                android:gravity="center"
+                android:layout_below="@id/state_tv"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray"/>
-        <RelativeLayout
-            android:id="@+id/settlement_layout"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:onClick="onClick">
+        <LinearLayout
+            android:id="@+id/money_layout"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="29dp"
+            android:layout_below="@id/cash_layout"
+            android:orientation="horizontal"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:background="@drawable/myassert_shape">
+            <RelativeLayout
+                android:id="@+id/income_layout"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:paddingTop="24dp">
+                <TextView
+                    android:id="@+id/cash_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="368.98"
+                    android:textSize="16sp"
+                    android:textColor="@color/A3"
+                    android:layout_centerHorizontal="true" />
+                <TextView
+                    android:id="@+id/showCash_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:textColor="@color/A3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/cash_tv"
+                    android:layout_marginTop="10dp"
+
+                    android:text="本月收入"/>
+            </RelativeLayout>
             <TextView
-                android:id="@+id/settlementShow_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/identify_shape"
-                android:padding="5dp"
-                android:text="结算中"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"/>
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/colorDivider"/>
+            <RelativeLayout
+                android:id="@+id/settlement_layout"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/settlement_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    android:textSize="16sp"
+                    android:textColor="@color/A3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="24dp"/>
+                <TextView
+                    android:id="@+id/settlementShow_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/settlement_tv"
+                    android:layout_marginTop="10dp"
+                    android:text="结算中"
+                    android:textSize="11sp"
+                    android:textColor="@color/A3" />
+            </RelativeLayout>
             <TextView
-                android:id="@+id/settlement_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/settlementShow_tv"
-                android:layout_marginTop="10dp"
-                android:text="0.00"/>
-        </RelativeLayout>
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray"/>
-        <RelativeLayout
-            android:id="@+id/allIncome_layout"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:onClick="onClick">
-            <TextView
-                android:id="@+id/allIncomeShow_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/identify_shape"
-                android:padding="5dp"
-                android:text="累计收入"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:id="@+id/allIncome_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/allIncomeShow_tv"
-                android:layout_marginTop="10dp"
-                android:text="0.00"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/divider_tv"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@id/money_layout"/>
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/colorDivider"/>
+            <RelativeLayout
+                android:id="@+id/allIncome_layout"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/allIncome_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="368.98"
+                    android:textSize="16sp"
+                    android:textColor="@color/A3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="24dp"/>
+                <TextView
+                    android:id="@+id/allIncomeShow_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/allIncome_tv"
+                    android:layout_marginTop="10dp"
+                    android:text="累计收入"
+                    android:textSize="11sp"
+                    android:textColor="@color/A3"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/yinying_zichan"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop"/>
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/graphTitle_tv"
-        android:layout_below="@id/divider_tv"
-        android:layout_margin="15dp"
-        android:layout_width="wrap_content"
+        android:layout_below="@id/makeMoney_layout"
+        android:layout_marginTop="13dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:text="最近六个月收入走势"/>
     <com.bb.hbx.widget.IncomesTableView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="10dp"
         app:tableType="income"
         style="@style/incomeview_style"
+        android:background="@color/white"
         android:id="@+id/income_itv"
-        android:layout_margin="10dp"
         android:layout_below="@id/graphTitle_tv"/>
 </RelativeLayout>

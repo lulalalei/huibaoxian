@@ -1,29 +1,30 @@
 package com.bb.hbx.activitiy;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MySettlementAdapter;
+import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MySettlementBean;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /*
 * 点击 我的--我的资产--结算中 显示的页面*/
-public class SettlementActivity extends AppCompatActivity {
+public class SettlementActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.back_iv)
+    ImageView back_iv;
+    @BindView(R.id.menu_iv)
+    ImageView menu_iv;
+
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     @BindView(R.id.recyclerView)
@@ -34,13 +35,23 @@ public class SettlementActivity extends AppCompatActivity {
     MySettlementAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settlement);
-        ButterKnife.bind(this);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        //scrollView.scrollTo(30,30);
+    public int getLayoutId() {
+        return R.layout.activity_settlement;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initListener() {
+        back_iv.setOnClickListener(this);
+        menu_iv.setOnClickListener(this);
+    }
+
+    @Override
+    public void initdata() {
         manager = new GridLayoutManager(this, 1){
             @Override
             public boolean canScrollVertically() {
@@ -67,11 +78,18 @@ public class SettlementActivity extends AppCompatActivity {
         scrollView.scrollTo(0,0);
     }
 
-    public void backMethod(View view) {
-        finish();
-    }
-
-    public void menuMethod(View view) {
-        Toast.makeText(this,"菜单",Toast.LENGTH_SHORT).show();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.back_iv:
+                finish();
+                break;
+            case R.id.menu_iv:
+                Toast.makeText(this,"菜单",Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
     }
 }

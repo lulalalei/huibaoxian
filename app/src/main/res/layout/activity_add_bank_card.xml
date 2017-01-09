@@ -19,155 +19,189 @@
             android:id="@+id/back_iv"
             android:src="@drawable/fanhui"
             android:scaleType="centerCrop"
-            android:layout_marginLeft="18dp"/>
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="添加银行卡"
-            android:textSize="22sp"
+            android:textSize="17sp"
             android:textColor="@color/A1"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:gravity="center"/>
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/show_tv"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/topbar_layout"
-        android:paddingLeft="10dp"
-        android:text="绑卡只用于提现,不会产生扣费"
-        android:background="@android:color/darker_gray"
-        android:gravity="center_vertical"/>
     <RelativeLayout
+        android:id="@+id/warn_layout"
+        android:layout_below="@id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/user_layout"
-        android:layout_below="@id/show_tv">
+        android:layout_height="43dp"
+        android:background="@color/colorDivider">
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/warn"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:id="@+id/warn_iv"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绑卡只用于提现,不会产生扣费"
+            android:textSize="12sp"
+            android:textColor="@color/A4"
+            android:layout_toRightOf="@id/warn_iv"
+            android:layout_marginLeft="11dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/warn_layout"
+        android:background="@color/white">
         <TextView
             android:id="@+id/showName_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="真实姓名:"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:text="真实姓名"
+            android:textSize="14sp"
+            android:textColor="@color/A4"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="请输入用户名"
-            android:layout_alignBaseline="@id/showName_tv"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="100dp"/>
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/ic_launcher"
-            android:scaleType="centerCrop"
-            android:id="@+id/warn_iv"
-            android:onClick="showWarnMethod"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:layout_alignParentBottom="true"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/idCard_layout"
-        android:layout_below="@id/user_layout">
-        <TextView
-            android:id="@+id/showIdCard_tv"
+            android:id="@+id/name_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="身份证号:"
-            android:textSize="20sp"
+            android:hint="请输入真实姓名"
+            android:textSize="13sp"
+            android:textColor="@color/A5"
+            android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="请输入身份证号"
-            android:layout_alignBaseline="@id/showIdCard_tv"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="100dp"/>
+            android:layout_toRightOf="@id/showName_tv"
+            android:layout_marginLeft="23dp"/>
+        <ImageView
+            android:id="@+id/nameInfo_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/zhenshixingming"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="18dp"
+            android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="18dp"
+            android:background="@color/colorDivider"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/divider_tv"
-        android:layout_below="@id/idCard_layout"/>
     <RelativeLayout
+        android:id="@+id/idCard_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/name_layout"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/showIdcard_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证号"
+            android:textSize="14sp"
+            android:textColor="@color/A4"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
+        <EditText
+            android:id="@+id/idCard_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="330333333333333333"
+            android:textSize="13sp"
+            android:textColor="@color/A3"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/showIdcard_tv"
+            android:layout_marginLeft="23dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/bankCard_layout"
-        android:layout_below="@id/idCard_layout">
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@id/idCard_layout"
+        android:background="@color/white"
+        android:layout_marginTop="13dp">
         <TextView
             android:id="@+id/showBankCard_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="银行卡号:"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:text="银行卡号"
+            android:textSize="14sp"
+            android:textColor="@color/A4"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/bankCard_et"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="请输入您的银行卡号"
-            android:layout_alignBaseline="@id/showBankCard_tv"
+            android:textSize="13sp"
+            android:textColor="@color/A5"
+            android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="100dp"/>
+            android:layout_toRightOf="@id/showBankCard_tv"
+            android:layout_marginLeft="23dp"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="18dp"
+            android:background="@color/colorDivider"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:id="@+id/choseBank_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:layout_below="@id/bankCard_layout"
-        android:onClick="choseBankMethod">
+        android:background="@color/white">
         <TextView
-            android:id="@+id/showBank_tv"
+            android:id="@+id/showChose_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请选择卡户银行:"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/right_arrow"
-            android:scaleType="centerCrop"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"/>
+            android:text="请选择开户银行"
+            android:textSize="14sp"
+            android:textColor="@color/A4"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:layout_alignParentBottom="true"/>
+            android:id="@+id/choseBank_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="工商银行"
+            android:textSize="13sp"
+            android:textColor="@color/A5"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/showChose_tv"
+            android:layout_marginLeft="23dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nextstep"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="18dp"
+            android:layout_centerVertical="true"/>
+
     </RelativeLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:onClick="nextStepMethod"
-        android:text="下一步"
+    <TextView
+        android:id="@+id/verify_tv"
         android:layout_below="@id/choseBank_layout"
-        android:layout_marginTop="10dp"/>
+        android:background="@drawable/shape_btn_a1"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="31dp"
+        android:text="确认"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:gravity="center"/>
 </RelativeLayout>
