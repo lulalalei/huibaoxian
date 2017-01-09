@@ -38,6 +38,8 @@
         <item name="android:textColor">@color/A3</item>
     </style>
 
+
+
     <style name="TextAppear.Theme.A1_Size17" parent="android:TextAppearance.Theme">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/A1</item>
@@ -73,6 +75,12 @@
 
     </style>
 
+    <style name="TextAppear.Theme.A3_Size18" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/A3</item>
+
+    </style>
+
 
     <style name="TextAppear.Theme.A1_Size14" parent="android:TextAppearance.Theme">
         <item name="android:textSize">14sp</item>
@@ -94,6 +102,21 @@
     <style name="TextAppear.Theme.A6_Size12" parent="android:TextAppearance.Theme">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/A6</item>
+    </style>
+
+    <style name="TextAppear.Theme.A5_Size12" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/A5</item>
+    </style>
+
+    <style name="TextAppear.Theme.A5_Size14" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/A5</item>
+    </style>
+
+    <style name="TextAppear.Theme.A3_Size36" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/A3</item>
     </style>
 
     <style name="TextAppear.Theme.A3_Size19" parent="android:TextAppearance.Theme">
