@@ -1,15 +1,21 @@
 package com.bb.hbx.activitiy;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.cans.Can;
+import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.ShareSPUtils;
 
@@ -125,4 +131,7 @@ public class WelcomeActivity extends BaseActivity {
             }
         }
     }
+
+
+
 }
