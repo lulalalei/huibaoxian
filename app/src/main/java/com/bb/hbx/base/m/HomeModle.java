@@ -24,19 +24,15 @@ public class HomeModle implements HomeContract.Model {
     }
 
     @Override
+    public void getHomePageInfo(String userId, Callback callback) {
+        Call call = service.getHomePageInfo(userId);
+        call.enqueue(callback);
+
+    }
+
+    @Override
     public void getTopicList(int pageIndex, int pageSize, Callback callback) {
-        Call<String> call = service.getSpecials(pageIndex, pageSize);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("fancl", response.body());
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
 
     }
 

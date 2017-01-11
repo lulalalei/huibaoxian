@@ -46,7 +46,9 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
     @Override
     public void onResponse(Call<Result_Api> call, Response<Result_Api> response) {
         Log.i(TAG, "response.code():" + response.code() + "%%%%%%%" + response.body());
-        view.dissmissLoading();
+        if(view!=null) {
+            view.dissmissLoading();
+        }
         Result_Api api = response.body();
         if (api != null) {
             if (Constants.SUCCESS.equalsIgnoreCase(api.getRespCode())) {
@@ -65,9 +67,10 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 //                }
                 successCallback(api);
             } else
+            if(view!=null)
                 view.showMsg(api.getRespMsg());
         } else
-
+        if(view!=null)
             view.showMsg(ERROR_DATA);
 
 
@@ -75,8 +78,10 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 
     @Override
     public void onFailure(Call<Result_Api> call, Throwable t) {
-        view.dissmissLoading();
-        view.showMsg(NET_ERROR);
+        if(view!=null) {
+            view.dissmissLoading();
+            view.showMsg(NET_ERROR);
+        }
         failCallback();
     }
 }

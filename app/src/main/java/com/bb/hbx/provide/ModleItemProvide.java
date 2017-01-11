@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
-import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.ModleItem;
-import com.bb.hbx.widget.banner.BGABanner;
+import com.bb.hbx.bean.ProductItem;
+import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
 import butterknife.BindView;
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by fancl.
  */
 
-public class ModleItemProvide extends ItemViewProvider<ModleItem, ModleItemProvide.ViewHolder> {
+public class ModleItemProvide extends ItemViewProvider<ProductItem, ModleItemProvide.ViewHolder> {
 
 
     @NonNull
@@ -33,7 +33,7 @@ public class ModleItemProvide extends ItemViewProvider<ModleItem, ModleItemProvi
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull ModleItem modleItem) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull ProductItem modleItem) {
         holder.setData(modleItem);
     }
 
@@ -54,9 +54,10 @@ public class ModleItemProvide extends ItemViewProvider<ModleItem, ModleItemProvi
         }
 
 
-        void setData(@NonNull final ModleItem modleItem) {
-            img.setImageResource(modleItem.getResId());
-            title.setText(modleItem.getTitle());
+        void setData(@NonNull final ProductItem modleItem) {
+            title.setText(modleItem.getName());
+            GlideUtil.getInstance().loadImage(MyApplication.getAppContext(),
+                    img,modleItem.getUrl(),true);
         }
     }
 

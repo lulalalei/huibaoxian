@@ -18,7 +18,17 @@ public class AppManager {
 
     private static AppManager instance;
 
+
+    private static final String DEFAULT_DATA_BASEPATH = "/huibx"; // 缓存目录
+    public  String DEFAULT_DATA_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/IMAGE"; // 小图缓存地址
+    public  String DEFAULT_DATA_TEMP = DEFAULT_DATA_BASEPATH + "/TEMP"; // 备份数据地址
+    public  String DEFAULT_DATA_BIG_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/BIGIMAGE"; // 大图缓存地址
+
     private AppManager() {
+        String rootPath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+        DEFAULT_DATA_IMAGEPATH = rootPath + DEFAULT_DATA_IMAGEPATH;
+        DEFAULT_DATA_TEMP = rootPath + DEFAULT_DATA_TEMP;
+        DEFAULT_DATA_BIG_IMAGEPATH = rootPath + DEFAULT_DATA_BIG_IMAGEPATH;
     }
 
     /**
