@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.AdBean;
 import com.bb.hbx.bean.BannerBean;
+import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.banner.BGABanner;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
@@ -24,7 +27,7 @@ import butterknife.ButterKnife;
  * Created by fancl.
  */
 
-public class BannerProvide extends ItemViewProvider<BannerBean,BannerProvide.ViewHolder> {
+public class BannerProvide extends ItemViewProvider<BannerBean, BannerProvide.ViewHolder> {
 
 
     @NonNull
@@ -44,9 +47,10 @@ public class BannerProvide extends ItemViewProvider<BannerBean,BannerProvide.Vie
 
         @BindView(R.id.banner)
         BGABanner bgaBanner;
+
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
 
 
         }
@@ -56,19 +60,26 @@ public class BannerProvide extends ItemViewProvider<BannerBean,BannerProvide.Vie
             bgaBanner.setAdapter(new BGABanner.Adapter() {
                 @Override
                 public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
-                    ((ImageView)view).setImageResource((Integer) model);
+
+                    AdBean bean = (AdBean) model;
+                    GlideUtil.getInstance().loadImage(MyApplication.getAppContext(), (ImageView) view,
+                            bean.getAdURL(), true);
                 }
             });
 
             bgaBanner.setOnItemClickListener(new BGABanner.OnItemClickListener() {
                 @Override
                 public void onBannerItemClick(BGABanner banner, View view, Object model, int position) {
-                   if(bgaBanner.getContext() instanceof BaseActivity){
-                       ((BaseActivity) bgaBanner.getContext()).showTip("点击了第"+position+"张");
-                   }
+                    if (bgaBanner.getContext() instanceof BaseActivity) {
+                        AdBean bean = (AdBean) model;
+                        ((BaseActivity) bgaBanner.getContext()).showTip(bean.getAdLink());
+
+                    }
                 }
             });
-            bgaBanner.setData(bannerBean.getList(),null);
+
+            if (bannerBean.getList() != null)
+                bgaBanner.setData(bannerBean.getList(), null);
         }
     }
 

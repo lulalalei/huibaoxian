@@ -1,5 +1,6 @@
 package com.bb.hbx.api;
 
+import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
 
 import retrofit2.Call;
@@ -20,10 +21,7 @@ public interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("api.do?method=getSpecials&type=post")
-    Call<String> getSpecials(@Field("pageIndex") int pageIndex
-            , @Field("pageSize") int pageSize);
-
-
+    @POST("api.do?method=getHomePageInfo&type=post")
+    Call<Result_Api<HomePageInfo>> getHomePageInfo(@Field("userId") String userId);
 
 }

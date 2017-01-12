@@ -2,6 +2,7 @@ package com.bb.hbx.base.v;
 
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
+import com.bb.hbx.bean.HomePageInfo;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public interface HomeContract {
 
     interface Model extends BaseModel {
 
+
+        void getHomePageInfo(String userId, Callback callback);
+
         //专题列表
         void getTopicList(int pageIndex, int pageSize, Callback callback);
 
@@ -24,12 +28,17 @@ public interface HomeContract {
 
     interface View extends BaseView {
 
+        void setHomepageInfoData(HomePageInfo info);
+
 
     }
 
     abstract class Presenter extends BasePresenter<HomeContract.Model, HomeContract.View> {
 
-        public  abstract void getTopicList();
+
+        public abstract void getHomePageInfo();
+
+        public abstract void getTopicList();
 
     }
 }

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-
 import java.util.Stack;
 
 /**
@@ -19,16 +18,26 @@ public class AppManager {
 
     private static AppManager instance;
 
+
+    private static final String DEFAULT_DATA_BASEPATH = "/huibx"; // 缓存目录
+    public  String DEFAULT_DATA_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/IMAGE"; // 小图缓存地址
+    public  String DEFAULT_DATA_TEMP = DEFAULT_DATA_BASEPATH + "/TEMP"; // 备份数据地址
+    public  String DEFAULT_DATA_BIG_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/BIGIMAGE"; // 大图缓存地址
+
     private AppManager() {
+        String rootPath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+        DEFAULT_DATA_IMAGEPATH = rootPath + DEFAULT_DATA_IMAGEPATH;
+        DEFAULT_DATA_TEMP = rootPath + DEFAULT_DATA_TEMP;
+        DEFAULT_DATA_BIG_IMAGEPATH = rootPath + DEFAULT_DATA_BIG_IMAGEPATH;
     }
 
     /**
      * 单一实例
      */
 
-    public static AppManager getInstance(){
-        if(instance==null){
-            instance=new AppManager();
+    public static AppManager getInstance() {
+        if (instance == null) {
+            instance = new AppManager();
         }
         return instance;
     }
@@ -47,8 +56,11 @@ public class AppManager {
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
      */
-    public Activity currentActivity(){
-        Activity activity=activityStack.lastElement();
+    public Activity currentActivity() {
+        Activity activity = null;
+        if (activityStack.size() > 0) {
+            activity = activityStack.lastElement();
+        }
         return activity;
     }
 
@@ -56,7 +68,7 @@ public class AppManager {
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     public void finishActivity() {
-        Activity activity=currentActivity();
+        Activity activity = currentActivity();
         finishActivity(activity);
     }
 
@@ -64,10 +76,10 @@ public class AppManager {
      * 结束指定的Activity
      */
     public void finishActivity(Activity activity) {
-        if(activity!=null){
+        if (activity != null) {
             //activity.finish();
             activityStack.remove(activity);
-            activity=null;
+            activity = null;
         }
     }
 
@@ -76,10 +88,10 @@ public class AppManager {
      * 结束指定类名的Activity
      */
 
-    public void finishActivity(Class<?> tClass){
+    public void finishActivity(Class<?> tClass) {
 
-        for(Activity activity : activityStack){
-            if(activity.getClass().equals(tClass)){
+        for (Activity activity : activityStack) {
+            if (activity.getClass().equals(tClass)) {
                 finishActivity(activity);
             }
         }
@@ -100,8 +112,8 @@ public class AppManager {
 
 
     public boolean processBackKey(Class<? extends Activity>... classes) {
-        for(Class<? extends Activity> clazz : classes) {
-            if (currentActivity().getClass().getSimpleName().equals(clazz.getSimpleName())){
+        for (Class<? extends Activity> clazz : classes) {
+            if (currentActivity().getClass().getSimpleName().equals(clazz.getSimpleName())) {
                 //进入最底层的页面 需要做具体操作来结束app页面，入弹出dialog
                 // TODO: 2016/11/25
                 return true;
@@ -125,7 +137,7 @@ public class AppManager {
      */
     public void showActivity(Class<? extends Activity> goActivity, Bundle aBundle) {
         //跳转页面
-        Activity activity=currentActivity();
+        Activity activity = currentActivity();
         Intent intent = new Intent();
         intent.setClassName(activity, goActivity.getName());
         if (null != aBundle) {
@@ -142,14 +154,13 @@ public class AppManager {
      */
     public void showActivityForResult(Class<? extends Activity> goActivity, Bundle aBundle, int requestCode) {
         Intent intent = new Intent();
-        Activity activity=currentActivity();
+        Activity activity = currentActivity();
         intent.setClassName(activity, goActivity.getName());
         if (null != aBundle) {
             intent.putExtras(aBundle);
         }
         activity.startActivityForResult(intent, requestCode);
     }
-
 
 
 }
