@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MyApplication"
@@ -97,7 +99,18 @@
         <activity android:name=".activitiy.RealNameFinishActivity"></activity>
     </application>
 
-    <meta-data android:name="com.bb.hbx.utils.MyGlideModule"
-        android:value="GlideModule"/>
+    <service
+        android:name="com.baidu.location.f"
+        android:enabled="true"
+        android:process=":remote" >
+        <intent-filter>
+            <action android:name="com.baidu.location.service_v2.2" >
+            </action>
+        </intent-filter>
+    </service>
+
+    <meta-data
+        android:name="com.bb.hbx.utils.MyGlideModule"
+        android:value="GlideModule" />
 
 </manifest>

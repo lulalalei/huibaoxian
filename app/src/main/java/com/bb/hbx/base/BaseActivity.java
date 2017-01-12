@@ -65,18 +65,7 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         this.initListener();
         if (this instanceof BaseView && mPresenter != null)
             mPresenter.setVM(this, InstanceUtil.getInstance(this, 1));
-
-        //保证手机唯一码不被销毁
-        if (MyApplication.DUID.isEmpty()) {
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
-                isCheckReadPhone();
-            } else {
-                DeviceUtils.getDeviceIdentification(this);
-                this.initdata();
-            }
-        } else {
-            this.initdata();
-        }
+        this.initdata();
 
 
     }
@@ -85,17 +74,6 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
     protected void onStart() {
         super.onStart();
 
-        if (!isCheck) {
-            //保证手机唯一码不被销毁
-            if (MyApplication.DUID.isEmpty()) {
-                if (android.os.Build.VERSION.SDK_INT >= 23) {
-                    isCheckReadPhone();
-                } else {
-                    DeviceUtils.getDeviceIdentification(this);
-                    this.initdata();
-                }
-            }
-        }
     }
 
     @Override
@@ -146,70 +124,6 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         MyApplication.widthPixels = dm.widthPixels;
         MyApplication.heightPixels = dm.heightPixels;
     }
-
-    private static final int REQUEST_PERMISSION_READ_PHONE_STATE_CODE = 1;
-
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void isCheckReadPhone() {
-        if (!(checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)) {
-            requestCameraPermission();
-        } else {
-            DeviceUtils.getDeviceIdentification(this);
-            initdata();
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void requestCameraPermission() {
-        requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_PERMISSION_READ_PHONE_STATE_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_READ_PHONE_STATE_CODE) {
-            boolean granted = (grantResults[0] == PackageManager.PERMISSION_GRANTED);
-            if (!granted) {
-                showTipsDialog();
-            } else {
-                DeviceUtils.getDeviceIdentification(this);
-                initdata();
-            }
-        }
-    }
-
-
-    /**
-     * 显示提示对话框
-     */
-    private void showTipsDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("提示信息")
-                .setMessage("当前应用缺少必要权限，该功能暂时无法使用。如若需要，请单击【确定】按钮前往设置中心进行权限授权。")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startAppSettings();
-                        isCheck = false;
-                    }
-                }).show();
-    }
-
-    /**
-     * 启动当前应用设置页面
-     */
-    private void startAppSettings() {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.parse("package:" + getPackageName()));
-        startActivity(intent);
-    }
-
 
     /**
      * 布局加载

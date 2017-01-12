@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -17,6 +19,7 @@ import com.bb.hbx.fragment.ClassFragment;
 import com.bb.hbx.fragment.HomeFragment;
 import com.bb.hbx.fragment.MallFragment;
 import com.bb.hbx.fragment.MineFragment;
+import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.BottomBar;
 
 import butterknife.BindView;
@@ -169,6 +172,26 @@ public class HomeActivity extends BaseActivity {
             transaction.hide(mineFragment);
         }
 
+
+    }
+
+    /**
+     * 实现再按一次退出提醒
+     */
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 3000) {
+                showTip(getString(R.string.snack_exit_once_more));
+                exitTime = System.currentTimeMillis();
+            } else {
+                AppManager.getInstance().AppExit(this);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
 
     }
 
