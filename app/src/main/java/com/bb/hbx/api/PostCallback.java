@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.bb.hbx.base.v.BaseView;
 import com.bb.hbx.utils.Constants;
+import com.google.gson.JsonIOException;
 
 
 import retrofit2.Call;
@@ -28,7 +29,7 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 //    private Class<T> clazz;
 
     public PostCallback(V view) {
-          this.view = view;
+        this.view = view;
 //        if (this.getClass().getGenericSuperclass() instanceof ParameterizedType) {
 //            clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
 //
@@ -45,8 +46,7 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 
     @Override
     public void onResponse(Call<Result_Api> call, Response<Result_Api> response) {
-        Log.i(TAG, "response.code():" + response.code() + "%%%%%%%" + response.body());
-        if(view!=null) {
+        if (view != null) {
             view.dissmissLoading();
         }
         Result_Api api = response.body();
@@ -65,12 +65,16 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 //
 //
 //                }
+
+                if (api.getOutput() == null) {
+                    throw new JsonIOException("解析出错或者数据格式返回错误");
+
+                }
+
                 successCallback(api);
-            } else
-            if(view!=null)
+            } else if (view != null)
                 view.showMsg(api.getRespMsg());
-        } else
-        if(view!=null)
+        } else if (view != null)
             view.showMsg(ERROR_DATA);
 
 
@@ -78,7 +82,7 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 
     @Override
     public void onFailure(Call<Result_Api> call, Throwable t) {
-        if(view!=null) {
+        if (view != null) {
             view.dissmissLoading();
             view.showMsg(NET_ERROR);
         }

@@ -18,8 +18,11 @@ public class GenApiHashUrl {
     private static GenApiHashUrl INSTANCE = null;
     //public static final String apiUrl = "http://wg.bettapharma.cn/api/service.ashx";//正式环境
     //public static final String apiUrl = "http://wg.bettapharma.cn/api/";//正式环境
-    public static final String apiUrl = "http://192.168.32.95:8080/api/";//环境
+    //public static final String apiUrl = "http://192.168.32.95:8080/api/";//环境
    // public static final String apiUrl = "http://192.168.32.210:18080/seaway-ebao-api-server/";//环境
+
+
+    public static final String apiUrl = "http://192.168.32.144:8080/";//环境
 
     public static final String md5_key = "md5_key";
 
