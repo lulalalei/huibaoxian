@@ -11,22 +11,24 @@ import java.util.List;
 public class BobaoItem implements Item{
 
 
-    List<String>list;
+    List<XhbMsg>list;
 
     public BobaoItem(){
 
     }
 
-    public BobaoItem(List<String>list){
+    public BobaoItem(List<XhbMsg>list){
        this.list=list;
     }
 
 
-    public List<String> getList() {
+    public List<XhbMsg> getList() {
         return list;
     }
 
-    public void setList(List<String> list) {
+    public void setList(List<XhbMsg> list) {
         this.list = list;
     }
+
+
 }

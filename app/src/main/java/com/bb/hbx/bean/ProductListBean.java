@@ -10,35 +10,59 @@ public class ProductListBean implements Item {
 
 
     /**
+     * ageDesc :
+     * benefitList :
      * classId :
-     * coverage :
+     * commisionType :
+     * commisionValue1 :
      * guarantee :
      * insurerId :
      * insurerLogo :
      * insurerName :
-     * monthAmount :
-     * perferwords : 周伟亮测试1
-     * productId : 1
-     * productIntro :
+     * minPremium : 0
+     * monthAmount : 50
+     * productId : 1001
+     * productIntro : 全面保障您的出行
      * productLogo :
-     * productName : 周伟亮测试1
+     * productName : 孕妇健康险
      * productPrice :
      * productProp :
      * productTagUrls :
-     * specialPrice : 50
+     * specialPrice :
      * suitable :
-     * totalAmount :
-     * typeList :
+     * totalAmount : 100
+     * <p>
+     * <p>
+     * productId	产品编号	n	M	5
+     * productName	产品名称	ansc	M	64
+     * productLogo	产品图片	ans	M	128	产品图片URL
+     * productIntro	产品简介	ansc	O	128
+     * insurerId	保险公司编号	n	M	5	保险公司编号
+     * insurerName	保险公司名称	ansc	M	64	保险公司名称
+     * insurerLogo	保险公司Logo	ans	M	128	保险公司Logo
+     * productProp	产品属性	n	M	10	位标识，定义暂缓，待明确
+     * ageDesc	承保年龄	ans 	M	32	如：0~80周岁
+     * guarantee	保障期限	ansc	M	32	如：1~30天/6个月/12个月
+     * suitable	适用人群	ansc	M	32	如：热爱户外运动的人士
+     * totalAmount	总销量	n	O	10	该产品一共销售数量
+     * monthAmount	月销量	n	M	10	最近30天销量
+     * productPrice	市场价	d	M	10	单位：分，起价。当有多个价格时取最低价
+     * specialPrice	活动价	d	O	10	单位：分，起价。当有多个价格时取最低价
+     * commisionType	推广费类型	N	M	1	存放本产品的分销推广费用类型，0：无推广费；1：按比例提取；2：按固定值提取，默认为1
+     * commisionValue1	一级分销费率	n	M	12	一级分销推广费率值，与commision_type配合使用。commision_type=1，则一级分销佣金=产品支付价格 * commision_value1 / 100；commision_type=1，则一级分销佣金= commision_value1 ，单位：分；
      */
 
+    private String ageDesc;
+    private String benefitList;
     private String classId;
-    private String coverage;
+    private String commisionType;
+    private String commisionValue1;
     private String guarantee;
     private String insurerId;
     private String insurerLogo;
     private String insurerName;
+    private String minPremium;
     private String monthAmount;
-    private String perferwords;
     private String productId;
     private String productIntro;
     private String productLogo;
@@ -49,7 +73,27 @@ public class ProductListBean implements Item {
     private String specialPrice;
     private String suitable;
     private String totalAmount;
-    private String typeList;
+
+    private String perferWords;
+
+    //------------自己需求添加的参数
+    private boolean isLine = true;
+
+    public String getAgeDesc() {
+        return ageDesc;
+    }
+
+    public void setAgeDesc(String ageDesc) {
+        this.ageDesc = ageDesc;
+    }
+
+    public String getBenefitList() {
+        return benefitList;
+    }
+
+    public void setBenefitList(String benefitList) {
+        this.benefitList = benefitList;
+    }
 
     public String getClassId() {
         return classId;
@@ -59,12 +103,20 @@ public class ProductListBean implements Item {
         this.classId = classId;
     }
 
-    public String getCoverage() {
-        return coverage;
+    public String getCommisionType() {
+        return commisionType;
     }
 
-    public void setCoverage(String coverage) {
-        this.coverage = coverage;
+    public void setCommisionType(String commisionType) {
+        this.commisionType = commisionType;
+    }
+
+    public String getCommisionValue1() {
+        return commisionValue1;
+    }
+
+    public void setCommisionValue1(String commisionValue1) {
+        this.commisionValue1 = commisionValue1;
     }
 
     public String getGuarantee() {
@@ -99,20 +151,20 @@ public class ProductListBean implements Item {
         this.insurerName = insurerName;
     }
 
+    public String getMinPremium() {
+        return minPremium;
+    }
+
+    public void setMinPremium(String minPremium) {
+        this.minPremium = minPremium;
+    }
+
     public String getMonthAmount() {
         return monthAmount;
     }
 
     public void setMonthAmount(String monthAmount) {
         this.monthAmount = monthAmount;
-    }
-
-    public String getPerferwords() {
-        return perferwords;
-    }
-
-    public void setPerferwords(String perferwords) {
-        this.perferwords = perferwords;
     }
 
     public String getProductId() {
@@ -195,11 +247,19 @@ public class ProductListBean implements Item {
         this.totalAmount = totalAmount;
     }
 
-    public String getTypeList() {
-        return typeList;
+    public boolean isLine() {
+        return isLine;
     }
 
-    public void setTypeList(String typeList) {
-        this.typeList = typeList;
+    public void setLine(boolean line) {
+        isLine = line;
+    }
+
+    public String getPerferWords() {
+        return perferWords;
+    }
+
+    public void setPerferWords(String perferWords) {
+        this.perferWords = perferWords;
     }
 }

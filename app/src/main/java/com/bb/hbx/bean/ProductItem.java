@@ -14,42 +14,48 @@ public class ProductItem implements Item{
      * logo :
      * name : 孕妇险
      * url : http://ebao.seaway.net.cn:18100/product.html#productType/103124
+     * id	分类险ID	n	M	6
+     name	分类险名称	ansc	M	10	最多三个汉字
+     logo	分类险logo	ans	M	128	logo URL
+     url	跳转URL	ans	M	128
+
      */
 
-    private String id;
-    private String logo;
-    private String name;
-    private String url;
+    private String insurerTypeId;
+    private String insurerTypeLogo;
+    private String insurerTypeName;
+    private String insurerTypeUrl;
 
-    public String getId() {
-        return id;
+
+    public String getInsurerTypeId() {
+        return insurerTypeId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setInsurerTypeId(String insurerTypeId) {
+        this.insurerTypeId = insurerTypeId;
     }
 
-    public String getLogo() {
-        return logo;
+    public String getInsurerTypeLogo() {
+        return insurerTypeLogo;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setInsurerTypeLogo(String insurerTypeLogo) {
+        this.insurerTypeLogo = insurerTypeLogo;
     }
 
-    public String getName() {
-        return name;
+    public String getInsurerTypeName() {
+        return insurerTypeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInsurerTypeName(String insurerTypeName) {
+        this.insurerTypeName = insurerTypeName;
     }
 
-    public String getUrl() {
-        return url;
+    public String getInsurerTypeUrl() {
+        return insurerTypeUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setInsurerTypeUrl(String insurerTypeUrl) {
+        this.insurerTypeUrl = insurerTypeUrl;
     }
 }

@@ -55,9 +55,9 @@ public class ModleItemProvide extends ItemViewProvider<ProductItem, ModleItemPro
 
 
         void setData(@NonNull final ProductItem modleItem) {
-            title.setText(modleItem.getName());
+            title.setText(modleItem.getInsurerTypeName());
             GlideUtil.getInstance().loadImage(MyApplication.getAppContext(),
-                    img,modleItem.getUrl(),true);
+                    img, modleItem.getInsurerTypeLogo(), true);
         }
     }
 

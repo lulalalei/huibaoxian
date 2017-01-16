@@ -38,8 +38,8 @@
             android:id="@+id/tl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y86"
-            android:listSelector="@null"
-            android:divider="@null">
+            android:divider="@null"
+            android:listSelector="@android:color/transparent">
 
         </com.bb.hbx.widget.TitleListview>
 

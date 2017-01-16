@@ -2,14 +2,10 @@ package com.bb.hbx.fragment;
 
 ;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.SearchActivity;
@@ -18,14 +14,13 @@ import com.bb.hbx.base.m.HomeModle;
 import com.bb.hbx.base.p.HomePresenter;
 import com.bb.hbx.base.v.HomeContract;
 import com.bb.hbx.bean.BKItem;
-import com.bb.hbx.bean.BKchildItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.JxItem;
-import com.bb.hbx.bean.ModleItem;
 import com.bb.hbx.bean.ProductItem;
-import com.bb.hbx.bean.SafeKind_Item;
+import com.bb.hbx.bean.ProductListBean;
+import com.bb.hbx.bean.Special;
 import com.bb.hbx.provide.BKItemProvide;
 import com.bb.hbx.provide.BKchildItemProvide;
 import com.bb.hbx.provide.BannerProvide;
@@ -59,7 +54,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     @BindView(R.id.list)
     RecyclerView rc_list;
 
-    List<Item> items;
+    private GridLayoutManager layoutManager;
 
     private MultiTypeAdapter adapter;
 
@@ -68,7 +63,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     private float endOffset;
 
 
-    private BannerBean b;//banner条类
+    private BannerProvide bannerProvide;
 
 
     @Override
@@ -79,25 +74,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     @Override
     public void initView() {
         rel_tool.getBackground().mutate().setAlpha(0);//toolbar透明度初始化为0
-        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 5);
-        GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                Item item = items.get(position);
+        layoutManager = new GridLayoutManager(getActivity(), 5);
 
-                if (item instanceof BannerBean) {
-                    return 5;
-                } else if (item instanceof ProductItem) {
-                    return 1;
-                } else if (item instanceof BobaoItem) {
-                    return 5;
-                } else if (item instanceof BKItem) {
-                    return 5;
-                }
-                return 5;
-            }
-        };
-        layoutManager.setSpanSizeLookup(spanSizeLookup);
+
+        layoutManager.setSpanSizeLookup(mPresenter.getSpanSizeLookup());
         rc_list.setLayoutManager(layoutManager);
 
         endOffset = getResources().getDimensionPixelOffset(R.dimen.y500) -
@@ -140,18 +120,19 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     protected void initdate(Bundle savedInstanceState) {
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
-        adapter.register(BannerBean.class, new BannerProvide());
+        bannerProvide = new BannerProvide();
+        adapter.register(BannerBean.class, bannerProvide);
         adapter.register(ProductItem.class, new ModleItemProvide());
         adapter.register(BobaoItem.class, new BobaoProvide());
         adapter.register(BKItem.class, new BKItemProvide());
-        adapter.register(BKchildItem.class, new BKchildItemProvide());
-        adapter.register(JxItem.class, new JxItemProvide());
+        adapter.register(ProductListBean.class, new BKchildItemProvide(getActivity()));
+        adapter.register(Special.class, new JxItemProvide(getActivity()));
         rc_list.setAdapter(adapter);
 
 
-        b = new BannerBean();
-        items = new ArrayList<>();
-        items.add(b);
+//        b = new BannerBean();
+//        items = new ArrayList<>();
+//        items.add(b);
 
 //        items.add(new ModleItem(R.drawable.chexian, "车险"));
 //        items.add(new ModleItem(R.drawable.renshouxian, "人寿险"));
@@ -226,7 +207,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 //        its.add(safeKind_item1);
 //
 //
-//        JxItem jxItem = new JxItem(R.drawable.holder, its);
+//       JxItem jxItem = new JxItem(R.drawable.holder, its);
 //
 //
 //        List<JxItem> jxItems = new ArrayList<>();
@@ -235,11 +216,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 //
 //
 //        items.addAll(jxItems);
-        adapter.setItems(items);
+//        adapter.setItems(items);
 
 
         mPresenter.getHomePageInfo();
-        mPresenter.getTopicList();
+
     }
 
     @Override
@@ -252,10 +233,17 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     }
 
     @Override
-    public void setHomepageInfoData(HomePageInfo info) {
-        b.setList(info.getAds());
-        items.addAll(info.getProductType());
+    public void setAutuoBanner(boolean isAuto) {
+        bannerProvide.setmAutoPlayAble(isAuto);
+    }
+
+    @Override
+    public void getfreshListData(List<Item> items) {
+        adapter.setItems(items);
         adapter.notifyDataSetChanged();
 
+
     }
+
+
 }

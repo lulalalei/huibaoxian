@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.XhbMsg;
 
 import java.util.List;
 
@@ -17,12 +18,11 @@ import java.util.List;
 
 public class ListAdapter extends BaseAdapter {
 
-    private List<String> list;
+    private List<XhbMsg> list;
     private LayoutInflater mInflater;
 
 
-
-    public ListAdapter(Context context, List<String> list){
+    public ListAdapter(Context context, List<XhbMsg> list) {
         this.list = list;
         this.mInflater = LayoutInflater.from(context);
     }
@@ -35,7 +35,7 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return  list.get(position % list.size());
+        return list.get(position % list.size());
     }
 
     @Override
@@ -46,20 +46,20 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHoler viewHolder = null;
-        if(convertView == null){
+        if (convertView == null) {
             viewHolder = new ViewHoler();
             convertView = mInflater.inflate(R.layout.lv_content_item, null);
             viewHolder.tvText = (TextView) convertView.findViewById(R.id.tv);
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHoler) convertView.getTag();
         }
-        viewHolder.tvText.setText(list.get(position % list.size()));
+        viewHolder.tvText.setText(list.get(position % list.size()).getMsgContent());
 
         return convertView;
     }
 
-    static class ViewHoler{
+    static class ViewHoler {
         TextView tvText;
     }
 

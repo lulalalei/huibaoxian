@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:paddingTop="@dimen/y46"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/y46"
-    android:orientation="vertical">
+    android:paddingTop="@dimen/y46">
 
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:scaleType="centerCrop"
-        tools:src="@mipmap/ic_launcher"/>
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/title"
@@ -23,6 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/y28"
         android:textAppearance="@style/TextAppear.Theme.A3_Size13"
-        tools:text="title"/>
+        tools:text="title" />
 
 </LinearLayout>

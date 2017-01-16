@@ -1,6 +1,7 @@
 package com.bb.hbx.api;
 
 
+import android.util.Log;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -28,7 +29,7 @@ public class RetrofitFactory {
     private static String TAG = RetrofitFactory.class.getSimpleName();
 
 
-    private static RetrofitFactory INSTANCE=null;
+    private static RetrofitFactory INSTANCE = null;
 
 
     private Retrofit mRetrofit;
@@ -39,6 +40,7 @@ public class RetrofitFactory {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+
         OkHttpClient client = new OkHttpClient.Builder()
 
                 .addInterceptor(httpLoggingInterceptor)
@@ -47,8 +49,6 @@ public class RetrofitFactory {
                 .writeTimeout(DEFAULT_WRITE_TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
                 .build();
-
-
 
 
         // 创建Retrofit
@@ -72,15 +72,15 @@ public class RetrofitFactory {
 
     }
 
-    public static RetrofitFactory getINSTANCE(){
+    public static RetrofitFactory getINSTANCE() {
 
-        if(INSTANCE==null)
-            INSTANCE=new RetrofitFactory();
+        if (INSTANCE == null)
+            INSTANCE = new RetrofitFactory();
         return INSTANCE;
     }
 
 
-    public <T> T create(Class<T> service){
+    public <T> T create(Class<T> service) {
         return mRetrofit.create(service);
     }
 
