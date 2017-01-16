@@ -8,6 +8,7 @@ import android.util.Log;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.MallAllBean;
+import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.provide.MallAllProvide;
 import com.bb.hbx.utils.Constants;
 import com.bb.hbx.widget.ConditionLayout;
@@ -43,6 +44,13 @@ public class Mall_ItemFragment extends BaseFragment {
 
     @BindView(R.id.cl_condit)
     ConditionLayout cl_condit;
+
+
+    private TypeModel model;
+
+    public Mall_ItemFragment(TypeModel model) {
+        this.model = model;
+    }
 
 
     @Override

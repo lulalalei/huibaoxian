@@ -30,6 +30,9 @@ import butterknife.ButterKnife;
 public class BannerProvide extends ItemViewProvider<BannerBean, BannerProvide.ViewHolder> {
 
 
+    private boolean mAutoPlayAble = true;
+
+
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
@@ -42,7 +45,7 @@ public class BannerProvide extends ItemViewProvider<BannerBean, BannerProvide.Vi
         holder.setData(bannerBean);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
 
         @BindView(R.id.banner)
@@ -57,6 +60,8 @@ public class BannerProvide extends ItemViewProvider<BannerBean, BannerProvide.Vi
 
 
         void setData(@NonNull final BannerBean bannerBean) {
+            bgaBanner.setAutoPlayAble(BannerProvide.this.mAutoPlayAble);
+
             bgaBanner.setAdapter(new BGABanner.Adapter() {
                 @Override
                 public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
@@ -83,5 +88,11 @@ public class BannerProvide extends ItemViewProvider<BannerBean, BannerProvide.Vi
         }
     }
 
+    public boolean ismAutoPlayAble() {
+        return mAutoPlayAble;
+    }
 
+    public void setmAutoPlayAble(boolean mAutoPlayAble) {
+        this.mAutoPlayAble = mAutoPlayAble;
+    }
 }

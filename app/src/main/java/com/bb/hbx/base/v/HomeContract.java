@@ -1,8 +1,11 @@
 package com.bb.hbx.base.v;
 
+import android.support.v7.widget.GridLayoutManager;
+
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
 import com.bb.hbx.bean.HomePageInfo;
+import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.List;
 
@@ -20,15 +23,19 @@ public interface HomeContract {
 
         void getHomePageInfo(String userId, Callback callback);
 
-        //专题列表
-        void getTopicList(int pageIndex, int pageSize, Callback callback);
+
 
     }
 
 
     interface View extends BaseView {
 
-        void setHomepageInfoData(HomePageInfo info);
+
+        void setAutuoBanner(boolean isAuto);
+
+        void getfreshListData(List<Item> items);
+
+
 
 
     }
@@ -38,7 +45,8 @@ public interface HomeContract {
 
         public abstract void getHomePageInfo();
 
-        public abstract void getTopicList();
 
+
+        public abstract  GridLayoutManager.SpanSizeLookup getSpanSizeLookup();
     }
 }

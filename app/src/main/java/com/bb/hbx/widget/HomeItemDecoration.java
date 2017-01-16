@@ -5,12 +5,10 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.bb.hbx.bean.BKItem;
-import com.bb.hbx.bean.BKchildItem;
+import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -74,7 +72,7 @@ public class HomeItemDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             Item item = (Item) ((MultiTypeAdapter) parent.getAdapter()).getItems().get(i);
-            if (item instanceof BKchildItem) {
+            if (item instanceof ProductListBean) {
                 final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
                 final int top = child.getBottom() + params.bottomMargin;
                 final int bottom = top + mDivider.getIntrinsicHeight();

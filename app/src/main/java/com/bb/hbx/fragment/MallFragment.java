@@ -13,6 +13,10 @@ import com.bb.hbx.R;
 import com.bb.hbx.adapter.BasePageAdapter;
 import com.bb.hbx.adapter.MallPageAdapter;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.base.m.MallModel;
+import com.bb.hbx.base.p.MallPresenter;
+import com.bb.hbx.base.v.MallContract;
+import com.bb.hbx.bean.TypeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +28,10 @@ import butterknife.BindView;
  * 商城
  */
 
-public class MallFragment extends BaseFragment {
+public class MallFragment extends BaseFragment<MallPresenter, MallModel> implements MallContract.View {
 
 
-    private final static String TAG=MallFragment.class.getSimpleName();
+    private final static String TAG = MallFragment.class.getSimpleName();
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -57,7 +61,7 @@ public class MallFragment extends BaseFragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG,"haha");
+                Log.i(TAG, "haha");
             }
         });
 
@@ -65,18 +69,6 @@ public class MallFragment extends BaseFragment {
 
     @Override
     protected void initdate(Bundle savedInstanceState) {
-        tabsTitle = new ArrayList<>();
-        tabsTitle.add("车险");
-        tabsTitle.add("理财险");
-        tabsTitle.add("意外险");
-        tabsTitle.add("健康险");
-        tabsTitle.add("旅游险");
-        adapter = new MallPageAdapter(getActivity().getSupportFragmentManager(), tabsTitle);
-        for (int i = 0; i < tabsTitle.size(); i++) {
-            adapter.addFragment(new Mall_ItemFragment());
-        }
-        viewpager.setAdapter(adapter);
-        tabs.setupWithViewPager(viewpager);
 
     }
 
@@ -84,9 +76,21 @@ public class MallFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Log.i(TAG,"haha");
+                Log.i(TAG, "haha");
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void initTitle(List<TypeModel> models) {
+        adapter = new MallPageAdapter(getActivity().getSupportFragmentManager(), models);
+
+        for (int i = 0; i < models.size(); i++) {
+            adapter.addFragment(new Mall_ItemFragment());
+
+        }
+        viewpager.setAdapter(adapter);
+        tabs.setupWithViewPager(viewpager);
     }
 }

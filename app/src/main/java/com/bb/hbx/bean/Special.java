@@ -1,24 +1,42 @@
 package com.bb.hbx.bean;
 
+import com.bb.hbx.widget.multitype.data.Item;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/10.
  */
 
-public class Special  {
+public class Special  implements Item{
+
+
+
+    private List<ProductListBean> productList;
 
 
     /**
-     * endTime : 20170111182316
+     * endTime :
      * productCount :
-     * productList : [{"classId":"","coverage":"","guarantee":"","insurerId":"","insurerLogo":"","insurerName":"","monthAmount":"","perferwords":"周伟亮测试1","productId":"1","productIntro":"","productLogo":"","productName":"周伟亮测试1","productPrice":"","productProp":"","productTagUrls":"","specialPrice":"50","suitable":"","totalAmount":"","typeList":""}]
-     * specialContent : 关爱女性描述
+     * specialContent :
      * specialId : 2
      * specialIntro :  关爱女性介绍
-     * specialLogo :
-     * specialName :  关爱女性
-     * startTime : 20150529044826
+     * specialLogo : http://pic12.nipic.com/20110104/1984213_110016002109_2.jpg
+     * specialName :  精选专题
+     * specialType : 10
+     * specialUrl :
+     * startTime :
+     *
+     * specialId	专题编号	n	M	6
+     specialName	专题名称	ansc	M	32
+     specialType	专题类型	n	M	128	10：普通专题；20：爆款
+     specialLogo1	专题宣传小图	ans	M	128	专题宣传小图URL地址，通常用于logo类图片
+     specialLogo2	专题中图片	ans	M	128	专题宣传中图URL地址，通常用于列表显示图片
+     specialLogo3	专题大图片	ans	M	128	专题宣传大图URL地址，通常用于广告类图片
+     specialUrl	专题页面地址	ans	M	128	存放专题页面url地址
+     specialIntro	专题简介	ansc	O	256	专题简介，字数控制在100以内
+     specialDesc	专题详情	ansc	O	1024	专题详情，不超过500字
+
      */
 
     private String endTime;
@@ -28,8 +46,9 @@ public class Special  {
     private String specialIntro;
     private String specialLogo;
     private String specialName;
+    private int specialType;
+    private String specialUrl;
     private String startTime;
-    private List<ProductListBean> productList;
 
     public String getEndTime() {
         return endTime;
@@ -87,6 +106,22 @@ public class Special  {
         this.specialName = specialName;
     }
 
+    public int getSpecialType() {
+        return specialType;
+    }
+
+    public void setSpecialType(int specialType) {
+        this.specialType = specialType;
+    }
+
+    public String getSpecialUrl() {
+        return specialUrl;
+    }
+
+    public void setSpecialUrl(String specialUrl) {
+        this.specialUrl = specialUrl;
+    }
+
     public String getStartTime() {
         return startTime;
     }
@@ -102,6 +137,4 @@ public class Special  {
     public void setProductList(List<ProductListBean> productList) {
         this.productList = productList;
     }
-
-
 }

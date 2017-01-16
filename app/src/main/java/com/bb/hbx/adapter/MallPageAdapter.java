@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.bean.TypeModel;
+import com.bb.hbx.fragment.Mall_ItemFragment;
 import com.bb.hbx.utils.Constants;
 
 import java.util.List;
@@ -13,13 +15,23 @@ import java.util.List;
  * Created by Administrator on 2016/12/23.
  */
 
-public class MallPageAdapter extends BasePageAdapter {
+public class MallPageAdapter extends BasePageAdapter<Mall_ItemFragment,TypeModel> {
 
 
-
-
-    public MallPageAdapter(FragmentManager fm, List<String> listtitle) {
+    public MallPageAdapter(FragmentManager fm, List<TypeModel> listtitle) {
         super(fm, listtitle);
+    }
+
+    @Override
+    public void addFragment(Mall_ItemFragment fragment) {
+        if (list.size() < listtitle.size()) {
+            list.add(fragment);
+        }
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return ((TypeModel)listtitle.get(position)).getTypeName();
     }
 
     @Override
@@ -30,4 +42,6 @@ public class MallPageAdapter extends BasePageAdapter {
         squareFragment.setArguments(bundle);
         return squareFragment;
     }
+
+
 }

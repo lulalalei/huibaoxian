@@ -20,9 +20,15 @@ public class HomePageInfo implements Serializable {
 
     private String loop;
     private String showTime;
-    private String userLogo;
+
     private List<AdBean> ads;
+    private List<XhbMsg> xhbMsgList;
     private List<ProductItem> productType;
+
+    private List<Special> specialList;
+
+    private int userType;
+
 
     public String getLoop() {
         return loop;
@@ -40,13 +46,6 @@ public class HomePageInfo implements Serializable {
         this.showTime = showTime;
     }
 
-    public String getUserLogo() {
-        return userLogo;
-    }
-
-    public void setUserLogo(String userLogo) {
-        this.userLogo = userLogo;
-    }
 
     public List<AdBean> getAds() {
         return ads;
@@ -63,4 +62,30 @@ public class HomePageInfo implements Serializable {
     public void setProductType(List<ProductItem> productType) {
         this.productType = productType;
     }
+
+    public List<XhbMsg> getXhbMsgList() {
+        return xhbMsgList;
+    }
+
+    public void setXhbMsgList(List<XhbMsg> xhbMsgList) {
+        this.xhbMsgList = xhbMsgList;
+    }
+
+    public List<Special> getSpecialList() {
+        return specialList;
+    }
+
+    public void setSpecialList(List<Special> specialList) {
+        this.specialList = specialList;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+
 }

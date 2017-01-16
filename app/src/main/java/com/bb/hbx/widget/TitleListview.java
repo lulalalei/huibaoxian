@@ -53,7 +53,7 @@ public class TitleListview extends ListView {
     }
 
     private void initdata() {
-        Log.i(TAG, "initdata");
+
         timeTaskScroll = new TimeTaskScroll(this);
         //height = MyApplication.dp2px(getContext(), 50);
     }
@@ -72,6 +72,7 @@ public class TitleListview extends ListView {
     @Override
     public void setAdapter(android.widget.ListAdapter adapter) {
         super.setAdapter(adapter);
+        Log.i(TAG, "setAdapter");
         startTimeScoll();
     }
 

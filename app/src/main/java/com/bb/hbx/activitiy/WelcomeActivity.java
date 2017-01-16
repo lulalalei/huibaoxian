@@ -9,8 +9,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -20,8 +18,8 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.Poi;
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
-import com.bb.hbx.activitiy.login.LoginActivity;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.User;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.DeviceUtils;
 import com.bb.hbx.utils.LocationService;
@@ -56,10 +54,11 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initdata() {
+        MyApplication.user = new User();
+        MyApplication.user.setUserId("0");
         utils = new PermissionUtils(this);
         ShareSPUtils.initShareSP(this);
         MyUsersSqlite.initUsersdb(this);
-
         comm();
     }
 
@@ -107,10 +106,10 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void initLocationService() {
-        locationService = ((MyApplication) getApplication()).locationService;
-        locationService.registerListener(mListener);
-        locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-        locationService.start();// 定位SDK
+//        locationService = ((MyApplication) getApplication()).locationService;
+//        locationService.registerListener(mListener);
+//        locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+//        locationService.start();// 定位SDK
     }
 
 

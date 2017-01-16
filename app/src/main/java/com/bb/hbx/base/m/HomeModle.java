@@ -30,10 +30,5 @@ public class HomeModle implements HomeContract.Model {
 
     }
 
-    @Override
-    public void getTopicList(int pageIndex, int pageSize, Callback callback) {
-
-
-    }
 
 }

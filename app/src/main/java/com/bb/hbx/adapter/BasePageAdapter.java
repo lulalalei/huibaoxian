@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.baidu.platform.comapi.map.L;
 import com.bb.hbx.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -15,27 +16,23 @@ import java.util.List;
  * Created by fancl on 2016/12/21.
  */
 
-public abstract class BasePageAdapter<T extends BaseFragment> extends FragmentStatePagerAdapter {
+public abstract class BasePageAdapter<T extends BaseFragment, L> extends FragmentStatePagerAdapter {
 
 
     public static final String TAG = BasePageAdapter.class.getSimpleName();
 
-    private List<String> listtitle;
+    public List<L> listtitle;
 
     public List<BaseFragment> list = new ArrayList<>();
 
 
-    public BasePageAdapter(FragmentManager fm, List<String> listtitle) {
+    public BasePageAdapter(FragmentManager fm, List<L> listtitle) {
         super(fm);
         this.listtitle = listtitle;
     }
 
 
-    public void addFragment(T fragment) {
-        if (list.size() < listtitle.size()) {
-            list.add(fragment);
-        }
-    }
+    public abstract  void addFragment(T fragment);
 
 
     public void removeFragment(T fragment) {
@@ -75,10 +72,8 @@ public abstract class BasePageAdapter<T extends BaseFragment> extends FragmentSt
             return listtitle.size();
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return listtitle.get(position);
-    }
+
+    public abstract CharSequence getPageTitle(int position);
 
     public abstract BaseFragment getFragement(int position);
 }
