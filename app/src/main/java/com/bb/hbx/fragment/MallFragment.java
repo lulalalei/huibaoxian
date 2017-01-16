@@ -87,7 +87,7 @@ public class MallFragment extends BaseFragment<MallPresenter, MallModel> impleme
         adapter = new MallPageAdapter(getActivity().getSupportFragmentManager(), models);
 
         for (int i = 0; i < models.size(); i++) {
-            adapter.addFragment(new Mall_ItemFragment());
+            adapter.addFragment(new Mall_ItemFragment(models.get(i)));
 
         }
         viewpager.setAdapter(adapter);
