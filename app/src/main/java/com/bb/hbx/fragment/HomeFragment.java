@@ -1,12 +1,13 @@
 package com.bb.hbx.fragment;
 
-;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.SearchActivity;
 import com.bb.hbx.base.BaseFragment;
@@ -16,8 +17,7 @@ import com.bb.hbx.base.v.HomeContract;
 import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
-import com.bb.hbx.bean.HomePageInfo;
-import com.bb.hbx.bean.JxItem;
+
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
@@ -28,6 +28,9 @@ import com.bb.hbx.provide.BobaoProvide;
 import com.bb.hbx.provide.JxItemProvide;
 import com.bb.hbx.provide.ModleItemProvide;
 import com.bb.hbx.utils.AppManager;
+import com.bb.hbx.utils.Constants;
+import com.bb.hbx.widget.freshlayout.OnPullListener;
+import com.bb.hbx.widget.freshlayout.RefreshLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -42,6 +45,13 @@ import butterknife.BindView;
  */
 
 public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> implements HomeContract.View, View.OnClickListener {
+
+
+    @BindView(R.id.iv_xx)
+    ImageView iv_xx;
+
+    @BindView(R.id.refresh)
+    RefreshLayout refresh;
 
 
     @BindView(R.id.lin_bg)
@@ -73,6 +83,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
     @Override
     public void initView() {
+
+        refresh.setNeedLoadMore(false);
+        refresh.setView(rel_tool);
+        iv_xx.setImageResource(R.drawable.tongzhi);
         rel_tool.getBackground().mutate().setAlpha(0);//toolbar透明度初始化为0
         layoutManager = new GridLayoutManager(getActivity(), 5);
 
@@ -94,13 +108,16 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
                 if (mDistanceY == 0) {
                     rel_tool.getBackground().mutate().setAlpha(0);
+                    iv_xx.setImageResource(R.drawable.tongzhi);
                 } else if (mDistanceY > 0 && mDistanceY < endOffset) {
                     float precent = mDistanceY / endOffset;
                     int alpha = Math.round(precent * 255);
                     rel_tool.getBackground().mutate().setAlpha(alpha);
                     if (alpha > 125) {
+                        iv_xx.setImageResource(R.drawable.message_zhuse);
                         lin_search.setBackgroundResource(R.drawable.shape_alpha_a6);
                     } else {
+                        iv_xx.setImageResource(R.drawable.tongzhi);
                         lin_search.setBackgroundResource(R.drawable.shape_alpha_white);
                     }
                 } else if (mDistanceY >= endOffset) {
@@ -218,6 +235,18 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 //        items.addAll(jxItems);
 //        adapter.setItems(items);
 
+        refresh.setOnPullListener(new OnPullListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getHomePageInfo();
+            }
+
+            @Override
+            public void onLoadMore() {
+
+            }
+        });
+
 
         mPresenter.getHomePageInfo();
 
@@ -243,6 +272,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
         adapter.notifyDataSetChanged();
 
 
+    }
+
+    @Override
+    public void stopRefresh() {
+        refresh.stopRefresh(true);
     }
 
 

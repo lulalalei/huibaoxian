@@ -5,8 +5,8 @@
     <!--线宽为dashWith，线之间空隙dashGap，dashGap=0dp时，是实线 -->
     <stroke
         android:dashGap="3dip"
-        android:dashWidth="6dip"
-        android:width="1dip"
+        android:dashWidth="3dip"
+        android:width="0.5dip"
         android:color="@color/A6" />
 
     <!-- 虚线高度 -->

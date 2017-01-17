@@ -35,6 +35,7 @@
     <color name="Z53">#fafafa</color>
     <color name="Z52">#ffae22</color>
     <color name="Z51">#fff0d5</color>
+    <color name="Z50">#ff5346</color>
 
 
 
@@ -42,4 +43,5 @@
 
     <color name="bg_f">#CCffffff</color>
     <color name="bg_A4">#75a8afac</color>
+    <color name="bg_B2">#B2ffffff</color>
 </resources>

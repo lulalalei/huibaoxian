@@ -36,37 +36,36 @@ public class HomePresenter extends HomeContract.Presenter {
 
     private int topicListPageSize = 10;
 
-    private PostCallback postCallback = new PostCallback<HomeContract.View>(mView) {
-
-
-        @Override
-        public void successCallback(Result_Api api) {
-
-            if (api.getOutput() instanceof HomePageInfo) {
-
-                HomePageInfo info = (HomePageInfo) api.getOutput();
-                mView.setAutuoBanner("1".equals(info.getLoop()) ? true : false);
-                dealWith(info);
-
-            }
-        }
-
-        @Override
-        public void failCallback() {
-
-        }
-    };
+    private PostCallback postCallback;
 
 
     @Override
     public void onAttached() {
         items = new ArrayList<>();
+        postCallback = new PostCallback<HomeContract.View>(mView) {
+
+            @Override
+            public void successCallback(Result_Api api) {
+                mView.stopRefresh();
+                if (api.getOutput() instanceof HomePageInfo) {
+                    HomePageInfo info = (HomePageInfo) api.getOutput();
+                    mView.setAutuoBanner("1".equals(info.getLoop()) ? true : false);
+                    dealWith(info);
+
+                }
+            }
+
+            @Override
+            public void failCallback() {
+                mView.stopRefresh();
+            }
+        };
 
     }
 
 
     private void dealWith(HomePageInfo info) {
-
+        items.clear();
         MyApplication.user.setUserType(info.getUserType());
 
         //banner
@@ -82,9 +81,11 @@ public class HomePresenter extends HomeContract.Presenter {
         }
 
         //小汇报
-        BobaoItem bobaoItem = new BobaoItem();
-        bobaoItem.setList(info.getXhbMsgList());
-        items.add(bobaoItem);
+        if (MyApplication.user.getUserType() == Constants.BOSSUSER) {
+            BobaoItem bobaoItem = new BobaoItem();
+            bobaoItem.setList(info.getXhbMsgList());
+            items.add(bobaoItem);
+        }
 
         //爆款推荐专题
         items.add(new BKItem(R.drawable.baokuantuijian));
