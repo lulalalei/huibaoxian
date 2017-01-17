@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/x26"
     android:paddingTop="@dimen/y42">
 
@@ -16,12 +16,30 @@
         android:layout_marginBottom="@dimen/y26"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/img_pic"
-            android:layout_width="@dimen/x240"
-            android:layout_height="@dimen/y180"
-            android:scaleType="centerCrop"
-            android:src="@drawable/holder" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_pic"
+                android:layout_width="@dimen/x240"
+                android:layout_height="@dimen/y180"
+                android:scaleType="centerCrop"
+                android:src="@drawable/holder" />
+
+            <TextView
+                android:id="@+id/tv_insurancecompany"
+                android:layout_width="@dimen/x170"
+                android:layout_height="@dimen/y36"
+                android:layout_alignBottom="@+id/img_pic"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/y18"
+                android:background="@drawable/shape_i3"
+                android:gravity="center"
+                tools:text="太平洋保险"
+                android:textAppearance="@style/TextAppear.Theme.A3_Size11" />
+
+        </RelativeLayout>
 
 
         <LinearLayout
@@ -30,32 +48,70 @@
             android:layout_marginLeft="@dimen/x32"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="@dimen/x280"
+                    android:singleLine="true"
+                    tools:text="少儿重大险"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size16" />
+
+
+                <TextView
+                    android:id="@+id/tv_grade1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/x6"
+                    android:background="@drawable/shape_co11"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp"
+                    android:text="爆款"
+                    android:textAppearance="@style/TextAppear.Theme.white_Size11" />
+
+                <TextView
+                    android:id="@+id/tv_grade2"
+                    android:layout_marginRight="@dimen/x26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/x12"
+                    android:background="@drawable/shape_co11"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="2dp"
+                    android:text="新品"
+                    android:textAppearance="@style/TextAppear.Theme.white_Size11" />
+
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_detail1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/x22"
-                android:drawableRight="@drawable/hot"
-                android:gravity="bottom"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppear.Theme.A3_Size16"
-                android:text="少儿重大疾病医疗险" />
+                android:layout_marginTop="@dimen/y15"
+                android:text="投保年龄:28天-17周岁"
+                android:textAppearance="@style/TextAppear.Theme.A4_Size11" />
 
             <TextView
                 android:id="@+id/tv_detail2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y15"
-                android:textAppearance="@style/TextAppear.Theme.A4_Size11"
-                android:text="投保年龄:28天-17周岁" />
-
-            <TextView
-                android:id="@+id/tv_detail3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y15"
-                android:textAppearance="@style/TextAppear.Theme.A4_Size11"
-                android:text="住院津贴:50元一天" />
+                android:text="住院津贴:50元一天"
+                android:textAppearance="@style/TextAppear.Theme.A4_Size11" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,8 +123,8 @@
                     android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppear.Theme.A1_Size16"
-                    android:text="￥1000" />
+                    tools:text="￥1000"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size16" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -87,60 +143,32 @@
                     android:gravity="center"
                     android:singleLine="true"
                     android:text="20%推广费"
-                    android:textAppearance="@style/TextAppear.Theme.white_Size11" />
-            </LinearLayout>
-
-
-            <View
-                android:id="@+id/v_xx"
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:layout_marginTop="@dimen/y25"
-                android:background="@drawable/shape_gapline"
-                android:layerType="software" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y26"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_i"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_i1"
-                        android:paddingBottom="@dimen/y10"
-                        android:paddingLeft="@dimen/x20"
-                        android:paddingRight="@dimen/x20"
-                        android:paddingTop="@dimen/y10"
-                        android:text="大西洋保险"
-                        android:textAppearance="@style/TextAppear.Theme.Z52_Size11" />
-
-                </LinearLayout>
+                    android:textAppearance="@style/TextAppear.Theme.white_Size11"
+                    />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_sales"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/x26"
-                    android:gravity="right"
+                    android:singleLine="true"
                     android:textAppearance="@style/TextAppear.Theme.A4_Size12"
                     tools:text="销量 12万份" />
 
 
             </LinearLayout>
 
+
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/line_e" />
+    <View
+        android:id="@+id/v_xx"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/y25"
+        android:background="@drawable/shape_gapline"
+        android:layerType="software" />
 
 </LinearLayout>
 

@@ -7,6 +7,7 @@ import com.bb.hbx.MyApplication;
 import com.bb.hbx.utils.AppUtils;
 import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.MD5Util;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -21,9 +22,11 @@ import java.util.TreeMap;
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.Buffer;
 
 
 /**
@@ -48,13 +51,24 @@ public class BasicParamsInterceptor implements Interceptor {
         requestBuilder.addHeader("versionType", "2");
         requestBuilder.addHeader("deviceNo", MyApplication.DUID);
         requestBuilder.addHeader("deviceName", "10");
+        requestBuilder.addHeader("domainId", "100");
 
-        FormBody oldFormBody = (FormBody) request.body();
+
+
         TreeMap<String, String> treeMap = new TreeMap<>();
         JSONObject jsonObject = new JSONObject();
-        for (int i = 0; i < oldFormBody.size(); i++) {
+        if (request.body() instanceof FormBody) {
+            FormBody oldFormBody = (FormBody) request.body();
+            for (int i = 0; i < oldFormBody.size(); i++) {
+                try {
+                    jsonObject.put(oldFormBody.name(i), oldFormBody.value(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
             try {
-                jsonObject.put(oldFormBody.name(i), oldFormBody.value(i));
+                jsonObject = new JSONObject(bodyToString(request.body()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -89,6 +103,20 @@ public class BasicParamsInterceptor implements Interceptor {
         RequestBody body = RequestBody.create(type, builder.toString().getBytes());
 
         return body;
+    }
+
+    private static String bodyToString(final RequestBody request) {
+        try {
+            final RequestBody copy = request;
+            final Buffer buffer = new Buffer();
+            if (copy != null)
+                copy.writeTo(buffer);
+            else
+                return "";
+            return buffer.readUtf8();
+        } catch (final IOException e) {
+            return "did not work";
+        }
     }
 
 }

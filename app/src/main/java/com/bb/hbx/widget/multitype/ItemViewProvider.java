@@ -1,5 +1,6 @@
 package com.bb.hbx.widget.multitype;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,11 @@ import com.bb.hbx.widget.multitype.data.Item;
  */
 
 public abstract class ItemViewProvider<C extends Item, V extends RecyclerView.ViewHolder> {
+
+
+
+
+
 
 
     @NonNull

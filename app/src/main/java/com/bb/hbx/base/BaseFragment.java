@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
@@ -81,6 +82,18 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
     }
 
     /**
+     * 提示信息
+     *
+     * @param aFormatMsg
+     * @param aMsgArgs
+     */
+    public void showTip(String aFormatMsg, Object... aMsgArgs) {
+        String outString = String.format(aFormatMsg, aMsgArgs);
+        int duration = (outString.length() > 10) ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT;
+        Toast.makeText(mContext, outString, duration).show();
+    }
+
+    /**
      * 布局加载
      *
      * @return
@@ -97,7 +110,7 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
 
     @Override
     public void showMsg(String msg) {
-
+        showTip(msg);
     }
 
     @Override

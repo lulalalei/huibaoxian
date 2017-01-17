@@ -7,7 +7,10 @@ import android.util.Log;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseFragment;
-import com.bb.hbx.bean.MallAllBean;
+import com.bb.hbx.base.m.Mall_itemModel;
+import com.bb.hbx.base.p.Mall_ItemPresenter;
+import com.bb.hbx.base.v.Mall_ItemContract;
+import com.bb.hbx.bean.Product;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.provide.MallAllProvide;
 import com.bb.hbx.utils.Constants;
@@ -15,7 +18,7 @@ import com.bb.hbx.widget.ConditionLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,13 +27,15 @@ import butterknife.BindView;
  * Created by Administrator on 2016/12/22.
  */
 
-public class Mall_ItemFragment extends BaseFragment {
+public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_itemModel>
+        implements Mall_ItemContract.View {
 
 
     private final String TAG = Mall_ItemFragment.class.getSimpleName();
 
     @BindView(R.id.rl_view)
     RecyclerView rl_view;
+
 
     private MultiTypeAdapter adapter;
 
@@ -47,6 +52,7 @@ public class Mall_ItemFragment extends BaseFragment {
 
 
     private TypeModel model;
+
 
     public Mall_ItemFragment(TypeModel model) {
         this.model = model;
@@ -93,7 +99,7 @@ public class Mall_ItemFragment extends BaseFragment {
         rl_view.setLayoutManager(manager);
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
-        adapter.register(MallAllBean.class, new MallAllProvide());
+        adapter.register(Product.class, new MallAllProvide());
         rl_view.setAdapter(adapter);
 
 
@@ -101,18 +107,18 @@ public class Mall_ItemFragment extends BaseFragment {
 
     @Override
     protected void initdate(Bundle savedInstanceState) {
-
-        Log.i(TAG, "initdate,pageType" + pageType);
-
-
-        List<Item> list = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            MallAllBean bean = new MallAllBean();
-            list.add(bean);
-        }
-
-        adapter.setItems(list);
+        adapter.setItems(mPresenter.getList());
+        mPresenter.getProducts();
+    }
 
 
+    @Override
+    public void notfiy() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public TypeModel getTypeModel() {
+        return model;
     }
 }

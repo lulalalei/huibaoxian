@@ -23,6 +23,7 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 
     private final static String ERROR_DATA = "获取数据异常";
     private final static String NET_ERROR = "请检查网络是否正常";
+    private final static String NET_OK = "数据请求正常";
 
     private V view;
 
@@ -52,6 +53,7 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
         Result_Api api = response.body();
         if (api != null) {
             if (Constants.SUCCESS.equalsIgnoreCase(api.getRespCode())) {
+
 //                if (api.getOutput() != null) {
 //
 //                    JSONObject jsonObject= null;
@@ -67,15 +69,22 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 //                }
 
                 if (api.getOutput() == null) {
+                    failCallback();
                     throw new JsonIOException("解析出错或者数据格式返回错误");
+
 
                 }
 
                 successCallback(api);
-            } else if (view != null)
+            } else if (view != null) {
+                failCallback();
                 view.showMsg(api.getRespMsg());
-        } else if (view != null)
+
+            }
+        } else if (view != null) {
+            failCallback();
             view.showMsg(ERROR_DATA);
+        }
 
 
     }

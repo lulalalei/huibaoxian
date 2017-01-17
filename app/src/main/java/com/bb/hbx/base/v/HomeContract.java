@@ -35,6 +35,7 @@ public interface HomeContract {
 
         void getfreshListData(List<Item> items);
 
+        void stopRefresh();
 
 
 
