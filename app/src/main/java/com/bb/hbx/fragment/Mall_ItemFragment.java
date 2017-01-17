@@ -99,7 +99,7 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
         rl_view.setLayoutManager(manager);
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
-        adapter.register(Product.class, new MallAllProvide());
+        adapter.register(Product.class, new MallAllProvide(getActivity()));
         rl_view.setAdapter(adapter);
 
 
