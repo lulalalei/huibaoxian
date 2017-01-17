@@ -2,13 +2,11 @@ package com.bb.hbx.base.p;
 
 import android.util.Log;
 
-import com.bb.hbx.MyApplication;
 import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.api.PostCallback;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.base.v.RegistContract;
 import com.bb.hbx.bean.MessageCodeBean;
-import com.bb.hbx.bean.User;
 import com.bb.hbx.utils.Constants;
 
 /**
@@ -52,13 +50,12 @@ public class RegistPresenter extends RegistContract.Presenter {
 
     @Override
     public void regist(String tel, String pass, String code) {
-
     }
 
 
     @Override
-    public void getVerifyCode(String mobile) {
-        mModel.getVerifyCode(Constants.DXYZM, mobile, Constants.RECIVE_bizType, postCallback);
+    public void getVerifyCode(String mobile,String bizType) {
+        mModel.getVerifyCode(Constants.DXYZM, mobile, bizType, postCallback);
     }
 
 

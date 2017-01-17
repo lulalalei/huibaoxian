@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bb.hbx.cans.Can;
@@ -31,7 +30,7 @@ public class ShareSPUtils {
         sp = context.getSharedPreferences("usersinfo", Context.MODE_PRIVATE);
         edit = sp.edit();
     }
-    public static void readShareSP(ViewGroup notLogin, ImageView userIcon, TextView hasLogin,Context context) {
+    public static void readShareSP(ViewGroup notLogin, ImageView userIcon, /*TextView hasLogin,*/Context context) {
         if (sp!=null)
         {
             Can.hasLogined=sp.getBoolean("hasLogined",false);
@@ -43,7 +42,7 @@ public class ShareSPUtils {
                 if (notLogin.getVisibility()== View.GONE)
                 {
                     notLogin.setVisibility(View.VISIBLE);
-                    hasLogin.setVisibility(View.GONE);
+                    //hasLogin.setVisibility(View.GONE);
                 }
                 userIcon.setImageBitmap(BitmapFactory.decodeFile(usersIconPath));
             }
@@ -52,16 +51,16 @@ public class ShareSPUtils {
                 Can.userName=sp.getString("userName",null);
                 Can.userPwd=sp.getString("userPwd",null);
                 Can.userIcon= sp.getString("userIcon", null);
-                if (hasLogin.getVisibility()==View.GONE)
-                {
-                    hasLogin.setVisibility(View.VISIBLE);
+                /*if (hasLogin.getVisibility()==View.GONE)
+                {*/
                     notLogin.setVisibility(View.GONE);
-                }
+                   /* hasLogin.setVisibility(View.VISIBLE);
+                }*/
                 Bitmap bitmap = BitmapFactory.decodeFile(Can.userIcon);
                 int byteCount = bitmap.getByteCount();
                 //从本地文件加载图片
                 userIcon.setImageBitmap(bitmap);
-                hasLogin.setText(Can.userName);
+                //hasLogin.setText(Can.userName);
             }
         }
         else
@@ -70,12 +69,14 @@ public class ShareSPUtils {
 
         }
     }
-    public static String writeShareSp(boolean loginFlag,String userName,String phone,String pwd)
+    public static String writeShareSp(boolean loginFlag,String userId,String sessionId,String userName,String phone,String pwd)
     {
         String parentPath = Can.getDefaultUsersIconFile();
         File file = new File(parentPath);
         String usersIconPath = new File(file, Can.userIconDefault.substring(Can.userIconDefault.lastIndexOf("/") + 1)).getAbsolutePath();
         edit.putBoolean("hasLogined",loginFlag);
+        edit.putString("userId",userId);
+        edit.putString("sessionId",sessionId);
         edit.putString("userName",userName);
         edit.putString("userPhone",phone);
         edit.putString("userPwd",pwd);

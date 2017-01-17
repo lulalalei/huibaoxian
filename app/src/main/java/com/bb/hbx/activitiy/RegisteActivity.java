@@ -1,7 +1,5 @@
 package com.bb.hbx.activitiy;
 
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,18 +11,23 @@ import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.login.LoginContract;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.m.RegistModel;
 import com.bb.hbx.base.p.RegistPresenter;
+import com.bb.hbx.bean.UserRegist;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
-import com.bb.hbx.utils.MyUsersSqlite;
-import com.bb.hbx.utils.ShareSPUtils;
 import com.bb.hbx.widget.CountDownTextView;
 import com.bb.hbx.widget.LoginPswEdit;
 import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -115,7 +118,7 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
             case R.id.tv_getcode:
                 if (isverTel()) {
                     tv_getcode.startTime();
-                    mPresenter.getVerifyCode(et_phone.getText().toString().trim());
+                    mPresenter.getVerifyCode(et_phone.getText().toString().trim(),"10");
                 } else
                     showTip("请输入正确的手机号码");
                 break;
@@ -137,10 +140,35 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
                     showTip("密码不正确");
                     return;
                 }
-                mPresenter.regist(et_phone.getText().toString().trim(), et_psw.getText().toString().trim(),
-                        et_yzm.getText().toString().trim());
 
-                String userPhone = et_phone.getText().toString();
+               /* mPresenter.regist(et_phone.getText().toString().trim(), et_psw.getText().toString().trim(),
+                        et_yzm.getText().toString().trim());*/
+
+                ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                Call call=service.regUser(et_phone.getText().toString().trim(),et_psw.getText().toString().trim(),et_yzm.getText().toString().trim());
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Result_Api body = (Result_Api) response.body();
+                        UserRegist bean = (UserRegist) body.getOutput();
+                        String respCode = body.getRespCode();
+                        if (respCode.equals("000000"))
+                        {
+                            //bean.getUserId();
+                            showTip("注册成功");
+                        }
+                        else if (respCode.equals("201022"))
+                        {
+                            Toast.makeText(RegisteActivity.this,"用户名已存在",Toast.LENGTH_SHORT);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+
+                    }
+                });
+                /*String userPhone = et_phone.getText().toString();
                 String userPwd = et_psw.getText().toString();
                 Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where phone = ?", new String[]{userPhone});
                 if (cursor!=null)
@@ -165,7 +193,7 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
                         Toast.makeText(RegisteActivity.this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
                         finish();
                     }
-                }
+                }*/
                 break;
 
             case R.id.back_iv:

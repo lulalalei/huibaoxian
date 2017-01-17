@@ -68,6 +68,7 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
     private float headerHeight;//顶部高度
     private float minHeaderHeight;//顶部最低高度，即Bar的高度
 
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_purchase_detail;
@@ -136,6 +137,21 @@ public class PurchaseDetailActivity extends BaseActivity implements View.OnClick
         itemInDetailAdapter = new MyInsuranceItemInDetailAdapter(totalInsuranceItemList, this);
         insuranceItem_recyclerView.setAdapter(itemInDetailAdapter);
         customInfo_recyclerView.setAdapter(customInfoInDetailAdapter);
+        /*ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getSpecialsAndProductsList(1,1,2);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                *//*Result_Api body = (Result_Api) response.body();
+                TestDetailBean bean= (TestDetailBean) body.getOutput();*//*
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });*/
     }
 
     @Override

@@ -4,55 +4,61 @@
     android:id="@+id/activity_all_income"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/A7"
     tools:context="com.bb.hbx.activitiy.AllIncomeActivity">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/toolbar">
+        android:layout_height="198dp"
+        android:background="@drawable/jiesuan_shouru">
+        <RelativeLayout
+            android:id="@+id/topbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="17dp"
+                android:id="@+id/back_iv"
+                android:src="@drawable/jiantou_bai"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="累计收入"
+                android:textSize="17sp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:gravity="center"/>
+        </RelativeLayout>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="累计收入"
-            android:textSize="20sp"
-            android:gravity="center"/>
-    </android.support.v7.widget.Toolbar>
-
-    <ImageView
-        android:layout_width="wrap_content"
+            android:layout_height="158dp"
+            android:layout_below="@id/topbar_layout"
+            android:text="102.98"
+            android:textSize="36sp"
+            android:textColor="@color/white"
+            android:id="@+id/allIncome_tv"
+            android:paddingTop="40dp"
+            android:gravity="center_horizontal" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/show_tv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/back_iv"
-        android:src="@mipmap/right_arrow"
-        android:layout_margin="10dp"
-        android:onClick="backMethod"/>
-    <ScrollView
+        android:text="最近6个月收入"
+        android:textColor="@color/A3"
+        android:textSize="13sp"
+        android:padding="18dp"
+        android:background="@color/colorDivider"
+        android:layout_below="@id/relativeLayout"/>
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:layout_below="@id/toolbar">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:id="@+id/recyclerView"
+        android:layout_below="@id/show_tv"></android.support.v7.widget.RecyclerView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:text="2341.56"
-                android:textSize="20sp"
-                android:id="@+id/allIncome_tv"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/divider_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="最近六个月收入"
-                android:padding="10dp"
-                android:background="@android:color/darker_gray" />
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/recyclerView"></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </ScrollView>
 </RelativeLayout>

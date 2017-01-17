@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.bean.ProductListBean;
-import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
@@ -83,18 +82,18 @@ public class BKchildItemProvide extends ItemViewProvider<ProductListBean, BKchil
 
         void setData(@NonNull final ProductListBean bKchildItem) {
 
-
+            //Constants.CLIENTUSER
             tv_name.setText(bKchildItem.getProductName());
             tv_detail.setText(bKchildItem.getProductIntro());
             tv_price_start.setText(context.getString(R.string.howPrice, bKchildItem.getMinPremium()));
             tv_added.setText(bKchildItem.getCommisionValue1());
-            if (MyApplication.user.getUserType() == Constants.CLIENTUSER) {
+           /* if (MyApplication.user.getIsBClient() .equals(Constants.CLIENTUSER+"") ) {
                 tv_added.setVisibility(View.INVISIBLE);
-            } else if (MyApplication.user.getUserType() == Constants.BOSSUSER) {
+            } else if (MyApplication.user.getIsBClient() .equals(Constants.BOSSUSER+"") ) {
                 tv_added.setVisibility(View.VISIBLE);
             } else {
                 tv_added.setVisibility(View.INVISIBLE);
-            }
+            }*/
 
             GlideUtil.getInstance().loadImage(MyApplication.getAppContext(),
                     img, bKchildItem.getProductLogo(), true);

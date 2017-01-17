@@ -5,6 +5,7 @@
     android:id="@+id/activity_my_assert"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/A7"
     tools:context="com.bb.hbx.activitiy.MyAssertActivity">
 
     <RelativeLayout
@@ -15,8 +16,8 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="17dp"
             android:id="@+id/back_iv"
             android:src="@drawable/jiantou_bai"
             android:scaleType="centerCrop"

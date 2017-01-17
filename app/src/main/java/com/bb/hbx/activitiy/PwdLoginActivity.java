@@ -1,6 +1,5 @@
 package com.bb.hbx.activitiy;
 
-import android.database.Cursor;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +14,11 @@ import com.bb.hbx.activitiy.login.LoginActivity;
 import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.activitiy.login.LoginModel;
 import com.bb.hbx.activitiy.login.LoginPresenter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.User;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.LoginAnimHelp;
@@ -25,6 +28,9 @@ import com.bb.hbx.widget.LoginPswEdit;
 import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 密码登录
@@ -181,23 +187,42 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
             case R.id.tv_login:
                 if (isverTel() && isverCode()) {
                     //mPresenter.login(et_phone.getText().toString().trim(), et_psw.getText().toString().trim());
-                    String phone = et_phone.getText().toString();
-                    String pwd = et_psw.getText().toString();
-                    Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where phone = ? and pwd = ?", new String[]{phone, pwd});
-                    if (cursor!=null)
-                    {
-                        if (cursor.moveToNext())//存在此用户,说明登录成功
-                        {
-                            ShareSPUtils.writeShareSp(true, "默认用户名", phone, pwd);
-                            Toast.makeText(this,"登陆成功",Toast.LENGTH_SHORT).show();
-                            AppManager.getInstance().showActivity(HomeActivity.class, null);
+                    final String phone = et_phone.getText().toString();
+                    final String pwd = et_psw.getText().toString();
+                    Toast.makeText(mContext,"phone:"+phone+"  pwd:"+pwd,Toast.LENGTH_SHORT);
+                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                    Call call=service.login(phone,pwd,1+"");
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            //32 d5f1744756eca2250a22ae3d974d0794
+                            Result_Api body = (Result_Api) response.body();
+                            User user = (User) body.getOutput();
+                            String userId = user.getUserId();
+                            String sessionId = user.getSessionId();
+                            String isBClient = user.getIsBClient()+"";
+                            Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
+                            ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, pwd);
+                            //更新表数据
+                            MyUsersSqlite.db.execSQL("update userstb set userId=?,sessionId=?,isBClient=?,name=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
+                                    new String[]{userId,sessionId,isBClient,phone,pwd,null});
+                           /* ContentValues values = new ContentValues();
+                            values.put("userId",userId);
+                            values.put("sessionId",sessionId);
+                            values.put("isBClient",false);//默认false
+                            values.put("name",phone);//默认名称为手机号
+                            values.put("phone",phone);
+                            values.put("pwd",pwd);
+                            values.put("usericon",userId);
+                            long flag = MyUsersSqlite.db.insert("userstb", null, values);
+                            values.clear();*/
                         }
-                        else
-                        {
-                            Toast.makeText(this,"手机号或密码错误",Toast.LENGTH_SHORT).show();
+
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+                            Toast.makeText(mContext,"writeShareSp:"+"error",Toast.LENGTH_SHORT).show();
                         }
-                        cursor.close();
-                    }
+                    });
                 } else
                     showTip("手机号码或验证码有误");
                 break;

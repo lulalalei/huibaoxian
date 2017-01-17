@@ -1,64 +1,53 @@
 package com.bb.hbx.bean;
 
 /**
- * Created by Administrator on 2017/1/6.
+ * Created by Administrator on 2017/1/17.
  */
 
-public class User {
+public class UserInfo {
 
     /**
-     * output : {"address":"","areaCode":"","backUrl":"","birthday":"","city":"","domainId":"10","email":"","euck":"","gender":"","idNo":"","idType":"","isBClient":"false","lastDevice":"","lastLoginIP":"","lastLoginTime":"20170117150251","loginPwd":"1","logo":"","mobile":"15735920000","realName":"","sessionId":"f7a30f557b0304e5ab72bb41be3b5ba4","userId":"32","userName":"15735920000"}
+     * output : {"address":"","areaCode":"","birthday":"","city":"","email":"","gender":"","idNo":"","idType":"","isBClient":"","lastLoginIP":"","lastLoginTime":"20170117134943","loginPwd":"1","logo":"","mobile":"15735920000","realName":"","userId":"32","userName":"15735920000"}
      * respCode : 000000
-     * respMsg : 登录成功
+     * respMsg : 获取用户信息成功
      * success : true
      */
-
 
         /**
          * address :
          * areaCode :
-         * backUrl :
          * birthday :
          * city :
-         * domainId : 10
          * email :
-         * euck :
          * gender :
          * idNo :
          * idType :
-         * isBClient : false
-         * lastDevice :
+         * isBClient :
          * lastLoginIP :
-         * lastLoginTime : 20170117150251
+         * lastLoginTime : 20170117134943
          * loginPwd : 1
          * logo :
          * mobile : 15735920000
          * realName :
-         * sessionId : f7a30f557b0304e5ab72bb41be3b5ba4
          * userId : 32
          * userName : 15735920000
          */
 
         private String address;
         private String areaCode;
-        private String backUrl;
         private String birthday;
         private String city;
-        private String domainId;
         private String email;
-        private String euck;
         private String gender;
         private String idNo;
         private String idType;
-        private boolean isBClient;
-        private String lastDevice;
+        private String isBClient;
         private String lastLoginIP;
         private String lastLoginTime;
         private String loginPwd;
         private String logo;
         private String mobile;
         private String realName;
-        private String sessionId;
         private String userId;
         private String userName;
 
@@ -78,14 +67,6 @@ public class User {
             this.areaCode = areaCode;
         }
 
-        public String getBackUrl() {
-            return backUrl;
-        }
-
-        public void setBackUrl(String backUrl) {
-            this.backUrl = backUrl;
-        }
-
         public String getBirthday() {
             return birthday;
         }
@@ -102,28 +83,12 @@ public class User {
             this.city = city;
         }
 
-        public String getDomainId() {
-            return domainId;
-        }
-
-        public void setDomainId(String domainId) {
-            this.domainId = domainId;
-        }
-
         public String getEmail() {
             return email;
         }
 
         public void setEmail(String email) {
             this.email = email;
-        }
-
-        public String getEuck() {
-            return euck;
-        }
-
-        public void setEuck(String euck) {
-            this.euck = euck;
         }
 
         public String getGender() {
@@ -150,20 +115,12 @@ public class User {
             this.idType = idType;
         }
 
-        public boolean getIsBClient() {
+        public String getIsBClient() {
             return isBClient;
         }
 
-        public void setIsBClient(boolean isBClient) {
+        public void setIsBClient(String isBClient) {
             this.isBClient = isBClient;
-        }
-
-        public String getLastDevice() {
-            return lastDevice;
-        }
-
-        public void setLastDevice(String lastDevice) {
-            this.lastDevice = lastDevice;
         }
 
         public String getLastLoginIP() {
@@ -214,14 +171,6 @@ public class User {
             this.realName = realName;
         }
 
-        public String getSessionId() {
-            return sessionId;
-        }
-
-        public void setSessionId(String sessionId) {
-            this.sessionId = sessionId;
-        }
-
         public String getUserId() {
             return userId;
         }
@@ -237,5 +186,4 @@ public class User {
         public void setUserName(String userName) {
             this.userName = userName;
         }
-
 }

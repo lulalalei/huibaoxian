@@ -27,7 +27,7 @@ public class HomePageInfo implements Serializable {
 
     private List<Special> specialList;
 
-    private int userType;
+    private boolean isBClient;
 
 
     public String getLoop() {
@@ -79,13 +79,11 @@ public class HomePageInfo implements Serializable {
         this.specialList = specialList;
     }
 
-    public int getUserType() {
-        return userType;
+    public boolean getIsBClient() {
+        return isBClient;
     }
 
-    public void setUserType(int userType) {
-        this.userType = userType;
+    public void setIsBClient(boolean isBClient) {
+        this.isBClient = isBClient;
     }
-
-
 }

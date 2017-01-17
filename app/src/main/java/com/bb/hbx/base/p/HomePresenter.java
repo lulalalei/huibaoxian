@@ -65,8 +65,9 @@ public class HomePresenter extends HomeContract.Presenter {
 
 
     private void dealWith(HomePageInfo info) {
+
+        MyApplication.user.setIsBClient(info.getIsBClient());
         items.clear();
-        MyApplication.user.setUserType(info.getUserType());
 
         //banner
         bannerBean = new BannerBean();
@@ -81,7 +82,7 @@ public class HomePresenter extends HomeContract.Presenter {
         }
 
         //小汇报
-        if (MyApplication.user.getUserType() == Constants.BOSSUSER) {
+        if (MyApplication.user.getIsBClient()) {
             BobaoItem bobaoItem = new BobaoItem();
             bobaoItem.setList(info.getXhbMsgList());
             items.add(bobaoItem);

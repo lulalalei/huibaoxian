@@ -1,17 +1,12 @@
 package com.bb.hbx.activitiy;
 
 import android.Manifest;
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -27,8 +22,6 @@ import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.PermissionUtils;
 import com.bb.hbx.utils.ShareSPUtils;
 
-import static com.bb.hbx.utils.PermissionUtils.REQUEST_SETTING_CODE;
-
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -36,7 +29,7 @@ public class WelcomeActivity extends BaseActivity {
 
     private PermissionUtils utils;
 
-
+    boolean isOnce=false;
     @Override
     public int getLayoutId() {
         return R.layout.activity_welcome;
@@ -59,6 +52,17 @@ public class WelcomeActivity extends BaseActivity {
         utils = new PermissionUtils(this);
         ShareSPUtils.initShareSP(this);
         MyUsersSqlite.initUsersdb(this);
+        if (!isOnce)
+        {
+            ContentValues values = new ContentValues();
+            values.put("currentUser","currentUser");
+            values.put("isBClient",false);//默认false
+            values.put("sessionId","123");
+            long flag = MyUsersSqlite.db.insert("userstb", null, values);
+            //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
+            values.clear();
+            isOnce=true;
+        }
         comm();
     }
 

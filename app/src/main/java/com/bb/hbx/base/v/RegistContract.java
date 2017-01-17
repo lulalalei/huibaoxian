@@ -4,7 +4,6 @@ import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
-import com.bb.hbx.base.v.BaseView;
 import com.bb.hbx.bean.MessageCodeBean;
 
 import retrofit2.Callback;
@@ -41,7 +40,7 @@ public interface RegistContract {
 
         public abstract void regist(String tel, String pass, String code);
 
-        public abstract void getVerifyCode(String mobile);
+        public abstract void getVerifyCode(String mobile,String bizType);
 
     }
 }

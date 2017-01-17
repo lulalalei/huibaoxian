@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_add_bank_card"
+    android:id="@+id/activity_set_pay_pwd"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/A7"
-    tools:context="com.bb.hbx.activitiy.AddBankCardActivity">
+    tools:context="com.bb.hbx.activitiy.SetPayPwdActivity">
 
     <RelativeLayout
         android:id="@+id/topbar_layout"
@@ -25,21 +25,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="添加银行卡"
+            android:text="设置支付密码"
             android:textSize="17sp"
             android:textColor="@color/A1"
             android:layout_centerInParent="true"
             android:gravity="center"/>
     </RelativeLayout>
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/warn_layout"
         android:layout_below="@id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="18dp"
+        android:paddingBottom="10dp"
         android:background="@color/colorDivider">
         <ImageView
             android:layout_width="12dp"
             android:layout_height="12dp"
+            android:layout_marginTop="2dp"
             android:src="@drawable/warn"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"
@@ -48,49 +51,42 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="绑卡只用于提现,不会产生扣费"
+            android:text="         为了交易安全,设置支付密码用户交易确认,支付密码由6至12位数字,字母组成,字母区分大小写."
+            android:lineSpacingExtra="7dp"
             android:textSize="12sp"
             android:textColor="@color/A4"
             android:layout_toRightOf="@id/warn_iv"
-            android:layout_marginLeft="11dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:layout_centerVertical="true"/>
-    </RelativeLayout>
+    </FrameLayout>
     <RelativeLayout
-        android:id="@+id/name_layout"
+        android:id="@+id/pwd_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_below="@id/warn_layout"
         android:background="@color/white">
         <TextView
-            android:id="@+id/showName_tv"
+            android:id="@+id/showPwd_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="真实姓名"
+            android:text="支付密码"
             android:textSize="14sp"
             android:textColor="@color/A4"
             android:layout_marginLeft="18dp"
             android:layout_centerVertical="true"/>
         <EditText
-            android:id="@+id/name_et"
+            android:id="@+id/pwd_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="请输入真实姓名"
+            android:hint="请输入密码"
             android:textSize="13sp"
             android:textColorHint="@color/A5"
             android:textColor="@color/A3"
-            android:singleLine="true"
             android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/showName_tv"
+            android:layout_toRightOf="@id/showPwd_tv"
             android:layout_marginLeft="23dp"/>
-        <ImageView
-            android:id="@+id/nameInfo_iv"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/zhenshixingming"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="18dp"
-            android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -99,63 +95,60 @@
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/idCard_layout"
+        android:id="@+id/checkPwd_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_below="@id/name_layout"
+        android:layout_below="@id/pwd_layout"
         android:background="@color/white">
         <TextView
-            android:id="@+id/showIdcard_tv"
+            android:id="@+id/showCheckPwd_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="身份证号"
+            android:text="再次输入"
             android:textSize="14sp"
             android:textColor="@color/A4"
             android:layout_marginLeft="18dp"
             android:layout_centerVertical="true"/>
         <EditText
-            android:id="@+id/idCard_et"
-            android:layout_width="match_parent"
+            android:id="@+id/checkPwd_et"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="请输入身份证号"
+            android:hint="请再次输入"
             android:textSize="13sp"
             android:textColorHint="@color/A5"
             android:textColor="@color/A3"
-            android:singleLine="true"
             android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/showIdcard_tv"
+            android:layout_toRightOf="@id/showCheckPwd_tv"
             android:layout_marginLeft="23dp"/>
-
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/bankCard_layout"
+        android:id="@+id/phone_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_below="@id/idCard_layout"
+        android:layout_below="@id/checkPwd_layout"
         android:background="@color/white"
         android:layout_marginTop="13dp">
         <TextView
-            android:id="@+id/showBankCard_tv"
+            android:id="@+id/phone_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="银行卡号"
+            android:text="手机号"
             android:textSize="14sp"
             android:textColor="@color/A4"
             android:layout_marginLeft="18dp"
             android:layout_centerVertical="true"/>
         <EditText
-            android:id="@+id/bankCard_et"
+            android:id="@+id/phone_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="请输入您的银行卡号"
+            android:hint="请输入您的手机号"
             android:textSize="13sp"
-            android:textColor="@color/A3"
             android:textColorHint="@color/A5"
-            android:singleLine="true"
+            android:textColor="@color/A3"
             android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/showBankCard_tv"
+            android:layout_toRightOf="@id/phone_tv"
             android:layout_marginLeft="23dp"/>
         <TextView
             android:layout_width="match_parent"
@@ -165,42 +158,47 @@
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/choseBank_layout"
+        android:id="@+id/checkCode_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_below="@id/bankCard_layout"
+        android:layout_below="@id/phone_layout"
         android:background="@color/white">
         <TextView
-            android:id="@+id/showChose_tv"
+            android:id="@+id/checkCode_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请选择开户银行"
+            android:text="验证码"
             android:textSize="14sp"
             android:textColor="@color/A4"
             android:layout_marginLeft="18dp"
             android:layout_centerVertical="true"/>
-        <TextView
+        <EditText
             android:id="@+id/choseBank_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="工商银行"
+            android:hint="请输入验证码"
             android:textSize="13sp"
+            android:textColorHint="@color/A5"
             android:textColor="@color/A3"
+            android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/showChose_tv"
+            android:layout_toRightOf="@id/checkCode_tv"
             android:layout_marginLeft="23dp"/>
-        <ImageView
+        <TextView
+            android:id="@+id/getCode_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/nextstep"
+            android:text="获取验证码"
+            android:textColor="@color/A1"
+            android:textSize="14sp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="18dp"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"/>
 
     </RelativeLayout>
     <TextView
         android:id="@+id/verify_tv"
-        android:layout_below="@id/choseBank_layout"
+        android:layout_below="@id/checkCode_layout"
         android:background="@drawable/shape_btn_a1"
         android:layout_width="match_parent"
         android:layout_height="44dp"

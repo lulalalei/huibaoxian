@@ -12,19 +12,12 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
-
-
 import com.bb.hbx.bean.Special;
-import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
-
 import butterknife.BindView;
-
 import butterknife.ButterKnife;
-
-import static com.bb.hbx.R.id.tv_added;
 
 
 /**
@@ -94,9 +87,9 @@ public class JxItemProvide extends ItemViewProvider<Special, JxItemProvide.ViewH
                     tv_price.setText(context.getString(R.string.howPrice, jxItem.getProductList().get(i).getMinPremium()));
                     tv_added.setText(jxItem.getProductList().get(i).getCommisionValue1());
 
-                    if (MyApplication.user.getUserType() == Constants.CLIENTUSER) {
+                    if (MyApplication.user.getIsBClient() ) {
                         tv_added.setVisibility(View.INVISIBLE);
-                    } else if (MyApplication.user.getUserType() == Constants.BOSSUSER) {
+                    } else if (MyApplication.user.getIsBClient() ) {
                         tv_added.setVisibility(View.VISIBLE);
                     } else {
                         tv_added.setVisibility(View.INVISIBLE);

@@ -96,7 +96,8 @@
         <activity android:name=".activitiy.HomeActivity" />
         <activity android:name=".activitiy.RealNameIdentifyActivity" />
         <activity android:name=".activitiy.RealNameCommitActivity" />
-        <activity android:name=".activitiy.RealNameFinishActivity"></activity>
+        <activity android:name=".activitiy.RealNameFinishActivity" />
+        <activity android:name=".activitiy.SetPayPwdActivity"></activity>
     </application>
 
     <!--<service-->

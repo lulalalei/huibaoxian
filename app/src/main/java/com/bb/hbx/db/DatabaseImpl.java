@@ -4,7 +4,6 @@ package com.bb.hbx.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -29,6 +28,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     private static final int version = 1;
 
+    public static SQLiteDatabase db;
 
     private DatabaseImpl(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -50,19 +50,22 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
                 TABLE_SEARCH_HISTORY +
                 " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name VARCHAR" + ");");
-
+        String sql="create table if not exists userstb(_id integer primary key autoincrement,currentUser text,userId text,sessionId text,isBClient text,name text,phone text,pwd text,usericon text)";
+        db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+       /* db.execSQL("drop table if exists userstb");
+        db.execSQL("create table if not exists userstb(_id integer primary key autoincrement,currentUser text,userId text," +
+                "sessionId text,isBClient text,name text,phone text,pwd text,usericon text)");*/
     }
 
 
     @Override
     public void addHistory(LishiSearchBean bean) {
 
-        SQLiteDatabase db = getWritableDatabase();
+        db = getWritableDatabase();
         if (db == null) return;
         ContentValues values = new ContentValues();
         values.put("name", bean.getName());
@@ -77,7 +80,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void deleteHistory(LishiSearchBean bean) {
-        SQLiteDatabase db = getWritableDatabase();
+        db = getWritableDatabase();
         if (db == null) return;
         String[] whereArgs = {bean.getName()};
         db.delete(TABLE_SEARCH_HISTORY, "name=?", whereArgs);
@@ -86,7 +89,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void deleteAllHis() {
-        SQLiteDatabase db = getWritableDatabase();
+        db = getWritableDatabase();
         if (db == null) return;
         db.delete(TABLE_SEARCH_HISTORY, null, null);
         db.close();

@@ -51,9 +51,13 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
 
         @BindView(R.id.pic_iv)
         ImageView pic_iv;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+           /* int width = pi_iv.getWidth();
+            int height = pi_iv.getHeight();
+            Log.e("=====MyViewHolder=====","====width===="+width+"height:"+height);*/
         }
     }
 }
