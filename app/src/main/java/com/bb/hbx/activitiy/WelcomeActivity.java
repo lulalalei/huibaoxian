@@ -58,6 +58,8 @@ public class WelcomeActivity extends BaseActivity {
             values.put("currentUser","currentUser");
             values.put("isBClient",false);//默认false
             values.put("sessionId","123");
+            values.put("userId","0");
+            values.put("gender","0");//默认为0
             long flag = MyUsersSqlite.db.insert("userstb", null, values);
             //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
             values.clear();

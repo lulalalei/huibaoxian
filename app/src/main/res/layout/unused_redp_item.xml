@@ -8,7 +8,6 @@
     android:layout_marginRight="18dp"
     android:background="@drawable/hongbao_hong">
 
-
     <RelativeLayout
         android:id="@+id/price_layout"
         android:layout_width="100dp"

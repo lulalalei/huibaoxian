@@ -57,7 +57,7 @@
                 <FrameLayout
                     android:id="@+id/identify_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/userIcon_civ"
                     android:layout_marginTop="16dp">
@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/notLogin_layout"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_gravity="center_horizontal">
                         <TextView
                             android:layout_width="match_parent"
@@ -75,18 +75,6 @@
                             android:textSize="16sp"
                             android:textColor="@color/white"
                             android:id="@+id/userName"/>
-                        <TextView
-                            android:id="@+id/identify_tv"
-                            android:layout_width="59dp"
-                            android:layout_height="18dp"
-                            android:layout_centerHorizontal="true"
-                            android:text="未认证"
-                            android:textSize="11sp"
-                            android:textColor="@color/A2"
-                            android:gravity="center"
-                            android:background="@drawable/identify_shape"
-                            android:layout_below="@id/userName"
-                            android:layout_marginTop="6dp"/>
                     </RelativeLayout>
                     <!-- <TextView
                         android:layout_width="wrap_content"
@@ -100,12 +88,23 @@
                         android:visibility="visible"/>-->
 
                 </FrameLayout>
-
+                <TextView
+                    android:id="@+id/identify_tv"
+                    android:layout_width="59dp"
+                    android:layout_height="18dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="未认证"
+                    android:textSize="11sp"
+                    android:textColor="@color/A2"
+                    android:gravity="center"
+                    android:background="@drawable/identify_shape"
+                    android:layout_below="@id/identify_layout"
+                    android:layout_marginTop="6dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
                     android:orientation="horizontal"
-                    android:layout_below="@id/identify_layout"
+                    android:layout_below="@id/identify_tv"
                     android:layout_marginTop="31dp">
                     <RelativeLayout
                         android:layout_width="0dp"

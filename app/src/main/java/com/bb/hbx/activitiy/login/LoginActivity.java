@@ -1,11 +1,7 @@
 package com.bb.hbx.activitiy.login;
 
-import android.animation.ObjectAnimator;
-import android.text.Editable;
+import android.content.Intent;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,21 +12,28 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-
 import com.bb.hbx.R;
-import com.bb.hbx.activitiy.HomeActivity;
 import com.bb.hbx.activitiy.PwdLoginActivity;
 import com.bb.hbx.activitiy.RegisteActivity;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.MessageCodeBean;
+import com.bb.hbx.bean.User;
+import com.bb.hbx.cans.Can;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.LoginAnimHelp;
+import com.bb.hbx.utils.MyUsersSqlite;
+import com.bb.hbx.utils.ShareSPUtils;
 import com.bb.hbx.widget.CountDownTextView;
 import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
-
-import static com.bb.hbx.R.id.activity_smss_login;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -96,6 +99,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     //软件盘弹起后所占高度阀值
     private int keyHeight = 0;
 
+    //接收验证码
+    String smsCode;
 
     @Override
     protected void onResume() {
@@ -181,6 +186,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
 
     @Override
     public void onClick(View v) {
+        Intent intent=null;
         switch (v.getId()) {
             case R.id.back_iv:
                 finish();
@@ -188,22 +194,26 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 break;
             case R.id.tv_regist:
                 AppManager.getInstance().showActivity(RegisteActivity.class, null);
+                finish();
                 break;
 
             case R.id.tv_passwordlogin:
-                AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
+                //AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
+                intent=new Intent(this, PwdLoginActivity.class);
+                startActivityForResult(intent,100);
                 break;
             case R.id.tv_login:
                 if (isverTel() && isverCode()) {
                     mPresenter.login(et_phone.getText().toString().trim(), et_pwd.getText().toString().trim());
-                    AppManager.getInstance().showActivity(HomeActivity.class, null);
+                    loginMethod();
+                    //AppManager.getInstance().showActivity(HomeActivity.class, null);
                 } else
                     showTip("手机号码或验证码有误");
                 break;
             case R.id.tv_getcode:
                 if (isverTel()) {
                     tv_getcode.startTime();
-
+                    getCheckCode();
                 } else
                     showTip("请输入正确的手机号码");
                 break;
@@ -268,5 +278,77 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(0, R.anim.slide_out_to_bottom);
+    }
+
+    //获取短信验证码
+    public String getCheckCode() {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getVerifyCode("1",et_phone.getText().toString().trim(),"11");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                MessageCodeBean bean = (MessageCodeBean) body.getOutput();
+                smsCode= bean.getSmsCode();
+                //Toast.makeText(LoginActivity.this,"smsCode:"+smsCode,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                showTip("获取验证码失败");
+            }
+        });
+        return null;
+    }
+
+    public void loginMethod()
+    {
+        final String phone = et_phone.getText().toString();
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.loginSms(et_phone.getText().toString().trim(),et_pwd.getText().toString().trim(),"2");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                User user = (User) body.getOutput();
+                String userId = user.getUserId();
+                String sessionId = user.getSessionId();
+                String isBClient = user.getIsBClient()+"";
+                String gender = user.getGender();
+                String userName = user.getRealName();
+                if (TextUtils.isEmpty(gender))
+                {
+                    gender="0";
+                }
+                if (TextUtils.isEmpty(userName))
+                {
+                    userName=phone;
+                }
+                ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, null);
+                //更新表数据
+                MyUsersSqlite.db.execSQL("update userstb set userId=?,sessionId=?,isBClient=?,name=?,gender=?,phone=?,usericon=? where currentUser=currentUser ",
+                        new String[]{userId,sessionId,isBClient,userName,gender,phone,null});
+                showTip("登陆成功");
+                //AppManager.getInstance().showActivity(HomeActivity.class, null);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                showTip("登录失败");
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100)
+        {
+            if (resultCode== Can.FINISH_LOGIN)
+            {
+                finish();
+            }
+        }
     }
 }

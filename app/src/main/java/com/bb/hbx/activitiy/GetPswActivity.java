@@ -5,18 +5,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.activitiy.login.LoginModel;
 import com.bb.hbx.activitiy.login.LoginPresenter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.CountDownTextView;
 import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -43,6 +51,8 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
     @BindView(R.id.tv_next)
     TextView tv_next;
 
+    //接收验证码
+    String smsCode;
 
     @Override
     public void onClick(View v) {
@@ -53,19 +63,37 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
             case R.id.tv_getcode:
                 if (isverTel()) {
                     tv_getcode.startTime();
-
+                    getCheckCode();
                 } else
                     showTip("请输入正确的手机号码");
                 break;
 
             case R.id.tv_next:
                 if (isverTel() && isverCode()) {
-                    mPresenter.getPsw(et_phone.getText().toString().trim(), et_pwd.getText().toString().trim());
-                    AppManager.getInstance().showActivity(ResetPswActivity.class, null);
+                    //mPresenter.getPsw(et_phone.getText().toString().trim(), et_pwd.getText().toString().trim());
+                    nextMethod();
+                    //AppManager.getInstance().showActivity(ResetPswActivity.class, null);
                 } else
                     showTip("手机号码或验证码有误");
                 break;
         }
+    }
+
+    //下一步...判断输入的验证码是
+    private void nextMethod() {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.verifyCode("1",et_pwd.getText().toString().trim(),"12");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                AppManager.getInstance().showActivity(ResetPswActivity.class, null);
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                showTip("验证码错误");
+            }
+        });
     }
 
     @Override
@@ -75,7 +103,7 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
 
     @Override
     public void initView() {
-
+        back_iv.setOnClickListener(this);
     }
 
     @Override
@@ -125,5 +153,26 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
     @Override
     public void showMsg(String msg) {
 
+    }
+
+    //获取短信验证码
+    public String getCheckCode() {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getVerifyCode("1",et_phone.getText().toString().trim(),"12");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                MessageCodeBean bean = (MessageCodeBean) body.getOutput();
+                smsCode= bean.getSmsCode();
+                Toast.makeText(GetPswActivity.this,"smsCode:"+smsCode, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                showTip("获取验证码失败");
+            }
+        });
+        return null;
     }
 }

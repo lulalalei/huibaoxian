@@ -40,6 +40,13 @@ public class Can {
                 + "huibx";
         return path;
     }
+
+    //修改用户名成功后的响应码
+    public static final int RESULT_NAME=200;
+
+    //结束短信登录Activity
+    public static final int FINISH_LOGIN=300;
+
     //在 我的--个险--个险订单 页面中记录上一个fragment的位置,用于hide,show上一个fragment
     public static int preFragmentPositionInPIO;
     //在 我的--红包--我的红包 页面中记录上一个fragment的位置,用于hide,show上一个fragment

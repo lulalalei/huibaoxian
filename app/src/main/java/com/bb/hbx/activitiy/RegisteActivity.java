@@ -156,6 +156,8 @@ public class RegisteActivity extends BaseActivity<RegistPresenter, RegistModel> 
                         {
                             //bean.getUserId();
                             showTip("注册成功");
+                            AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
+                            finish();
                         }
                         else if (respCode.equals("201022"))
                         {

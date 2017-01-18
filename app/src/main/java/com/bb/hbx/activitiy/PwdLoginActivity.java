@@ -1,5 +1,6 @@
 package com.bb.hbx.activitiy;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.User;
+import com.bb.hbx.cans.Can;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.LoginAnimHelp;
@@ -91,7 +93,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
     //软件盘弹起后所占高度阀值
     private int keyHeight = 0;
 
-
+    Intent intentFromLogin;
     @Override
     public void loginSuccess() {
 
@@ -167,7 +169,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
 
     @Override
     public void initdata() {
-
+        intentFromLogin = getIntent();
     }
 
     @Override
@@ -201,11 +203,25 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             String userId = user.getUserId();
                             String sessionId = user.getSessionId();
                             String isBClient = user.getIsBClient()+"";
-                            Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
+                            String gender = user.getGender();
+                            String userName = user.getRealName();
+                            if (TextUtils.isEmpty(gender))
+                            {
+                                gender="0";
+                            }
+                            if (TextUtils.isEmpty(userName))
+                            {
+                                userName=phone;
+                            }
+                            //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
                             ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, pwd);
                             //更新表数据
-                            MyUsersSqlite.db.execSQL("update userstb set userId=?,sessionId=?,isBClient=?,name=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
-                                    new String[]{userId,sessionId,isBClient,phone,pwd,null});
+                            MyUsersSqlite.db.execSQL("update userstb set userId=?,sessionId=?,isBClient=?,name=?,gender=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
+                                    new String[]{userId,sessionId,isBClient,userName,gender,phone,pwd,null});
+                            showTip("登陆成功");
+                            //AppManager.getInstance().showActivity(HomeActivity.class, null);
+                            setResult(Can.FINISH_LOGIN,intentFromLogin);
+                            finish();
                            /* ContentValues values = new ContentValues();
                             values.put("userId",userId);
                             values.put("sessionId",sessionId);
@@ -220,7 +236,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
 
                         @Override
                         public void onFailure(Call call, Throwable t) {
-                            Toast.makeText(mContext,"writeShareSp:"+"error",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,"该用户未注册!",Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else

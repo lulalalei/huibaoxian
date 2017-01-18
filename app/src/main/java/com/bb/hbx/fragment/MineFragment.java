@@ -135,7 +135,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.userIcon_civ:
-                intent.setClass(mContext,PersonInfoSettingActivity.class);
+                boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
+                if (hasLogined)
+                {
+                    intent.setClass(mContext,PersonInfoSettingActivity.class);
+                }
+                else
+                {
+                    intent.setClass(mContext, LoginActivity.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.myAsset_tv:

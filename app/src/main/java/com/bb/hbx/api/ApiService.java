@@ -14,11 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
-
-import static com.baidu.location.h.j.m;
 
 /**
  * Created by fancl.
@@ -34,10 +30,10 @@ public interface ApiService {
     Call<Result_Api<MessageCodeBean>> getVerifyCode(@Field("codeType") String codeType
             , @Field("mobile") String mobile, @Field("bizType") String bizType);
 
-    //验证码校验----待测
+    //验证码校验
     @FormUrlEncoded
     @POST("api.do?method=verifyCode&type=post")
-    Call<String> verifyCode(@Field("codeType") String codeType
+    Call<Result_Api> verifyCode(@Field("codeType") String codeType
             , @Field("verifyCode") String verifyCode, @Field("bizType") String bizType);
 
     //用户注册
@@ -46,6 +42,11 @@ public interface ApiService {
     Call<Result_Api<UserRegist>> regUser(@Field("userName") String userName
             , @Field("loginPwd") String loginPwd, @Field("smsCode") String smsCode);
 
+
+    //短信登录
+    @FormUrlEncoded
+    @POST("api.do?method=login&type=post")
+    Call<Result_Api<User>> loginSms(@Field("userName") String userName, @Field("smsCode") String smsCode, @Field("loginType") String loginType);
 
     //密码登录
     @FormUrlEncoded
@@ -62,10 +63,10 @@ public interface ApiService {
     @POST("api.do?method=updateUserInfo&type=post")
     Call<Result_Api> updateUserInfo(@Field("userId") String userId, @Field("realName") String realName);
 
-    //修改用户信息----性别----待测
+    //修改用户信息----性别
     @FormUrlEncoded
     @POST("api.do?method=updateUserInfo&type=post")
-    Call<String> updateUserInfoSex(@Field("userId") String userId,@Field("gender") String gender);
+    Call<Result_Api> updateUserInfoSex(@Field("userId") String userId,@Field("gender") String gender);
 
     //获取首页数据
     @FormUrlEncoded

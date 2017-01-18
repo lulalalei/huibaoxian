@@ -62,6 +62,8 @@ public class User {
         private String userId;
         private String userName;
 
+    private String nickName;
+
         public String getAddress() {
             return address;
         }
@@ -238,4 +240,11 @@ public class User {
             this.userName = userName;
         }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 }

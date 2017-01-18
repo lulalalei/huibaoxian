@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -18,6 +20,7 @@ import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.cans.Can;
 import com.bb.hbx.utils.CompressBitmap;
+import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.ShareSPUtils;
 
 import java.io.BufferedOutputStream;
@@ -46,6 +49,13 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
     RelativeLayout realNameIdentify_layout;
     @BindView(R.id.countSafe_layout)
     RelativeLayout countSafe_layout;
+
+    @BindView(R.id.name_tv)
+    TextView name_tv;
+    @BindView(R.id.sex_tv)
+    TextView sex_tv;
+    @BindView(R.id.phone_tv)
+    TextView phone_tv;
 
     TextView camera_tv;
     TextView mapstorage_tv;
@@ -80,7 +90,57 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void initdata() {
+        updateUserInfo();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserInfo();
+    }
+
+    private void updateUserInfo() {
+        Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+        if (cursor!=null)
+        {
+            if (cursor.moveToNext())
+            {
+                /*String userId = cursor.getString(cursor.getColumnIndex("userId"));
+                String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));*/
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                String gender = cursor.getString(cursor.getColumnIndex("gender"));
+                String phone = cursor.getString(cursor.getColumnIndex("phone"));
+                name_tv.setText(name);
+                if (TextUtils.isEmpty(phone))//用户可能是通过短信的方式登录
+                {
+                    phone_tv.setText("请绑定手机号");
+                }
+                else
+                {
+                    phone_tv.setText(phone);
+                }
+                if (gender.equals("0"))
+                {
+                    sex_tv.setText("男");
+                }
+                else if (gender.equals("1"))
+                {
+                    sex_tv.setText("女");
+                }
+                else
+                {
+                    sex_tv.setText("性别未知");
+                }
+            }
+            else
+            {
+                Toast.makeText(mContext,"cursor下一条不存在",Toast.LENGTH_SHORT);
+            }
+        }
+        else
+        {
+            Toast.makeText(mContext,"cursor为空",Toast.LENGTH_SHORT);
+        }
     }
 
     @Override
@@ -136,7 +196,7 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.name_layout:
                 intent.setClass(PersonInfoSettingActivity.this,EditNameActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,103);
                 break;
             case R.id.sex_layout:
                 intent.setClass(PersonInfoSettingActivity.this,SexActivity.class);
@@ -248,6 +308,20 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                     e.printStackTrace();
                 }
             }*/
+        }
+        else if (requestCode==103)
+        {
+            if (resultCode==Can.RESULT_NAME)
+            {
+                if (data!=null)
+                {
+                    String name = data.getStringExtra("name");
+                    if (!TextUtils.isEmpty(name))
+                    {
+                        name_tv.setText(name);
+                    }
+                }
+            }
         }
     }
 }
