@@ -3,6 +3,7 @@ package com.bb.hbx.activitiy;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -52,18 +53,46 @@ public class WelcomeActivity extends BaseActivity {
         utils = new PermissionUtils(this);
         ShareSPUtils.initShareSP(this);
         MyUsersSqlite.initUsersdb(this);
-        if (!isOnce)
+
+        //boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
+        Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+        if (cursor!=null)
         {
-            ContentValues values = new ContentValues();
-            values.put("currentUser","currentUser");
-            values.put("isBClient",false);//默认false
-            values.put("sessionId","123");
-            values.put("userId","0");
-            values.put("gender","0");//默认为0
-            long flag = MyUsersSqlite.db.insert("userstb", null, values);
-            //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
-            values.clear();
-            isOnce=true;
+            if (!cursor.moveToNext())//没有数据,则首次使用,初始化部分数据
+            {
+                ContentValues values = new ContentValues();
+                values.put("currentUser","currentUser");
+                values.put("hasLogined","false");//默认false,未登录
+                values.put("isBClient",false);//默认false
+                values.put("sessionId","123");
+                values.put("userId","0");
+                values.put("gender","0");//默认为0
+                long flag = MyUsersSqlite.db.insert("userstb", null, values);
+                //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
+                values.clear();
+                MyApplication.user.setUserId("0");
+                MyApplication.user.setSessionId("123");
+                MyApplication.user.setIsBClient(false);
+            }
+            else
+            {
+                String hasLogined = cursor.getString(cursor.getColumnIndex("hasLogined"));
+                if (hasLogined.equals("true"))//首次登陆后,数据会被刷新
+                {
+                    String userId = cursor.getString(cursor.getColumnIndex("userId"));
+                    String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));
+                    String isBClient = cursor.getString(cursor.getColumnIndex("isBClient"));
+                    MyApplication.user.setUserId(userId);
+                    MyApplication.user.setSessionId(sessionId);
+                    MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
+                }
+                else
+                {
+                    MyApplication.user.setUserId("0");
+                    MyApplication.user.setSessionId("123");
+                    MyApplication.user.setIsBClient(false);
+                }
+            }
         }
         comm();
     }

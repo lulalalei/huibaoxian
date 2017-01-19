@@ -50,15 +50,15 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
                 TABLE_SEARCH_HISTORY +
                 " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name VARCHAR" + ");");
-        String sql="create table if not exists userstb(_id integer primary key autoincrement,currentUser text,userId text,sessionId text,isBClient text,name text,gender text,phone text,pwd text,usericon text)";
+        String sql="create table if not exists userstb(_id integer primary key autoincrement,currentUser text,hasLogined text,userId text,sessionId text,isBClient text,name text,gender text,phone text,pwd text,usericon text)";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-       /* db.execSQL("drop table if exists userstb");
-        db.execSQL("create table if not exists userstb(_id integer primary key autoincrement,currentUser text,userId text," +
-                "sessionId text,isBClient text,name text,phone text,pwd text,usericon text)");*/
+        db.execSQL("drop table if exists userstb");
+        db.execSQL("create table if not exists userstb(_id integer primary key autoincrement,currentUser text,hasLogined text,userId text," +
+                "sessionId text,isBClient text,name text,phone text,pwd text,usericon text)");
     }
 
 

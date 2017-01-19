@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.PwdLoginActivity;
 import com.bb.hbx.activitiy.RegisteActivity;
@@ -326,9 +327,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 }
                 ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, null);
                 //更新表数据
-                MyUsersSqlite.db.execSQL("update userstb set userId=?,sessionId=?,isBClient=?,name=?,gender=?,phone=?,usericon=? where currentUser=currentUser ",
-                        new String[]{userId,sessionId,isBClient,userName,gender,phone,null});
+                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,phone=?,usericon=? where currentUser=currentUser ",
+                        new String[]{"true",userId,sessionId,isBClient,userName,gender,phone,null});
                 showTip("登陆成功");
+
+                MyApplication.user.setUserId(userId);
+                MyApplication.user.setSessionId(sessionId);
+                MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
+
                 //AppManager.getInstance().showActivity(HomeActivity.class, null);
                 finish();
             }
