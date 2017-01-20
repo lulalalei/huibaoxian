@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
@@ -25,8 +26,8 @@ import butterknife.BindView;
 
 public class RedPacketActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.menu_iv)
     ImageView menu_iv;
     @BindView(R.id.viewPager)
@@ -51,7 +52,7 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initListener() {
-        back_iv.setOnClickListener(this);
+        back_layout.setOnClickListener(this);
         menu_iv.setOnClickListener(this);
     }
 
@@ -80,7 +81,7 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.back_iv:
+            case R.id.back_layout:
                 finish();
                 break;
             case R.id.menu_iv:

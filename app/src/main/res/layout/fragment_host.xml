@@ -88,23 +88,30 @@
                         android:visibility="visible"/>-->
 
                 </FrameLayout>
-                <TextView
-                    android:id="@+id/identify_tv"
+                <RelativeLayout
+                    android:id="@+id/ifIdentify_layout"
                     android:layout_width="59dp"
                     android:layout_height="18dp"
+                    android:layout_marginTop="6dp"
                     android:layout_centerHorizontal="true"
-                    android:text="未认证"
-                    android:textSize="11sp"
-                    android:textColor="@color/A2"
-                    android:gravity="center"
-                    android:background="@drawable/identify_shape"
-                    android:layout_below="@id/identify_layout"
-                    android:layout_marginTop="6dp"/>
+                    android:layout_below="@id/identify_layout">
+                    <TextView
+                        android:id="@+id/identify_tv"
+                        android:layout_width="59dp"
+                        android:layout_height="18dp"
+                        android:text="未认证"
+                        android:textSize="11sp"
+                        android:textColor="@color/A2"
+                        android:gravity="center"
+                        android:background="@drawable/identify_shape"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
                     android:orientation="horizontal"
-                    android:layout_below="@id/identify_tv"
+                    android:layout_below="@id/ifIdentify_layout"
                     android:layout_marginTop="31dp">
                     <RelativeLayout
                         android:layout_width="0dp"

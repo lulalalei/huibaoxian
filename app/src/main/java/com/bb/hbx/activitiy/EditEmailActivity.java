@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.api.ApiService;
@@ -23,27 +22,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditNameActivity extends BaseActivity implements View.OnClickListener{
+public class EditEmailActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
     @BindView(R.id.save_tv)
     TextView save_tv;
-    @BindView(R.id.name_et)
-    EditText name_et;
+    @BindView(R.id.email_et)
+    EditText email_et;
 
-    Intent nameIntent;
-    String name;
+    Intent intentFromPersonInfo;
+    String email;
     @Override
     public int getLayoutId() {
-        return R.layout.activity_edit_name;
+        return R.layout.activity_edit_email;
     }
 
     @Override
     public void initView() {
-        nameIntent= getIntent();
-        name = nameIntent.getStringExtra("name");
-        name_et.setText(name);
+        intentFromPersonInfo = getIntent();
+        email = intentFromPersonInfo.getStringExtra("email");
+        if (!TextUtils.isEmpty(email))
+        {
+            email_et.setText(email);
+        }
     }
 
     @Override
@@ -65,11 +67,11 @@ public class EditNameActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.save_tv:
-                final String name = name_et.getText().toString();
-                if (!TextUtils.isEmpty(name))
+                final String email = email_et.getText().toString();
+                if (!TextUtils.isEmpty(email))
                 {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                    dialog.setTitle("是否确认更改用户名");
+                    dialog.setTitle("是否确认更改邮箱地址");
                     dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -85,21 +87,21 @@ public class EditNameActivity extends BaseActivity implements View.OnClickListen
                             if (!TextUtils.isEmpty(userId))
                             {
                                 ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                                Call call=service.updateUserInfo(userId,name);
+                                Call call=service.updateUserInfoEmail(userId,email);
                                 call.enqueue(new Callback() {
                                     @Override
                                     public void onResponse(Call call, Response response) {
                                         showTip("更新用户名成功!");
-                                        MyUsersSqlite.db.execSQL("update userstb set name=? where currentUser=currentUser ",
-                                                new String[]{name});
-                                        nameIntent.putExtra("name",name);
-                                        setResult(Can.RESULT_NAME,nameIntent);
+                                        MyUsersSqlite.db.execSQL("update userstb set email=? where currentUser=currentUser ",
+                                                new String[]{email});
+                                        intentFromPersonInfo.putExtra("email",email);
+                                        setResult(Can.RESULT_EMAIL,intentFromPersonInfo);
                                         finish();
                                     }
 
                                     @Override
                                     public void onFailure(Call call, Throwable t) {
-                                        Toast.makeText(EditNameActivity.this,"服务器连接异常!",Toast.LENGTH_SHORT).show();
+
                                     }
                                 });
                             }
@@ -110,7 +112,7 @@ public class EditNameActivity extends BaseActivity implements View.OnClickListen
                 }
                 else
                 {
-                    showTip("用户名不能为空!");
+                    showTip("邮箱地址不能为空!");
                 }
                 break;
             default:

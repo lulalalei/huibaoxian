@@ -10,22 +10,28 @@
     <RelativeLayout
         android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@color/white"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/back_iv"
-            android:src="@drawable/fanhui"
-            android:scaleType="centerCrop"
-            android:layout_marginLeft="18dp"/>
+        <RelativeLayout
+            android:id="@+id/back_layout"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="17dp"
+                android:id="@+id/back_iv"
+                android:src="@drawable/fanhui"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="18dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="个人资料设置"
-            android:textSize="22sp"
+            android:textSize="17sp"
             android:textColor="@color/A1"
             android:layout_centerHorizontal="true"
             android:gravity="center"/>
@@ -184,6 +190,7 @@
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/email_layout"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:paddingLeft="18dp">
@@ -200,6 +207,16 @@
                     android:src="@drawable/nextstep"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="18dp"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/email_tv"
+                    android:text="15735926343@163.com"
+                    android:textColor="@color/A4"
+                    android:textSize="13sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="33dp"
                     android:layout_centerVertical="true"/>
                 <TextView
                     android:layout_width="match_parent"

@@ -34,6 +34,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonInfoSettingActivity extends BaseActivity implements View.OnClickListener{
 
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.userIcon_civ)
     CircleImageView userIcon_civ;
 
@@ -43,6 +45,8 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
     RelativeLayout name_layout;
     @BindView(R.id.sex_layout)
     RelativeLayout sex_layout;
+    @BindView(R.id.email_layout)
+    RelativeLayout email_layout;
     @BindView(R.id.address_layout)
     RelativeLayout address_layout;
     @BindView(R.id.realNameIdentify_layout)
@@ -56,10 +60,14 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
     TextView sex_tv;
     @BindView(R.id.phone_tv)
     TextView phone_tv;
+    @BindView(R.id.email_tv)
+    TextView email_tv;
 
     TextView camera_tv;
     TextView mapstorage_tv;
 
+    String name;
+    String email;
     File picFile;
     String picPath;
     @Override
@@ -80,9 +88,11 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void initListener() {
+        back_layout.setOnClickListener(this);
         userIcon_layout.setOnClickListener(this);
         name_layout.setOnClickListener(this);
         sex_layout.setOnClickListener(this);
+        email_layout.setOnClickListener(this);
         address_layout.setOnClickListener(this);
         realNameIdentify_layout.setOnClickListener(this);
         countSafe_layout.setOnClickListener(this);
@@ -107,10 +117,19 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
             {
                 /*String userId = cursor.getString(cursor.getColumnIndex("userId"));
                 String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));*/
-                String name = cursor.getString(cursor.getColumnIndex("name"));
+                name = cursor.getString(cursor.getColumnIndex("name"));
                 String gender = cursor.getString(cursor.getColumnIndex("gender"));
+                email = cursor.getString(cursor.getColumnIndex("email"));
                 String phone = cursor.getString(cursor.getColumnIndex("phone"));
                 name_tv.setText(name);
+                if (TextUtils.isEmpty(email))
+                {
+                    email_tv.setText("请设置邮箱地址");
+                }
+                else
+                {
+                    email_tv.setText(email);
+                }
                 if (TextUtils.isEmpty(phone))//用户可能是通过短信的方式登录
                 {
                     phone_tv.setText("请绑定手机号");
@@ -148,6 +167,9 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
         Intent intent = new Intent();
         switch (v.getId())
         {
+            case R.id.back_layout:
+                finish();
+                break;
             case R.id.userIcon_layout:
                 View view = LayoutInflater.from(this).inflate(R.layout.layout_change_usericon, null);
                 camera_tv = (TextView) view.findViewById(R.id.camera_tv);
@@ -196,11 +218,17 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.name_layout:
                 intent.setClass(PersonInfoSettingActivity.this,EditNameActivity.class);
+                intent.putExtra("name",name);
                 startActivityForResult(intent,103);
                 break;
             case R.id.sex_layout:
                 intent.setClass(PersonInfoSettingActivity.this,SexActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.email_layout:
+                intent.setClass(PersonInfoSettingActivity.this,EditEmailActivity.class);
+                intent.putExtra("email",email);
+                startActivityForResult(intent,104);
                 break;
             case R.id.address_layout:
                 intent.setClass(PersonInfoSettingActivity.this,AddressManagerActivity.class);
@@ -319,6 +347,20 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                     if (!TextUtils.isEmpty(name))
                     {
                         name_tv.setText(name);
+                    }
+                }
+            }
+        }
+        else if (requestCode==104)
+        {
+            if (resultCode==Can.RESULT_EMAIL)
+            {
+                if (data!=null)
+                {
+                    String email = data.getStringExtra("email");
+                    if (!TextUtils.isEmpty(email))
+                    {
+                        email_tv.setText(email);
                     }
                 }
             }

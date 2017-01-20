@@ -1,5 +1,6 @@
 package com.bb.hbx.activitiy;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -16,8 +17,8 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MessageCodeBean;
+import com.bb.hbx.cans.Can;
 import com.bb.hbx.interfaces.LoginTextWatcher;
-import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.CountDownTextView;
 import com.bb.hbx.widget.LoginTelEdit;
 
@@ -71,7 +72,11 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
             case R.id.tv_next:
                 if (isverTel() && isverCode()) {
                     //mPresenter.getPsw(et_phone.getText().toString().trim(), et_pwd.getText().toString().trim());
-                    nextMethod();
+                    Intent intent = new Intent(this, ResetPswActivity.class);
+                    intent.putExtra("smsCode",et_pwd.getText().toString().trim());
+                    intent.putExtra("mobile",et_phone.getText().toString().trim());
+                    startActivityForResult(intent,100);
+                    //nextMethod();
                     //AppManager.getInstance().showActivity(ResetPswActivity.class, null);
                 } else
                     showTip("手机号码或验证码有误");
@@ -79,7 +84,7 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
         }
     }
 
-    //下一步...判断输入的验证码是
+   /* //下一步...判断输入的验证码是
     private void nextMethod() {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
         Call call=service.verifyCode("1",et_pwd.getText().toString().trim(),"12");
@@ -94,7 +99,7 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
                 showTip("验证码错误");
             }
         });
-    }
+    }*/
 
     @Override
     public int getLayoutId() {
@@ -174,5 +179,17 @@ public class GetPswActivity extends BaseActivity<LoginPresenter, LoginModel> imp
             }
         });
         return null;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100)
+        {
+            if (resultCode== Can.FINISH_GETPSW)
+            {
+                finish();
+            }
+        }
     }
 }

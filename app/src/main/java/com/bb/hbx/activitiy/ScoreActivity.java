@@ -4,6 +4,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
@@ -17,8 +18,8 @@ import butterknife.BindView;
 
 public class ScoreActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.menu_iv)
     ImageView menu_iv;
     @BindView(R.id.recyclerView)
@@ -40,7 +41,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void initListener() {
-        back_iv.setOnClickListener(this);
+        back_layout.setOnClickListener(this);
         menu_iv.setOnClickListener(this);
     }
 
@@ -63,7 +64,7 @@ public class ScoreActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.back_iv:
+            case R.id.back_layout:
                 finish();
                 break;
             case R.id.menu_iv:

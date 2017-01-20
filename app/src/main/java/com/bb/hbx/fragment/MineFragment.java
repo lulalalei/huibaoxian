@@ -181,6 +181,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
         if (hasLogined)
         {
+            identify_tv.setVisibility(View.VISIBLE);
             String userName=null;
             Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
             if (cursor!=null)
@@ -200,8 +201,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                                 //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
                                 //正常,,不吐司
                                 Result_Api body = (Result_Api) response.body();
-                                UserInfo userInfo = (UserInfo) body.getOutput();
-                                String userName1 = userInfo.getUserName();
+                                if (body!=null)
+                                {
+                                    UserInfo userInfo = (UserInfo) body.getOutput();
+                                    String userName1 = userInfo.getUserName();
+                                }
+                                else
+                                {
+                                    Toast.makeText(mContext,"服务器异常!",Toast.LENGTH_SHORT);
+                                }
                             }
 
                             @Override

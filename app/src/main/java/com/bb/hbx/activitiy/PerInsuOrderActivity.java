@@ -4,27 +4,26 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyPerInsuOrderAdapter;
+import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.cans.Can;
 import com.bb.hbx.fragment.PIOrderContentFragment;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 /*
 * 个险订单页面*/
-public class PerInsuOrderActivity extends AppCompatActivity {
+public class PerInsuOrderActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     @BindView(R.id.tabLayout)
@@ -33,14 +32,24 @@ public class PerInsuOrderActivity extends AppCompatActivity {
     String [] titles=new String[]{"全部","待支付","有效","已终止"};
     ArrayList<PIOrderContentFragment> fragmentList=new ArrayList<>();
     MyPerInsuOrderAdapter adapter;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_per_insu_order);
-        ButterKnife.bind(this);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
 
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_per_insu_order;
+    }
+
+    @Override
+    public void initView() {
+        back_layout.setOnClickListener(this);
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initdata() {
         Can.pIOFragmentList=Can.getFragmentListInPIO();
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabTextColors(Color.BLACK,Color.GRAY);
@@ -57,8 +66,15 @@ public class PerInsuOrderActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    //对返回图标的监听
-    public void backMethod(View view) {
-        finish();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.back_layout:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 }

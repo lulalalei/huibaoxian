@@ -316,7 +316,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 String sessionId = user.getSessionId();
                 String isBClient = user.getIsBClient()+"";
                 String gender = user.getGender();
-                String userName = user.getRealName();
+                String userName = user.getNickName();
                 if (TextUtils.isEmpty(gender))
                 {
                     gender="0";

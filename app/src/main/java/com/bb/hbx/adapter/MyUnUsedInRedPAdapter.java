@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bb.hbx.R;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Glide.with(mContext).load(list.get(position)).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(holder.pic_iv);
+        //Glide.with(mContext).load(list.get(position)).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(holder.pic_iv);
     }
 
     @Override
@@ -49,15 +48,17 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.pic_iv)
-        ImageView pic_iv;
+        @BindView(R.id.divider_iv)
+        ImageView divider_iv;
+        @BindView(R.id.deadLine_tv)
+        ImageView deadLine_tv;
+        @BindView(R.id.state_iv)
+        ImageView state_iv;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-           /* int width = pi_iv.getWidth();
-            int height = pi_iv.getHeight();
-            Log.e("=====MyViewHolder=====","====width===="+width+"height:"+height);*/
+
         }
     }
 }

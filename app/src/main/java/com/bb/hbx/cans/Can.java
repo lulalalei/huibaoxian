@@ -42,10 +42,17 @@ public class Can {
     }
 
     //修改用户名成功后的响应码
+
     public static final int RESULT_NAME=200;
+
+    //修改邮箱地址成功后的响应码
+    public static final int RESULT_EMAIL=201;
 
     //结束短信登录Activity
     public static final int FINISH_LOGIN=300;
+
+    //结束找回密码Activity
+    public static final int FINISH_GETPSW=301;
 
     //在 我的--个险--个险订单 页面中记录上一个fragment的位置,用于hide,show上一个fragment
     public static int preFragmentPositionInPIO;

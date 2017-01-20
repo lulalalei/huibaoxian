@@ -1,23 +1,24 @@
 package com.bb.hbx.activitiy;
 
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.utils.AppManager;
-import com.bb.hbx.widget.CountDownTextView;
+import com.bb.hbx.cans.Can;
 import com.bb.hbx.widget.LoginPswEdit;
-import com.bb.hbx.widget.LoginTelEdit;
-
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by fancl on 2016/12/30.
@@ -38,6 +39,9 @@ public class ResetPswActivity extends BaseActivity implements View.OnClickListen
     @BindView(R.id.tv_complete)
     TextView tv_complete;
 
+    Intent intentFromGetPsw;
+    String smsCode;
+    String mobile;
 
     @Override
     public void onClick(View v) {
@@ -47,7 +51,22 @@ public class ResetPswActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.tv_complete:
                 if (isverpassword()) {
-                    AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
+                    //AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
+                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                    Call call=service.forgetLoginPwd(mobile,et_psw.getText().toString().trim(),"2",smsCode);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+
+                        }
+                    });
+                    setResult(Can.FINISH_GETPSW,intentFromGetPsw);
+                    finish();
                 } else {
                     showTip("请正确填写密码");
                 }
@@ -72,7 +91,7 @@ public class ResetPswActivity extends BaseActivity implements View.OnClickListen
         et_psw.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (!TextUtils.isEmpty(s) && s.length() >= 6) {
+                if (!TextUtils.isEmpty(s) && s.toString().trim().length() >= 5) {
                     tv_complete.setBackgroundResource(R.drawable.shape_btn_a1);
                 } else {
                     tv_complete.setBackgroundResource(R.drawable.shape_btn_a6);
@@ -103,6 +122,9 @@ public class ResetPswActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initdata() {
+        intentFromGetPsw = getIntent();
+        smsCode = intentFromGetPsw.getStringExtra("smsCode");
+        mobile = intentFromGetPsw.getStringExtra("mobile");
 
     }
 }

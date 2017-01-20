@@ -53,20 +53,30 @@ public interface ApiService {
     @POST("api.do?method=login&type=post")
     Call<Result_Api<User>> login(@Field("userName") String userName, @Field("loginPwd") String loginPwd, @Field("loginType") String loginType);
 
+    //忘记密码------待测
+    @FormUrlEncoded
+    @POST("api.do?method=forgetLoginPwd&type=post")
+    Call<String> forgetLoginPwd(@Field("mobile") String mobile, @Field("newPwd") String newPwd, @Field("resetType") String resetType,@Field("smsCode") String smsCode);
+
     //我的首页
     @FormUrlEncoded
     @POST("api.do?method=getUserInfo&type=post")
     Call<Result_Api<UserInfo>> getUserInfo(@Header("sessionId") String sessionId, @Field("userId") String userId);
 
-    //修改用户信息--姓名
+    //修改用户信息,nickName
     @FormUrlEncoded
     @POST("api.do?method=updateUserInfo&type=post")
-    Call<Result_Api> updateUserInfo(@Field("userId") String userId, @Field("realName") String realName);
+    Call<Result_Api> updateUserInfo(@Field("userId") String userId, @Field("nickName") String nickName);
 
-    //修改用户信息----性别
+    //修改用户信息,性别
     @FormUrlEncoded
     @POST("api.do?method=updateUserInfo&type=post")
     Call<Result_Api> updateUserInfoSex(@Field("userId") String userId,@Field("gender") String gender);
+
+    //修改用户信息,邮箱地址-----待测
+    @FormUrlEncoded
+    @POST("api.do?method=updateUserInfo&type=post")
+    Call<Result_Api> updateUserInfoEmail(@Field("userId") String userId,@Field("email") String email);
 
     //获取首页数据
     @FormUrlEncoded

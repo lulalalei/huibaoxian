@@ -1,9 +1,12 @@
 package com.bb.hbx.activitiy;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
@@ -20,18 +23,23 @@ import retrofit2.Response;
 
 public class SexActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.boy_layout)
     RelativeLayout boy_layout;
     @BindView(R.id.girl_layout)
     RelativeLayout girl_layout;
+    @BindView(R.id.save_tv)
+    TextView save_tv;
     @BindView(R.id.boy_iv)
     ImageView boy_iv;
     @BindView(R.id.girl_iv)
     ImageView girl_iv;
 
     String userId;
+    String gender;
+
+    String sex;
     @Override
     public int getLayoutId() {
         return R.layout.activity_sex;
@@ -44,7 +52,8 @@ public class SexActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void initListener() {
-        back_iv.setOnClickListener(this);
+        save_tv.setOnClickListener(this);
+        back_layout.setOnClickListener(this);
         boy_layout.setOnClickListener(this);
         girl_layout.setOnClickListener(this);
     }
@@ -57,6 +66,17 @@ public class SexActivity extends BaseActivity implements View.OnClickListener{
             if (cursor.moveToNext())
             {
                 userId = cursor.getString(cursor.getColumnIndex("userId"));
+                gender = cursor.getString(cursor.getColumnIndex("gender"));
+                if (gender==null||gender.equals("0"))//表示为男
+                {
+                    boy_iv.setImageResource(R.drawable.check);
+                    girl_iv.setImageBitmap(null);
+                }
+                else
+                {
+                    girl_iv.setImageResource(R.drawable.check);
+                    boy_iv.setImageBitmap(null);
+                }
             }
             else
             {
@@ -67,26 +87,36 @@ public class SexActivity extends BaseActivity implements View.OnClickListener{
         {
             Toast.makeText(mContext,"cursor为空",Toast.LENGTH_SHORT);
         }
-        updateGender("0");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.back_iv:
-
+            case R.id.back_layout:
                 finish();
+                break;
+            case R.id.save_tv:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("是否确认更改用性别");
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateGender(gender);
+                    }
+                });
+                dialog.setNegativeButton("取消",null);
+                dialog.show();
                 break;
             case R.id.boy_layout:
                 boy_iv.setImageResource(R.drawable.check);
                 girl_iv.setImageBitmap(null);
-                updateGender("0");
+                gender="0";
                 break;
             case R.id.girl_layout:
                 girl_iv.setImageResource(R.drawable.check);
                 boy_iv.setImageBitmap(null);
-                updateGender("1");
+                gender="1";
                 break;
             default:
                 break;
