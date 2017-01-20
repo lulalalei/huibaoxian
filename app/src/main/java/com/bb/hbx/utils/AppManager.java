@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 
 
 import java.util.Stack;
@@ -160,6 +161,17 @@ public class AppManager {
             intent.putExtras(aBundle);
         }
         activity.startActivityForResult(intent, requestCode);
+    }
+
+
+    public  int dp2px(Context context,int dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return (int) ((dp * displayMetrics.density) + 0.5);
+    }
+
+    public  int dp2px( Context context,double dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return (int) ((dp * displayMetrics.density) + 0.5);
     }
 
 

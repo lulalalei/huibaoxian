@@ -1,5 +1,6 @@
 package com.bb.hbx.activitiy;
 
+import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 
 /**
@@ -11,7 +12,7 @@ public class ProductDetailActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.activity_productdetail;
     }
 
     @Override

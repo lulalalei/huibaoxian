@@ -44,15 +44,9 @@ public class MyApplication extends Application {
     }
 
 
-    public static int dp2px(Context context, int dp) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        return (int) ((dp * displayMetrics.density) + 0.5);
-    }
 
-    public static int dp2px(Context context, double dp) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        return (int) ((dp * displayMetrics.density) + 0.5);
-    }
+
+
 
     @Override
     public void onCreate() {

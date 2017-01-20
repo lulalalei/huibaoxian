@@ -87,13 +87,11 @@ public class BKchildItemProvide extends ItemViewProvider<ProductListBean, BKchil
             tv_detail.setText(bKchildItem.getProductIntro());
             tv_price_start.setText(context.getString(R.string.howPrice, bKchildItem.getMinPremium()));
             tv_added.setText(bKchildItem.getCommisionValue1());
-           /* if (MyApplication.user.getIsBClient() .equals(Constants.CLIENTUSER+"") ) {
-                tv_added.setVisibility(View.INVISIBLE);
-            } else if (MyApplication.user.getIsBClient() .equals(Constants.BOSSUSER+"") ) {
+            if (MyApplication.user.getIsBClient()) {
                 tv_added.setVisibility(View.VISIBLE);
             } else {
                 tv_added.setVisibility(View.INVISIBLE);
-            }*/
+            }
 
             GlideUtil.getInstance().loadImage(MyApplication.getAppContext(),
                     img, bKchildItem.getProductLogo(), true);

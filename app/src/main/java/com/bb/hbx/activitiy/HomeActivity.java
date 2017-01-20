@@ -16,6 +16,7 @@ import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.fragment.ClassFragment;
+import com.bb.hbx.fragment.FindFragment;
 import com.bb.hbx.fragment.HomeFragment;
 import com.bb.hbx.fragment.MallFragment;
 import com.bb.hbx.fragment.MineFragment;
@@ -26,6 +27,7 @@ import butterknife.BindView;
 
 import static android.R.attr.fragment;
 import static android.view.Window.FEATURE_NO_TITLE;
+import static com.baidu.location.h.j.F;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -39,6 +41,7 @@ public class HomeActivity extends BaseActivity {
 
     private HomeFragment homeFragment;
     private MallFragment mallFragment;
+    private FindFragment findFragment;
     private ClassFragment classFragment;
     private MineFragment mineFragment;
 
@@ -93,14 +96,14 @@ public class HomeActivity extends BaseActivity {
 
                     case 2:
                         // 当点击了消息tab时，改变控件的图片和文字颜色
-                        if (classFragment == null) {
+                        if (findFragment == null) {
                             // 如果MessageFragment为空，则创建一个并添加到界面上
-                            classFragment = new ClassFragment();
+                            findFragment = new FindFragment();
                             //exfs.add(mineFragment);
-                            transaction.add(R.id.tab_content, classFragment, ClassFragment.class.getName());
+                            transaction.add(R.id.tab_content, findFragment, FindFragment.class.getName());
                         } else {
                             // 如果MessageFragment不为空，则直接将它显示出来
-                            transaction.show(classFragment);
+                            transaction.show(findFragment);
                         }
                         break;
 
@@ -116,6 +119,8 @@ public class HomeActivity extends BaseActivity {
                             transaction.show(classFragment);
                         }
                         break;
+
+
                     case 4:
                         // 当点击了消息tab时，改变控件的图片和文字颜色
                         if (mineFragment == null) {
@@ -166,6 +171,10 @@ public class HomeActivity extends BaseActivity {
         }
         if (mallFragment != null) {
             transaction.hide(mallFragment);
+        }
+
+        if (findFragment != null) {
+            transaction.hide(findFragment);
         }
 
         if (mineFragment != null) {

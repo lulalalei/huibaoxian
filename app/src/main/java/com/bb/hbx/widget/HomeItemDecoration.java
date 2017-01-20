@@ -3,6 +3,8 @@ package com.bb.hbx.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -69,6 +71,7 @@ public class HomeItemDecoration extends RecyclerView.ItemDecoration {
         int left = parent.getPaddingLeft();
         int right = parent.getWidth() - parent.getPaddingRight();
         final int childCount = parent.getChildCount();
+
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             Item item = (Item) ((MultiTypeAdapter) parent.getAdapter()).getItems().get(i);

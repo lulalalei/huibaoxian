@@ -30,5 +30,11 @@ public class HomeModle implements HomeContract.Model {
 
     }
 
+    @Override
+    public void getMsgs(String userId, String msgType, String sts, int pageIndex, int pageSize, Callback callback) {
+        Call call = service.getMsgs(userId, msgType, sts, pageIndex, pageSize);
+        call.enqueue(callback);
+    }
+
 
 }

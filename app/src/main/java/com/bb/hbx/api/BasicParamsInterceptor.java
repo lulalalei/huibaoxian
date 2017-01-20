@@ -52,7 +52,7 @@ public class BasicParamsInterceptor implements Interceptor {
         requestBuilder.addHeader("deviceNo", MyApplication.DUID);
         requestBuilder.addHeader("deviceName", "10");
         requestBuilder.addHeader("domainId", "100");
-
+        requestBuilder.addHeader("sessionId", MyApplication.user.getSessionId());
 
 
         TreeMap<String, String> treeMap = new TreeMap<>();

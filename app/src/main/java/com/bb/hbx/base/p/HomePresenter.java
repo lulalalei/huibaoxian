@@ -66,7 +66,7 @@ public class HomePresenter extends HomeContract.Presenter {
 
     private void dealWith(HomePageInfo info) {
 
-        MyApplication.user.setIsBClient(info.getIsBClient());
+
         items.clear();
 
         //banner
@@ -117,6 +117,11 @@ public class HomePresenter extends HomeContract.Presenter {
     @Override
     public void getHomePageInfo() {
         mModel.getHomePageInfo("0", postCallback);
+    }
+
+    @Override
+    public void getMsgs() {
+        mModel.getMsgs(MyApplication.user.getUserId(), "1", "1", 1, 99, postCallback);
     }
 
 

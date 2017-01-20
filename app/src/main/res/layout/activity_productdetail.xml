@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bb.hbx.activitiy.ProductDetailActivity">
+
+    <LinearLayout
+        android:id="@+id/lin_bottombtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/line_e" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y118"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppear.Theme.A2_Size21"
+                android:textStyle="bold"
+                tools:text="￥116.00" />
+
+            <LinearLayout
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/A6" />
+
+
+            <LinearLayout
+                android:id="@+id/lin_share"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/fenxiang"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="@string/share"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size18" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/A6" />
+
+            <TextView
+                android:id="@+id/tv_buy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/A1"
+                android:gravity="center"
+                android:text="@string/ibuy"
+                android:textAppearance="@style/TextAppear.Theme.white_Size21" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/sl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lin_bottombtn"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/holder" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_pic"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/y45"
+                    android:layout_marginRight="@dimen/x36"
+
+                    android:textAppearance="@style/TextAppear.Theme.white_Size14"
+                    tools:text="大西洋保险 | 销量 133" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y44"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x36"
+                android:paddingRight="@dimen/x36">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size19"
+                    tools:text="成人综合意外险" />
+
+                <TextView
+                    android:id="@+id/tv_pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/tuiguangfeibiaoqian"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="20%推广费"
+                    android:textAppearance="@style/TextAppear.Theme.white_Size11" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y28"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x36"
+                android:paddingRight="@dimen/x36">
+
+                <TextView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/shape_a4" />
+
+                <TextView
+                    android:id="@+id/tv_description1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x22"
+                    android:text="推广人口众多,推广人口众多,推广人口众多"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y22"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x36"
+                android:paddingRight="@dimen/x36">
+
+                <TextView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/shape_a4" />
+
+                <TextView
+                    android:id="@+id/tv_description2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x22"
+                    android:text="推广人口众多"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginTop="@dimen/y20"
+                android:paddingLeft="@dimen/x16"
+                android:paddingTop="@dimen/y16"
+                android:text="@string/more_features"
+                android:textAppearance="@style/TextAppear.Theme.A1_Size13" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y42"
+                android:background="@color/A7">
+
+                <LinearLayout
+                    android:id="@+id/lin_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y100"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginRight="@dimen/x36"
+                    android:layout_marginTop="@dimen/y26"
+                    android:background="@drawable/shape_z49"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x36"
+                        android:drawableLeft="@drawable/baozhang"
+                        android:drawablePadding="@dimen/x22"
+                        android:gravity="center_vertical"
+                        android:text="@string/protection_list"
+                        android:textAppearance="@style/TextAppear.Theme.Z48_Size16" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/lin_1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/touying" />
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_insured_up" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y112"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingRight="@dimen/x36">
+
+
+                    <TextView
+                        android:id="@+id/tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x36"
+                        android:layout_weight="1"
+                        android:text="@string/buyquantity"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x46"
+                        android:src="@drawable/subtraction" />
+
+                    <TextView
+                        android:id="@+id/tv_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
+
+                    <ImageView
+                        android:id="@+id/iv_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x46"
+                        android:src="@drawable/add" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x36"
+                android:layout_marginRight="@dimen/x36"
+                android:layout_marginTop="@dimen/y42">
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/A7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginTop="@dimen/y28"
+                    android:text="@string/insured"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_insured_information" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/A7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginTop="@dimen/y28"
+                    android:text="@string/beinsured"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_beinsured_information" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/A7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginTop="@dimen/y28"
+                    android:text="@string/insurance"
+                    android:drawablePadding="@dimen/x22"
+                    android:drawableLeft="@drawable/tishi"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_claims_process"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y112"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/x36">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/claims_process"
+                android:textAppearance="@style/TextAppear.Theme.A3_Size14"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/xiayibu"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/agree_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y160"
+                android:layout_marginTop="@dimen/y42"
+                android:background="@color/A7"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/ck_agree"
+                    style="@style/mycheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:singleLine="true"
+                    android:text="@string/agreement"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size11" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.bb.hbx.provide;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.AcitBean;
-import com.bb.hbx.bean.SquareBean;
+import com.bb.hbx.bean.Product;
+import com.bb.hbx.bean.RecommendBean;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
 import butterknife.BindView;
@@ -20,35 +21,51 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/12/21.
  */
 
-public class ActivProvide extends ItemViewProvider<AcitBean, ActivProvide.ViewHolder> {
+public class RecommendProvide extends ItemViewProvider<RecommendBean, RecommendProvide.ViewHolder> {
 
+
+    private Context context;
+
+    public RecommendProvide(Context context) {
+        this.context = context;
+    }
 
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View view = inflater.inflate(R.layout.square_act_item, parent, false);
+        View view = inflater.inflate(R.layout.recommend_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull AcitBean squareBean) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull RecommendBean squareBean) {
         holder.setData(squareBean);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        @BindView(R.id.img)
-        ImageView img;
+        @BindView(R.id.iv_pic)
+        ImageView iv_pic;
 
-        @BindView(R.id.tv_title)
-        TextView tv_title;
+        @BindView(R.id.tv_price)
+        TextView tv_price;
+
+        @BindView(R.id.tv_name)
+        TextView tv_name;
+
 
         @BindView(R.id.tv_detail)
         TextView tv_detail;
 
 
+        @BindView(R.id.tv_pro)
+        TextView tv_pro;
 
+
+
+        @BindView(R.id.tv_sales)
+        TextView tv_sales;
 
 
         public ViewHolder(View itemView) {
@@ -56,11 +73,8 @@ public class ActivProvide extends ItemViewProvider<AcitBean, ActivProvide.ViewHo
             ButterKnife.bind(this, itemView);
         }
 
-        void setData(@NonNull final AcitBean squareBean) {
-//            tv_title.setText(squareBean.getTitle());
-//            tv_detail.setText(squareBean.getDetail());
-//            tv_promotion.setText(squareBean.getPromotion());
-//            tv_price.setText(squareBean.getPrice());
+        void setData(@NonNull final RecommendBean squareBean) {
+
 
         }
 

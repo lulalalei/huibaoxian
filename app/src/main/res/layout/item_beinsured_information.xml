@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.bb.hbx.widget.ItemLayout
+        android:id="@+id/il_beinsurer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="本人"
+        app:isCheck="true"
+        app:isEdit="false"
+        app:isright_icon="true"
+        app:left_name="@string/relation"
+        app:right_icon="@drawable/xialaicon"
+        app:right_butIcon="@drawable/xialaicon_xiangshang">
+
+    </com.bb.hbx.widget.ItemLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x36">
+
+        <include layout="@layout/line_e" />
+    </LinearLayout>
+
+    <com.bb.hbx.widget.ItemLayout
+        android:id="@+id/il_insurer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="@string/please_beinsurer"
+        app:isCheck="true"
+        app:isEdit="true"
+        app:isright_icon="true"
+        app:left_name="@string/beinsurer"
+        app:right_icon="@drawable/xialaicon"
+        app:right_butIcon="@drawable/xialaicon_xiangshang"
+        >
+
+    </com.bb.hbx.widget.ItemLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x36">
+
+        <include layout="@layout/line_e" />
+    </LinearLayout>
+
+    <com.bb.hbx.widget.ItemLayout
+        android:id="@+id/il_insurer3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isCheck="false"
+        app:isEdit="false"
+        app:text="@string/idcard"
+        app:isright_icon="true"
+        app:left_name="@string/certificatetype"
+        app:right_icon="@drawable/xialaicon"
+        app:right_butIcon="@drawable/xialaicon_xiangshang">
+
+    </com.bb.hbx.widget.ItemLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x36">
+
+        <include layout="@layout/line_e" />
+    </LinearLayout>
+
+    <com.bb.hbx.widget.ItemLayout
+        android:id="@+id/il_insurer4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="@string/hinid"
+        app:isCheck="false"
+        app:isEdit="true"
+        app:isright_icon="false"
+        app:left_name="@string/certificate"
+        >
+
+    </com.bb.hbx.widget.ItemLayout>
+
+    
+
+
+</LinearLayout>
+

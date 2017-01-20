@@ -23,7 +23,8 @@ public interface HomeContract {
 
         void getHomePageInfo(String userId, Callback callback);
 
-
+        void getMsgs(String userId, String msgType, String sts, int pageIndex, int pageSize,
+                     Callback callback);
 
     }
 
@@ -38,7 +39,6 @@ public interface HomeContract {
         void stopRefresh();
 
 
-
     }
 
     abstract class Presenter extends BasePresenter<HomeContract.Model, HomeContract.View> {
@@ -46,8 +46,9 @@ public interface HomeContract {
 
         public abstract void getHomePageInfo();
 
+        public abstract void getMsgs();
 
 
-        public abstract  GridLayoutManager.SpanSizeLookup getSpanSizeLookup();
+        public abstract GridLayoutManager.SpanSizeLookup getSpanSizeLookup();
     }
 }

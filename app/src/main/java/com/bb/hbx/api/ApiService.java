@@ -71,7 +71,7 @@ public interface ApiService {
     //修改用户信息,性别
     @FormUrlEncoded
     @POST("api.do?method=updateUserInfo&type=post")
-    Call<Result_Api> updateUserInfoSex(@Field("userId") String userId,@Field("gender") String gender);
+    Call<Result_Api> updateUserInfoSex(@Field("userId") String userId, @Field("gender") String gender);
 
     //修改用户信息,邮箱地址-----待测
     @FormUrlEncoded
@@ -98,5 +98,12 @@ public interface ApiService {
 
     @POST("api.do?method=getProducts&type=post")
     Call<Result_Api<ProductBean>> getProducts(@Body RequestProduct product);
+
+
+    //获取消息列表
+    @FormUrlEncoded
+    @POST("api.do?method=getMsgs&type=post")
+    Call<Result_Api<String>> getMsgs(@Field("userId") String userId, @Field("msgType") String msgType,
+                                                   @Field("sts") String sts, @Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
 
 }

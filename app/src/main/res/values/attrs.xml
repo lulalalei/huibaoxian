@@ -103,5 +103,25 @@
 
     </declare-styleable>
 
+    <declare-styleable name="ItemLayout">
+        <attr name="left_name" format="string"></attr>
+        <attr name="isEdit" format="boolean"></attr>
+        <attr name="hint" format="string"></attr>
+        <attr name="text" format="string"></attr>
+
+        <attr name="isright_icon" format="boolean"></attr>
+        <attr name="isCheck" format="boolean"></attr>
+        <attr name="right_icon" format="reference"></attr>
+        <attr name="right_butIcon" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ItemLayout2">
+        <attr name="left_name2" format="string"></attr>
+        <attr name="text2" format="string"></attr>
+        <attr name="right_icon2" format="reference"></attr>
+        <attr name="right_butIcon2" format="reference"></attr>
+        <attr name="textAppearance" format="reference"></attr>
+    </declare-styleable>
+
 
 </resources>

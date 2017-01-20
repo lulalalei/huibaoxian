@@ -14,231 +14,231 @@ public class User {
      */
 
 
-        /**
-         * address :
-         * areaCode :
-         * backUrl :
-         * birthday :
-         * city :
-         * domainId : 10
-         * email :
-         * euck :
-         * gender :
-         * idNo :
-         * idType :
-         * isBClient : false
-         * lastDevice :
-         * lastLoginIP :
-         * lastLoginTime : 20170117150251
-         * loginPwd : 1
-         * logo :
-         * mobile : 15735920000
-         * realName :
-         * sessionId : f7a30f557b0304e5ab72bb41be3b5ba4
-         * userId : 32
-         * userName : 15735920000
-         */
+    /**
+     * address :
+     * areaCode :
+     * backUrl :
+     * birthday :
+     * city :
+     * domainId : 10
+     * email :
+     * euck :
+     * gender :
+     * idNo :
+     * idType :
+     * isBClient : false
+     * lastDevice :
+     * lastLoginIP :
+     * lastLoginTime : 20170117150251
+     * loginPwd : 1
+     * logo :
+     * mobile : 15735920000
+     * realName :
+     * sessionId : f7a30f557b0304e5ab72bb41be3b5ba4
+     * userId : 32
+     * userName : 15735920000
+     */
 
-        private String address;
-        private String areaCode;
-        private String backUrl;
-        private String birthday;
-        private String city;
-        private String domainId;
-        private String email;
-        private String euck;
-        private String gender;
-        private String idNo;
-        private String idType;
-        private boolean isBClient;
-        private String lastDevice;
-        private String lastLoginIP;
-        private String lastLoginTime;
-        private String loginPwd;
-        private String logo;
-        private String mobile;
-        private String realName;
-        private String sessionId;
-        private String userId;
-        private String userName;
+    private String address = "";
+    private String areaCode = "";
+    private String backUrl = "";
+    private String birthday = "";
+    private String city = "";
+    private String domainId = "";
+    private String email = "";
+    private String euck = "";
+    private String gender = "";
+    private String idNo = "";
+    private String idType = "";
+    private boolean isBClient;
+    private String lastDevice = "";
+    private String lastLoginIP = "";
+    private String lastLoginTime = "";
+    private String loginPwd = "";
+    private String logo = "";
+    private String mobile = "";
+    private String realName = "";
+    private String sessionId = "";
+    private String userId = "";
+    private String userName = "";
 
     private String nickName;
 
-        public String getAddress() {
-            return address;
-        }
+    public String getAddress() {
+        return address;
+    }
 
-        public void setAddress(String address) {
-            this.address = address;
-        }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-        public String getAreaCode() {
-            return areaCode;
-        }
+    public String getAreaCode() {
+        return areaCode;
+    }
 
-        public void setAreaCode(String areaCode) {
-            this.areaCode = areaCode;
-        }
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
 
-        public String getBackUrl() {
-            return backUrl;
-        }
+    public String getBackUrl() {
+        return backUrl;
+    }
 
-        public void setBackUrl(String backUrl) {
-            this.backUrl = backUrl;
-        }
+    public void setBackUrl(String backUrl) {
+        this.backUrl = backUrl;
+    }
 
-        public String getBirthday() {
-            return birthday;
-        }
+    public String getBirthday() {
+        return birthday;
+    }
 
-        public void setBirthday(String birthday) {
-            this.birthday = birthday;
-        }
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 
-        public String getCity() {
-            return city;
-        }
+    public String getCity() {
+        return city;
+    }
 
-        public void setCity(String city) {
-            this.city = city;
-        }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-        public String getDomainId() {
-            return domainId;
-        }
+    public String getDomainId() {
+        return domainId;
+    }
 
-        public void setDomainId(String domainId) {
-            this.domainId = domainId;
-        }
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
+    }
 
-        public String getEmail() {
-            return email;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public String getEuck() {
-            return euck;
-        }
+    public String getEuck() {
+        return euck;
+    }
 
-        public void setEuck(String euck) {
-            this.euck = euck;
-        }
+    public void setEuck(String euck) {
+        this.euck = euck;
+    }
 
-        public String getGender() {
-            return gender;
-        }
+    public String getGender() {
+        return gender;
+    }
 
-        public void setGender(String gender) {
-            this.gender = gender;
-        }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-        public String getIdNo() {
-            return idNo;
-        }
+    public String getIdNo() {
+        return idNo;
+    }
 
-        public void setIdNo(String idNo) {
-            this.idNo = idNo;
-        }
+    public void setIdNo(String idNo) {
+        this.idNo = idNo;
+    }
 
-        public String getIdType() {
-            return idType;
-        }
+    public String getIdType() {
+        return idType;
+    }
 
-        public void setIdType(String idType) {
-            this.idType = idType;
-        }
+    public void setIdType(String idType) {
+        this.idType = idType;
+    }
 
-        public boolean getIsBClient() {
-            return isBClient;
-        }
+    public boolean getIsBClient() {
+        return isBClient;
+    }
 
-        public void setIsBClient(boolean isBClient) {
-            this.isBClient = isBClient;
-        }
+    public void setIsBClient(boolean isBClient) {
+        this.isBClient = isBClient;
+    }
 
-        public String getLastDevice() {
-            return lastDevice;
-        }
+    public String getLastDevice() {
+        return lastDevice;
+    }
 
-        public void setLastDevice(String lastDevice) {
-            this.lastDevice = lastDevice;
-        }
+    public void setLastDevice(String lastDevice) {
+        this.lastDevice = lastDevice;
+    }
 
-        public String getLastLoginIP() {
-            return lastLoginIP;
-        }
+    public String getLastLoginIP() {
+        return lastLoginIP;
+    }
 
-        public void setLastLoginIP(String lastLoginIP) {
-            this.lastLoginIP = lastLoginIP;
-        }
+    public void setLastLoginIP(String lastLoginIP) {
+        this.lastLoginIP = lastLoginIP;
+    }
 
-        public String getLastLoginTime() {
-            return lastLoginTime;
-        }
+    public String getLastLoginTime() {
+        return lastLoginTime;
+    }
 
-        public void setLastLoginTime(String lastLoginTime) {
-            this.lastLoginTime = lastLoginTime;
-        }
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
-        public String getLoginPwd() {
-            return loginPwd;
-        }
+    public String getLoginPwd() {
+        return loginPwd;
+    }
 
-        public void setLoginPwd(String loginPwd) {
-            this.loginPwd = loginPwd;
-        }
+    public void setLoginPwd(String loginPwd) {
+        this.loginPwd = loginPwd;
+    }
 
-        public String getLogo() {
-            return logo;
-        }
+    public String getLogo() {
+        return logo;
+    }
 
-        public void setLogo(String logo) {
-            this.logo = logo;
-        }
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
-        public String getMobile() {
-            return mobile;
-        }
+    public String getMobile() {
+        return mobile;
+    }
 
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
-        }
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-        public String getRealName() {
-            return realName;
-        }
+    public String getRealName() {
+        return realName;
+    }
 
-        public void setRealName(String realName) {
-            this.realName = realName;
-        }
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
-        public String getSessionId() {
-            return sessionId;
-        }
+    public String getSessionId() {
+        return sessionId;
+    }
 
-        public void setSessionId(String sessionId) {
-            this.sessionId = sessionId;
-        }
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 
-        public String getUserId() {
-            return userId;
-        }
+    public String getUserId() {
+        return userId;
+    }
 
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-        public String getUserName() {
-            return userName;
-        }
+    public String getUserName() {
+        return userName;
+    }
 
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getNickName() {
         return nickName;

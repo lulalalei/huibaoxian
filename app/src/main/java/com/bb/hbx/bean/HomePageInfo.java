@@ -29,6 +29,8 @@ public class HomePageInfo implements Serializable {
 
     private boolean isBClient;
 
+    private String iataCodeVersion;
+
 
     public String getLoop() {
         return loop;
@@ -85,5 +87,13 @@ public class HomePageInfo implements Serializable {
 
     public void setIsBClient(boolean isBClient) {
         this.isBClient = isBClient;
+    }
+
+    public String getIataCodeVersion() {
+        return iataCodeVersion;
+    }
+
+    public void setIataCodeVersion(String iataCodeVersion) {
+        this.iataCodeVersion = iataCodeVersion;
     }
 }

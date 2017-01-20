@@ -147,94 +147,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
         rc_list.setAdapter(adapter);
 
 
-//        b = new BannerBean();
-//        items = new ArrayList<>();
-//        items.add(b);
-
-//        items.add(new ModleItem(R.drawable.chexian, "车险"));
-//        items.add(new ModleItem(R.drawable.renshouxian, "人寿险"));
-//        items.add(new ModleItem(R.drawable.jiankangxian, "健康险"));
-//        items.add(new ModleItem(R.drawable.yiwaixian, "意外险"));
-//        items.add(new ModleItem(R.drawable.caichanxian, "财产险"));
-//
-//        List<String> list1 = new ArrayList<>();
-//        list1.add("今天是星期一" + 111);
-//        list1.add("今天是星期二" + 222);
-//        list1.add("今天是星期三" + 333);
-//        list1.add("今天是星期四" + 444);
-//        items.add(new BobaoItem(list1));
-//
-//        items.add(new BKItem(R.drawable.baokuantuijian));
-//
-//        BKchildItem item = new BKchildItem();
-//        item.setRedId(R.drawable.holder);
-//        item.setSafe_name("健康保险");
-//        item.setSafe_detail("超值保险/全国通赔1");
-//        item.setSafe_price("￥2300");
-//        item.setSafe_add("推广费1");
-//        items.add(item);
-//
-//        item = new BKchildItem();
-//        item.setRedId(R.drawable.holder);
-//        item.setSafe_name("社会保险");
-//        item.setSafe_detail("超值保险/全国通赔2");
-//        item.setSafe_price("￥2400");
-//        item.setSafe_add("推广费2");
-//        items.add(item);
-//
-//        item = new BKchildItem();
-//        item.setRedId(R.drawable.holder);
-//        item.setSafe_name("社会保险1");
-//        item.setSafe_detail("超值保险/全国通赔3");
-//        item.setSafe_price("￥2500");
-//        item.setSafe_add("推广费3");
-//        items.add(item);
-//
-//        item = new BKchildItem();
-//        item.setRedId(R.drawable.holder);
-//        item.setSafe_name("社会保险2");
-//        item.setSafe_detail("超值保险/全国通赔4");
-//        item.setSafe_price("￥2600");
-//        item.setSafe_add("推广费4");
-//        items.add(item);
-//
-//        item = new BKchildItem();
-//        item.setRedId(R.drawable.holder);
-//        item.setSafe_name("社会保险3");
-//        item.setSafe_detail("超值保险/全国通赔4");
-//        item.setSafe_price("￥2600");
-//        item.setSafe_add("推广费4");
-//        items.add(item);
-//
-//        item = new BKchildItem();
-//        item.setRedId(R.drawable.holder);
-//        item.setSafe_name("社会保险4");
-//        item.setSafe_detail("超值保险/全国通赔4");
-//        item.setSafe_price("￥2600");
-//        item.setSafe_add("推广费4");
-//        item.setLine(false);
-//        items.add(item);
-//        items.add(new BKItem(R.drawable.jingxuanzhuanti));
-//
-//
-//        List<SafeKind_Item> its = new ArrayList<>();
-//        SafeKind_Item safeKind_item = new SafeKind_Item("家庭意外保险1", "买5W赔10w", "￥3000", R.drawable.holder);
-//        its.add(safeKind_item);
-//        SafeKind_Item safeKind_item1 = new SafeKind_Item("家庭意外保险2", "买5W赔10w", "￥3000", R.drawable.holder);
-//        its.add(safeKind_item1);
-//
-//
-//       JxItem jxItem = new JxItem(R.drawable.holder, its);
-//
-//
-//        List<JxItem> jxItems = new ArrayList<>();
-//        jxItems.add(jxItem);
-//        jxItems.add(jxItem);
-//
-//
-//        items.addAll(jxItems);
-//        adapter.setItems(items);
-
         refresh.setOnPullListener(new OnPullListener() {
             @Override
             public void onRefresh() {
@@ -249,6 +161,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
 
         mPresenter.getHomePageInfo();
+
+        if ("0".equalsIgnoreCase(MyApplication.user.getUserId())) {//未登录
+
+        } else {
+            mPresenter.getMsgs();
+        }
+
 
     }
 
@@ -280,4 +199,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     }
 
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+
+        }
+    }
 }

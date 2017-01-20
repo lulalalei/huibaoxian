@@ -56,10 +56,10 @@ public class ShareSPUtils {
                     notLogin.setVisibility(View.GONE);
                    /* hasLogin.setVisibility(View.VISIBLE);
                 }*/
-                Bitmap bitmap = BitmapFactory.decodeFile(Can.userIcon);
-                int byteCount = bitmap.getByteCount();
+//                Bitmap bitmap = BitmapFactory.decodeFile(Can.userIcon);
+//                int byteCount = bitmap.getByteCount();
                 //从本地文件加载图片
-                userIcon.setImageBitmap(bitmap);
+                //userIcon.setImageBitmap(bitmap);
                 //hasLogin.setText(Can.userName);
             }
         }

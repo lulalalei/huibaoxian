@@ -10,17 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.AcitBean;
-import com.bb.hbx.bean.MallAllBean;
 import com.bb.hbx.bean.Product;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
-import org.w3c.dom.Text;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.baidu.location.h.j.s;
 
 /**
  * Created by Administrator on 2016/12/21.

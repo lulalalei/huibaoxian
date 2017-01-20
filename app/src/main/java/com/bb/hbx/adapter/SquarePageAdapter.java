@@ -1,27 +1,17 @@
 package com.bb.hbx.adapter;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.PermissionChecker;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.bb.hbx.base.BaseFragment;
-import com.bb.hbx.fragment.SquareFragment;
 import com.bb.hbx.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.fragment;
 
 /**
  * Created by fancl on 2016/12/21.

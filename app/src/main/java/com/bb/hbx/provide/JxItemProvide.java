@@ -1,6 +1,7 @@
 package com.bb.hbx.provide;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.ProductDetailActivity;
+import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
+import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
@@ -82,21 +86,21 @@ public class JxItemProvide extends ItemViewProvider<Special, JxItemProvide.ViewH
 
                     View v_xx = view.findViewById(R.id.v_xx);
 
-                    tv_name.setText(jxItem.getProductList().get(i).getProductName());
-                    tv_detail.setText(jxItem.getProductList().get(i).getProductIntro());
-                    tv_price.setText(context.getString(R.string.howPrice, jxItem.getProductList().get(i).getMinPremium()));
-                    tv_added.setText(jxItem.getProductList().get(i).getCommisionValue1());
+                    final ProductListBean bean = jxItem.getProductList().get(i);
 
-                    if (MyApplication.user.getIsBClient() ) {
-                        tv_added.setVisibility(View.INVISIBLE);
-                    } else if (MyApplication.user.getIsBClient() ) {
+                    tv_name.setText(bean.getProductName());
+                    tv_detail.setText(bean.getProductIntro());
+                    tv_price.setText(context.getString(R.string.howPrice, bean.getMinPremium()));
+                    tv_added.setText(bean.getCommisionValue1());
+
+                    if (MyApplication.user.getIsBClient()) {
                         tv_added.setVisibility(View.VISIBLE);
                     } else {
                         tv_added.setVisibility(View.INVISIBLE);
                     }
 
                     GlideUtil.getInstance().loadImage(MyApplication.getAppContext(),
-                            img_right, jxItem.getProductList().get(i).getProductLogo(), true);
+                            img_right, bean.getProductLogo(), true);
 
                     lin_add.addView(view);
                     if (i == jxItem.getProductList().size() - 1) {
@@ -104,6 +108,15 @@ public class JxItemProvide extends ItemViewProvider<Special, JxItemProvide.ViewH
                     } else {
                         v_xx.setVisibility(View.VISIBLE);
                     }
+
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("productId", bean.getProductId());
+                            AppManager.getInstance().showActivity(ProductDetailActivity.class, bundle);
+                        }
+                    });
                 }
 
 
