@@ -237,6 +237,94 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x36"
+                android:layout_marginRight="@dimen/x36"
+                android:layout_marginTop="@dimen/y42">
+
+                <TextView
+                    android:id="@+id/tv_appendKey1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size14"
+                    tools:text="人身意外伤害-身故、残疾" />
+
+                <TextView
+                    android:id="@+id/tv_appendValue1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14"
+                    tools:text="100万" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x36"
+                android:layout_marginRight="@dimen/x36"
+                android:layout_marginTop="@dimen/y20">
+
+                <TextView
+                    android:id="@+id/tv_appendKey2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size14"
+                    tools:text="意外医疗费用(免配额100元，90%赔付)" />
+
+                <TextView
+                    android:id="@+id/tv_appendValue2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14"
+                    tools:text="5000万" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x36"
+                android:layout_marginRight="@dimen/x36"
+                android:layout_marginTop="@dimen/y20">
+
+                <TextView
+                    android:id="@+id/tv_appendKey3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size14"
+                    tools:text="意外医疗费用(免配额100元，90%赔付)" />
+
+                <TextView
+                    android:id="@+id/tv_appendValue3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14"
+                    tools:text="5000万" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y30"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginTop="@dimen/y20"
+                android:paddingLeft="@dimen/x16"
+                android:paddingTop="@dimen/y16"
+                android:text="@string/more_features"
+                android:textAppearance="@style/TextAppear.Theme.A1_Size13" />
+
+
+            <include layout="@layout/line_e" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <include layout="@layout/item_insured_up" />
@@ -353,32 +441,33 @@
                     android:layout_marginBottom="@dimen/y20"
                     android:layout_marginLeft="@dimen/x36"
                     android:layout_marginTop="@dimen/y28"
-                    android:text="@string/insurance"
-                    android:drawablePadding="@dimen/x22"
                     android:drawableLeft="@drawable/tishi"
+                    android:drawablePadding="@dimen/x22"
+                    android:text="@string/insurance"
                     android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
 
             </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/lin_claims_process"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y112"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingRight="@dimen/x36">
+            <LinearLayout
+                android:id="@+id/lin_claims_process"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y112"
+                android:layout_marginLeft="@dimen/x36"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/x36">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/claims_process"
-                android:textAppearance="@style/TextAppear.Theme.A3_Size14"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/claims_process"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/xiayibu"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/xiayibu" />
 
             </LinearLayout>
 
@@ -387,9 +476,10 @@
                 android:id="@+id/agree_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y160"
-                android:layout_marginTop="@dimen/y42"
+                android:layout_marginLeft="@dimen/x36"
                 android:background="@color/A7"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/y42">
 
                 <CheckBox
                     android:id="@+id/ck_agree"
@@ -403,7 +493,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:singleLine="true"
-                    android:text="@string/agreement"
+                    android:text="@string/agreement2"
                     android:textAppearance="@style/TextAppear.Theme.A3_Size11" />
 
 
