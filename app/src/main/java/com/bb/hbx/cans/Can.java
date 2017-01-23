@@ -2,7 +2,9 @@ package com.bb.hbx.cans;
 
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.fragment.AllInPIOFragment;
 import com.bb.hbx.fragment.HadPaiedInPIOFragment;
 import com.bb.hbx.fragment.RecordInRedPaFragment;
@@ -41,8 +43,34 @@ public class Can {
         return path;
     }
 
-    //修改用户名成功后的响应码
+    //判断用户是否登录
+    public static boolean hasLoginedMethod()
+    {
+        boolean hasLogin=false;
+        if (MyApplication.user==null)
+        {
+            hasLogin=false;
+        }
+        else
+        {
+            String userId = MyApplication.user.getUserId();
+            if (TextUtils.isEmpty(userId))
+            {
+                hasLogin=false;
+            }
+            else if ("0".equals(userId))
+            {
+                hasLogin=false;
+            }
+            else
+            {
+                hasLogin=true;
+            }
+        }
+        return hasLogin;
+    }
 
+    //修改用户名成功后的响应码
     public static final int RESULT_NAME=200;
 
     //修改邮箱地址成功后的响应码

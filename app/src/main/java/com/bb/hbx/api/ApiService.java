@@ -1,10 +1,14 @@
 package com.bb.hbx.api;
 
+import com.bb.hbx.bean.Account;
+import com.bb.hbx.bean.AreasListBean;
+import com.bb.hbx.bean.Consignees;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.RequestProduct;
 import com.bb.hbx.bean.TypeModel;
+import com.bb.hbx.bean.UpdateConsignee;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.bean.UserInfo;
 import com.bb.hbx.bean.UserRegist;
@@ -63,6 +67,11 @@ public interface ApiService {
     @POST("api.do?method=getUserInfo&type=post")
     Call<Result_Api<UserInfo>> getUserInfo(@Header("sessionId") String sessionId, @Field("userId") String userId);
 
+    //查询账户信息
+    @FormUrlEncoded
+    @POST("api.do?method=getAccount&type=post")
+    Call<Result_Api<Account>> getAccount(@Field("userId") String userId);
+
     //修改用户信息,nickName
     @FormUrlEncoded
     @POST("api.do?method=updateUserInfo&type=post")
@@ -73,10 +82,27 @@ public interface ApiService {
     @POST("api.do?method=updateUserInfo&type=post")
     Call<Result_Api> updateUserInfoSex(@Field("userId") String userId, @Field("gender") String gender);
 
-    //修改用户信息,邮箱地址-----待测
+    //修改用户信息,邮箱地址
     @FormUrlEncoded
     @POST("api.do?method=updateUserInfo&type=post")
     Call<Result_Api> updateUserInfoEmail(@Field("userId") String userId,@Field("email") String email);
+
+    //获取收货人信息
+    @FormUrlEncoded
+    @POST("api.do?method=getConsignees&type=post")
+    Call<Result_Api<Consignees>> getConsignees(@Field("userId") String userId, @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+
+    //修改收货人信息
+    @FormUrlEncoded
+    @POST("api.do?method=updateConsignee&type=post")
+    Call<Result_Api<UpdateConsignee>> updateConsignee(@Field("userId") String userId, @Field("cneeId") String cneeId, @Field("cneeName") String cneeName,
+                                                      @Field("mobile") String mobile, @Field("areaCode") String areaCode, @Field("address") String address,
+                                                      @Field("defaultFlag") String defaultFlag);
+
+    //获取地区信息---------待测
+    @FormUrlEncoded
+    @POST("api.do?method=getAreaList&type=post")
+    Call<Result_Api<AreasListBean>> getAreaList(@Field("findAllFlag") boolean findAllFlag);
 
     //获取首页数据
     @FormUrlEncoded

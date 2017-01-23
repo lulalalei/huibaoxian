@@ -4,6 +4,7 @@
     android:id="@+id/activity_per_insu_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/A7"
     tools:context="com.bb.hbx.activitiy.PerInsuOrderActivity">
 
     <RelativeLayout
@@ -36,15 +37,15 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"/>
     </RelativeLayout>
-
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tabLayout"
+        android:layout_below="@id/topbar_layout"/>
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/viewPager"
-        android:layout_below="@id/topbar_layout">
-        <android.support.design.widget.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:id="@+id/tabLayout" />
+        android:layout_below="@id/tabLayout">
     </android.support.v4.view.ViewPager>
 </RelativeLayout>

@@ -112,6 +112,7 @@
         <activity android:name=".activitiy.RealNameFinishActivity" />
         <activity android:name=".activitiy.SetPayPwdActivity" />
         <activity android:name=".activitiy.EditEmailActivity"></activity>
+        <service android:name=".service.DownloadIconService"></service>
 
         <activity
             android:name=".activitiy.ProductDetailActivity"

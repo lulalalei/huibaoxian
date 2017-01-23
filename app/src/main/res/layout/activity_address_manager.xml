@@ -4,43 +4,54 @@
     android:id="@+id/activity_address_manager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/A7"
     tools:context="com.bb.hbx.activitiy.AddressManagerActivity">
 
     <RelativeLayout
         android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@color/white"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/back_iv"
-            android:src="@drawable/fanhui"
-            android:scaleType="centerCrop"
-            android:layout_marginLeft="18dp"/>
+        <RelativeLayout
+            android:id="@+id/back_layout"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="17dp"
+                android:id="@+id/back_iv"
+                android:src="@drawable/fanhui"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="18dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="地址管理"
-            android:textSize="22sp"
+            android:layout_height="match_parent"
+            android:text="编辑邮箱"
+            android:textSize="17sp"
             android:textColor="@color/A1"
             android:layout_centerHorizontal="true"
             android:gravity="center"/>
     </RelativeLayout>
-
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:layout_below="@id/topbar_layout"></android.support.v7.widget.RecyclerView>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:id="@+id/bottom_layout"
-        android:layout_alignParentBottom="true"
-        android:background="@color/A1">
+        android:layout_below="@id/topbar_layout"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/recyclerView"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:id="@+id/bottom_layout"
+            android:layout_alignParentBottom="true"
+            android:background="@color/A1">
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,5 +73,7 @@
                     android:layout_toRightOf="@id/add_tv"
                     android:layout_marginLeft="13dp"/>
             </RelativeLayout>
-    </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
 </RelativeLayout>
