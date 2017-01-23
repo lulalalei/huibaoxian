@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -26,17 +27,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="7dp"
         android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:paddingTop="7dp">
+        android:paddingRight="18dp">
 
 
         <LinearLayout
             android:id="@+id/lin_search"
             android:layout_width="0dp"
             android:layout_height="32dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
             android:layout_weight="1"
             android:background="@drawable/shape_alpha_white"
             android:gravity="center">
@@ -60,18 +62,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="11dp"
-            android:src="@drawable/tongzhi" />
+            android:src="@drawable/message2" />
 
         <TextView
+            android:id="@+id/tv_messagecount"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="-5dp"
-            android:layout_marginTop="-8dp"
+            android:layout_marginLeft="-8dp"
+            android:layout_marginTop="-12dp"
             android:background="@drawable/shape_z56"
             android:gravity="center"
-            android:text="5"
-            android:textAppearance="@style/TextAppear.Theme.Z55_Size8" />
+            android:textAppearance="@style/TextAppear.Theme.Z55_Size8"
+            tools:text="5" />
 
     </LinearLayout>
 

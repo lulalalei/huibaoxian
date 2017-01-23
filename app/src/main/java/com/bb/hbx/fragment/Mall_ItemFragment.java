@@ -12,9 +12,12 @@ import com.bb.hbx.base.p.Mall_ItemPresenter;
 import com.bb.hbx.base.v.Mall_ItemContract;
 import com.bb.hbx.bean.Product;
 import com.bb.hbx.bean.TypeModel;
+import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.provide.MallAllProvide;
 import com.bb.hbx.utils.Constants;
 import com.bb.hbx.widget.ConditionLayout;
+import com.bb.hbx.widget.freshlayout.OnPullListener;
+import com.bb.hbx.widget.freshlayout.RefreshLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -35,6 +38,10 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
 
     @BindView(R.id.rl_view)
     RecyclerView rl_view;
+
+
+    @BindView(R.id.refresh)
+    RefreshLayout refresh;
 
 
     private MultiTypeAdapter adapter;
@@ -102,13 +109,26 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
         adapter.register(Product.class, new MallAllProvide(getActivity()));
         rl_view.setAdapter(adapter);
 
+//        refresh.setNeedLoadMore(true);
+        refresh.setOnPullListener(new OnPullListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getProducts(DataLoadDirection.Refresh);
+            }
+
+            @Override
+            public void onLoadMore() {
+                mPresenter.getProducts(DataLoadDirection.LoadMore);
+            }
+        });
+
 
     }
 
     @Override
     protected void initdate(Bundle savedInstanceState) {
         adapter.setItems(mPresenter.getList());
-        mPresenter.getProducts();
+        mPresenter.getProducts(DataLoadDirection.Refresh);
     }
 
 
@@ -120,5 +140,15 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
     @Override
     public TypeModel getTypeModel() {
         return model;
+    }
+
+    @Override
+    public void stopRefresh() {
+        refresh.stopRefresh(true);
+    }
+
+    @Override
+    public void stopLoadMore() {
+        refresh.stopLoadMore(true);
     }
 }

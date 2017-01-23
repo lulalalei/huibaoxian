@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -21,6 +22,7 @@ import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
+import com.bb.hbx.cans.Can;
 import com.bb.hbx.provide.BKItemProvide;
 import com.bb.hbx.provide.BKchildItemProvide;
 import com.bb.hbx.provide.BannerProvide;
@@ -46,6 +48,11 @@ import butterknife.BindView;
 
 public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> implements HomeContract.View, View.OnClickListener {
 
+
+
+
+    @BindView(R.id.tv_messagecount)
+    TextView tv_messagecount;
 
     @BindView(R.id.iv_xx)
     ImageView iv_xx;
@@ -86,7 +93,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
         refresh.setNeedLoadMore(false);
         refresh.setView(rel_tool);
-        iv_xx.setImageResource(R.drawable.tongzhi);
+        iv_xx.setImageResource(R.drawable.message2);
         rel_tool.getBackground().mutate().setAlpha(0);//toolbar透明度初始化为0
         layoutManager = new GridLayoutManager(getActivity(), 5);
 
@@ -108,7 +115,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
                 if (mDistanceY == 0) {
                     rel_tool.getBackground().mutate().setAlpha(0);
-                    iv_xx.setImageResource(R.drawable.tongzhi);
+                    iv_xx.setImageResource(R.drawable.message2);
                 } else if (mDistanceY > 0 && mDistanceY < endOffset) {
                     float precent = mDistanceY / endOffset;
                     int alpha = Math.round(precent * 255);
@@ -117,7 +124,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
                         iv_xx.setImageResource(R.drawable.message_zhuse);
                         lin_search.setBackgroundResource(R.drawable.shape_alpha_a6);
                     } else {
-                        iv_xx.setImageResource(R.drawable.tongzhi);
+                        iv_xx.setImageResource(R.drawable.message2);
                         lin_search.setBackgroundResource(R.drawable.shape_alpha_white);
                     }
                 } else if (mDistanceY >= endOffset) {
@@ -162,9 +169,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
         mPresenter.getHomePageInfo();
 
-        if ("0".equalsIgnoreCase(MyApplication.user.getUserId())) {//未登录
-
-        } else {
+        if (Can.hasLoginedMethod()) {//未登录
             mPresenter.getMsgs();
         }
 

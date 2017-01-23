@@ -15,11 +15,23 @@
 
     <include layout="@layout/line_e" />
 
-    <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/rl_view"
+    <com.bb.hbx.widget.freshlayout.RefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/rl_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            android:background="@color/white"
+            />
+    </com.bb.hbx.widget.freshlayout.RefreshLayout>
+
+
 
 </LinearLayout>
 

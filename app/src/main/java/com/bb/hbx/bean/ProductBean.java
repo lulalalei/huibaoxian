@@ -19,7 +19,7 @@ public class ProductBean {
      */
 
     private String getDefault;
-    private String pageSize;
+    private int pageSize;
     private String totalCount;
     private List<Product> productList;
 
@@ -31,11 +31,11 @@ public class ProductBean {
         this.getDefault = getDefault;
     }
 
-    public String getPageSize() {
+    public int getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(String pageSize) {
+    public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
 

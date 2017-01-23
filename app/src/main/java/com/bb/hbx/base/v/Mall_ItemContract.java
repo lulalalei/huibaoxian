@@ -32,19 +32,22 @@ public interface Mall_ItemContract {
 
         TypeModel getTypeModel();
 
+        void stopRefresh();
+
+        void stopLoadMore();
+
+
 
     }
 
     abstract class Presenter extends BasePresenter<Mall_ItemContract.Model, Mall_ItemContract.View> {
 
 
-        public abstract void onRefresh();
 
-        public abstract void onLoadMore();
 
         public abstract List<Item> getList();
 
-        public abstract void getProducts();
+        public abstract void getProducts(int type);
 
 
     }

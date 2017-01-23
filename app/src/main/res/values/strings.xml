@@ -89,6 +89,7 @@
     <string name="claims_process">理赔流程</string>
     <string name="agreement2">我已阅读《投保须知》《保险条款》《健康告知》并同意上述协议约定</string>
     <string name="more_protection">查看保障详情</string>
+    <string name="xlmatch">销量\t%1$s份</string>
     <!-- behavior -->
 
     <string name="ToolbarAlphaBehavior">com.bb.hbx.behavior.ToolbarAlphaBehavior</string>

@@ -9,12 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.bean.Product;
+import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.bb.hbx.R.id.tv_added;
 
 /**
  * Created by Administrator on 2016/12/21.
@@ -86,13 +90,19 @@ public class MallAllProvide extends ItemViewProvider<Product, MallAllProvide.Vie
 
             tv_name.setText(squareBean.getProductName());
             tv_insurancecompany.setText(squareBean.getInsurerName());
-            tv_price.setText(context.getString(R.string.howPrice,squareBean.getMinPremium()));
+            tv_price.setText(context.getString(R.string.howPrice, squareBean.getMinPremium()));
 
+            tv_sales.setText(context.getString(R.string.xlmatch, squareBean.getTotalAmount()));
+            if (MyApplication.user.getIsBClient()) {
+                tv_pro.setVisibility(View.VISIBLE);
+                tv_sales.setVisibility(View.GONE);
+            } else {
+                tv_pro.setVisibility(View.GONE);
+                tv_sales.setVisibility(View.VISIBLE);
+            }
 
-//            tv_title.setText(squareBean.getTitle());
-//            tv_detail.setText(squareBean.getDetail());
-//            tv_promotion.setText(squareBean.getPromotion());
-//            tv_price.setText(squareBean.getPrice());
+            GlideUtil.getInstance().loadImage(context, img_pic, squareBean.getProductLogo(), true);
+
 
         }
 

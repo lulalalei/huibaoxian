@@ -8,6 +8,7 @@ import com.bb.hbx.base.v.Mall_ItemContract;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.RequestProduct;
 import com.bb.hbx.bean.TypeModel;
+import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.ArrayList;
@@ -32,6 +33,11 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
 
     private boolean isAlready = false;
 
+    private int loadType = DataLoadDirection.Refresh;
+
+
+    private boolean isloadmore = true;
+
 
     @Override
     public void onAttached() {
@@ -39,17 +45,38 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
 
             @Override
             public void successCallback(Result_Api api) {
+
+
                 if (api.getOutput() instanceof ProductBean) {
                     ProductBean bean = (ProductBean) api.getOutput();
                     isAlready = true;
+                    if (loadType == DataLoadDirection.Refresh) {
+                        items.clear();
+                        isloadmore = true;
+                    } else {
+
+                    }
+                    if (bean.getPageSize() < PAGE_SIZE) {
+                        isloadmore = false;
+                    }
                     items.addAll(bean.getProductList());
                     mView.notfiy();
+                }
+
+                if (loadType == DataLoadDirection.Refresh)
+                    mView.stopRefresh();
+                else {
+                    mView.stopLoadMore();
                 }
             }
 
             @Override
             public void failCallback() {
-
+                if (loadType == DataLoadDirection.Refresh)
+                    mView.stopRefresh();
+                else {
+                    mView.stopLoadMore();
+                }
             }
         };
         rp = new RequestProduct();
@@ -61,27 +88,31 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
 
 
     @Override
-    public void onRefresh() {
-
-    }
-
-    @Override
-    public void onLoadMore() {
-
-    }
-
-    @Override
     public List<Item> getList() {
         return items;
     }
 
     @Override
-    public void getProducts() {
-        if (isAlready) {
-            mView.notfiy();
-        } else {
+    public void getProducts(int type) {
+        loadType = type;
+        if (loadType == DataLoadDirection.Refresh) {
+            PAGE_INDEX = 1;
+            rp.setPageIndex(PAGE_INDEX);
             mModel.getProducts(rp, postCallback);
+        } else {
+            if (isloadmore) {
+                PAGE_INDEX++;
+                rp.setPageIndex(PAGE_INDEX);
+                mModel.getProducts(rp, postCallback);
+            } else {
+                mView.showMsg("没有数据啦...");
+                mView.stopLoadMore();
+
+            }
+
         }
+
+
     }
 
 
