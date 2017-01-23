@@ -12,6 +12,7 @@ import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.HomePageInfo;
+import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
@@ -52,6 +53,9 @@ public class HomePresenter extends HomeContract.Presenter {
                     mView.setAutuoBanner("1".equals(info.getLoop()) ? true : false);
                     dealWith(info);
 
+                } else if (api.getOutput() instanceof MsgInfo) {
+                    MsgInfo info = (MsgInfo) api.getOutput();
+                    mView.setMsgCount(info.getTotalCount());
                 }
             }
 

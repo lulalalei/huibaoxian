@@ -38,6 +38,8 @@ public interface HomeContract {
 
         void stopRefresh();
 
+        void setMsgCount(int count);
+
 
     }
 

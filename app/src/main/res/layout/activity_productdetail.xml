@@ -95,6 +95,7 @@
                     android:src="@drawable/holder" />
 
                 <TextView
+                    android:id="@+id/tv_matchall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/iv_pic"
@@ -186,6 +187,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_morefeature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
@@ -352,7 +354,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x46"
-                        android:src="@drawable/subtraction" />
+                        android:src="@drawable/subtraction"
+                        android:visibility="invisible" />
 
                     <TextView
                         android:id="@+id/tv_quantity"
@@ -472,13 +475,13 @@
             </LinearLayout>
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/agree_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y160"
                 android:layout_marginLeft="@dimen/x36"
+                android:layout_marginRight="@dimen/x36"
                 android:background="@color/A7"
-                android:gravity="center_vertical"
                 android:paddingTop="@dimen/y42">
 
                 <CheckBox
@@ -486,18 +489,22 @@
                     style="@style/mycheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:checked="true" />
 
                 <TextView
+                    android:id="@+id/tv_agree"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:singleLine="true"
+                    android:layout_alignTop="@+id/ck_agree"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/ck_agree"
+                    android:lineSpacingMultiplier="1.2"
                     android:text="@string/agreement2"
                     android:textAppearance="@style/TextAppear.Theme.A3_Size11" />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

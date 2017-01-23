@@ -5,7 +5,9 @@ import com.bb.hbx.bean.AreasListBean;
 import com.bb.hbx.bean.Consignees;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
+import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.ProductBean;
+import com.bb.hbx.bean.ProductDetail;
 import com.bb.hbx.bean.RequestProduct;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.bean.UpdateConsignee;
@@ -60,7 +62,7 @@ public interface ApiService {
     //忘记密码------待测
     @FormUrlEncoded
     @POST("api.do?method=forgetLoginPwd&type=post")
-    Call<String> forgetLoginPwd(@Field("mobile") String mobile, @Field("newPwd") String newPwd, @Field("resetType") String resetType,@Field("smsCode") String smsCode);
+    Call<String> forgetLoginPwd(@Field("mobile") String mobile, @Field("newPwd") String newPwd, @Field("resetType") String resetType, @Field("smsCode") String smsCode);
 
     //我的首页
     @FormUrlEncoded
@@ -85,7 +87,7 @@ public interface ApiService {
     //修改用户信息,邮箱地址
     @FormUrlEncoded
     @POST("api.do?method=updateUserInfo&type=post")
-    Call<Result_Api> updateUserInfoEmail(@Field("userId") String userId,@Field("email") String email);
+    Call<Result_Api> updateUserInfoEmail(@Field("userId") String userId, @Field("email") String email);
 
     //获取收货人信息
     @FormUrlEncoded
@@ -129,7 +131,12 @@ public interface ApiService {
     //获取消息列表
     @FormUrlEncoded
     @POST("api.do?method=getMsgs&type=post")
-    Call<Result_Api<String>> getMsgs(@Field("userId") String userId, @Field("msgType") String msgType,
-                                                   @Field("sts") String sts, @Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
+    Call<Result_Api<MsgInfo>> getMsgs(@Field("userId") String userId, @Field("msgType") String msgType,
+                                      @Field("sts") String sts, @Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
+
+    //获取产品详情
+    @FormUrlEncoded
+    @POST("api.do?method=getProductDetail&type=post")
+    Call<Result_Api<ProductDetail>> getProductDetail(@Field("productId") String productId);
 
 }

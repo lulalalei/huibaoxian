@@ -49,8 +49,6 @@ import butterknife.BindView;
 public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> implements HomeContract.View, View.OnClickListener {
 
 
-
-
     @BindView(R.id.tv_messagecount)
     TextView tv_messagecount;
 
@@ -171,6 +169,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
         if (Can.hasLoginedMethod()) {//未登录
             mPresenter.getMsgs();
+            tv_messagecount.setVisibility(View.VISIBLE);
+        } else {
+            tv_messagecount.setVisibility(View.GONE);
         }
 
 
@@ -201,6 +202,18 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     @Override
     public void stopRefresh() {
         refresh.stopRefresh(true);
+    }
+
+    @Override
+    public void setMsgCount(int count) {
+        tv_messagecount.setVisibility(View.VISIBLE);
+        if (count == 0) {
+            tv_messagecount.setVisibility(View.GONE);
+        } else if (count > 9) {
+            tv_messagecount.setText("9+");
+        } else {
+            tv_messagecount.setText(count + "");
+        }
     }
 
 
