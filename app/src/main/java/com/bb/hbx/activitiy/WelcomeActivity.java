@@ -16,6 +16,7 @@ import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.User;
+import com.bb.hbx.service.DownloadIconService;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.DeviceUtils;
 import com.bb.hbx.utils.LocationService;
@@ -54,6 +55,8 @@ public class WelcomeActivity extends BaseActivity {
         ShareSPUtils.initShareSP(this);
         MyUsersSqlite.initUsersdb(this);
 
+        Intent intentService = new Intent(this, DownloadIconService.class);
+        startService(intentService);
         //boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
         Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
         if (cursor!=null)
@@ -64,14 +67,14 @@ public class WelcomeActivity extends BaseActivity {
                 values.put("currentUser","currentUser");
                 values.put("hasLogined","false");//默认false,未登录
                 values.put("isBClient",false);//默认false
-                values.put("sessionId","123");
+                values.put("sessionId","");
                 values.put("userId","0");
                 values.put("gender","0");//默认为0
                 long flag = MyUsersSqlite.db.insert("userstb", null, values);
                 //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
                 values.clear();
                 MyApplication.user.setUserId("0");
-                MyApplication.user.setSessionId("123");
+                MyApplication.user.setSessionId("");
                 MyApplication.user.setIsBClient(false);
             }
             else

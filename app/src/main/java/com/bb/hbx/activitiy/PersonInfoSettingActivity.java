@@ -66,6 +66,7 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
     TextView camera_tv;
     TextView mapstorage_tv;
 
+    String userId;
     String name;
     String email;
     File picFile;
@@ -117,6 +118,7 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
             {
                 /*String userId = cursor.getString(cursor.getColumnIndex("userId"));
                 String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));*/
+                userId = cursor.getString(cursor.getColumnIndex("userId"));
                 name = cursor.getString(cursor.getColumnIndex("name"));
                 String gender = cursor.getString(cursor.getColumnIndex("gender"));
                 email = cursor.getString(cursor.getColumnIndex("email"));
@@ -232,6 +234,7 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.address_layout:
                 intent.setClass(PersonInfoSettingActivity.this,AddressManagerActivity.class);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
                 break;
             case R.id.realNameIdentify_layout:

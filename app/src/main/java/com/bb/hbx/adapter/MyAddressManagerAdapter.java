@@ -2,7 +2,6 @@ package com.bb.hbx.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.AddressBean;
+import com.bb.hbx.bean.Consignees;
+import com.bb.hbx.interfaces.OnItemClickListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,18 +25,27 @@ import butterknife.ButterKnife;
 
 public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManagerAdapter.MyViewHolder>{
 
-    ArrayList<AddressBean> list;
+    List<Consignees.CneeListBean> list;
     Context mContext;
-    HashMap<Integer,Boolean> map;
+    HashMap<Integer,String> map;
     LayoutInflater inflater;
-    Boolean isSelected;
+    String isDefaultFlag="0";
     int prePosition;
+    OnItemClickListener onMyItemClickListener;
 
-    public MyAddressManagerAdapter(ArrayList<AddressBean> list, Context mContext, HashMap<Integer, Boolean> map) {
+    public MyAddressManagerAdapter(List<Consignees.CneeListBean> list, Context mContext, HashMap<Integer, String> map) {
         this.list = list;
         this.mContext = mContext;
         this.map = map;
         inflater=LayoutInflater.from(mContext);
+    }
+
+    public void setPrePosition(int prePosition) {
+        this.prePosition = prePosition;
+    }
+
+    public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
+        this.onMyItemClickListener = onMyItemClickListener;
     }
 
     @Override
@@ -47,33 +56,33 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.name_tv.setText(list.get(position).getName());
-        holder.phone_tv.setText(list.get(position).getPhone());
+        holder.name_tv.setText(list.get(position).getCneeName());
+        holder.phone_tv.setText(list.get(position).getMobile());
         holder.address_tv.setText(list.get(position).getAddress());
         holder.select_iv.setTag(position);
-        isSelected=map.get(position);
-        Log.e("===position=====","=========="+position);
+        isDefaultFlag=map.get(position);
         final MyViewHolder finalHolder=holder;
-        finalHolder.select_iv.setSelected(isSelected);
-        holder.select_iv.setOnClickListener(new View.OnClickListener() {
+        finalHolder.select_iv.setSelected("1".equals(isDefaultFlag)?true:false);
+        holder.select_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (finalHolder.select_iv.getTag()!=null&&(int)finalHolder.select_iv.getTag()==position)
                 {
-                    isSelected=map.get(position);
-                    if (isSelected)
+                    isDefaultFlag=map.get(position);
+                    if ("1".equals(isDefaultFlag)?true:false)
                     {
                         finalHolder.select_iv.setSelected(false);
-                        map.put(position,false);
+                        map.put(position,"0");
                         notifyDataSetChanged();
                     }
                     else
                     {
                         finalHolder.select_iv.setSelected(true);
-                        map.put(prePosition,false);
-                        map.put(position,true);
+                        map.put(prePosition,"0");
+                        map.put(position,"1");
                         prePosition=position;
                         notifyDataSetChanged();
+                        onMyItemClickListener.onMyItemClickListener(position);
                     }
                 }
             }
@@ -95,6 +104,8 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
         TextView address_tv;
         @BindView(R.id.select_iv)
         ImageView select_iv;
+        @BindView(R.id.select_layout)
+        RelativeLayout select_layout;
         @BindView(R.id.address_layout)
         RelativeLayout address_layout;
         @BindView(R.id.delete_layout)

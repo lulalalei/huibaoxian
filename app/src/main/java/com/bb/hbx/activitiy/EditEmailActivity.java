@@ -91,7 +91,7 @@ public class EditEmailActivity extends BaseActivity implements View.OnClickListe
                                 call.enqueue(new Callback() {
                                     @Override
                                     public void onResponse(Call call, Response response) {
-                                        showTip("更新用户名成功!");
+                                        showTip("更新邮箱地址成功!");
                                         MyUsersSqlite.db.execSQL("update userstb set email=? where currentUser=currentUser ",
                                                 new String[]{email});
                                         intentFromPersonInfo.putExtra("email",email);

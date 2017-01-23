@@ -27,6 +27,7 @@ import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.bean.Account;
 import com.bb.hbx.bean.UserInfo;
 import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.ShareSPUtils;
@@ -57,6 +58,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     TextView myAsset_tv;
     @BindView(R.id.score_layout)
     RelativeLayout score_layout;
+    @BindView(R.id.canCash_tv)
+    TextView canCash_tv;
+    @BindView(R.id.leftMoney_tv)
+    TextView leftMoney_tv;
+    @BindView(R.id.score_tv)
+    TextView score_tv;
+    @BindView(R.id.redPacket_tv)
+    TextView redPacket_tv;
     @BindView(R.id.identify_layout)
     FrameLayout identify_layout;
     @BindView(R.id.redPacket_layout)
@@ -105,7 +114,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
         ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,/*,hasLogin_tv,*/mContext);
         hasLoginShow();
+        //updateMyAccount();
     }
+
+
 
     @Override
     protected void initdate(Bundle savedInstanceState) {
@@ -193,6 +205,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                     userName = cursor.getString(cursor.getColumnIndex("name"));
                     if (!TextUtils.isEmpty(userId)&&!TextUtils.isEmpty(sessionId))
                     {
+                        //调用更新账户方法
+                        updateMyAccount(userId);
                         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
                         Call call=service.getUserInfo(sessionId,userId);
                         call.enqueue(new Callback() {
@@ -252,5 +266,30 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 Toast.makeText(mContext,"用户名为空",Toast.LENGTH_SHORT);
             }
         }
+    }
+    //更新我的资产
+    private void updateMyAccount(String userId) {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getAccount(userId);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                Account account = (Account) body.getOutput();
+                String acctBalance = account.getAcctBalance();//可提现????
+                String acctSum = account.getAcctSum();//余额????
+                String accountScore = account.getAccountScore();
+                String bonusCount = account.getBonusCount();
+                canCash_tv.setText(TextUtils.isEmpty(acctBalance)?"0":acctBalance);
+                leftMoney_tv.setText(TextUtils.isEmpty(acctSum)?"0":acctSum);
+                score_tv.setText(TextUtils.isEmpty(accountScore)?"0":accountScore);
+                redPacket_tv.setText(TextUtils.isEmpty(bonusCount)?"0":bonusCount);
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                showTip("服务器返回出错啦!");
+            }
+        });
     }
 }

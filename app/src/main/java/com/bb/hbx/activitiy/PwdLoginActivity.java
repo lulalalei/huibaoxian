@@ -95,6 +95,8 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
     private int keyHeight = 0;
 
     Intent intentFromLogin;
+
+    String respCode;
     @Override
     public void loginSuccess() {
 
@@ -192,6 +194,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                     //mPresenter.login(et_phone.getText().toString().trim(), et_psw.getText().toString().trim());
                     final String phone = et_phone.getText().toString();
                     final String pwd = et_psw.getText().toString();
+
                     Toast.makeText(mContext,"phone:"+phone+"  pwd:"+pwd,Toast.LENGTH_SHORT);
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
                     Call call=service.login(phone,pwd,1+"");
@@ -201,6 +204,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             //32 d5f1744756eca2250a22ae3d974d0794
                             Result_Api body = (Result_Api) response.body();
                             User user = (User) body.getOutput();
+                            respCode = body.getRespCode();
                             String userId = user.getUserId();
                             String sessionId = user.getSessionId();
                             String isBClient = user.getIsBClient()+"";
@@ -228,21 +232,18 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             //AppManager.getInstance().showActivity(HomeActivity.class, null);
                             setResult(Can.FINISH_LOGIN,intentFromLogin);
                             finish();
-                           /* ContentValues values = new ContentValues();
-                            values.put("userId",userId);
-                            values.put("sessionId",sessionId);
-                            values.put("isBClient",false);//默认false
-                            values.put("name",phone);//默认名称为手机号
-                            values.put("phone",phone);
-                            values.put("pwd",pwd);
-                            values.put("usericon",userId);
-                            long flag = MyUsersSqlite.db.insert("userstb", null, values);
-                            values.clear();*/
                         }
 
                         @Override
                         public void onFailure(Call call, Throwable t) {
-                            Toast.makeText(mContext,"该用户未注册!",Toast.LENGTH_SHORT).show();
+                            if ("201031".equals(respCode))
+                            {
+                                Toast.makeText(mContext,"该用户未注册!",Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(mContext,"密码有误!",Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 } else
