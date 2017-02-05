@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -29,6 +30,8 @@ import okhttp3.Response;
 import okio.Buffer;
 
 
+
+
 /**
  * Created by Administrator on 2016/12/1.
  */
@@ -36,13 +39,15 @@ import okio.Buffer;
 public class BasicParamsInterceptor implements Interceptor {
 
 
-    public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded;charset=utf-8");
-
+    //public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded;charset=utf-8");
+    public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json;charset=UTF-8");
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request.Builder requestBuilder = request.newBuilder();
+        HttpUrl url=request.url();
+        String params=url.encodedQuery();
         requestBuilder.addHeader("height", MyApplication.heightPixels + "");
         requestBuilder.addHeader("width", MyApplication.widthPixels + "");
         requestBuilder.addHeader("osName", Constants.OSNAME);
@@ -75,9 +80,21 @@ public class BasicParamsInterceptor implements Interceptor {
         }
 
         String sign = MD5Util.MD5(jsonObject.toString() + GenApiHashUrl.md5_key).toLowerCase();
-        treeMap.put("input", jsonObject.toString());
-        treeMap.put("sign", sign);
-        RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
+//        treeMap.put("input", jsonObject.toString());
+//        treeMap.put("sign", sign);
+//        treeMap.put("method",params.substring(7,params.indexOf('&')));
+
+        JSONObject js=new JSONObject();
+        try {
+            js.put("input", jsonObject.toString());
+            js.put("sign", sign);
+            js.put("method",params.substring(7,params.indexOf('&')));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, js.toString().getBytes());
+
+       // RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
         requestBuilder.method(request.method(), body);
         request = requestBuilder.build();
         Log.i("OkHttp", request.headers().toString());
