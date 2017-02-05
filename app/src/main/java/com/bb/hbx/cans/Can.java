@@ -5,13 +5,20 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 import com.bb.hbx.MyApplication;
+import com.bb.hbx.fragment.AllInCarInsuFragment;
+import com.bb.hbx.fragment.AllInMyOrderFragment;
 import com.bb.hbx.fragment.AllInPIOFragment;
 import com.bb.hbx.fragment.HadPaiedInPIOFragment;
+import com.bb.hbx.fragment.HadSentInCarInsuFragment;
+import com.bb.hbx.fragment.HadStopInCarInsuFragment;
+import com.bb.hbx.fragment.HasFinishedInMyOrderFragment;
 import com.bb.hbx.fragment.RecordInRedPaFragment;
 import com.bb.hbx.fragment.UnEfficientInPIOFragment;
 import com.bb.hbx.fragment.UnEfficientInRedPaFragment;
 import com.bb.hbx.fragment.UnPayInPIOFragment;
 import com.bb.hbx.fragment.UnUsedInRedPaFragment;
+import com.bb.hbx.fragment.UnderPayInMyOrderFragment;
+import com.bb.hbx.fragment.UnderSendInCarInsuFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -86,10 +93,19 @@ public class Can {
     public static int preFragmentPositionInPIO;
     //在 我的--红包--我的红包 页面中记录上一个fragment的位置,用于hide,show上一个fragment
     public static int preFragmentPositionInRedP;
+    //在 我的--我的订单 页面中记录上一个fragment的位置,用于hide,show上一个fragment
+    public static int preFragmentPositionInMyOrder;
+    //在 我的--车险订单 页面中记录上一个fragment的位置,用于hide,show上一个fragment
+    public static int preFragmentPositionInCIO;
     //容纳 我的--个险--个险订单 页面中的四个fragment,
     public static ArrayList<Fragment> pIOFragmentList;
     //容纳 我的--红包--我的红包 页面中的三个fragment,
     public static ArrayList<Fragment> redPFragmentList;
+    //容纳 我的--我的订单 页面中的三个fragment,
+    public static ArrayList<Fragment> myOrderFragmentList;
+    //容纳 我的--车险订单 页面中的四个fragment,
+    public static ArrayList<Fragment> carIOFragmentList;
+
     public static ArrayList<Fragment> getFragmentListInPIO()
     {
         ArrayList<Fragment> fragmentList=new ArrayList<>();
@@ -105,6 +121,23 @@ public class Can {
         fragmentList.add(UnUsedInRedPaFragment.getInstance());
         fragmentList.add(RecordInRedPaFragment.getInstance());
         fragmentList.add(UnEfficientInRedPaFragment.getInstance());
+        return fragmentList;
+    }
+    public static ArrayList<Fragment> getFragmentListInMyOrder()
+    {
+        ArrayList<Fragment> fragmentList=new ArrayList<>();
+        fragmentList.add(AllInMyOrderFragment.getInstance());
+        fragmentList.add(UnderPayInMyOrderFragment.getInstance());
+        fragmentList.add(HasFinishedInMyOrderFragment.getInstance());
+        return fragmentList;
+    }
+    public static ArrayList<Fragment> getFragmentListInCIO()
+    {
+        ArrayList<Fragment> fragmentList=new ArrayList<>();
+        fragmentList.add(AllInCarInsuFragment.getInstance());
+        fragmentList.add(UnderSendInCarInsuFragment.getInstance());
+        fragmentList.add(HadSentInCarInsuFragment.getInstance());
+        fragmentList.add(HadStopInCarInsuFragment.getInstance());
         return fragmentList;
     }
 }

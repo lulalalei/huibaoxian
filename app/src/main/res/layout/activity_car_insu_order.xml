@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_red_packet"
+    android:id="@+id/activity_car_insu_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/A7"
-    tools:context="com.bb.hbx.activitiy.RedPacketActivity">
+    tools:context="com.bb.hbx.activitiy.CarInsuOrderActivity">
 
     <RelativeLayout
         android:id="@+id/topbar_layout"
@@ -31,20 +31,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="我的红包"
+            android:text="车险保单"
             android:textSize="17sp"
             android:textColor="@color/A1"
             android:layout_centerHorizontal="true"
             android:gravity="center"/>
-        <ImageView
-            android:id="@+id/menu_iv"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/lvwenhao"
-            android:scaleType="centerCrop"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dp"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -71,5 +62,4 @@
             android:id="@+id/viewPager">
         </android.support.v4.view.ViewPager>
     </LinearLayout>
-
 </RelativeLayout>

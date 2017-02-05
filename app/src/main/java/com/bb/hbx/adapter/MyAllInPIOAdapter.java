@@ -67,7 +67,7 @@ public class MyAllInPIOAdapter extends BaseAdapter{
         holder.theInsured.setText(list.get(position).getTheInsured());
         holder.insuranceHolder_tv.setText(list.get(position).getInsuranceHolder());
         holder.time_tv.setText(list.get(position).getTime());
-        holder.state_tv.setText(list.get(position).getState());
+        //holder.state_tv.setText(list.get(position).getState());
         return convertView;
     }
 
@@ -82,8 +82,8 @@ public class MyAllInPIOAdapter extends BaseAdapter{
         TextView insuranceHolder_tv;
         @BindView(R.id.time_tv)
         TextView time_tv;
-        @BindView(R.id.state_tv)
-        TextView state_tv;
+       /* @BindView(R.id.state_tv)
+        TextView state_tv;*/
 
     }
 }

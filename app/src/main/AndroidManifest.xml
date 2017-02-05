@@ -111,8 +111,9 @@
         <activity android:name=".activitiy.RealNameCommitActivity" />
         <activity android:name=".activitiy.RealNameFinishActivity" />
         <activity android:name=".activitiy.SetPayPwdActivity" />
-        <activity android:name=".activitiy.EditEmailActivity"></activity>
-        <service android:name=".service.DownloadIconService"></service>
+        <activity android:name=".activitiy.EditEmailActivity" />
+
+        <service android:name=".service.DownloadIconService" />
 
         <activity
             android:name=".activitiy.ProductDetailActivity"
@@ -120,6 +121,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activitiy.MyOrderActivity" />
+        <activity android:name=".activitiy.CarInsuOrderActivity" />
+        <activity android:name=".activitiy.ModifyAddressActivity"></activity>
     </application>
 
 </manifest>

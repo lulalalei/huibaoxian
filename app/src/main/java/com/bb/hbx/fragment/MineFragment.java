@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.CarInsuOrderActivity;
 import com.bb.hbx.activitiy.MyAssertActivity;
+import com.bb.hbx.activitiy.MyOrderActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
 import com.bb.hbx.activitiy.PersonInfoSettingActivity;
 import com.bb.hbx.activitiy.PurchaseDetailActivity;
@@ -52,8 +54,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     CircleImageView userIcon_civ;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.myOrder_layout)
+    RelativeLayout myOrder_layout;
     @BindView(R.id.pInsurance_layout)
     RelativeLayout pInsurance_layout;
+    @BindView(R.id.cInsurance_layout)
+    RelativeLayout cInsurance_layout;
     @BindView(R.id.myAsset_tv)
     TextView myAsset_tv;
     @BindView(R.id.score_layout)
@@ -104,7 +110,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         setting_iv.setOnClickListener(this);
         message_iv.setOnClickListener(this);
         userIcon_civ.setOnClickListener(this);
+        myOrder_layout.setOnClickListener(this);
         pInsurance_layout.setOnClickListener(this);
+        cInsurance_layout.setOnClickListener(this);
         myAsset_tv.setOnClickListener(this);
         score_layout.setOnClickListener(this);
         redPacket_layout.setOnClickListener(this);
@@ -142,8 +150,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
             case R.id.setting_iv:
                 Toast.makeText(mContext,"设置",Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.myOrder_layout:
+                intent.setClass(mContext,MyOrderActivity.class);
+                startActivity(intent);
+                break;
             case R.id.pInsurance_layout:
                 intent.setClass(mContext,PerInsuOrderActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.cInsurance_layout:
+                intent.setClass(mContext,CarInsuOrderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.userIcon_civ:

@@ -210,6 +210,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             String isBClient = user.getIsBClient()+"";
                             String gender = user.getGender();
                             String userName = user.getNickName();
+                            String email = user.getEmail();
                             if (TextUtils.isEmpty(gender))
                             {
                                 gender="0";
@@ -221,8 +222,8 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
                             ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, pwd);
                             //更新表数据
-                            MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
-                                    new String[]{"true",userId,sessionId,isBClient,userName,gender,phone,pwd,null});
+                            MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
+                                    new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,pwd,null});
                             showTip("登陆成功");
 
                             MyApplication.user.setUserId(userId);

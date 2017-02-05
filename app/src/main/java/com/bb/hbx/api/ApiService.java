@@ -1,8 +1,10 @@
 package com.bb.hbx.api;
 
 import com.bb.hbx.bean.Account;
+import com.bb.hbx.bean.AddConsignee;
 import com.bb.hbx.bean.AreasListBean;
 import com.bb.hbx.bean.Consignees;
+import com.bb.hbx.bean.DeleteConsignee;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
@@ -101,7 +103,19 @@ public interface ApiService {
                                                       @Field("mobile") String mobile, @Field("areaCode") String areaCode, @Field("address") String address,
                                                       @Field("defaultFlag") String defaultFlag);
 
-    //获取地区信息---------待测
+    //新增收货人信息
+    @FormUrlEncoded
+    @POST("api.do?method=addConsignee&type=post")
+    Call<Result_Api<AddConsignee>> addConsignee(@Field("userId") String userId, @Field("cneeName") String cneeName, @Field("mobile") String mobile,
+                                    @Field("areaCode") String areaCode, @Field("areaId") String areaId, @Field("address") String address,
+                                    @Field("syncUser") String syncUser, @Field("defaultFlag") String defaultFlag);
+
+    //删除收货人信息--待测
+    @FormUrlEncoded
+    @POST("api.do?method=delConsignee&type=post")
+    Call<Result_Api<DeleteConsignee>> delConsignee(@Field("userId") String userId, @Field("cneeId") String cneeId);
+
+    //获取地区信息
     @FormUrlEncoded
     @POST("api.do?method=getAreaList&type=post")
     Call<Result_Api<AreasListBean>> getAreaList(@Field("findAllFlag") boolean findAllFlag);

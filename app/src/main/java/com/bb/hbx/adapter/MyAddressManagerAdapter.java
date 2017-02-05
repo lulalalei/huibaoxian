@@ -32,6 +32,8 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
     String isDefaultFlag="0";
     int prePosition;
     OnItemClickListener onMyItemClickListener;
+    OnItemClickListener onMyItemDeleteClickListener;
+    OnItemClickListener onMyItemEditClickListener;
 
     public MyAddressManagerAdapter(List<Consignees.CneeListBean> list, Context mContext, HashMap<Integer, String> map) {
         this.list = list;
@@ -46,6 +48,14 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
 
     public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
         this.onMyItemClickListener = onMyItemClickListener;
+    }
+
+    public void setOnMyItemDeleteClickListener(OnItemClickListener onMyItemDeleteClickListener) {
+        this.onMyItemDeleteClickListener = onMyItemDeleteClickListener;
+    }
+
+    public void setOnMyItemEditClickListener(OnItemClickListener onMyItemEditClickListener) {
+        this.onMyItemEditClickListener = onMyItemEditClickListener;
     }
 
     @Override
@@ -71,9 +81,9 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
                     isDefaultFlag=map.get(position);
                     if ("1".equals(isDefaultFlag)?true:false)
                     {
-                        finalHolder.select_iv.setSelected(false);
+                        /*finalHolder.select_iv.setSelected(false);
                         map.put(position,"0");
-                        notifyDataSetChanged();
+                        notifyDataSetChanged();*/
                     }
                     else
                     {
@@ -85,6 +95,18 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
                         onMyItemClickListener.onMyItemClickListener(position);
                     }
                 }
+            }
+        });
+        holder.delete_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMyItemDeleteClickListener.onMyItemClickListener(position);
+            }
+        });
+        holder.edit_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMyItemEditClickListener.onMyItemClickListener(position);
             }
         });
     }

@@ -12,7 +12,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -30,7 +29,6 @@ import com.bb.hbx.widget.banner.transformer.TransitionEffect;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class BGABanner extends RelativeLayout implements BGAViewPager.AutoPlayDelegate, ViewPager.OnPageChangeListener {
@@ -502,9 +500,10 @@ public class BGABanner extends RelativeLayout implements BGAViewPager.AutoPlayDe
 
         if (mAutoPlayAble) {
             mViewPager.setAutoPlayDelegate(this);
-
-            int zeroItem = Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2) % mViews.size();
-            mViewPager.setCurrentItem(zeroItem);
+            if(mViews.size()!=0) {
+                int zeroItem = Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2) % mViews.size();
+                mViewPager.setCurrentItem(zeroItem);
+            }
 
             startAutoPlay();
         } else {
@@ -726,7 +725,9 @@ public class BGABanner extends RelativeLayout implements BGAViewPager.AutoPlayDe
 
         @Override
         public int getCount() {
-            return mViews == null ? 0 : (mAutoPlayAble ? Integer.MAX_VALUE : mViews.size());
+            if(mViews==null||mViews.size()==0)
+                return 0;
+            return (mAutoPlayAble ? Integer.MAX_VALUE : mViews.size());
         }
 
         @Override

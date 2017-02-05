@@ -1,7 +1,6 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,11 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.api.ApiService;
-import com.bb.hbx.api.Result_Api;
-import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.bean.AddConsignee;
 import com.smarttop.library.bean.City;
 import com.smarttop.library.bean.County;
 import com.smarttop.library.bean.Province;
@@ -24,11 +19,8 @@ import com.smarttop.library.widget.BottomDialog;
 import com.smarttop.library.widget.OnAddressSelectedListener;
 
 import butterknife.BindView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class BuildNewAddressActivity extends BaseActivity implements View.OnClickListener,OnAddressSelectedListener,AddressSelector.OnDialogCloseListener{
+public class ModifyAddressActivity extends BaseActivity implements View.OnClickListener,OnAddressSelectedListener,AddressSelector.OnDialogCloseListener{
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
@@ -51,22 +43,15 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
     @BindView(R.id.save_tv)
     TextView save_tv;
 
-    boolean isNormalAddress;
-
     private BottomDialog dialog;
     private String provinceCode;
     private String cityCode;
     private String countyCode;
     private String streetCode;
 
-    String userId;
-    String areaId;
-    String defaultFlag="0";
-    boolean syncUser;
-    String address;
     @Override
     public int getLayoutId() {
-        return R.layout.activity_build_new_address;
+        return R.layout.activity_modify_address;
     }
 
     @Override
@@ -85,8 +70,20 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
     @Override
     public void initdata() {
         Intent intent = getIntent();
-        userId = intent.getStringExtra("userId");
-        syncUser = intent.getBooleanExtra("syncUser",false);
+        String cneeName = intent.getStringExtra("cneeName");
+        String mobile = intent.getStringExtra("mobile");
+        String areaCode = intent.getStringExtra("areaCode");
+        String city = intent.getStringExtra("city");
+        String address = intent.getStringExtra("address");
+        String defaultFlag = intent.getStringExtra("defaultFlag");
+        String userId = intent.getStringExtra("userId");
+        String cneeId = intent.getStringExtra("cneeId");
+        name_et.setText(cneeName);
+        phone_et.setText(mobile);
+        post_et.setText(areaCode);
+        address_tv.setText(city);
+        address_tv.setTextColor(getResources().getColor(R.color.A3));
+        street_et.setText(address);
     }
 
     @Override
@@ -97,6 +94,7 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.address_layout:
+                //showTip("address_layout");
                 if (dialog != null) {
                     dialog.show();
                 } else {
@@ -109,64 +107,12 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
                     dialog.setTextUnSelectedColor(android.R.color.holo_blue_light);//设置字体没有获得焦点的颜色
                     dialog.show();
                 }
-                /*ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                Call call=service.getAreaList(true);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-
-                    }
-                });*/
                 break;
             case R.id.isNormalAddress_layout:
-                if (isNormalAddress)
-                {
-                    isNormalAddress_iv.setSelected(false);
-                    defaultFlag="0";
-                    isNormalAddress=false;
-                }
-                else
-                {
-                    isNormalAddress_iv.setSelected(true);
-                    defaultFlag="1";
-                    isNormalAddress=true;
-                }
+                showTip("isNormalAddress_layout");
                 break;
             case R.id.save_tv:
-                String name = name_et.getText().toString();
-                String phone = phone_et.getText().toString();
-                String post = post_et.getText().toString();
-                String street = street_et.getText().toString();
-                if (TextUtils.isEmpty(name)||TextUtils.isEmpty(phone)||
-                        TextUtils.isEmpty(post)||TextUtils.isEmpty(areaId)||
-                        TextUtils.isEmpty(address) ||TextUtils.isEmpty(street))
-                {
-                    showTip("请完善收货人信息");
-                }
-                else
-                {
-                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.addConsignee(userId,name,phone,post,areaId,address+street,syncUser?"1":"0",defaultFlag);
-                    showTip("=====defaultFlag======"+defaultFlag);
-                    call.enqueue(new Callback() {
-                        @Override
-                        public void onResponse(Call call, Response response) {
-                            Result_Api body = (Result_Api) response.body();
-                            AddConsignee addConsignee = (AddConsignee) body.getOutput();
-                            int cneeId = addConsignee.getCneeId();
-                        }
-
-                        @Override
-                        public void onFailure(Call call, Throwable t) {
-                            showTip("请检查填写信息");
-                        }
-                    });
-                }
+                showTip("保存");
                 break;
             default:
                 break;
@@ -192,8 +138,8 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
         LogUtil.d("数据", "街道id=" + streetCode);
         String s = (province == null ? "" : province.name) + (city == null ? "" : city.name) + (county == null ? "" : county.name) +
                 (street == null ? "" : street.name);
-        address=s;
-        areaId=city.id+"";
+        //address=s;
+        //areaId=city.id+"";
         address_tv.setText(s);
         address_tv.setTextColor(getResources().getColor(R.color.A3));
         if (dialog != null) {

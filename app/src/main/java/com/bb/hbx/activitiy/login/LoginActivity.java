@@ -317,6 +317,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 String isBClient = user.getIsBClient()+"";
                 String gender = user.getGender();
                 String userName = user.getNickName();
+                String email = user.getEmail();
                 if (TextUtils.isEmpty(gender))
                 {
                     gender="0";
@@ -327,8 +328,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 }
                 ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, null);
                 //更新表数据
-                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,phone=?,usericon=? where currentUser=currentUser ",
-                        new String[]{"true",userId,sessionId,isBClient,userName,gender,phone,null});
+                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,usericon=? where currentUser=currentUser ",
+                        new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,null});
                 showTip("登陆成功");
 
                 MyApplication.user.setUserId(userId);
