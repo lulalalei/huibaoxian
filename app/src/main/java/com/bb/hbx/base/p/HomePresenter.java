@@ -2,6 +2,7 @@ package com.bb.hbx.base.p;
 
 
 import android.support.v7.widget.GridLayoutManager;
+import android.util.Log;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -50,6 +51,7 @@ public class HomePresenter extends HomeContract.Presenter {
                 mView.stopRefresh();
                 if (api.getOutput() instanceof HomePageInfo) {
                     HomePageInfo info = (HomePageInfo) api.getOutput();
+                    MyApplication.areaVersion = info.getAreaVersion();
                     mView.setAutuoBanner("1".equals(info.getLoop()) ? true : false);
                     dealWith(info);
 
