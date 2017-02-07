@@ -25,6 +25,7 @@ public class MyApplication extends Application {
     public static String city;//城市
 
 
+    public static String areaVersion = "";
 
 
     public static String DUID = "";// 设备唯一码
@@ -44,16 +45,12 @@ public class MyApplication extends Application {
     }
 
 
-
-
-
-
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
         INSTANCE = this;
- //       locationService = new LocationService(context);
+        //       locationService = new LocationService(context);
 //        CrashHandler crashHandler = CrashHandler.getInstance();
 //        crashHandler.init(context);
 
