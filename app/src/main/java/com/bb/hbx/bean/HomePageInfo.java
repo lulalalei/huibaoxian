@@ -31,6 +31,16 @@ public class HomePageInfo implements Serializable {
 
     private String iataCodeVersion;
 
+    private String areaVersion;//地区版本
+
+
+    public String getAreaVersion() {
+        return areaVersion;
+    }
+
+    public void setAreaVersion(String areaVersion) {
+        this.areaVersion = areaVersion;
+    }
 
     public String getLoop() {
         return loop;
