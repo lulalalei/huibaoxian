@@ -1,57 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="18dp"
+    android:layout_marginTop="18dp">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:paddingLeft="26dp"
+        android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="个人借款"
-            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textColor="@color/A3"
+            android:layout_marginTop="30dp"
             android:id="@+id/title_tv"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="订单号:xxxx"
+            android:text="保单:xxxx"
             android:id="@+id/number_tv"
+            android:textSize="11sp"
+            android:textColor="@color/A5"
             android:layout_below="@id/title_tv"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="21dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="被保险人:"
-            android:id="@+id/theInsured"
+            android:text="被保人:罗伟"
+            android:textSize="11sp"
+            android:textColor="@color/A5"
+            android:id="@+id/theInsured_tv"
             android:layout_below="@id/number_tv"
-            android:layout_marginTop="10dp"/>
-        android:layout_marginTop="10dp"/>
+            android:layout_marginTop="8dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="投保人:"
+            android:text="投保人:罗伟"
+            android:textSize="11sp"
+            android:textColor="@color/A5"
             android:id="@+id/insuranceHolder_tv"
-            android:layout_below="@id/theInsured"
-            android:layout_marginTop="10dp"/>
+            android:layout_below="@id/theInsured_tv"
+            android:layout_marginTop="8dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="保险时间:"
+            android:text="保险期间:2016-12-10至2017-12-09"
+            android:textSize="11sp"
+            android:textColor="@color/A5"
             android:id="@+id/time_tv"
             android:layout_below="@id/insuranceHolder_tv"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="8dp"/>
         <TextView
-            android:id="@+id/state_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="去支付"
-            android:padding="10dp"
-            android:background="@drawable/identify_shape"
+            android:text="订单金额:154.00元"
+            android:textSize="12sp"
+            android:textColor="@color/A3"
+            android:id="@+id/price_tv"
+            android:layout_below="@id/time_tv"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推广费:32.00元"
+            android:textSize="12sp"
+            android:textColor="@color/A3"
+            android:id="@+id/income_tv"
+            android:layout_alignBottom="@id/price_tv"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="26dp"/>
+        <ImageView
+            android:id="@+id/state_iv"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:src="@drawable/baodan_baozhangzhong"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="21dp"
+            android:layout_marginTop="-10dp"/>
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</RelativeLayout>

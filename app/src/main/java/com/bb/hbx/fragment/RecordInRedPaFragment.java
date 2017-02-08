@@ -60,6 +60,10 @@ public class RecordInRedPaFragment extends BaseFragment{
             }
         };
         recyclerView.setLayoutManager(manager);
+        if (list!=null&&list.size()>0)
+        {
+            list.clear();
+        }
         for (int i = 0; i < 10; i++) {
             list.add(path);
         }

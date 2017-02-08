@@ -110,7 +110,7 @@ public interface ApiService {
                                     @Field("areaCode") String areaCode, @Field("areaId") String areaId, @Field("address") String address,
                                     @Field("syncUser") String syncUser, @Field("defaultFlag") String defaultFlag);
 
-    //删除收货人信息--待测
+    //删除收货人信息
     @FormUrlEncoded
     @POST("api.do?method=delConsignee&type=post")
     Call<Result_Api<DeleteConsignee>> delConsignee(@Field("userId") String userId, @Field("cneeId") String cneeId);

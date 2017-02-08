@@ -1,15 +1,16 @@
 package com.bb.hbx.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.bean.MyPIOederBean;
+import com.bb.hbx.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -20,11 +21,12 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/12/26.
  */
 
-public class MyHadPaiedInPIOAdapter extends BaseAdapter{
-
+public class MyHadPaiedInPIOAdapter extends RecyclerView.Adapter<MyHadPaiedInPIOAdapter.MyViewHolder>{
+//convertView=inflater.inflate(R.layout.hadpaied_pio_item,parent,false);
     ArrayList<MyPIOederBean> list;
     Context mContext;
     LayoutInflater inflater;
+    OnItemClickListener onMyItemClickListener;
 
     public MyHadPaiedInPIOAdapter(ArrayList<MyPIOederBean> list, Context mContext) {
         this.list = list;
@@ -32,57 +34,52 @@ public class MyHadPaiedInPIOAdapter extends BaseAdapter{
         inflater=LayoutInflater.from(mContext);
     }
 
+    public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
+        this.onMyItemClickListener = onMyItemClickListener;
+    }
+
     @Override
-    public int getCount() {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view=inflater.inflate(R.layout.hadpaied_pio_item,parent,false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMyItemClickListener.onMyItemClickListener(position);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
         return list.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return list.get(position);
-    }
+    class MyViewHolder extends RecyclerView.ViewHolder{
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Log.e("============","======MyHadPaiedInPIOAdapter=====");
-        MyViewHolder holder;
-        if (convertView==null)
-        {
-            convertView=inflater.inflate(R.layout.hadpaied_pio_item,parent,false);
-            holder=new MyViewHolder();
-            ButterKnife.bind(holder,convertView);
-            convertView.setTag(holder);
-        }
-        else
-        {
-            holder= (MyViewHolder) convertView.getTag();
-        }
-        holder.title_tv.setText(list.get(position).getTitle());
-        holder.number_tv.setText(list.get(position).getNumber());
-        holder.theInsured.setText(list.get(position).getTheInsured());
-        holder.insuranceHolder_tv.setText(list.get(position).getInsuranceHolder());
-        holder.time_tv.setText(list.get(position).getTime());
-        holder.state_tv.setText(list.get(position).getState());
-        return convertView;
-    }
-    static class MyViewHolder{
         @BindView(R.id.title_tv)
         TextView title_tv;
         @BindView(R.id.number_tv)
         TextView number_tv;
-        @BindView(R.id.theInsured)
-        TextView theInsured;
+        @BindView(R.id.theInsured_tv)
+        TextView theInsured_tv;
         @BindView(R.id.insuranceHolder_tv)
         TextView insuranceHolder_tv;
         @BindView(R.id.time_tv)
         TextView time_tv;
-        @BindView(R.id.state_tv)
-        TextView state_tv;
-
+        @BindView(R.id.price_tv)
+        TextView price_tv;
+        @BindView(R.id.income_tv)
+        TextView income_tv;
+        @BindView(R.id.state_iv)
+        ImageView state_iv;
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this,itemView);
+        }
     }
 }

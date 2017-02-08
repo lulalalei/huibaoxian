@@ -78,12 +78,18 @@
                     android:textColor="@color/A3"
                     android:textColorHint="@color/A4"
                     android:layout_centerVertical="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/contacts"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"/>
+                <RelativeLayout
+                    android:id="@+id/contacts_layout"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/contacts"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

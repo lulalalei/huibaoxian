@@ -128,4 +128,13 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metric);
         return metric;
     }
+
+   /* @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Can.redPFragmentList.clear();
+        *//*for (int i = 0; i < Can.redPFragmentList.size(); i++) {
+            Can.redPFragmentList.get(i).onDestroy();
+        }*//*
+    }*/
 }

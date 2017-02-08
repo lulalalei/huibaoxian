@@ -34,7 +34,7 @@ public class PerInsuOrderActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
 
-    String [] titles=new String[]{"全部","待支付","有效","已终止"};
+    String [] titles=new String[]{"全部","待出单","已出单","已终止"};
     ArrayList<PIOrderContentFragment> fragmentList=new ArrayList<>();
     MyPerInsuOrderAdapter adapter;
 
@@ -57,7 +57,7 @@ public class PerInsuOrderActivity extends BaseActivity implements View.OnClickLi
     public void initdata() {
         Can.pIOFragmentList=Can.getFragmentListInPIO();
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.setTabTextColors(Color.BLACK,Color.GRAY);
+        tabLayout.setTabTextColors(Color.GRAY,Color.BLACK);
         for (int i = 0; i < titles.length; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(titles[i]));
             PIOrderContentFragment fragment = new PIOrderContentFragment();

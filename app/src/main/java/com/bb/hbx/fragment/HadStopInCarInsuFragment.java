@@ -1,13 +1,16 @@
 package com.bb.hbx.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.CarOrderDetailActivity;
 import com.bb.hbx.adapter.MyHadStopInCarInsuAdapter;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -60,10 +63,21 @@ public class HadStopInCarInsuFragment extends BaseFragment{
             }
         };
         recyclerView.setLayoutManager(manager);
+        if (list!=null&&list.size()>0)
+        {
+            list.clear();
+        }
         for (int i = 0; i < 10; i++) {
             list.add(path);
         }
         adapter = new MyHadStopInCarInsuAdapter(mContext, list);
         recyclerView.setAdapter(adapter);
+        adapter.setOnMyItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onMyItemClickListener(int position) {
+                Intent intent = new Intent(mContext, CarOrderDetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

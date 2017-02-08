@@ -2,9 +2,7 @@ package com.bb.hbx.activitiy;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +20,11 @@ import butterknife.BindView;
 * 保单详情页面  由点击 我的--个险订单 中的条目进入*/
 public class PerOrderDetailActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
 
+    @BindView(R.id.buy_tv)
+    TextView buy_tv;
     @BindView(R.id.insureInfo_tv)
     TextView insureInfo_tv;
     @BindView(R.id.insureItem_tv)
@@ -53,11 +51,13 @@ public class PerOrderDetailActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-        toolbar.setTitle("");
+
     }
 
     @Override
     public void initListener() {
+        back_layout.setOnClickListener(this);
+        buy_tv.setOnClickListener(this);
         insureInfo_tv.setOnClickListener(this);
         insureItem_tv.setOnClickListener(this);
         call_layout.setOnClickListener(this);
@@ -84,14 +84,16 @@ public class PerOrderDetailActivity extends BaseActivity implements View.OnClick
         recyclerView.setAdapter(adapter);
     }
 
-    public void backMethod(View view) {
-        finish();
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
+            case R.id.back_layout:
+                finish();
+                break;
+            case R.id.buy_tv:
+                showTip("再次购买");
+                break;
             case R.id.insureInfo_tv:
                 Toast.makeText(this,"投保须知",Toast.LENGTH_SHORT).show();
                 break;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ScrollView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyUnderPayInMyOrderAdapter;
@@ -20,6 +21,8 @@ import butterknife.BindView;
 public class UnderPayInMyOrderFragment extends BaseFragment{
 
     Context mContext;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     String path="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
@@ -61,6 +64,10 @@ public class UnderPayInMyOrderFragment extends BaseFragment{
             }
         };
         recyclerView.setLayoutManager(manager);
+        if (list!=null&&list.size()>0)
+        {
+            list.clear();
+        }
         for (int i = 0; i < 10; i++) {
             list.add(path);
         }

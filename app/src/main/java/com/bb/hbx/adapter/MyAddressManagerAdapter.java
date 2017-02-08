@@ -71,14 +71,17 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
         holder.address_tv.setText(list.get(position).getAddress());
         holder.select_iv.setTag(position);
         isDefaultFlag=map.get(position);
+        //isDefaultFlag=list.get(position).getDefaultFlag();
         final MyViewHolder finalHolder=holder;
         finalHolder.select_iv.setSelected("1".equals(isDefaultFlag)?true:false);
+        finalHolder.select_tv.setTextColor("1".equals(isDefaultFlag)?mContext.getResources().getColor(R.color.A2):mContext.getResources().getColor(R.color.A3));
         holder.select_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (finalHolder.select_iv.getTag()!=null&&(int)finalHolder.select_iv.getTag()==position)
                 {
                     isDefaultFlag=map.get(position);
+                    //isDefaultFlag=list.get(position).getDefaultFlag();
                     if ("1".equals(isDefaultFlag)?true:false)
                     {
                         /*finalHolder.select_iv.setSelected(false);
@@ -126,6 +129,8 @@ public class MyAddressManagerAdapter extends RecyclerView.Adapter<MyAddressManag
         TextView address_tv;
         @BindView(R.id.select_iv)
         ImageView select_iv;
+        @BindView(R.id.select_tv)
+        TextView select_tv;
         @BindView(R.id.select_layout)
         RelativeLayout select_layout;
         @BindView(R.id.address_layout)

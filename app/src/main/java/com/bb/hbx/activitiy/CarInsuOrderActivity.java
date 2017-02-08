@@ -65,7 +65,7 @@ public class CarInsuOrderActivity extends BaseActivity implements View.OnClickLi
         }
         adapter = new MyCarInsuAdapter(getSupportFragmentManager(), fragmentList, title);
         //加这句代码比不加这句更减小内存消耗,,,,,,fragment会同时加载,且在结合hide,show之后,尽管页卡来回切换,但初始化只会执行一次
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);
         setIndicator(this,tablayout,28,28);

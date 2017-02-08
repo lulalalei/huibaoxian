@@ -43,12 +43,16 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
     List<Consignees.CneeListBean> cneeTotalList=new ArrayList<>();
     HashMap<Integer,String> mapSelect=new HashMap<>();
     int selectedPosition=0;
+    //int prePosition=0;
 
     Intent intentFromPersonInfo;
     String userId;
     int pageIndex=1;
     int pageSize=10;
 
+    int totalCount;
+    int scrollY;
+    int index=0;
     boolean syncUser=false;
     @Override
     public int getLayoutId() {
@@ -64,6 +68,60 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
         adapter=new MyAddressManagerAdapter(cneeTotalList,AddressManagerActivity.this,mapSelect);
         recyclerView.setAdapter(adapter);
 
+        //recycler实现上拉加载更多
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //Log.e("===dy===","======"+dy);
+                scrollY=dy;
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    //得到当前显示的最后一个item的view
+                    View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
+                    //得到lastChildView的bottom的坐标值
+                    int lastChildBottom = lastChildView.getBottom();
+                    //得到recyclerview的底部坐标减去底部padding值,也就是显示内容最底部的坐标
+                    int recyclerBottom = recyclerView.getBottom() - recyclerView.getPaddingBottom();
+                    //通过lastChildView得到这个view当前的position值
+                    int lastPosition = recyclerView.getLayoutManager().getPosition(lastChildView);
+                    //判断lastChildView的bottom值跟recyclerview的bottom,判断lastPosition是不是最后一个position
+                    //如果条件都满足则说明真正滑动到了最底部
+                    if (scrollY>0&&lastChildBottom==recyclerBottom&&lastPosition==recyclerView.getLayoutManager().getItemCount()-1)
+                    {
+                        pageIndex++;
+                        if (pageIndex>((totalCount/10)+1))
+                        {
+                            showTip("已经到底啦!");
+                            pageIndex--;
+                        }
+                        else
+                        {
+                            expandConsigneesList();
+                        }
+                    }
+                    /*int lastVisiblePosition = manager.findLastVisibleItemPosition();
+                    if(scrollY>0&&lastVisiblePosition >=manager.getItemCount()-1){
+                        pageIndex++;
+                        //Log.e("===pageIndex===","======"+pageIndex);
+                        //showTip("已经到底啦!");
+                        if (pageIndex>((totalCount/10)+1))
+                        {
+                            showTip("已经到底啦!");
+                            pageIndex--;
+                        }
+                        else
+                        {
+                            expandConsigneesList();
+                        }
+                    }*/
+                }
+            }
+        });
     }
 
     @Override
@@ -78,6 +136,11 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
         adapter.setOnMyItemClickListener(new OnItemClickListener() {
            @Override
            public void onMyItemClickListener(int position) {
+               cneeTotalList.get(selectedPosition).setDefaultFlag("0");
+               selectedPosition=position;
+               //cneeTotalList.get(prePosition).setDefaultFlag("0");
+               cneeTotalList.get(position).setDefaultFlag("1");
+               //prePosition=position;
                String cneeId = cneeTotalList.get(position).getCneeId();
                String cneeName = cneeTotalList.get(position).getCneeName();
                String mobile = cneeTotalList.get(position).getMobile();
@@ -122,7 +185,17 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
                                             DeleteConsignee deleteConsignee = (DeleteConsignee) body.getOutput();
                                             int count = deleteConsignee.getCount();
                                             cneeTotalList.remove(position);
-                                            adapter.notifyItemRemoved(position);
+                                            mapSelect.clear();
+                                            for (int i =0; i <cneeTotalList.size(); i++) {
+                                                mapSelect.put(i,cneeTotalList.get(i).getDefaultFlag());
+                                                if ("1".equals(cneeTotalList.get(i).getDefaultFlag()))
+                                                {
+                                                    selectedPosition=i;
+                                                }
+                                            }
+                                            adapter.setPrePosition(selectedPosition);
+                                            //adapter.notifyItemRemoved(position);
+                                            adapter.notifyDataSetChanged();
                                             showTip("删除成功!");
                                         }
 
@@ -148,7 +221,6 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
         adapter.setOnMyItemEditClickListener(new OnItemClickListener() {
             @Override
             public void onMyItemClickListener(int position) {
-                //showTip("编辑");
                 if (cneeTotalList.size()>0)
                 {
                     Intent intent = new Intent(AddressManagerActivity.this, ModifyAddressActivity.class);
@@ -184,6 +256,48 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
         showConsigneesList();
     }
 
+    //recyclerview上拉加载时执行的方法
+    private void expandConsigneesList() {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getConsignees(userId,pageIndex+"",pageSize+"");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                Consignees consignees = (Consignees) body.getOutput();
+                List<Consignees.CneeListBean> cneeList = consignees.getCneeList();
+                //totalCount = Integer.parseInt(consignees.getTotalCount());
+                if (cneeList!=null)
+                {
+                    if (cneeList.size()>0)
+                    {
+                        index++;
+                        for (int i = (10*index)+0; i <(10*index)+cneeList.size(); i++) {
+                            mapSelect.put(i,cneeList.get(i-(10*index)).getDefaultFlag());
+                            if ("1".equals(cneeList.get(i-(10*index)).getDefaultFlag()))
+                            {
+                                selectedPosition=i;
+                            }
+                        }
+                        //cneeTotalList.clear();
+                        cneeTotalList.addAll(cneeList);
+                    }
+                    else
+                    {
+                        syncUser=true;
+                    }
+                    adapter.setPrePosition(selectedPosition);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                showTip("服务器异常!");
+            }
+        });
+    }
+
     private void showConsigneesList() {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
         Call call=service.getConsignees(userId,pageIndex+"",pageSize+"");
@@ -193,24 +307,28 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
                 Result_Api body = (Result_Api) response.body();
                 Consignees consignees = (Consignees) body.getOutput();
                 List<Consignees.CneeListBean> cneeList = consignees.getCneeList();
-                if (cneeList.size()>0)
+                totalCount = Integer.parseInt(consignees.getTotalCount());
+                if (cneeList!=null)
                 {
-                    for (int i = 0; i < cneeList.size(); i++) {
-                        mapSelect.put(i,cneeList.get(i).getDefaultFlag());
-                        if ("1".equals(cneeList.get(i).getDefaultFlag()))
-                        {
-                            selectedPosition=i;
+                    if (cneeList.size()>0)
+                    {
+                        for (int i = 0; i < cneeList.size(); i++) {
+                            mapSelect.put(i,cneeList.get(i).getDefaultFlag());
+                            if ("1".equals(cneeList.get(i).getDefaultFlag()))
+                            {
+                                selectedPosition=i;
+                            }
                         }
+                        cneeTotalList.clear();
+                        cneeTotalList.addAll(cneeList);
                     }
-                    cneeTotalList.clear();
-                    cneeTotalList.addAll(cneeList);
+                    else
+                    {
+                        syncUser=true;
+                    }
+                    adapter.setPrePosition(selectedPosition);
+                    adapter.notifyDataSetChanged();
                 }
-                else
-                {
-                    syncUser=true;
-                }
-                adapter.setPrePosition(selectedPosition);
-                adapter.notifyDataSetChanged();
             }
 
             @Override

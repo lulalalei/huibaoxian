@@ -35,7 +35,7 @@
             android:text="被保人:罗伟"
             android:textSize="11sp"
             android:textColor="@color/A5"
-            android:id="@+id/theInsured"
+            android:id="@+id/theInsured_tv"
             android:layout_below="@id/number_tv"
             android:layout_marginTop="8dp"/>
         <TextView
@@ -45,7 +45,7 @@
             android:textSize="11sp"
             android:textColor="@color/A5"
             android:id="@+id/insuranceHolder_tv"
-            android:layout_below="@id/theInsured"
+            android:layout_below="@id/theInsured_tv"
             android:layout_marginTop="8dp"/>
         <TextView
             android:layout_width="wrap_content"

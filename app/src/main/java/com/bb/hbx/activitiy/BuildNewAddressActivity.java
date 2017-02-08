@@ -1,6 +1,8 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.AddConsignee;
+import com.bb.hbx.utils.GetPhoneContactsUtil;
 import com.smarttop.library.bean.City;
 import com.smarttop.library.bean.County;
 import com.smarttop.library.bean.Province;
@@ -32,6 +35,8 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
+    @BindView(R.id.contacts_layout)
+    RelativeLayout contacts_layout;
     @BindView(R.id.address_layout)
     RelativeLayout address_layout;
     @BindView(R.id.isNormalAddress_iv)
@@ -77,6 +82,7 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
     @Override
     public void initListener() {
         back_layout.setOnClickListener(this);
+        contacts_layout.setOnClickListener(this);
         address_layout.setOnClickListener(this);
         isNormalAddress_layout.setOnClickListener(this);
         save_tv.setOnClickListener(this);
@@ -95,6 +101,12 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
         {
             case R.id.back_layout:
                 finish();
+                break;
+            case R.id.contacts_layout:
+                //showTip("klajsfsjf");
+                Uri uri = ContactsContract.Contacts.CONTENT_URI;
+                Intent intent = new Intent(Intent.ACTION_PICK,uri);
+                startActivityForResult(intent,0);
                 break;
             case R.id.address_layout:
                 if (dialog != null) {
@@ -152,7 +164,7 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
                 {
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
                     Call call=service.addConsignee(userId,name,phone,post,areaId,address+street,syncUser?"1":"0",defaultFlag);
-                    showTip("=====defaultFlag======"+defaultFlag);
+                    showTip("=====defaultFlag======"+defaultFlag+":!!!!!!"+post);
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
@@ -171,6 +183,25 @@ public class BuildNewAddressActivity extends BaseActivity implements View.OnClic
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 0:
+                if(data==null)
+                {
+                    return;
+                }
+                //处理返回的data,获取选择的联系人信息
+                Uri uri=data.getData();
+                String[] contacts= GetPhoneContactsUtil.getPhoneContacts(this,uri);
+                name_et.setText(contacts[0]);
+                phone_et.setText(contacts[1]);
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     @Override

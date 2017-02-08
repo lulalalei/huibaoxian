@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.CarInsuOrderActivity;
+import com.bb.hbx.activitiy.CustomerManagerActivity;
 import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.MyOrderActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
@@ -87,6 +88,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     @BindView(R.id.pCount_tv)
     TextView pCount_tv;
 
+    @BindView(R.id.customers_layout)
+    RelativeLayout customers_layout;
     @BindView(R.id.service_layout)
     RelativeLayout service_layout;
     Context mContext;
@@ -118,6 +121,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         redPacket_layout.setOnClickListener(this);
         notLogin_layout.setOnClickListener(this);
 
+        customers_layout.setOnClickListener(this);
         service_layout.setOnClickListener(this);
 
         ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,/*,hasLogin_tv,*/mContext);
@@ -195,6 +199,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 Toast.makeText(mContext,"点了我",Toast.LENGTH_SHORT).show();
 
                 break;*/
+            case R.id.customers_layout:
+                intent.setClass(mContext, CustomerManagerActivity.class);
+                startActivity(intent);
+                break;
             case R.id.service_layout:
                 intent.setClass(mContext, PurchaseDetailActivity.class);
                 startActivity(intent);

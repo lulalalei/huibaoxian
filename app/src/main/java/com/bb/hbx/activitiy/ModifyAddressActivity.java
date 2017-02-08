@@ -1,6 +1,9 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -8,7 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.utils.GetPhoneContactsUtil;
 import com.smarttop.library.bean.City;
 import com.smarttop.library.bean.County;
 import com.smarttop.library.bean.Province;
@@ -19,11 +25,16 @@ import com.smarttop.library.widget.BottomDialog;
 import com.smarttop.library.widget.OnAddressSelectedListener;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ModifyAddressActivity extends BaseActivity implements View.OnClickListener,OnAddressSelectedListener,AddressSelector.OnDialogCloseListener{
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
+    @BindView(R.id.contacts_layout)
+    RelativeLayout contacts_layout;
     @BindView(R.id.address_layout)
     RelativeLayout address_layout;
     @BindView(R.id.isNormalAddress_iv)
@@ -49,11 +60,22 @@ public class ModifyAddressActivity extends BaseActivity implements View.OnClickL
     private String countyCode;
     private String streetCode;
 
+    String cneeName;
+    String mobile;
+    String areaCode;
+    String userId;
+    String cneeId;
+    String address;
+    boolean flag=false;
+    String defaultFlag;
+    String cityTown;
+    //String address;
     @Override
     public int getLayoutId() {
         return R.layout.activity_modify_address;
     }
 
+    //先执行initView再执行initData
     @Override
     public void initView() {
 
@@ -62,6 +84,7 @@ public class ModifyAddressActivity extends BaseActivity implements View.OnClickL
     @Override
     public void initListener() {
         back_layout.setOnClickListener(this);
+        contacts_layout.setOnClickListener(this);
         address_layout.setOnClickListener(this);
         isNormalAddress_layout.setOnClickListener(this);
         save_tv.setOnClickListener(this);
@@ -70,20 +93,32 @@ public class ModifyAddressActivity extends BaseActivity implements View.OnClickL
     @Override
     public void initdata() {
         Intent intent = getIntent();
-        String cneeName = intent.getStringExtra("cneeName");
-        String mobile = intent.getStringExtra("mobile");
-        String areaCode = intent.getStringExtra("areaCode");
-        String city = intent.getStringExtra("city");
-        String address = intent.getStringExtra("address");
-        String defaultFlag = intent.getStringExtra("defaultFlag");
-        String userId = intent.getStringExtra("userId");
-        String cneeId = intent.getStringExtra("cneeId");
+        cneeName = intent.getStringExtra("cneeName");
+        mobile = intent.getStringExtra("mobile");
+        areaCode = intent.getStringExtra("areaCode");
+        //city = intent.getStringExtra("city");
+        cityTown = intent.getStringExtra("city");
+        address = intent.getStringExtra("address");
+        defaultFlag = intent.getStringExtra("defaultFlag");
+        userId = intent.getStringExtra("userId");
+        cneeId = intent.getStringExtra("cneeId");
         name_et.setText(cneeName);
         phone_et.setText(mobile);
         post_et.setText(areaCode);
-        address_tv.setText(city);
+        //address_tv.setText(city);
+        address_tv.setText(cityTown);
         address_tv.setTextColor(getResources().getColor(R.color.A3));
         street_et.setText(address);
+        if ("1".equals(defaultFlag))
+        {
+            isNormalAddress_iv.setSelected(true);
+            flag=true;
+        }
+        else
+        {
+            isNormalAddress_iv.setSelected(false);
+            flag=false;
+        }
     }
 
     @Override
@@ -92,6 +127,11 @@ public class ModifyAddressActivity extends BaseActivity implements View.OnClickL
         {
             case R.id.back_layout:
                 finish();
+                break;
+            case R.id.contacts_layout:
+                Uri uri = ContactsContract.Contacts.CONTENT_URI;
+                Intent intent = new Intent(Intent.ACTION_PICK,uri);
+                startActivityForResult(intent,0);
                 break;
             case R.id.address_layout:
                 //showTip("address_layout");
@@ -109,14 +149,63 @@ public class ModifyAddressActivity extends BaseActivity implements View.OnClickL
                 }
                 break;
             case R.id.isNormalAddress_layout:
-                showTip("isNormalAddress_layout");
+                if ("0".equals(defaultFlag))//仅当为非默认地址时才可操作
+                {
+                   //defaultFlag="1";
+                    flag=!flag;
+                    isNormalAddress_iv.setSelected(flag);
+                }
+                //showTip("isNormalAddress_layout");
                 break;
             case R.id.save_tv:
-                showTip("保存");
+                String name = name_et.getText().toString();
+                String phone = phone_et.getText().toString();
+                String post = post_et.getText().toString();
+                String street = street_et.getText().toString();
+                if (TextUtils.isEmpty(name)||TextUtils.isEmpty(phone)||
+                        TextUtils.isEmpty(post)|| TextUtils.isEmpty(street))
+                {
+                    showTip("请完善收货人信息");
+                }
+                else
+                {
+                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                    Call call=service.updateConsignee(userId,cneeId,name,phone,post,cityTown+street,flag?"1":"0");
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            showTip("修改收货人信息成功!");
+                        }
+
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+                            showTip("修改收货人信息失败!");
+                        }
+                    });
+                }
+                //showTip("保存");
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 0:
+                if(data==null)
+                {
+                    return;
+                }
+                //处理返回的data,获取选择的联系人信息
+                Uri uri=data.getData();
+                String[] contacts= GetPhoneContactsUtil.getPhoneContacts(this,uri);
+                name_et.setText(contacts[0]);
+                phone_et.setText(contacts[1]);
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -138,6 +227,7 @@ public class ModifyAddressActivity extends BaseActivity implements View.OnClickL
         LogUtil.d("数据", "街道id=" + streetCode);
         String s = (province == null ? "" : province.name) + (city == null ? "" : city.name) + (county == null ? "" : county.name) +
                 (street == null ? "" : street.name);
+        cityTown=s;
         //address=s;
         //areaId=city.id+"";
         address_tv.setText(s);
