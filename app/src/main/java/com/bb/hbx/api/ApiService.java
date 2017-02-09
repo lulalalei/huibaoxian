@@ -120,6 +120,17 @@ public interface ApiService {
     @POST("api.do?method=getAreaList&type=post")
     Call<Result_Api<AreasListBean>> getAreaList(@Field("findAllFlag") boolean findAllFlag);
 
+    //添加银行卡
+    @FormUrlEncoded
+    @POST("api.do?method=addUserBank&type=post")
+    Call<Result_Api> addUserBank(@Field("accountName") String accountName,@Field("bankName") String bankName,
+                             @Field("cardNo") String cardNo,@Field("userId") String userId);
+
+    //设置,修改支付密码
+    @FormUrlEncoded
+    @POST("api.do?method=updatePayPassword&type=post")
+    Call<Result_Api> updatePayPassword(@Field("payPassword") String payPassword,@Field("userId") String userId);
+
     //获取首页数据
     @FormUrlEncoded
     @POST("api.do?method=getHomePageInfo&type=post")

@@ -15,8 +15,8 @@ import butterknife.BindView;
 
 public class CustomerManagerActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.topbar_layout)
-    RelativeLayout topbar_layout;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.content_layout)
     RelativeLayout content_layout;
     @BindView(R.id.search_iv)
@@ -25,10 +25,7 @@ public class CustomerManagerActivity extends BaseActivity implements View.OnClic
     TextView customers_tv;
     @BindView(R.id.reminding_tv)
     TextView reminding_tv;
-    @BindView(R.id.fromContacts_tv)
-    TextView fromContacts_tv;
-    @BindView(R.id.fromManual_tv)
-    TextView fromManual_tv;
+
 
     FragmentManager fragmentManager;
     CustomersManagerFragment customersManagerFragment;
@@ -48,12 +45,11 @@ public class CustomerManagerActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void initListener() {
-        topbar_layout.setOnClickListener(this);
+        back_layout.setOnClickListener(this);
         search_iv.setOnClickListener(this);
         customers_tv.setOnClickListener(this);
         reminding_tv.setOnClickListener(this);
-        fromContacts_tv.setOnClickListener(this);
-        fromManual_tv.setOnClickListener(this);
+
     }
 
     @Override
@@ -92,12 +88,6 @@ public class CustomerManagerActivity extends BaseActivity implements View.OnClic
                 {
                     fragmentManager.beginTransaction().add(R.id.content_layout,remindingFragment).commit();
                 }
-                break;
-            case R.id.fromContacts_tv:
-                showTip("通讯录导入");
-                break;
-            case R.id.fromManual_tv:
-                showTip("手动添加");
                 break;
             default:
                 break;

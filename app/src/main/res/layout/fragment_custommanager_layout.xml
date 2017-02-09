@@ -1,8 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_bright">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <RelativeLayout
+        android:id="@+id/choice_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbar_layout"
+        android:layout_marginTop="13dp"
+        android:background="@color/white"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp">
+        <TextView
+            android:id="@+id/fromContacts_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通讯录导入"
+            android:textColor="@color/A3"
+            android:textSize="18sp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"/>
+        <TextView
+            android:id="@+id/fromManual_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手动添加"
+            android:textColor="@color/A3"
+            android:textSize="18sp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/choice_layout">
 
+    </android.support.v7.widget.RecyclerView>
+
+    <com.bb.hbx.widget.IndexBar
+        android:id="@+id/indexBar"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:layout_alignParentRight="true"
+        app:pressBackground="@color/partTranslucent"
+        app:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvSideBarHint"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_side_bar_bg"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="48sp"
+        android:visibility="gone"
+        tools:text="A"
+        tools:visibility="visible" />
 </RelativeLayout>

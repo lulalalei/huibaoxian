@@ -1,5 +1,7 @@
 package com.bb.hbx.utils;
 
+import android.text.TextUtils;
+
 /**
  *
  */
@@ -165,5 +167,19 @@ public class StringUtils {
             }
         }
         return new String(chars);
+    }
+
+    //检测目标字符串的长度
+    public static boolean checkStringLength(String string,int length)
+    {
+        if (TextUtils.isEmpty(string))
+        {
+            return false;
+        }
+        if (string.trim().length()!=length)
+        {
+            return false;
+        }
+        return true;
     }
 }
