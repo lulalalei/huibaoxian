@@ -1,0 +1,76 @@
+package com.bb.hbx.fragment;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.ScrollView;
+
+import com.bb.hbx.R;
+import com.bb.hbx.adapter.MyHasUsedInPresInsuAdapter;
+import com.bb.hbx.base.BaseFragment;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
+
+/**
+ * Created by Administrator on 2017/2/9.
+ */
+
+public class HasUsedInPreInsuFragment extends BaseFragment{
+
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    Context mContext;
+    ArrayList<String> list=new ArrayList<>();
+    GridLayoutManager manager;
+    MyHasUsedInPresInsuAdapter adapter;
+    private static HasUsedInPreInsuFragment fragment;
+    public static HasUsedInPreInsuFragment getInstance()
+    {
+        if (fragment==null)
+        {
+            fragment=new HasUsedInPreInsuFragment();
+        }
+        return fragment;
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext=context;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_hasused_inpres_layout;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    protected void initdate(Bundle savedInstanceState) {
+        manager = new GridLayoutManager(mContext, 1){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        recyclerView.setLayoutManager(manager);
+        adapter = new MyHasUsedInPresInsuAdapter(list, mContext);
+        recyclerView.setAdapter(adapter);
+        if (list!=null&&list.size()>0)
+        {
+            list.clear();
+        }
+        for (int i = 0; i < 6; i++) {
+            list.add("i:"+i);
+        }
+        adapter.notifyDataSetChanged();
+    }
+}

@@ -13,6 +13,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MessageCodeBean;
+import com.bb.hbx.widget.CountDownTextView;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -34,7 +35,7 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
     @BindView(R.id.checkCode_et)
     EditText checkCode_et;
     @BindView(R.id.getCode_tv)
-    TextView getCode_tv;
+    CountDownTextView getCode_tv;
     @BindView(R.id.verify_tv)
     TextView verify_tv;
 
@@ -70,6 +71,7 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.getCode_tv:
                 //Toast.makeText(this,"获取验证码",Toast.LENGTH_SHORT).show();
+                getCode_tv.startTime();
                 String phone = phone_et.getText().toString().trim();
                 if (!TextUtils.isEmpty(phone)&&phone.length()==11)
                 {

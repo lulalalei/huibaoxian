@@ -22,6 +22,7 @@ import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.MyOrderActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
 import com.bb.hbx.activitiy.PersonInfoSettingActivity;
+import com.bb.hbx.activitiy.PresentInsuActivity;
 import com.bb.hbx.activitiy.PurchaseDetailActivity;
 import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
@@ -88,6 +89,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     @BindView(R.id.pCount_tv)
     TextView pCount_tv;
 
+    @BindView(R.id.purchase_layout)
+    RelativeLayout purchase_layout;
     @BindView(R.id.customers_layout)
     RelativeLayout customers_layout;
     @BindView(R.id.service_layout)
@@ -121,6 +124,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         redPacket_layout.setOnClickListener(this);
         notLogin_layout.setOnClickListener(this);
 
+        purchase_layout.setOnClickListener(this);
         customers_layout.setOnClickListener(this);
         service_layout.setOnClickListener(this);
 
@@ -199,6 +203,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 Toast.makeText(mContext,"点了我",Toast.LENGTH_SHORT).show();
 
                 break;*/
+            case R.id.purchase_layout:
+                //Toast.makeText(mContext,"赠险产品",Toast.LENGTH_SHORT).show();
+                intent.setClass(mContext, PresentInsuActivity.class);
+                startActivity(intent);
+                break;
             case R.id.customers_layout:
                 intent.setClass(mContext, CustomerManagerActivity.class);
                 startActivity(intent);
@@ -299,15 +308,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
             @Override
             public void onResponse(Call call, Response response) {
                 Result_Api body = (Result_Api) response.body();
-                Account account = (Account) body.getOutput();
-                String acctBalance = account.getAcctBalance();//可提现????
-                String acctSum = account.getAcctSum();//余额????
-                String accountScore = account.getAccountScore();
-                String bonusCount = account.getBonusCount();
-                canCash_tv.setText(TextUtils.isEmpty(acctBalance)?"0":acctBalance);
-                leftMoney_tv.setText(TextUtils.isEmpty(acctSum)?"0":acctSum);
-                score_tv.setText(TextUtils.isEmpty(accountScore)?"0":accountScore);
-                redPacket_tv.setText(TextUtils.isEmpty(bonusCount)?"0":bonusCount);
+                if (body!=null)
+                {
+                    Account account = (Account) body.getOutput();
+                    String acctBalance = account.getAcctBalance();//可提现????
+                    String acctSum = account.getAcctSum();//余额????
+                    String accountScore = account.getAccountScore();
+                    String bonusCount = account.getBonusCount();
+                    canCash_tv.setText(TextUtils.isEmpty(acctBalance)?"0":acctBalance);
+                    leftMoney_tv.setText(TextUtils.isEmpty(acctSum)?"0":acctSum);
+                    score_tv.setText(TextUtils.isEmpty(accountScore)?"0":accountScore);
+                    redPacket_tv.setText(TextUtils.isEmpty(bonusCount)?"0":bonusCount);
+                }
             }
 
             @Override

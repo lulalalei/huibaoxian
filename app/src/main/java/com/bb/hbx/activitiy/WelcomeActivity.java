@@ -50,7 +50,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void initdata() {
         MyApplication.user = new User();
-        MyApplication.user.setUserId("0");
+        MyApplication.user.setUserId("");
         utils = new PermissionUtils(this);
         ShareSPUtils.initShareSP(this);
         MyUsersSqlite.initUsersdb(this);
@@ -68,12 +68,12 @@ public class WelcomeActivity extends BaseActivity {
                 values.put("hasLogined","false");//默认false,未登录
                 values.put("isBClient",false);//默认false
                 values.put("sessionId","");
-                values.put("userId","0");
+                values.put("userId","");
                 values.put("gender","0");//默认为0
                 long flag = MyUsersSqlite.db.insert("userstb", null, values);
                 //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
                 values.clear();
-                MyApplication.user.setUserId("0");
+                MyApplication.user.setUserId("");
                 MyApplication.user.setSessionId("");
                 MyApplication.user.setIsBClient(false);
             }
@@ -91,8 +91,8 @@ public class WelcomeActivity extends BaseActivity {
                 }
                 else
                 {
-                    MyApplication.user.setUserId("0");
-                    MyApplication.user.setSessionId("123");
+                    MyApplication.user.setUserId("");
+                    MyApplication.user.setSessionId("");
                     MyApplication.user.setIsBClient(false);
                 }
             }

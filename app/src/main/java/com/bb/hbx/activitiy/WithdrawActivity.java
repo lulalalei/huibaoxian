@@ -1,16 +1,23 @@
 package com.bb.hbx.activitiy;
 
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.interfaces.PointTextWatcher;
 import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -54,7 +61,27 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
             case R.id.iv_question:
 
                 break;
+            case R.id.tv_withdraw:
+                String price = et_price.getText().toString().trim();
+                if (!TextUtils.isEmpty(price))
+                {
+                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                    Call call=service.applyCash(MyApplication.user.getUserId(),price,"阿亮","工商银行","1");
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            showTip("提现成功");
+                        }
 
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+                            showTip("提现失败");
+                        }
+                    });
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -75,6 +102,7 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void initListener() {
         iv_question.setOnClickListener(this);
+        tv_withdraw.setOnClickListener(this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

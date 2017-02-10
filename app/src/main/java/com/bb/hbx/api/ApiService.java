@@ -122,9 +122,15 @@ public interface ApiService {
 
     //添加银行卡
     @FormUrlEncoded
-    @POST("api.do?method=addUserBank&type=post")
-    Call<Result_Api> addUserBank(@Field("accountName") String accountName,@Field("bankName") String bankName,
+    @POST("api.do?method=bindingBankCard&type=post")
+    Call<Result_Api> bindingBankCard(@Field("accountName") String accountName,@Field("bankName") String bankName,
                              @Field("cardNo") String cardNo,@Field("userId") String userId);
+
+    //提现
+    @FormUrlEncoded
+    @POST("api.do?method=applyCash&type=post")
+    Call<Result_Api> applyCash(@Field("userId") String userId,@Field("cashAmount") String cashAmount,@Field("accountName") String accountName,
+                           @Field("bankName") String bankName, @Field("cashIp") String cashIp);
 
     //设置,修改支付密码
     @FormUrlEncoded

@@ -83,7 +83,7 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                 if (!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(idCard)&&!TextUtils.isEmpty(bankCard)/*&&!TextUtils.isEmpty(bank)*/)
                 {
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.addUserBank(name,"工商银行",bankCard, MyApplication.user.getUserId());
+                    Call call=service.bindingBankCard(name,"工商银行",bankCard, MyApplication.user.getUserId());
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {

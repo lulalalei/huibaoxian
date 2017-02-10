@@ -8,10 +8,13 @@ import com.bb.hbx.MyApplication;
 import com.bb.hbx.fragment.AllInCarInsuFragment;
 import com.bb.hbx.fragment.AllInMyOrderFragment;
 import com.bb.hbx.fragment.AllInPIOFragment;
+import com.bb.hbx.fragment.CanReceiveInPreInsuFragment;
 import com.bb.hbx.fragment.HadPaiedInPIOFragment;
 import com.bb.hbx.fragment.HadSentInCarInsuFragment;
 import com.bb.hbx.fragment.HadStopInCarInsuFragment;
 import com.bb.hbx.fragment.HasFinishedInMyOrderFragment;
+import com.bb.hbx.fragment.HasUsedInPreInsuFragment;
+import com.bb.hbx.fragment.OutofDateInPreInsuFragment;
 import com.bb.hbx.fragment.RecordInRedPaFragment;
 import com.bb.hbx.fragment.UnEfficientInPIOFragment;
 import com.bb.hbx.fragment.UnEfficientInRedPaFragment;
@@ -97,6 +100,8 @@ public class Can {
     public static int preFragmentPositionInMyOrder;
     //在 我的--车险订单 页面中记录上一个fragment的位置,用于hide,show上一个fragment
     public static int preFragmentPositionInCIO;
+    //在 我的--赠险产品 页面中记录上一个fragment的位置,用于hide,show上一个fragment
+    public static int preFragmentPositionInPresentInsu;
     //容纳 我的--个险--个险订单 页面中的四个fragment,
     public static ArrayList<Fragment> pIOFragmentList;
     //容纳 我的--红包--我的红包 页面中的三个fragment,
@@ -105,6 +110,8 @@ public class Can {
     public static ArrayList<Fragment> myOrderFragmentList;
     //容纳 我的--车险订单 页面中的四个fragment,
     public static ArrayList<Fragment> carIOFragmentList;
+    //容纳 我的--赠险产品 页面中的三个fragment,
+    public static ArrayList<Fragment> presentInsuFragmentList;
 
     public static ArrayList<Fragment> getFragmentListInPIO()
     {
@@ -121,6 +128,14 @@ public class Can {
         fragmentList.add(UnUsedInRedPaFragment.getInstance());
         fragmentList.add(RecordInRedPaFragment.getInstance());
         fragmentList.add(UnEfficientInRedPaFragment.getInstance());
+        return fragmentList;
+    }
+    public static ArrayList<Fragment> getFragmentListInPresentInsu()
+    {
+        ArrayList<Fragment> fragmentList=new ArrayList<>();
+        fragmentList.add(CanReceiveInPreInsuFragment.getInstance());
+        fragmentList.add(HasUsedInPreInsuFragment.getInstance());
+        fragmentList.add(OutofDateInPreInsuFragment.getInstance());
         return fragmentList;
     }
     public static ArrayList<Fragment> getFragmentListInMyOrder()
