@@ -107,8 +107,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=addConsignee&type=post")
     Call<Result_Api<AddConsignee>> addConsignee(@Field("userId") String userId, @Field("cneeName") String cneeName, @Field("mobile") String mobile,
-                                    @Field("areaCode") String areaCode, @Field("areaId") String areaId, @Field("address") String address,
-                                    @Field("syncUser") String syncUser, @Field("defaultFlag") String defaultFlag);
+                                                @Field("areaCode") String areaCode, @Field("areaId") String areaId, @Field("address") String address,
+                                                @Field("syncUser") String syncUser, @Field("defaultFlag") String defaultFlag);
 
     //删除收货人信息
     @FormUrlEncoded
@@ -135,7 +135,7 @@ public interface ApiService {
     //设置,修改支付密码
     @FormUrlEncoded
     @POST("api.do?method=updatePayPassword&type=post")
-    Call<Result_Api> updatePayPassword(@Field("payPassword") String payPassword,@Field("userId") String userId);
+    Call<Result_Api> updatePayPassword(@Field("payPassword") String payPassword, @Field("userId") String userId);
 
     //获取首页数据
     @FormUrlEncoded
@@ -169,5 +169,45 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=getProductDetail&type=post")
     Call<Result_Api<ProductDetail>> getProductDetail(@Field("productId") String productId);
+
+    //获取专题列表
+    @FormUrlEncoded
+    @POST("api.do?method=getSpecials&type=post")
+    Call<Result_Api<ProductDetail>> getSpecials(@Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
+
+
+    //版本信息获取
+    @FormUrlEncoded
+    @POST("api.do?method=getClientCtlInfo&type=post")
+    Call<Result_Api<String>> getClientCtlInfo(@Field("userId") String userId);
+
+    //版本信息获取
+    @FormUrlEncoded
+    @POST("api.do?method=getStartUpImgs&type=post")
+    Call<Result_Api<String>> getStartUpImgs();
+
+
+    //获取Banner
+    @FormUrlEncoded
+    @POST("api.do?method=getBannerInfo&type=post")
+    Call<Result_Api<String>> getBannerInfo();
+
+
+    //获取小汇报消息列表
+    @FormUrlEncoded
+    @POST("api.do?method=getXhbMessageInfo&type=post")
+    Call<Result_Api<String>> getXhbMessageInfo();
+
+
+    //获取首页分类
+    @FormUrlEncoded
+    @POST("api.do?method=getHomePageProductType&type=post")
+    Call<Result_Api<String>> getHomePageProductType();
+
+    //获取首页专题列表
+    @FormUrlEncoded
+    @POST("api.do?method=getHomePageProductList&type=post")
+    Call<Result_Api<String>> getHomePageProductList();
+
 
 }
