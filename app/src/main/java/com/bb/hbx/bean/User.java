@@ -62,7 +62,7 @@ public class User {
     private String userId = "";
     private String userName = "";
 
-    private String nickName;
+    private String nickName="";
 
     public String getAddress() {
         return address;

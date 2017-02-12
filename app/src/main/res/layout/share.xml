@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_E5"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y402"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="@dimen/y30"
+            android:textAppearance="@style/TextAppear.Theme.A3_Size14"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/share"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/y18"
+            android:textAppearance="@style/TextAppear.Theme.A4_Size11"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/share2"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/y86"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/lin_wxshare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/weixinlogo2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wxhy"
+                    android:layout_marginTop="@dimen/y26"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_pyqshare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pengyouquan"/>
+                <TextView
+                    android:layout_marginTop="@dimen/y26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wxpyq"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_qqshare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/qq"/>
+                <TextView
+                    android:layout_marginTop="@dimen/y26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qqhy"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/lin_cancl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y98"
+        android:background="@color/white"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancl"
+            android:textAppearance="@style/TextAppear.Theme.A3_Size18"/>
+    </LinearLayout>
+
+
+</LinearLayout>

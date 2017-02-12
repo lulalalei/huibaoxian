@@ -34,7 +34,6 @@ public abstract class PullLayout extends InterceptLauyout {
     public int SCROLL_TIME = 300;
 
 
-
     //是否刷新完成
     private boolean isRefreshSuccess = false;
     //是否加载完成
@@ -75,7 +74,7 @@ public abstract class PullLayout extends InterceptLauyout {
 
 
                 if (getScrollY() < 0) {
-                    if (HeadView != null) {
+                    if (HeadView != null && type == TypeState.UP) {
                         setGone();
                         performScroll(dy);
                         if (Math.abs(getScrollY()) > HeadView.getMeasuredHeight()) {
@@ -85,8 +84,8 @@ public abstract class PullLayout extends InterceptLauyout {
                         }
                     }
                 } // 如果getScrollY>=0，即上拉操作
-                else {
-                    if (FootView != null) {
+                else if (getScrollY() > 0) {
+                    if (FootView != null && type == TypeState.DOWN) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (getScrollY() >= bottomScroll + FootView.getMeasuredHeight()) {
@@ -95,6 +94,8 @@ public abstract class PullLayout extends InterceptLauyout {
                             updateStatus(UP_BEFORE);
                         }
                     }
+                } else {
+                    performScroll(dy);
                 }
                 // 记录y坐标
                 lastYMove = y;

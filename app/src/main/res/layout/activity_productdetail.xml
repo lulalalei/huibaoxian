@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.bb.hbx.activitiy.ProductDetailActivity">
 
     <LinearLayout
@@ -102,7 +103,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginBottom="@dimen/y45"
                     android:layout_marginRight="@dimen/x36"
-
+                    android:shadowColor="#ff000000"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
                     android:textAppearance="@style/TextAppear.Theme.white_Size14"
                     tools:text="大西洋保险 | 销量 133" />
 
@@ -197,43 +201,16 @@
                 android:text="@string/more_features"
                 android:textAppearance="@style/TextAppear.Theme.A1_Size13" />
 
-            <RelativeLayout
+
+
+            <com.bb.hbx.widget.CardLayout
+                android:id="@+id/clayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y42"
-                android:background="@color/A7">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/lin_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/y100"
-                    android:layout_marginLeft="@dimen/x36"
-                    android:layout_marginRight="@dimen/x36"
-                    android:layout_marginTop="@dimen/y26"
-                    android:background="@drawable/shape_z49"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x36"
-                        android:drawableLeft="@drawable/baozhang"
-                        android:drawablePadding="@dimen/x22"
-                        android:gravity="center_vertical"
-                        android:text="@string/protection_list"
-                        android:textAppearance="@style/TextAppear.Theme.Z48_Size16" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/lin_1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/touying" />
+            </com.bb.hbx.widget.CardLayout>
 
 
-            </RelativeLayout>
 
 
             <LinearLayout
@@ -318,7 +295,7 @@
                 android:layout_marginTop="@dimen/y20"
                 android:paddingLeft="@dimen/x16"
                 android:paddingTop="@dimen/y16"
-                android:text="@string/more_features"
+                android:text="@string/more_bzfeatures"
                 android:textAppearance="@style/TextAppear.Theme.A1_Size13" />
 
 
@@ -479,9 +456,9 @@
                 android:id="@+id/agree_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y160"
-                android:layout_marginLeft="@dimen/x36"
-                android:layout_marginRight="@dimen/x36"
                 android:background="@color/A7"
+                android:paddingLeft="@dimen/x36"
+                android:paddingRight="@dimen/x36"
                 android:paddingTop="@dimen/y42">
 
                 <CheckBox

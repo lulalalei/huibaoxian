@@ -14,6 +14,8 @@ public class Special  implements Item{
 
     private List<ProductListBean> productList;
 
+    private List<Special> specialList;
+
 
     /**
      * endTime :
@@ -49,6 +51,15 @@ public class Special  implements Item{
     private int specialType;
     private String specialUrl;
     private String startTime;
+
+
+    public List<Special> getSpecialList() {
+        return specialList;
+    }
+
+    public void setSpecialList(List<Special> specialList) {
+        this.specialList = specialList;
+    }
 
     public String getEndTime() {
         return endTime;

@@ -33,7 +33,7 @@ public class ActivitProvide extends ItemViewProvider<ActivitBean, ActivitProvide
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View view = inflater.inflate(R.layout.recommend_item, parent, false);
+        View view = inflater.inflate(R.layout.activit_item, parent, false);
         return new ViewHolder(view);
     }
 

@@ -72,7 +72,7 @@
     <string name="pleaseinsured">请输入投保人姓名</string>
     <string name="certificatetype">证件类型</string>
     <string name="tel">手机号码</string>
-    <string name="beinsured">投保人信息</string>
+    <string name="beinsured">被保人信息</string>
     <string name="certificate">证件号码</string>
     <string name="hinid">请输入证件号码</string>
     <string name="idcard">身份证</string>
@@ -90,6 +90,12 @@
     <string name="agreement2">我已阅读《投保须知》《保险条款》《健康告知》并同意上述协议约定</string>
     <string name="more_protection">查看保障详情</string>
     <string name="xlmatch">销量\t%1$s份</string>
+    <string name="more_bzfeatures">查看保障详情</string>
+    <string name="share2">分享后推广费不可见</string>
+    <string name="wxhy">微信好友</string>
+    <string name="wxpyq">微信朋友圈</string>
+    <string name="qqhy">QQ好友</string>
+    <string name="cancl">取消</string>
     <!-- behavior -->
 
     <string name="ToolbarAlphaBehavior">com.bb.hbx.behavior.ToolbarAlphaBehavior</string>

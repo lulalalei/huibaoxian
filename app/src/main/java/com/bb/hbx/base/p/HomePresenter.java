@@ -2,7 +2,6 @@ package com.bb.hbx.base.p;
 
 
 import android.support.v7.widget.GridLayoutManager;
-import android.util.Log;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -12,8 +11,9 @@ import com.bb.hbx.base.v.HomeContract;
 import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
-import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MsgInfo;
+import com.bb.hbx.bean.WaitingItem;
+import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
@@ -21,6 +21,7 @@ import com.bb.hbx.utils.Constants;
 import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -38,6 +39,8 @@ public class HomePresenter extends HomeContract.Presenter {
 
     private int topicListPageSize = 10;
 
+    private int item_PageSize = 5;
+
     private PostCallback postCallback;
 
 
@@ -49,11 +52,51 @@ public class HomePresenter extends HomeContract.Presenter {
             @Override
             public void successCallback(Result_Api api) {
                 mView.stopRefresh();
-                if (api.getOutput() instanceof HomePageInfo) {
-                    HomePageInfo info = (HomePageInfo) api.getOutput();
-                    MyApplication.areaVersion = info.getAreaVersion();
-                    mView.setAutuoBanner("1".equals(info.getLoop()) ? true : false);
-                    dealWith(info);
+                if (api.getOutput() instanceof BannerBean) {
+                    BannerBean bannerBean = (BannerBean) api.getOutput();
+                    items.set(0, bannerBean);
+                    mView.notfiy();
+
+                } else if (api.getOutput() instanceof ProductItem) {
+                    ProductItem productItem = (ProductItem) api.getOutput();
+                    if (productItem.getProductType() != null && !productItem.getProductType().isEmpty()) {
+                        int i = 1;
+                        for (ProductItem productItem1 : productItem.getProductType()) {
+                            items.set(i, productItem1);
+                            i++;
+                        }
+                        mView.notfiy();
+                    }
+
+                } else if (api.getOutput() instanceof BobaoItem) {
+//                    //小汇报
+                    BobaoItem bobaoItem = (BobaoItem) api.getOutput();
+                    items.set(item_PageSize + 1, bobaoItem);
+                    mView.notfiy();
+
+                } else if (api.getOutput() instanceof Special) {
+                    Special parent_Special = (Special) api.getOutput();
+                    //爆款推荐专题
+                    items.add(new BKItem(R.drawable.baokuantuijian));
+                    //爆款推荐的产品
+                    List<Special> specialList = parent_Special.getSpecialList();
+                    List<Special> jxLists = new ArrayList<>();
+                    for (Special special : specialList) {
+                        if (special.getSpecialType() == Constants.BKTJ) {
+                            List<ProductListBean> beanList = special.getProductList();
+                            if (beanList == null || beanList.size() == 0)
+                                return;
+                            beanList.get(beanList.size() - 1).setLine(false);
+                            items.addAll(beanList);
+                        } else {
+                            jxLists.add(special);
+                        }
+                    }
+
+                    //精选专题
+                    items.add(new BKItem(R.drawable.jingxuanzhuanti));
+                    items.addAll(jxLists);
+                    mView.notfiy();
 
                 } else if (api.getOutput() instanceof MsgInfo) {
                     MsgInfo info = (MsgInfo) api.getOutput();
@@ -70,64 +113,80 @@ public class HomePresenter extends HomeContract.Presenter {
     }
 
 
-    private void dealWith(HomePageInfo info) {
-
-
-        items.clear();
-
-        //banner
-        bannerBean = new BannerBean();
-        bannerBean.setList(info.getAds());
-        items.add(bannerBean);
-
-        //险种Item
-        if (info.getProductType() == null && info.getProductType().isEmpty()) {
-            //// TODO: 2017/1/13
-        } else {
-            items.addAll(info.getProductType());
-        }
-
-        //小汇报
-        if (MyApplication.user.getIsBClient()) {
-            BobaoItem bobaoItem = new BobaoItem();
-            bobaoItem.setList(info.getXhbMsgList());
-            items.add(bobaoItem);
-        }
-
-        //爆款推荐专题
-        items.add(new BKItem(R.drawable.baokuantuijian));
-
-
-        //爆款推荐的产品
-        List<Special> specialList = info.getSpecialList();
-        List<Special> jxLists = new ArrayList<>();
-        for (Special special : specialList) {
-            if (special.getSpecialType() == Constants.BKTJ) {
-                List<ProductListBean> beanList = special.getProductList();
-                beanList.get(beanList.size() - 1).setLine(false);
-                items.addAll(beanList);
-            } else {
-                jxLists.add(special);
-            }
-        }
-
-        //精选专题
-        items.add(new BKItem(R.drawable.jingxuanzhuanti));
-        items.addAll(jxLists);
-        mView.getfreshListData(items);
-
-
-    }
+//    private void dealWith(HomePageInfo info) {
+//
+//
+//        items.clear();
+//
+//        //banner
+//        bannerBean = new BannerBean();
+//        bannerBean.setAds(info.getAds());
+//        items.add(bannerBean);
+//
+//        //险种Item
+//        if (info.getProductType() == null && info.getProductType().isEmpty()) {
+//            //// TODO: 2017/1/13
+//        } else {
+//            items.addAll(info.getProductType());
+//        }
+//
+//
+//        //爆款推荐专题
+//        items.add(new BKItem(R.drawable.baokuantuijian));
+//
+//
+//        //爆款推荐的产品
+//        List<Special> specialList = info.getSpecialList();
+//        List<Special> jxLists = new ArrayList<>();
+//        for (Special special : specialList) {
+//            if (special.getSpecialType() == Constants.BKTJ) {
+//                List<ProductListBean> beanList = special.getProductList();
+//                if (beanList == null || beanList.size() == 0)
+//                    return;
+//                beanList.get(beanList.size() - 1).setLine(false);
+//                items.addAll(beanList);
+//            } else {
+//                jxLists.add(special);
+//            }
+//        }
+//
+//        //精选专题
+//        items.add(new BKItem(R.drawable.jingxuanzhuanti));
+//        items.addAll(jxLists);
+//        mView.getfreshListData(items);
+//
+//
+//    }
 
 
     @Override
     public void getHomePageInfo() {
-        mModel.getHomePageInfo("0", postCallback);
+        items.clear();
+        items.add(new BannerBean());
+        for (int i = 0; i < item_PageSize; i++) {
+            items.add(new ProductItem());
+        }
+        if (MyApplication.user.getIsBClient()) {
+            items.add(new BobaoItem());
+        }
+        //接口
+        mModel.getBannerInfo(postCallback);
+        mModel.getHomePageProductType(postCallback);
+        if (MyApplication.user.getIsBClient()) {
+            mModel.getXhbMessageInfo(postCallback);
+        }
+        mModel.getHomePageProductList(postCallback);
     }
 
     @Override
     public void getMsgs() {
-        mModel.getMsgs(MyApplication.user.getUserId(), "1", "1", 1, 99, postCallback);
+
+        mModel.getUnReadMessageCount(MyApplication.user.getUserId(), postCallback);
+    }
+
+    @Override
+    public List<Item> getListItems() {
+        return items;
     }
 
 
@@ -140,9 +199,11 @@ public class HomePresenter extends HomeContract.Presenter {
                 if (item instanceof ProductItem) {
                     return 1;
                 }
-                return 5;
+                return item_PageSize;
             }
         };
         return spanSizeLookup;
     }
+
+
 }

@@ -6,10 +6,16 @@ import android.support.v7.widget.RecyclerView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.base.m.TopListModel;
+import com.bb.hbx.base.p.ToplistPresenter;
+import com.bb.hbx.base.v.TopicListContract;
 import com.bb.hbx.bean.RecommendBean;
 import com.bb.hbx.bean.TopicBean;
+import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.provide.TopicListProvide;
 import com.bb.hbx.widget.DottedLineItemDecoration;
+import com.bb.hbx.widget.freshlayout.OnPullListener;
+import com.bb.hbx.widget.freshlayout.RefreshLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -24,13 +30,18 @@ import butterknife.BindView;
  * 专题列表
  */
 
-public class TopiclistFragment extends BaseFragment {
+public class TopiclistFragment extends BaseFragment<ToplistPresenter, TopListModel>
+        implements TopicListContract.View {
 
 
     private final String TAG = TopiclistFragment.class.getSimpleName();
 
     @BindView(R.id.rl_view)
     RecyclerView rl_view;
+
+    @BindView(R.id.refresh)
+    RefreshLayout refresh;
+
 
     private MultiTypeAdapter adapter;
 
@@ -52,14 +63,33 @@ public class TopiclistFragment extends BaseFragment {
         adapter.register(TopicBean.class, new TopicListProvide(getActivity()));
         rl_view.setAdapter(adapter);
         rl_view.addItemDecoration(new DottedLineItemDecoration());
+
+        refresh.setOnPullListener(new OnPullListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getSpecials(DataLoadDirection.Refresh);
+            }
+
+            @Override
+            public void onLoadMore() {
+                mPresenter.getSpecials(DataLoadDirection.LoadMore);
+            }
+        });
     }
 
     @Override
     protected void initdate(Bundle savedInstanceState) {
-        items = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            items.add(new TopicBean());
-        }
-        adapter.setItems(items);
+        adapter.setItems(mPresenter.getList());
+        mPresenter.getSpecials(DataLoadDirection.Refresh);
+    }
+
+    @Override
+    public void stopRefresh() {
+        refresh.stopRefresh(true);
+    }
+
+    @Override
+    public void stopLoadMore() {
+        refresh.stopLoadMore(true);
     }
 }

@@ -8,27 +8,24 @@ import java.util.List;
  * Created by Administrator on 2016/12/13.
  */
 
-public class BobaoItem implements Item{
+public class BobaoItem implements Item {
 
 
-    List<XhbMsg>list;
+    private List<XhbMsg> msgList;
 
-    public BobaoItem(){
+    public BobaoItem() {
 
     }
 
-    public BobaoItem(List<XhbMsg>list){
-       this.list=list;
+    public BobaoItem(List<XhbMsg> list) {
+        this.msgList = list;
     }
 
-
-    public List<XhbMsg> getList() {
-        return list;
+    public List<XhbMsg> getMsgList() {
+        return msgList;
     }
 
-    public void setList(List<XhbMsg> list) {
-        this.list = list;
+    public void setMsgList(List<XhbMsg> msgList) {
+        this.msgList = msgList;
     }
-
-
 }

@@ -53,6 +53,19 @@
         <item name="android:textColor">@color/Z48</item>
     </style>
 
+    <style name="TextAppear.Theme.Z48_Size12" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/Z48</item>
+    </style>
+    <style name="TextAppear.Theme.Z48_Size24" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/Z48</item>
+    </style>
+
+    <style name="TextAppear.Theme.A1_Size24" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/A1</item>
+    </style>
 
     <style name="TextAppear.Theme.white_Size14" parent="android:TextAppearance.Theme">
         <item name="android:textSize">14sp</item>

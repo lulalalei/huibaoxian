@@ -30,8 +30,11 @@ import butterknife.ButterKnife;
 public class BannerProvide extends ItemViewProvider<BannerBean, BannerProvide.ViewHolder> {
 
 
-    private boolean mAutoPlayAble = true;
+    private boolean mAutoPlayAble;
 
+    public BannerProvide(boolean mAutoPlayAble) {
+        this.mAutoPlayAble = mAutoPlayAble;
+    }
 
     @NonNull
     @Override
@@ -83,16 +86,10 @@ public class BannerProvide extends ItemViewProvider<BannerBean, BannerProvide.Vi
                 }
             });
 
-            if (bannerBean.getList() != null)
-                bgaBanner.setData(bannerBean.getList(), null);
+            if (bannerBean.getAds() != null)
+                bgaBanner.setData(bannerBean.getAds(), null);
         }
     }
 
-    public boolean ismAutoPlayAble() {
-        return mAutoPlayAble;
-    }
 
-    public void setmAutoPlayAble(boolean mAutoPlayAble) {
-        this.mAutoPlayAble = mAutoPlayAble;
-    }
 }

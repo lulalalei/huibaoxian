@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by fancl.
  */
 
-public class BobaoProvide extends ItemViewProvider<BobaoItem,BobaoProvide.ViewHolder> {
+public class BobaoProvide extends ItemViewProvider<BobaoItem, BobaoProvide.ViewHolder> {
 
 
     @NonNull
@@ -43,16 +43,19 @@ public class BobaoProvide extends ItemViewProvider<BobaoItem,BobaoProvide.ViewHo
 
         @BindView(R.id.tl)
         TitleListview tl;
+
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
 
 
         }
 
 
         void setData(@NonNull final BobaoItem bannerBean) {
-            tl.setAdapter(new ListAdapter(tl.getContext(),bannerBean.getList()));
+            if (bannerBean.getMsgList() != null && !bannerBean.getMsgList().isEmpty()) {
+                tl.setAdapter(new ListAdapter(tl.getContext(), bannerBean.getMsgList()));
+            }
         }
     }
 

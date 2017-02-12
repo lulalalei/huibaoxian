@@ -13,7 +13,7 @@ import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.List;
 
-import static com.baidu.location.h.j.m;
+
 
 /**
  * Created by fancl.

@@ -27,6 +27,12 @@ public abstract class InterceptLauyout extends DrawLayout {
 
     public boolean isIng = false;
 
+    public enum TypeState {
+        UP,
+        DOWN
+    }
+
+    public TypeState type = TypeState.UP;
 
 
     public InterceptLauyout(Context context) {
@@ -52,6 +58,7 @@ public abstract class InterceptLauyout extends DrawLayout {
                 lastYMove = y;
                 // 不拦截ACTION_DOWN，因为当ACTION_DOWN被拦截，后续所有触摸事件都会被拦截
                 intercept = false;
+                isIng = false;
                 break;
 
             case MotionEvent.ACTION_MOVE:
@@ -69,6 +76,9 @@ public abstract class InterceptLauyout extends DrawLayout {
                         } else if (child instanceof RecyclerView) {
                             intercept = rlPullDownIntercept(child);
                         }
+                        if (intercept) {
+                            type = TypeState.UP;
+                        }
 
 
                     } else if (y < lastYIntercept && isNeedLoadMore) {// 上拉操作
@@ -83,6 +93,11 @@ public abstract class InterceptLauyout extends DrawLayout {
                         } else if (child instanceof RecyclerView) {
                             intercept = rvPullUpIntercept(child);
                         }
+
+                        if (intercept) {
+                            type = TypeState.DOWN;
+                        }
+
                     } else {
                         intercept = false;
                     }

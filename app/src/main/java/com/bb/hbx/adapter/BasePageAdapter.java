@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 import android.view.ViewGroup;
 
-import com.baidu.platform.comapi.map.L;
+
 import com.bb.hbx.base.BaseFragment;
 
 import java.util.ArrayList;

@@ -135,6 +135,11 @@ public class MyCustomInfoInDetailAdapter extends RecyclerView.Adapter<MyCustomIn
                         year + "-" + month + "-" + day,
                         Toast.LENGTH_LONG).show();
             }
+
+            @Override
+            public void ondissmiss() {
+
+            }
         });
     }
     @Override

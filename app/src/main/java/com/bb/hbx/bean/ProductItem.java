@@ -2,6 +2,8 @@ package com.bb.hbx.bean;
 
 import com.bb.hbx.widget.multitype.data.Item;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/1/11.
  */
@@ -25,6 +27,8 @@ public class ProductItem implements Item{
     private String insurerTypeLogo;
     private String insurerTypeName;
     private String insurerTypeUrl;
+
+    private List<ProductItem> productType;
 
 
     public String getInsurerTypeId() {
@@ -57,5 +61,13 @@ public class ProductItem implements Item{
 
     public void setInsurerTypeUrl(String insurerTypeUrl) {
         this.insurerTypeUrl = insurerTypeUrl;
+    }
+
+    public List<ProductItem> getProductType() {
+        return productType;
+    }
+
+    public void setProductType(List<ProductItem> productType) {
+        this.productType = productType;
     }
 }

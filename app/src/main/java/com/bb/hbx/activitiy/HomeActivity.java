@@ -25,9 +25,8 @@ import com.bb.hbx.widget.BottomBar;
 
 import butterknife.BindView;
 
-import static android.R.attr.fragment;
-import static android.view.Window.FEATURE_NO_TITLE;
-import static com.baidu.location.h.j.F;
+
+
 
 /**
  * Created by Administrator on 2016/12/20.

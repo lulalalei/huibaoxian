@@ -3,6 +3,8 @@ package com.bb.hbx.api;
 import com.bb.hbx.bean.Account;
 import com.bb.hbx.bean.AddConsignee;
 import com.bb.hbx.bean.AreasListBean;
+import com.bb.hbx.bean.BannerBean;
+import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.Consignees;
 import com.bb.hbx.bean.DeleteConsignee;
 import com.bb.hbx.bean.HomePageInfo;
@@ -10,12 +12,17 @@ import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.ProductDetail;
+import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.RequestProduct;
+import com.bb.hbx.bean.Special;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.bean.UpdateConsignee;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.bean.UserInfo;
 import com.bb.hbx.bean.UserRegist;
+import com.bb.hbx.bean.VersionInfo;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -123,14 +130,14 @@ public interface ApiService {
     //添加银行卡
     @FormUrlEncoded
     @POST("api.do?method=bindingBankCard&type=post")
-    Call<Result_Api> bindingBankCard(@Field("accountName") String accountName,@Field("bankName") String bankName,
-                             @Field("cardNo") String cardNo,@Field("userId") String userId);
+    Call<Result_Api> bindingBankCard(@Field("accountName") String accountName, @Field("bankName") String bankName,
+                                     @Field("cardNo") String cardNo, @Field("userId") String userId);
 
     //提现
     @FormUrlEncoded
     @POST("api.do?method=applyCash&type=post")
-    Call<Result_Api> applyCash(@Field("userId") String userId,@Field("cashAmount") String cashAmount,@Field("accountName") String accountName,
-                           @Field("bankName") String bankName, @Field("cashIp") String cashIp);
+    Call<Result_Api> applyCash(@Field("userId") String userId, @Field("cashAmount") String cashAmount, @Field("accountName") String accountName,
+                               @Field("bankName") String bankName, @Field("cashIp") String cashIp);
 
     //设置,修改支付密码
     @FormUrlEncoded
@@ -179,7 +186,7 @@ public interface ApiService {
     //版本信息获取
     @FormUrlEncoded
     @POST("api.do?method=getClientCtlInfo&type=post")
-    Call<Result_Api<String>> getClientCtlInfo(@Field("userId") String userId);
+    Call<Result_Api<VersionInfo>> getClientCtlInfo(@Field("userId") String userId);
 
     //版本信息获取
     @FormUrlEncoded
@@ -188,26 +195,29 @@ public interface ApiService {
 
 
     //获取Banner
-    @FormUrlEncoded
+
     @POST("api.do?method=getBannerInfo&type=post")
-    Call<Result_Api<String>> getBannerInfo();
+    Call<Result_Api<BannerBean>> getBannerInfo();
 
 
     //获取小汇报消息列表
-    @FormUrlEncoded
     @POST("api.do?method=getXhbMessageInfo&type=post")
-    Call<Result_Api<String>> getXhbMessageInfo();
+    Call<Result_Api<BobaoItem>> getXhbMessageInfo();
 
 
     //获取首页分类
-    @FormUrlEncoded
+
     @POST("api.do?method=getHomePageProductType&type=post")
-    Call<Result_Api<String>> getHomePageProductType();
+    Call<Result_Api<ProductItem>> getHomePageProductType();
 
     //获取首页专题列表
-    @FormUrlEncoded
     @POST("api.do?method=getHomePageProductList&type=post")
-    Call<Result_Api<String>> getHomePageProductList();
+    Call<Result_Api<Special>> getHomePageProductList();
+
+    //获取未读消息条数
+    @FormUrlEncoded
+    @POST("api.do?method=getUnReadMessageCount&type=post")
+    Call<Result_Api<MsgInfo>> getUnReadMessageCount(@Field("userId") String userId);
 
 
 }

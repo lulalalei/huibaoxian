@@ -58,6 +58,8 @@ public class ItemLayout2 extends LinearLayout {
     OnUpListener listener;
 
 
+
+
     public void setListener(OnUpListener listener) {
         this.listener = listener;
     }
@@ -77,7 +79,7 @@ public class ItemLayout2 extends LinearLayout {
         right_icon = a.getResourceId(R.styleable.ItemLayout2_right_icon2, -1);
         right_butIcon = a.getResourceId(R.styleable.ItemLayout2_right_butIcon2, -1);
 
-        textAppearance=a.getResourceId(R.styleable.ItemLayout2_textAppearance, R.style.TextAppear_Theme_A3_Size13);
+        textAppearance = a.getResourceId(R.styleable.ItemLayout2_textAppearance, R.style.TextAppear_Theme_A3_Size13);
         init();
 
     }
@@ -87,20 +89,29 @@ public class ItemLayout2 extends LinearLayout {
         View view = LayoutInflater.from(mContext).inflate(R.layout.line_item2, this, false);
         addView(view);
         ButterKnife.bind(this);
-        tv_comm.setTextAppearance(mContext,textAppearance);
+        tv_comm.setTextAppearance(mContext, textAppearance);
 
         iv_last.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOpen) {
-                    iv_last.setImageResource(right_butIcon);
-                    if (listener != null) {
-                        listener.onClick();
-                    }
-                } else {
-                    iv_last.setImageResource(right_icon);
+                iv_last.setImageResource(right_butIcon);
+                if (listener != null) {
+                    listener.onClick();
                 }
-                isOpen = !isOpen;
+
+
+            }
+        });
+
+        tv_comm.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_last.setImageResource(right_butIcon);
+                if (listener != null) {
+                    listener.onClick();
+                }
+
+
             }
         });
 
@@ -122,6 +133,10 @@ public class ItemLayout2 extends LinearLayout {
 
     public String getTextValue() {
         return tv_comm.getText().toString().trim();
+    }
+
+    public void setdownImageResource() {
+        iv_last.setImageResource(right_icon);
     }
 
     public interface OnUpListener {

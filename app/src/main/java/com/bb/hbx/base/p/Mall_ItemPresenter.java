@@ -31,7 +31,6 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
 
     private PostCallback postCallback;
 
-    private boolean isAlready = false;
 
     private int loadType = DataLoadDirection.Refresh;
 
@@ -49,18 +48,20 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
 
                 if (api.getOutput() instanceof ProductBean) {
                     ProductBean bean = (ProductBean) api.getOutput();
-                    isAlready = true;
                     if (loadType == DataLoadDirection.Refresh) {
                         items.clear();
                         isloadmore = true;
-                    } else {
-
                     }
+                    
                     if (bean.getPageSize() < PAGE_SIZE) {
                         isloadmore = false;
                     }
-                    items.addAll(bean.getProductList());
-                    mView.notfiy();
+                    if (bean.getProductList() == null || bean.getProductList().isEmpty()) {
+                        mView.showMsg("没有数据啦...");
+                    } else {
+                        items.addAll(bean.getProductList());
+                        mView.notfiy();
+                    }
                 }
 
                 if (loadType == DataLoadDirection.Refresh)

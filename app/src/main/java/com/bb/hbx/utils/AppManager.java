@@ -3,8 +3,13 @@ package com.bb.hbx.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 import java.util.Stack;
@@ -173,6 +178,8 @@ public class AppManager {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return (int) ((dp * displayMetrics.density) + 0.5);
     }
+
+
 
 
 }

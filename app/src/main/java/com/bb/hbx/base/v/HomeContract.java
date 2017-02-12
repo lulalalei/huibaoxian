@@ -21,20 +21,28 @@ public interface HomeContract {
     interface Model extends BaseModel {
 
 
-        void getHomePageInfo(String userId, Callback callback);
-
         void getMsgs(String userId, String msgType, String sts, int pageIndex, int pageSize,
                      Callback callback);
+
+
+        void getBannerInfo(Callback callback);
+
+        void getXhbMessageInfo(Callback callback);
+
+        void getHomePageProductType(Callback callback);
+
+        void getHomePageProductList(Callback callback);
+
+        void getUnReadMessageCount(String userId, Callback callback);
 
     }
 
 
     interface View extends BaseView {
 
-
-        void setAutuoBanner(boolean isAuto);
-
         void getfreshListData(List<Item> items);
+
+        void notfiy();
 
         void stopRefresh();
 
@@ -49,6 +57,8 @@ public interface HomeContract {
         public abstract void getHomePageInfo();
 
         public abstract void getMsgs();
+
+        public abstract List<Item> getListItems();
 
 
         public abstract GridLayoutManager.SpanSizeLookup getSpanSizeLookup();

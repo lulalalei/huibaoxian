@@ -19,6 +19,7 @@ import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
 
+import com.bb.hbx.bean.WaitingItem;
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
@@ -30,13 +31,11 @@ import com.bb.hbx.provide.BobaoProvide;
 import com.bb.hbx.provide.JxItemProvide;
 import com.bb.hbx.provide.ModleItemProvide;
 import com.bb.hbx.utils.AppManager;
-import com.bb.hbx.utils.Constants;
 import com.bb.hbx.widget.freshlayout.OnPullListener;
 import com.bb.hbx.widget.freshlayout.RefreshLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -142,7 +141,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     protected void initdate(Bundle savedInstanceState) {
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
-        bannerProvide = new BannerProvide();
+        boolean isPlaywhile = false;
+        if (MyApplication.versionInfo != null) {
+            isPlaywhile = MyApplication.versionInfo.getLoop() == 1 ? true :
+                    false;
+        }
+        bannerProvide = new BannerProvide(isPlaywhile);
         adapter.register(BannerBean.class, bannerProvide);
         adapter.register(ProductItem.class, new ModleItemProvide());
         adapter.register(BobaoItem.class, new BobaoProvide());
@@ -150,8 +154,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
         adapter.register(ProductListBean.class, new BKchildItemProvide(getActivity()));
         adapter.register(Special.class, new JxItemProvide(getActivity()));
         rc_list.setAdapter(adapter);
-
-
+        adapter.setItems(mPresenter.getListItems());
         refresh.setOnPullListener(new OnPullListener() {
             @Override
             public void onRefresh() {
@@ -186,18 +189,17 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
         }
     }
 
-    @Override
-    public void setAutuoBanner(boolean isAuto) {
-        bannerProvide.setmAutoPlayAble(isAuto);
-    }
 
     @Override
     public void getfreshListData(List<Item> items) {
-        adapter.setItems(items);
-        adapter.notifyDataSetChanged();
-
 
     }
+
+    @Override
+    public void notfiy() {
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void stopRefresh() {

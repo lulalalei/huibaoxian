@@ -12,22 +12,22 @@ import java.util.List;
 
 public class BannerBean implements Item {
 
-    private List<AdBean>list;
+    private  List<AdBean> ads;
 
     public BannerBean() {
 
     }
 
 
-    public BannerBean(@NonNull final List<AdBean>list) {
-        this.list = list;
+    public BannerBean(@NonNull final List<AdBean>ads) {
+        this.ads = ads;
     }
 
-    public List<AdBean> getList() {
-        return list;
+    public List<AdBean> getAds() {
+        return ads;
     }
 
-    public void setList(List<AdBean> list) {
-        this.list = list;
+    public void setAds(List<AdBean> ads) {
+        this.ads = ads;
     }
 }

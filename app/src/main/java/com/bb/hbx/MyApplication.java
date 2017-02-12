@@ -5,7 +5,8 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 
 import com.bb.hbx.bean.User;
-import com.bb.hbx.utils.LocationService;
+import com.bb.hbx.bean.VersionInfo;
+
 
 /**
  * Created by Administrator on 2016/12/6.
@@ -14,7 +15,7 @@ import com.bb.hbx.utils.LocationService;
 public class MyApplication extends Application {
 
 
-    public LocationService locationService;
+    //public LocationService locationService;
     private static MyApplication INSTANCE = null;
     private static Context context;
 
@@ -26,6 +27,8 @@ public class MyApplication extends Application {
 
 
     public static String areaVersion = "";
+
+    public static VersionInfo versionInfo;
 
 
     public static String DUID = "";// 设备唯一码
