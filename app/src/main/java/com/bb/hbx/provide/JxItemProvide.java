@@ -72,8 +72,9 @@ public class JxItemProvide extends ItemViewProvider<Special, JxItemProvide.ViewH
 
             GlideUtil.getInstance().loadImage(MyApplication.getAppContext(),
                     img_kind_res, jxItem.getSpecialLogo(), true);
-            if (jxItem.getProductList() != null && jxItem.getProductList().size() > 0 && lin_add != null) {
-                lin_add.removeAllViews();
+            lin_add.removeAllViews();
+            if (jxItem.getProductList() != null && jxItem.getProductList().size() > 0) {
+
                 for (int i = 0; i < jxItem.getProductList().size(); i++) {
                     View view = View.inflate(itemView.getContext(), R.layout.layout_jx_item, null);
 
