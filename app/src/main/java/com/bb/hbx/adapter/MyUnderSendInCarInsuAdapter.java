@@ -62,24 +62,24 @@ public class MyUnderSendInCarInsuAdapter extends RecyclerView.Adapter<MyUnderSen
 
         @BindView(R.id.time_tv)
         TextView time_tv;
+        @BindView(R.id.title_tv)
+        TextView title_tv;
         @BindView(R.id.orderNumber_tv)
         TextView orderNumber_tv;
-        @BindView(R.id.itemO_tv)
-        TextView itemO_tv;
-        @BindView(R.id.itemTw_tv)
-        TextView itemTw_tv;
-        @BindView(R.id.itemTh_tv)
-        TextView itemTh_tv;
-        @BindView(R.id.itemF_tv)
-        TextView itemF_tv;
+        @BindView(R.id.insured_tv)
+        TextView insured_tv;
+        @BindView(R.id.holder_tv)
+        TextView holder_tv;
+        @BindView(R.id.timeLimit_tv)
+        TextView timeLimit_tv;
         @BindView(R.id.price_tv)
         TextView price_tv;
         @BindView(R.id.income_tv)
         TextView income_tv;
-        @BindView(R.id.logo_iv)
-        ImageView logo_iv;
         @BindView(R.id.state_iv)
         ImageView state_iv;
+        @BindView(R.id.logo_iv)
+        ImageView logo_iv;
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

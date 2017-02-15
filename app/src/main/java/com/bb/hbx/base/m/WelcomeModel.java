@@ -48,12 +48,14 @@ public class WelcomeModel implements WelcomeContract.Model {
                 values.put("isBClient", false);//默认false
                 values.put("sessionId", "");
                 values.put("userId", "");
+                values.put("phone", "");
                 values.put("gender", "0");//默认为0
                 long flag = MyUsersSqlite.db.insert("userstb", null, values);
                 //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
                 values.clear();
 
                 user.setUserId("");
+                user.setMobile("");
                 user.setSessionId("");
                 user.setIsBClient(false);
             } else {
@@ -61,13 +63,16 @@ public class WelcomeModel implements WelcomeContract.Model {
                 if (hasLogined.equals("true"))//首次登陆后,数据会被刷新
                 {
                     String userId = cursor.getString(cursor.getColumnIndex("userId"));
+                    String phone = cursor.getString(cursor.getColumnIndex("phone"));
                     String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));
                     String isBClient = cursor.getString(cursor.getColumnIndex("isBClient"));
                     user.setUserId(userId);
+                    user.setMobile(phone);
                     user.setSessionId(sessionId);
                     user.setIsBClient(isBClient.equals("true") ? true : false);
                 } else {
                     user.setUserId("");
+                    user.setMobile("");
                     user.setSessionId("");
                     user.setIsBClient(false);
                 }

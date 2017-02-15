@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyHasUsedInPresInsuAdapter;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -72,5 +74,11 @@ public class HasUsedInPreInsuFragment extends BaseFragment{
             list.add("i:"+i);
         }
         adapter.notifyDataSetChanged();
+        adapter.setOnMyItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onMyItemClickListener(int position) {
+                Toast.makeText(mContext,"position:"+position,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

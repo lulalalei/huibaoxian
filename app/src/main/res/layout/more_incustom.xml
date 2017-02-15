@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_E5"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y402"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/y86"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/lin_heka"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/kehu_heka"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发送贺卡"
+                    android:layout_marginTop="@dimen/y26"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_bianji"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/kehu_bianji"/>
+                <TextView
+                    android:layout_marginTop="@dimen/y26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="编辑资料"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_shanchu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/kehu_shanchu"/>
+                <TextView
+                    android:layout_marginTop="@dimen/y26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="删除客户"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/lin_cancl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y98"
+        android:background="@color/white"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancl"
+            android:textAppearance="@style/TextAppear.Theme.A3_Size18"/>
+    </LinearLayout>
+
+
+</LinearLayout>

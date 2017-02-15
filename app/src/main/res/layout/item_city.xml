@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:background="@color/white">
     <TextView
+        android:id="@+id/letter_tv"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:textSize="13sp"
+        android:textColor="@color/A1"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="10dp"/>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:id="@+id/tyCity"
-        android:layout_marginLeft="20dp"/>
+        android:layout_height="56dp"
+        android:layout_toRightOf="@id/letter_tv"
+        android:layout_marginTop="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/A3"
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:id="@+id/tyCity"
+            android:layout_marginLeft="20dp"/>
+    </RelativeLayout>
+
 </RelativeLayout>

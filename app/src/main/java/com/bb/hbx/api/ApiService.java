@@ -2,14 +2,17 @@ package com.bb.hbx.api;
 
 import com.bb.hbx.bean.Account;
 import com.bb.hbx.bean.AddConsignee;
+import com.bb.hbx.bean.AddInsured;
 import com.bb.hbx.bean.AreasListBean;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.Consignees;
 import com.bb.hbx.bean.DeleteConsignee;
+import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
+import com.bb.hbx.bean.OssBean;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.ProductDetail;
 import com.bb.hbx.bean.ProductItem;
@@ -17,12 +20,11 @@ import com.bb.hbx.bean.RequestProduct;
 import com.bb.hbx.bean.Special;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.bean.UpdateConsignee;
+import com.bb.hbx.bean.UpdateInsured;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.bean.UserInfo;
 import com.bb.hbx.bean.UserRegist;
 import com.bb.hbx.bean.VersionInfo;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -143,6 +145,35 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=updatePayPassword&type=post")
     Call<Result_Api> updatePayPassword(@Field("payPassword") String payPassword, @Field("userId") String userId);
+
+    //上传用户头像,阿里云
+    @FormUrlEncoded
+    @POST("api.do?method=getOssToken&type=post")
+    Call<Result_Api<OssBean>> getOssToken(@Field("userId") String userId);
+
+    //获取常用保险联系人--已测,接口返回数据待修改
+    @FormUrlEncoded
+    @POST("api.do?method=getInsured&type=post")
+    Call<Result_Api<GetInsured>> getInsured(@Field("userId") String userId, @Field("mobile") String mobile,
+                                            @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+
+    //新增常用保险联系人--已测,
+    @FormUrlEncoded
+    @POST("api.do?method=addInsured&type=post")
+    Call<Result_Api<AddInsured>> addInsured(@Field("userId") String userId, @Field("insuredName") String insuredName, @Field("mobile") String mobile,
+                                            @Field("idType") String idType, @Field("idNo") String idNo);
+
+    //修改常用保险联系人--已测
+    @FormUrlEncoded
+    @POST("api.do?method=updateInsured&type=post")
+    Call<Result_Api<UpdateInsured>> updateInsured(@Field("userId") String userId, @Field("insuredId") String insuredId, @Field("insuredName") String insuredName,
+                                                  @Field("mobile") String mobile, @Field("idType") String idType, @Field("idNo") String idNo);
+
+    //删除常用保险联系人--待测
+    @FormUrlEncoded
+    @POST("api.do?method=delInsured&type=post")
+    Call<Result_Api<UpdateInsured>> delInsured(@Field("userId") String userId, @Field("insuredId") String insuredId);
+
 
     //获取首页数据
     @FormUrlEncoded

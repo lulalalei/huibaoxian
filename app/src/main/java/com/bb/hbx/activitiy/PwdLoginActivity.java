@@ -227,6 +227,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             showTip("登陆成功");
 
                             MyApplication.user.setUserId(userId);
+                            MyApplication.user.setMobile(phone);
                             MyApplication.user.setSessionId(sessionId);
                             MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
 

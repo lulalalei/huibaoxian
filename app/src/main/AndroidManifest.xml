@@ -12,8 +12,11 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <!--
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    -->
+
 
     <!-- <service -->
     <!-- android:name="com.baidu.location.f" -->
@@ -129,7 +132,12 @@
         <activity android:name=".activitiy.ModifyAddressActivity" />
         <activity android:name=".activitiy.CarOrderDetailActivity" />
         <activity android:name=".activitiy.CustomerManagerActivity" />
-        <activity android:name=".activitiy.PresentInsuActivity"></activity>
+        <activity android:name=".activitiy.PresentInsuActivity" />
+        <activity android:name=".activitiy.AddContactActivity" />
+        <activity android:name=".activitiy.MyCustomActivity" />
+        <activity android:name=".activitiy.CustomServiceActivity" />
+        <activity android:name=".activitiy.CustomServiceDetailActivity" />
+        <activity android:name=".activitiy.EditInsuredInfoActivity"></activity>
     </application>
 
 </manifest>

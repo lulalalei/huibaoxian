@@ -39,9 +39,9 @@ public class IndexBar extends View{
             "W", "X", "Y", "Z", "#"};//#在最后面（默认的数据源）
 
     //索引数据源
-    private List<String> mIndexDatas;
+    private List<String> mIndexDatas/*=new ArrayList<>()*/;
     //是否需要根据实际的数据来生成索引数据源(例如只有ABC三种tag,那么索引栏就ABC三项)
-    private boolean isNeedRealIndex;
+    private boolean isNeedRealIndex/*=true*/;
 
     private int mWidth, mHeight;//View的宽高
     private int mGapHeight;//每个index区域的高度
@@ -56,6 +56,7 @@ public class IndexBar extends View{
     //Adapter的数据源
     private List<? extends BaseIndexPinyinBean> mSourceDatas;
     private LinearLayoutManager mLayoutManager;
+    private Context mContext;
 
     public IndexBar(Context context) {
         this(context,null);
@@ -71,6 +72,7 @@ public class IndexBar extends View{
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+        mContext=context;
         int textSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics());
         mPressedBackground= Color.BLACK;//默认按下时纯黑色
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.IndexBar, defStyleAttr, 0);
@@ -99,7 +101,7 @@ public class IndexBar extends View{
         mPaint=new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setTextSize(textSize);
-        mPaint.setColor(Color.BLACK);
+        mPaint.setColor(mContext.getResources().getColor(R.color.A1));
 
         setmOnIndexPressedListener(new onIndexPressedListener() {
             @Override
@@ -175,7 +177,10 @@ public class IndexBar extends View{
                 //回调监听
                 if (null!=mOnIndexPressedListener)
                 {
-                    mOnIndexPressedListener.onIndexPressed(pressI,mIndexDatas.get(pressI));
+                    if (pressI<=mIndexDatas.size()-1)
+                    {
+                        mOnIndexPressedListener.onIndexPressed(pressI,mIndexDatas.get(pressI));
+                    }
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -304,9 +309,12 @@ public class IndexBar extends View{
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mWidth = w;
-        mHeight = h;
-        mGapHeight = (mHeight - getPaddingTop() - getPaddingBottom()) / mIndexDatas.size();
+        if (mIndexDatas!=null&&mIndexDatas.size()>0)
+        {
+            mWidth = w;
+            mHeight = h;
+            mGapHeight = (mHeight - getPaddingTop() - getPaddingBottom()) / mIndexDatas.size();
+        }
     }
 
     /*

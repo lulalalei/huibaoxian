@@ -5,7 +5,7 @@
     android:id="@+id/activity_my_assert"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/A7"
+    android:background="@color/white"
     tools:context="com.bb.hbx.activitiy.MyAssertActivity">
 
     <RelativeLayout
@@ -189,7 +189,7 @@
             android:layout_alignParentBottom="true"
             android:scaleType="centerCrop"/>
     </RelativeLayout>
-
+<!--
     <TextView
         android:id="@+id/graphTitle_tv"
         android:layout_below="@id/makeMoney_layout"
@@ -207,4 +207,19 @@
         android:background="@color/white"
         android:id="@+id/income_itv"
         android:layout_below="@id/graphTitle_tv"/>
+-->
+    <TextView
+        android:id="@+id/divider_tv"
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:background="@color/A7"
+        android:layout_below="@id/makeMoney_layout"/>
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart_lc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider_tv"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="46dp"/>
 </RelativeLayout>

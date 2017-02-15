@@ -10,9 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.BaseIndexTagBean;
 import com.bb.hbx.bean.ContactBean;
+import com.bb.hbx.interfaces.OnItemClickListener;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/12/2.
@@ -23,11 +28,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     private Context mContext;
     private List<ContactBean> mDatas;
     private LayoutInflater mInflater;
+    OnItemClickListener onMyItemClickListener;
+
+    private List<? extends BaseIndexTagBean> mDatasTag;
 
     public ContactAdapter(Context mContext, List<ContactBean> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
         mInflater=LayoutInflater.from(mContext);
+        mDatasTag=mDatas;
+    }
+
+    public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
+        this.onMyItemClickListener = onMyItemClickListener;
     }
 
     @Override
@@ -38,12 +51,35 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
+        if (position>-1)
+        {
+            if (position==0)//等于0肯定要有title
+            {
+                //drawTitleArea(c,left,right,child,params,position);
+                holder.letter_tv.setText(mDatasTag.get(position).getTag());
+            }
+            else
+            {
+                if (null!=mDatas.get(position).getTag()&&!mDatas.get(position).getTag().equals(mDatas.get(position-1).getTag()))
+                {
+                    //不为空,且跟前一个tag不一样,说明是新的分类,也要title
+                    //drawTitleArea(c,left,right,child,params,position);
+                    holder.letter_tv.setText(mDatasTag.get(position).getTag());
+                }
+                else
+                {
+                    holder.letter_tv.setText("");
+                }
+            }
+        }
+
         final ContactBean cityBean = mDatas.get(position);
         holder.tyCity.setText(cityBean.getCity());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "pos:"+position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "pos:"+position, Toast.LENGTH_SHORT).show();
+                onMyItemClickListener.onMyItemClickListener(position);
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -62,10 +98,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 
     static class MyViewHolder extends RecyclerView.ViewHolder{
 
+        @BindView(R.id.letter_tv)
+        TextView letter_tv;
+        @BindView(R.id.tyCity)
         TextView tyCity;
         public MyViewHolder(View itemView) {
             super(itemView);
-            tyCity= (TextView) itemView.findViewById(R.id.tyCity);
+            //tyCity= (TextView) itemView.findViewById(R.id.tyCity);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

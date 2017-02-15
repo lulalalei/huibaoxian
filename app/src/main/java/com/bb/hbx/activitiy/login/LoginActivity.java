@@ -333,6 +333,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 showTip("登陆成功");
 
                 MyApplication.user.setUserId(userId);
+                MyApplication.user.setMobile(phone);
                 MyApplication.user.setSessionId(sessionId);
                 MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
 

@@ -9,12 +9,15 @@ import com.bb.hbx.fragment.AllInCarInsuFragment;
 import com.bb.hbx.fragment.AllInMyOrderFragment;
 import com.bb.hbx.fragment.AllInPIOFragment;
 import com.bb.hbx.fragment.CanReceiveInPreInsuFragment;
+import com.bb.hbx.fragment.CustomInfoInMyCustomFragment;
 import com.bb.hbx.fragment.HadPaiedInPIOFragment;
 import com.bb.hbx.fragment.HadSentInCarInsuFragment;
 import com.bb.hbx.fragment.HadStopInCarInsuFragment;
 import com.bb.hbx.fragment.HasFinishedInMyOrderFragment;
 import com.bb.hbx.fragment.HasUsedInPreInsuFragment;
+import com.bb.hbx.fragment.OrderRecordInMyCustomFragment;
 import com.bb.hbx.fragment.OutofDateInPreInsuFragment;
+import com.bb.hbx.fragment.PresentRecordInMyCustomFragment;
 import com.bb.hbx.fragment.RecordInRedPaFragment;
 import com.bb.hbx.fragment.UnEfficientInPIOFragment;
 import com.bb.hbx.fragment.UnEfficientInRedPaFragment;
@@ -102,6 +105,8 @@ public class Can {
     public static int preFragmentPositionInCIO;
     //在 我的--赠险产品 页面中记录上一个fragment的位置,用于hide,show上一个fragment
     public static int preFragmentPositionInPresentInsu;
+    //在 我的--客户管理--客户 页面中记录上一个fragment的位置,用于hide,show上一个fragment
+    public static int preFragmentPositionInMyCustom;
     //容纳 我的--个险--个险订单 页面中的四个fragment,
     public static ArrayList<Fragment> pIOFragmentList;
     //容纳 我的--红包--我的红包 页面中的三个fragment,
@@ -112,6 +117,8 @@ public class Can {
     public static ArrayList<Fragment> carIOFragmentList;
     //容纳 我的--赠险产品 页面中的三个fragment,
     public static ArrayList<Fragment> presentInsuFragmentList;
+    //容纳 我的--客户管理--客户 页面中的三个fragment,
+    public static ArrayList<Fragment> myCustomFragmentList;
 
     public static ArrayList<Fragment> getFragmentListInPIO()
     {
@@ -136,6 +143,14 @@ public class Can {
         fragmentList.add(CanReceiveInPreInsuFragment.getInstance());
         fragmentList.add(HasUsedInPreInsuFragment.getInstance());
         fragmentList.add(OutofDateInPreInsuFragment.getInstance());
+        return fragmentList;
+    }
+    public static ArrayList<Fragment> getFragmentListInMyCustom()
+    {
+        ArrayList<Fragment> fragmentList=new ArrayList<>();
+        fragmentList.add(OrderRecordInMyCustomFragment.getInstance());
+        fragmentList.add(PresentRecordInMyCustomFragment.getInstance());
+        fragmentList.add(CustomInfoInMyCustomFragment.getInstance());
         return fragmentList;
     }
     public static ArrayList<Fragment> getFragmentListInMyOrder()

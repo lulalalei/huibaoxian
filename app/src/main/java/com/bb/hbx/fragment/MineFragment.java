@@ -17,13 +17,13 @@ import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.CarInsuOrderActivity;
+import com.bb.hbx.activitiy.CustomServiceActivity;
 import com.bb.hbx.activitiy.CustomerManagerActivity;
 import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.MyOrderActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
 import com.bb.hbx.activitiy.PersonInfoSettingActivity;
 import com.bb.hbx.activitiy.PresentInsuActivity;
-import com.bb.hbx.activitiy.PurchaseDetailActivity;
 import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
 import com.bb.hbx.activitiy.login.LoginActivity;
@@ -213,7 +213,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.service_layout:
-                intent.setClass(mContext, PurchaseDetailActivity.class);
+                intent.setClass(mContext, CustomServiceActivity.class);
                 startActivity(intent);
                 break;
             default:

@@ -69,6 +69,10 @@ public class CustomerManagerActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.customers_tv:
                 //showTip("客户管理");
+                customers_tv.setTextColor(getResources().getColor(R.color.white));
+                customers_tv.setBackgroundResource(R.drawable.shape_select_left_custom);
+                reminding_tv.setTextColor(getResources().getColor(R.color.A1));
+                reminding_tv.setBackgroundResource(R.drawable.shape_unselect_right_custom);
                 if (customersManagerFragment.isAdded())
                 {
                     fragmentManager.beginTransaction().hide(remindingFragment).show(customersManagerFragment).commit();
@@ -80,6 +84,10 @@ public class CustomerManagerActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.reminding_tv:
                 //showTip("事件提醒");
+                reminding_tv.setTextColor(getResources().getColor(R.color.white));
+                reminding_tv.setBackgroundResource(R.drawable.shape_select_right_custom);
+                customers_tv.setTextColor(getResources().getColor(R.color.A1));
+                customers_tv.setBackgroundResource(R.drawable.shape_unselect_left_custom);
                 if (remindingFragment.isAdded())
                 {
                     fragmentManager.beginTransaction().hide(customersManagerFragment).show(remindingFragment).commit();

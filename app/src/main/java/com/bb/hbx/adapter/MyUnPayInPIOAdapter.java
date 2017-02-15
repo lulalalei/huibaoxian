@@ -61,22 +61,26 @@ public class MyUnPayInPIOAdapter extends RecyclerView.Adapter<MyUnPayInPIOAdapte
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.title_tv)
-        TextView title_tv;
-        @BindView(R.id.number_tv)
-        TextView number_tv;
-        @BindView(R.id.theInsured_tv)
-        TextView theInsured_tv;
-        @BindView(R.id.insuranceHolder_tv)
-        TextView insuranceHolder_tv;
         @BindView(R.id.time_tv)
         TextView time_tv;
+        @BindView(R.id.title_tv)
+        TextView title_tv;
+        @BindView(R.id.orderNumber_tv)
+        TextView orderNumber_tv;
+        @BindView(R.id.insured_tv)
+        TextView insured_tv;
+        @BindView(R.id.holder_tv)
+        TextView holder_tv;
+        @BindView(R.id.timeLimit_tv)
+        TextView timeLimit_tv;
         @BindView(R.id.price_tv)
         TextView price_tv;
         @BindView(R.id.income_tv)
         TextView income_tv;
         @BindView(R.id.state_iv)
         ImageView state_iv;
+        @BindView(R.id.logo_iv)
+        ImageView logo_iv;
        public MyViewHolder(View itemView) {
            super(itemView);
            ButterKnife.bind(this,itemView);
