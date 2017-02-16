@@ -208,18 +208,64 @@
         android:id="@+id/income_itv"
         android:layout_below="@id/graphTitle_tv"/>
 -->
-    <TextView
-        android:id="@+id/divider_tv"
+    <RelativeLayout
+        android:id="@+id/title_layout"
         android:layout_width="match_parent"
-        android:layout_height="13dp"
-        android:background="@color/A7"
-        android:layout_below="@id/makeMoney_layout"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/makeMoney_layout"
+        android:layout_marginTop="13dp"
+        android:paddingTop="21dp"
+        android:paddingBottom="21dp">
+        <TextView
+            android:id="@+id/time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最近六个月收入走势"
+            android:textSize="14sp"
+            android:textColor="@color/A3"
+            android:layout_marginLeft="18dp"/>
+        <TextView
+            android:id="@+id/assertLogo_tv"
+            android:layout_width="18dp"
+            android:layout_height="5dp"
+            android:background="@color/A1"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/time_tv"
+            android:layout_marginLeft="32dp"/>
+        <TextView
+            android:id="@+id/assertTitle_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的资产"
+            android:textColor="@color/A3"
+            android:textSize="11sp"
+            android:layout_toRightOf="@id/assertLogo_tv"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/averageLogo_tv"
+            android:layout_width="18dp"
+            android:layout_height="5dp"
+            android:background="@color/A2"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/assertTitle_tv"
+            android:layout_marginLeft="13dp"/>
+        <TextView
+            android:id="@+id/averageTitle_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="平台平均值"
+            android:textColor="@color/A3"
+            android:textSize="11sp"
+            android:layout_toRightOf="@id/averageLogo_tv"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart_lc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/divider_tv"
-        android:layout_marginTop="13dp"
+        android:layout_below="@id/title_layout"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="46dp"/>
 </RelativeLayout>

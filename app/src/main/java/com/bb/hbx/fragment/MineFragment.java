@@ -251,7 +251,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                                 if (body!=null)
                                 {
                                     UserInfo userInfo = (UserInfo) body.getOutput();
-                                    String userName1 = userInfo.getUserName();
+                                    if (userInfo!=null)
+                                    {
+                                        String userName1 = userInfo.getUserName();
+                                    }
                                 }
                                 else
                                 {
@@ -311,14 +314,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 if (body!=null)
                 {
                     Account account = (Account) body.getOutput();
-                    String acctBalance = account.getAcctBalance();//可提现????
-                    String acctSum = account.getAcctSum();//余额????
-                    String accountScore = account.getAccountScore();
-                    String bonusCount = account.getBonusCount();
-                    canCash_tv.setText(TextUtils.isEmpty(acctBalance)?"0":acctBalance);
-                    leftMoney_tv.setText(TextUtils.isEmpty(acctSum)?"0":acctSum);
-                    score_tv.setText(TextUtils.isEmpty(accountScore)?"0":accountScore);
-                    redPacket_tv.setText(TextUtils.isEmpty(bonusCount)?"0":bonusCount);
+                    if (account!=null)
+                    {
+                        String acctBalance = account.getAcctBalance();//可提现????
+                        String acctSum = account.getAcctSum();//余额????
+                        String accountScore = account.getAccountScore();
+                        String bonusCount = account.getBonusCount();
+                        canCash_tv.setText(TextUtils.isEmpty(acctBalance)?"0":acctBalance);
+                        leftMoney_tv.setText(TextUtils.isEmpty(acctSum)?"0":acctSum);
+                        score_tv.setText(TextUtils.isEmpty(accountScore)?"0":accountScore);
+                        redPacket_tv.setText(TextUtils.isEmpty(bonusCount)?"0":bonusCount);
+                    }
                 }
             }
 

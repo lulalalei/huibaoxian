@@ -15,7 +15,6 @@ import com.bb.hbx.R;
 import com.bb.hbx.activitiy.MyCustomActivity;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.RetrofitFactory;
-import com.bb.hbx.utils.AppManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,7 +97,6 @@ public class MoreDailogInCustom extends BaseDialog implements
                     @Override
                     public void onResponse(Call call, Response response) {
                         Toast.makeText(mContext,"删除客户成功",Toast.LENGTH_LONG).show();
-                        AppManager.getInstance().finishActivity();
                     }
 
                     @Override
@@ -111,5 +109,6 @@ public class MoreDailogInCustom extends BaseDialog implements
                 this.dismiss();
                 break;
         }
+        dismiss();
     }
 }

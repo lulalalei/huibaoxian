@@ -88,9 +88,10 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
 
     private void showTableInfo() {
         //chart_lc= (CandleStickChart) findViewById(R.id.chart_lc);
-        chart_lc.setDescription("最近六个月收入走势");
+        /*chart_lc.setDescription("最近六个月收入走势");
         chart_lc.setDescriptionTextSize(10f);//像素为单位,6f最小
-        chart_lc.setDescriptionColor(getResources().getColor(R.color.A3));
+        chart_lc.setDescriptionColor(getResources().getColor(R.color.A3));*/
+        chart_lc.setDescription("");
         chart_lc.setNoDataTextDescription("设置当chart为空时显示描述的文字");
         chart_lc.setDrawGridBackground(true);//如果启用,chart绘图区后面的背景矩形将绘制
         chart_lc.setGridBackgroundColor(getResources().getColor(R.color.white));//设置网格背景应与绘制的颜色,若上一个属性为false,,则此属性无效
@@ -142,12 +143,14 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
         valsComp2.add(c2e3);
         valsComp2.add(c2e4);
 
-        LineDataSet setComp1 = new LineDataSet(valsComp1, "我的资产");
+        //LineDataSet setComp1 = new LineDataSet(valsComp1, "我的资产");
+        LineDataSet setComp1 = new LineDataSet(valsComp1, "");
         setComp1.setHighLightColor(Color.RED);//设置手指滑动到某个点时,横竖两条线的颜色
         setComp1.setColor(getResources().getColor(R.color.A1));//设置本条折线的颜色
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);//使dataset对应指定轴,进行绘制
         setComp1.setFillFormatter(new DefaultFillFormatter());//效果未知
-        LineDataSet setComp2 = new LineDataSet(valsComp2, "平台平均值");
+        //LineDataSet setComp2 = new LineDataSet(valsComp2, "平台平均值");
+        LineDataSet setComp2 = new LineDataSet(valsComp2, "");
         setComp2.setColors(new int[]{R.color.A2},this);//设置本条折线的颜色
         //setComp2.setHighlightEnabled(true);
         setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -171,6 +174,7 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
 
         //修改图例
         Legend legend = chart_lc.getLegend();
+        legend.setEnabled(false);
         legend.setTextColor(getResources().getColor(R.color.A3));
         legend.setPosition(Legend.LegendPosition.ABOVE_CHART_RIGHT);
 

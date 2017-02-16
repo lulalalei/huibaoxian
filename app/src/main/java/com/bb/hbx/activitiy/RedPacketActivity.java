@@ -75,6 +75,8 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);
         setIndicator(this,tablayout,28,28);
+
+
     }
 
     @Override

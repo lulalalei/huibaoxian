@@ -233,6 +233,10 @@ public class IndexBar extends View{
             StringBuilder pySb = new StringBuilder();
             String target = indexPinyinBean.getTarget();//取出需要被拼音化的字段
             //遍历target的每个char得到全拼音
+            if (TextUtils.isEmpty(target))
+            {
+                return;
+            }
             for (int i1 = 0; i1 < target.length(); i1++) {
                 //pySb.append()
                 //利用TinyPinyin将char转成拼音

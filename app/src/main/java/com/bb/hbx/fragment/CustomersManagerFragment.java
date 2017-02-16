@@ -65,9 +65,14 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
     TextView fromManual_tv;
     private Context mContext;
 
+    int scrollY;
+    int pageIndex=1;
     int pageSize;
     int totalCount;
     List<GetInsured.InsuredListBean> insuredList;
+    //String [] nameTotalData;
+    List<String> nameTotalList=new ArrayList<>();
+    //int count=0;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -105,20 +110,53 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
                 .setmLayoutManager(mManager)//设置RecyclerView的LayoutManager
                 .setmSourceDatas(mDatas);//设置数据源*/
 
-        /*private String birthday;
-    private String email;
-    private String gender;
-    private String idNo;
-    private String idType;
-    private String insurantDesc;
-    private String insuredAbbr;
-    private String insuredAddress;
-    private String insuredEname;
-    private String insuredId;
-    private String insuredName;
-    private String mobile;
-    private String occupation;
-    private String relation;*/
+        //recycler实现分页加载
+        mRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //Log.e("===dy===","======"+dy);
+                scrollY=dy;
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    //得到当前显示的最后一个item的view
+                    View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
+                    //得到lastChildView的bottom的坐标值
+                    int lastChildBottom = lastChildView.getBottom();
+                    //得到recyclerview的底部坐标减去底部padding值,也就是显示内容最底部的坐标
+                    int recyclerBottom = recyclerView.getBottom() - recyclerView.getPaddingBottom();
+                    //通过lastChildView得到这个view当前的position值
+                    int lastPosition = recyclerView.getLayoutManager().getPosition(lastChildView);
+                    //判断lastChildView的bottom值跟recyclerview的bottom,判断lastPosition是不是最后一个position
+                    //如果条件都满足则说明真正滑动到了最底部
+                    /*if (lastChildBottom==recyclerBottom)//列表到底了也不相等
+                    {
+                        Toast.makeText(mContext,lastChildBottom+"true"+recyclerBottom,Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(mContext,lastChildBottom+"false"+recyclerBottom,Toast.LENGTH_SHORT).show();
+                    }*/
+                    if (scrollY>0&&/*lastChildBottom==recyclerBottom&&*/lastPosition==recyclerView.getLayoutManager().getItemCount()-1)
+                    {
+                        pageIndex++;
+                        if (pageIndex>((totalCount/10)+1))
+                        {
+                            showTip("已经到底啦!");
+                            pageIndex--;
+                        }
+                        else
+                        {
+                            expandInsuredList();
+                        }
+                    }
+                }
+            }
+        });
         mAdapter.setOnMyItemClickListener(new OnItemClickListener() {
             @Override
             public void onMyItemClickListener(int position) {
@@ -153,6 +191,63 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
             }
         });
     }
+
+    private void expandInsuredList() {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getInsured(MyApplication.user.getUserId(),MyApplication.user.getMobile(),pageIndex+"","10");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                GetInsured bean = (GetInsured) body.getOutput();
+                if (bean!=null)
+                {
+                    String pageSizeString = bean.getPageSize();
+                    String totalCountString = bean.getTotalCount();
+                    pageSize=Integer.parseInt(pageSizeString);
+                    totalCount=Integer.parseInt(totalCountString);
+                    List<GetInsured.InsuredListBean> insuredBufList = bean.getInsuredList();
+                    int listSize = insuredBufList.size();
+                    String [] nameData=new String[listSize];
+                    for (int i = 0; i < listSize; i++) {
+                        nameData[i]= insuredBufList.get(i).getInsuredName();
+                        //nameTotalData[count-1]= insuredBufList.get(i).getInsuredName();
+                        nameTotalList.add(insuredBufList.get(i).getInsuredName());
+                        //count++;
+                    }
+                    if (listSize>0)
+                    {
+                        insuredList.addAll(insuredBufList);
+                        //initDatas(nameTotalData);
+                        initDataInOtherWay(nameTotalList);
+                        mAdapter.notifyDataSetChanged();
+                        mIndexBar.setmPressedShowTextView(mTvSideBarHint)//设置HintTextView
+                                .setNeedRealIndex(true)//设置需要真实的索引
+                                .setmLayoutManager(mManager)//设置RecyclerView的LayoutManager
+                                .setmSourceDatas(mDatas);//设置数据源
+                        mIndexBar.invalidate();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void initDataInOtherWay(List<String> list) {
+        mDatas.clear();
+        //注了这
+        //mDatas = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            ContactBean contactBean = new ContactBean();
+            contactBean.setCity(list.get(i));//设置城市名称
+            mDatas.add(contactBean);
+        }
+    }
+
     private void initDatas(String[] data) {
         mDatas.clear();
         //注了这
@@ -171,8 +266,10 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
     }
 
     private void getInsuredList() {
+        pageIndex=1;
+        //count=0;
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call=service.getInsured(MyApplication.user.getUserId(),MyApplication.user.getMobile(),"1","10");
+        Call call=service.getInsured(MyApplication.user.getUserId(),MyApplication.user.getMobile(),pageIndex+"","10");
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -180,13 +277,20 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
                 GetInsured bean = (GetInsured) body.getOutput();
                 if (bean!=null)
                 {
-                    String pageSize = bean.getPageSize();
-                    String totalCount = bean.getTotalCount();
+                    String pageSizeString = bean.getPageSize();
+                    String totalCountString = bean.getTotalCount();
+                    pageSize=Integer.parseInt(pageSizeString);
+                    totalCount=Integer.parseInt(totalCountString);
                     insuredList = bean.getInsuredList();
                     int listSize = insuredList.size();
                     String [] nameData=new String[listSize];
+                    //nameTotalData=new String[totalCount];
+                    nameTotalList.clear();
                     for (int i = 0; i < listSize; i++) {
                         nameData[i]=insuredList.get(i).getInsuredName();
+                        //nameTotalData[i]=insuredList.get(i).getInsuredName();
+                        nameTotalList.add(insuredList.get(i).getInsuredName());
+                        //count++;
                     }
                     if (listSize>0)
                     {

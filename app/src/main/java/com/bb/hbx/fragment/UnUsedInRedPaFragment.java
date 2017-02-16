@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ScrollView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyUnUsedInRedPAdapter;
@@ -20,6 +21,8 @@ import butterknife.BindView;
 public class UnUsedInRedPaFragment extends BaseFragment {
 
     Context mContext;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     String path="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
