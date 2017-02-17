@@ -169,10 +169,16 @@ public interface ApiService {
     Call<Result_Api<UpdateInsured>> updateInsured(@Field("userId") String userId, @Field("insuredId") String insuredId, @Field("insuredName") String insuredName,
                                                   @Field("mobile") String mobile, @Field("idType") String idType, @Field("idNo") String idNo);
 
-    //删除常用保险联系人--待测
+    //删除常用保险联系人--已测
     @FormUrlEncoded
     @POST("api.do?method=delInsured&type=post")
     Call<Result_Api<UpdateInsured>> delInsured(@Field("userId") String userId, @Field("insuredId") String insuredId);
+
+    //获取我的红包记录列表--待测
+    @FormUrlEncoded
+    @POST("api.do?method=getCouponList&type=post")
+    Call<String> getCouponList(@Field("userId") String userId, @Field("sts") String sts,
+                               @Field("pageIndex") String pageIndex,@Field("pageSize") String pageSize);
 
 
     //获取首页数据

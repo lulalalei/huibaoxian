@@ -205,35 +205,42 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             Result_Api body = (Result_Api) response.body();
                             User user = (User) body.getOutput();
                             respCode = body.getRespCode();
-                            String userId = user.getUserId();
-                            String sessionId = user.getSessionId();
-                            String isBClient = user.getIsBClient()+"";
-                            String gender = user.getGender();
-                            String userName = user.getNickName();
-                            String email = user.getEmail();
-                            if (TextUtils.isEmpty(gender))
+                            if (user!=null)
                             {
-                                gender="0";
+                                String userId = user.getUserId();
+                                String sessionId = user.getSessionId();
+                                String isBClient = user.getIsBClient()+"";
+                                String gender = user.getGender();
+                                String userName = user.getNickName();
+                                String email = user.getEmail();
+                                if (TextUtils.isEmpty(gender))
+                                {
+                                    gender="0";
+                                }
+                                if (TextUtils.isEmpty(userName))
+                                {
+                                    userName=phone;
+                                }
+                                //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
+                                ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, pwd);
+                                //更新表数据
+                                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
+                                        new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,pwd,null});
+                                showTip("登陆成功");
+
+                                MyApplication.user.setUserId(userId);
+                                MyApplication.user.setMobile(phone);
+                                MyApplication.user.setSessionId(sessionId);
+                                MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
+
+                                //AppManager.getInstance().showActivity(HomeActivity.class, null);
+                                setResult(Can.FINISH_LOGIN,intentFromLogin);
+                                finish();
                             }
-                            if (TextUtils.isEmpty(userName))
+                            else
                             {
-                                userName=phone;
+                                showTip("不存在该用户");
                             }
-                            //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
-                            ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, pwd);
-                            //更新表数据
-                            MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
-                                    new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,pwd,null});
-                            showTip("登陆成功");
-
-                            MyApplication.user.setUserId(userId);
-                            MyApplication.user.setMobile(phone);
-                            MyApplication.user.setSessionId(sessionId);
-                            MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
-
-                            //AppManager.getInstance().showActivity(HomeActivity.class, null);
-                            setResult(Can.FINISH_LOGIN,intentFromLogin);
-                            finish();
                         }
 
                         @Override

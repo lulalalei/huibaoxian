@@ -208,14 +208,19 @@
         android:id="@+id/income_itv"
         android:layout_below="@id/graphTitle_tv"/>
 -->
+    <TextView
+        android:id="@+id/divider_tv"
+        android:layout_below="@id/makeMoney_layout"
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:background="@color/A7"/>
     <RelativeLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/makeMoney_layout"
-        android:layout_marginTop="13dp"
+        android:layout_below="@id/divider_tv"
         android:paddingTop="21dp"
-        android:paddingBottom="21dp">
+        android:paddingBottom="10dp">
         <TextView
             android:id="@+id/time_tv"
             android:layout_width="wrap_content"
@@ -229,9 +234,9 @@
             android:layout_width="18dp"
             android:layout_height="5dp"
             android:background="@color/A1"
-            android:layout_centerVertical="true"
             android:layout_toRightOf="@id/time_tv"
-            android:layout_marginLeft="32dp"/>
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="7dp"/>
         <TextView
             android:id="@+id/assertTitle_tv"
             android:layout_width="wrap_content"
@@ -240,14 +245,14 @@
             android:textColor="@color/A3"
             android:textSize="11sp"
             android:layout_toRightOf="@id/assertLogo_tv"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="2dp"
             android:layout_marginLeft="10dp"/>
         <TextView
             android:id="@+id/averageLogo_tv"
             android:layout_width="18dp"
             android:layout_height="5dp"
             android:background="@color/A2"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="7dp"
             android:layout_toRightOf="@id/assertTitle_tv"
             android:layout_marginLeft="13dp"/>
         <TextView
@@ -258,8 +263,8 @@
             android:textColor="@color/A3"
             android:textSize="11sp"
             android:layout_toRightOf="@id/averageLogo_tv"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"/>
     </RelativeLayout>
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart_lc"

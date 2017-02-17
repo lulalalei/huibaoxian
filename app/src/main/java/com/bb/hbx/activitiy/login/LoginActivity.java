@@ -312,33 +312,40 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
             public void onResponse(Call call, Response response) {
                 Result_Api body = (Result_Api) response.body();
                 User user = (User) body.getOutput();
-                String userId = user.getUserId();
-                String sessionId = user.getSessionId();
-                String isBClient = user.getIsBClient()+"";
-                String gender = user.getGender();
-                String userName = user.getNickName();
-                String email = user.getEmail();
-                if (TextUtils.isEmpty(gender))
+                if (user!=null)
                 {
-                    gender="0";
+                    String userId = user.getUserId();
+                    String sessionId = user.getSessionId();
+                    String isBClient = user.getIsBClient()+"";
+                    String gender = user.getGender();
+                    String userName = user.getNickName();
+                    String email = user.getEmail();
+                    if (TextUtils.isEmpty(gender))
+                    {
+                        gender="0";
+                    }
+                    if (TextUtils.isEmpty(userName))
+                    {
+                        userName=phone;
+                    }
+                    ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, null);
+                    //更新表数据
+                    MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,usericon=? where currentUser=currentUser ",
+                            new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,null});
+                    showTip("登陆成功");
+
+                    MyApplication.user.setUserId(userId);
+                    MyApplication.user.setMobile(phone);
+                    MyApplication.user.setSessionId(sessionId);
+                    MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
+
+                    //AppManager.getInstance().showActivity(HomeActivity.class, null);
+                    finish();
                 }
-                if (TextUtils.isEmpty(userName))
+                else
                 {
-                    userName=phone;
+                    showTip("不存在该用户");
                 }
-                ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, null);
-                //更新表数据
-                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,usericon=? where currentUser=currentUser ",
-                        new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,null});
-                showTip("登陆成功");
-
-                MyApplication.user.setUserId(userId);
-                MyApplication.user.setMobile(phone);
-                MyApplication.user.setSessionId(sessionId);
-                MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
-
-                //AppManager.getInstance().showActivity(HomeActivity.class, null);
-                finish();
             }
 
             @Override
