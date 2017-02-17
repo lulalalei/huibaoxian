@@ -10,6 +10,7 @@ import com.bb.hbx.base.m.TopListModel;
 import com.bb.hbx.base.p.ToplistPresenter;
 import com.bb.hbx.base.v.TopicListContract;
 import com.bb.hbx.bean.RecommendBean;
+import com.bb.hbx.bean.Special;
 import com.bb.hbx.bean.TopicBean;
 import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.provide.TopicListProvide;
@@ -60,7 +61,7 @@ public class TopiclistFragment extends BaseFragment<ToplistPresenter, TopListMod
         rl_view.setLayoutManager(manager);
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
-        adapter.register(TopicBean.class, new TopicListProvide(getActivity()));
+        adapter.register(Special.class, new TopicListProvide(getActivity()));
         rl_view.setAdapter(adapter);
         rl_view.addItemDecoration(new DottedLineItemDecoration());
 
@@ -91,5 +92,10 @@ public class TopiclistFragment extends BaseFragment<ToplistPresenter, TopListMod
     @Override
     public void stopLoadMore() {
         refresh.stopLoadMore(true);
+    }
+
+    @Override
+    public void notfiy() {
+        adapter.notifyDataSetChanged();
     }
 }

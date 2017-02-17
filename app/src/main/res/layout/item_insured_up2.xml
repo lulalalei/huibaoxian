@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.bb.hbx.widget.ItemLayout2
+        android:id="@+id/il_up1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_name2="@string/protectiontime"
+        app:right_butIcon2="@drawable/xialaicon_xiangshang"
+        app:right_icon2="@drawable/xialaicon"
+        app:text2="">
+
+    </com.bb.hbx.widget.ItemLayout2>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x36">
+
+        <include layout="@layout/line_e" />
+    </LinearLayout>
+
+
+</LinearLayout>
+

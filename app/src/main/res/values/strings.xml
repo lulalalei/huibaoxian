@@ -87,7 +87,7 @@
     <string name="buyquantity">购买份数</string>
     <string name="insurance">保险受益人为法定受益人</string>
     <string name="claims_process">理赔流程</string>
-    <string name="agreement2">我已阅读《投保须知》《保险条款》《健康告知》并同意上述协议约定</string>
+    <string name="agreement2">我已阅读《投保须知》《保险条款》《健康告知》\n并同意上述协议约定</string>
     <string name="more_protection">查看保障详情</string>
     <string name="xlmatch">销量\t%1$s份</string>
     <string name="more_bzfeatures">查看保障详情</string>
@@ -96,6 +96,23 @@
     <string name="wxpyq">微信朋友圈</string>
     <string name="qqhy">QQ好友</string>
     <string name="cancl">取消</string>
+    <string name="filter">筛选</string>
+    <string name="insureplan">选择投保方案</string>
+    <string name="confim">确定</string>
+    <string name="orderdetail">订单详情</string>
+    <string name="bdxx">保单信息</string>
+    <string name="ddzt">订单状态 : </string>
+    <string name="ddh">订单号 : </string>
+    <string name="qbsj">起保时间 : </string>
+    <string name="zzsj">终止时间 : </string>
+    <string name="bdyjdz">保单邮寄地址</string>
+    <string name="sjr">收件人 : </string>
+    <string name="lxdh">联系电话 : </string>
+    <string name="dz">地址 : </string>
+    <string name="clxx">车辆信息</string>
+    <string name="cp">车牌 : </string>
+    <string name="cz">车主 : </string>
+    <string name="zjhm">证件号码 : </string>
     <!-- behavior -->
 
     <string name="ToolbarAlphaBehavior">com.bb.hbx.behavior.ToolbarAlphaBehavior</string>

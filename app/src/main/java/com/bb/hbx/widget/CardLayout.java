@@ -11,6 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.Plan;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,6 +105,15 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
 
     private CardListener listener;
 
+    private List<Plan> planList;
+
+    public List<Plan> getPlanList() {
+        return planList;
+    }
+
+    public void setPlanList(List<Plan> planList) {
+        this.planList = planList;
+    }
 
     public void setListener(CardListener listener) {
         this.listener = listener;
@@ -149,6 +161,8 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
                 tv_price1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size24);
                 tv_detail1.setTextAppearance(mContext, R.style.TextAppear_Theme_A4_Size12);
                 tv_other1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size12);
+
+
                 if (listener != null) {
                     listener.onclick(CARD1);
                 }
@@ -159,6 +173,7 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
                 tv_price2.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size24);
                 tv_detail2.setTextAppearance(mContext, R.style.TextAppear_Theme_A4_Size12);
                 tv_other2.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size12);
+
                 if (listener != null) {
                     listener.onclick(CARD2);
                 }
@@ -169,6 +184,7 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
                 tv_price3.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size24);
                 tv_detail3.setTextAppearance(mContext, R.style.TextAppear_Theme_A4_Size12);
                 tv_other3.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size12);
+
                 if (listener != null) {
                     listener.onclick(CARD3);
                 }
@@ -221,6 +237,7 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
 
 
     private void makeView(int count) {
+
         switch (count) {
             case CARD0:
             case CARD1:
@@ -231,13 +248,69 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
                 rel_1.setVisibility(View.GONE);
                 rel.setVisibility(View.VISIBLE);
                 lin_card3.setVisibility(View.GONE);
+
+                clickView(lin_card1);
+                clickItemView(lin_item1);
+                tv_price1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size24);
+                tv_detail1.setTextAppearance(mContext, R.style.TextAppear_Theme_A4_Size12);
+                tv_other1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size12);
+
+
+
+                if (listener != null) {
+                    listener.onclick(CARD1);
+                }
+
                 break;
             case CARD3:
                 rel_1.setVisibility(View.GONE);
                 rel.setVisibility(View.VISIBLE);
+
+                clickView(lin_card1);
+                clickItemView(lin_item1);
+                tv_price1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size24);
+                tv_detail1.setTextAppearance(mContext, R.style.TextAppear_Theme_A4_Size12);
+                tv_other1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size12);
+                if (listener != null) {
+                    listener.onclick(CARD1);
+                }
                 break;
+            default:
+                rel_1.setVisibility(View.GONE);
+                rel.setVisibility(View.VISIBLE);
+
+                clickView(lin_card1);
+                clickItemView(lin_item1);
+                tv_price1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size24);
+                tv_detail1.setTextAppearance(mContext, R.style.TextAppear_Theme_A4_Size12);
+                tv_other1.setTextAppearance(mContext, R.style.TextAppear_Theme_A1_Size12);
+                if (listener != null) {
+                    listener.onclick(CARD1);
+                }
 
         }
+
+        if(planList==null)
+            return;
+        if(planList.size()>=3){
+            tv_price1.setText(planList.get(0).getPlanPrice());
+            tv_detail1.setText(planList.get(0).getPlanName());
+
+            tv_price2.setText(planList.get(1).getPlanPrice());
+            tv_detail2.setText(planList.get(1).getPlanName());
+
+            tv_price3.setText(planList.get(2).getPlanPrice());
+            tv_detail3.setText(planList.get(2).getPlanName());
+        }else if(planList.size()==2){
+            tv_price1.setText(planList.get(0).getPlanPrice());
+            tv_detail1.setText(planList.get(0).getPlanName());
+            tv_price2.setText(planList.get(1).getPlanPrice());
+            tv_detail2.setText(planList.get(1).getPlanName());
+        }else if(planList.size()==1){
+            tv_price1.setText(planList.get(0).getPlanPrice());
+            tv_detail1.setText(planList.get(0).getPlanName());
+        }
+
 
     }
 
@@ -309,4 +382,6 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
     public interface CardListener {
         void onclick(int index);
     }
+
+
 }

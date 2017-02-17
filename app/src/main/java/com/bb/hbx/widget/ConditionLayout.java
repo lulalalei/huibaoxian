@@ -136,7 +136,7 @@ public class ConditionLayout extends LinearLayout implements View.OnClickListene
                 listener.saleListener(allState[typeS]);
                 break;
             case R.id.lin_l3:
-                //listener.filterListener(type);
+                listener.filterListener();
                 break;
         }
     }
@@ -147,7 +147,8 @@ public class ConditionLayout extends LinearLayout implements View.OnClickListene
 
         void saleListener(STATE operat);
 
-        void filterListener(STATE operat);
+        void filterListener();
+
     }
 
 

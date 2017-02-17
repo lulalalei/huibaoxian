@@ -1,12 +1,13 @@
 package com.bb.hbx.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/14.
  */
 
-public class TypeModel {
+public class TypeModel implements Serializable{
 
 
     /**

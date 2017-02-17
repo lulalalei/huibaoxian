@@ -138,6 +138,13 @@
         <activity android:name=".activitiy.CustomServiceActivity" />
         <activity android:name=".activitiy.CustomServiceDetailActivity" />
         <activity android:name=".activitiy.EditInsuredInfoActivity"></activity>
+
+        <activity
+            android:name=".activitiy.InsurancePlanActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

@@ -25,8 +25,8 @@ public class TopListModel implements TopicListContract.Model {
 
 
     @Override
-    public void getSpecials(int pageIndex, int pageSize, Callback callback) {
-        Call call = service.getSpecials(pageIndex, pageSize);
+    public void getSpecials(int pageIndex,Callback callback) {
+        Call call = service.getSpecials(pageIndex);
         call.enqueue(callback);
     }
 }

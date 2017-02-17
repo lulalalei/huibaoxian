@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="7dp"
+    android:layout_marginTop="@dimen/y106"
+    android:layout_marginLeft="@dimen/x20"
+    android:layout_marginRight="@dimen/x20"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="6dp"
+    card_view:cardElevation="1dp">
+
+
+
+
+        <LinearLayout
+            android:id="@+id/lin_all"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x36"
+            android:layout_marginRight="@dimen/x36"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/y356"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_key1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="交强险"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size16"/>
+                <TextView
+                    android:id="@+id/tv_value1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投保"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/y20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_key2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="商业险"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size16"/>
+                <TextView
+                    android:id="@+id/tv_value2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投保"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/y20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="商业险"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size16"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投保"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+
+            </LinearLayout>
+
+
+            <View
+                android:id="@+id/v_xx"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+
+                android:layout_marginTop="@dimen/y42"
+                android:background="@drawable/shape_gapline"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/y20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="商业险"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size16"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投保"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+
+            </LinearLayout>
+
+
+            <View
+
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+
+                android:layout_marginTop="@dimen/y42"
+                android:background="@drawable/shape_gapline"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/y20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="商业险"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size16"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投保"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+
+            </LinearLayout>
+
+
+            <View
+
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+
+                android:layout_marginTop="@dimen/y42"
+                android:background="@drawable/shape_gapline"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/y20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="商业险"
+                    android:textAppearance="@style/TextAppear.Theme.A1_Size16"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投保"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12"/>
+
+            </LinearLayout>
+
+
+            <View
+                android:id="@+id/v_xx"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+
+                android:layout_marginTop="@dimen/y42"
+                android:background="@drawable/shape_gapline"
+                android:layerType="software" />
+
+        </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

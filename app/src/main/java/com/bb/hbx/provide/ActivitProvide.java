@@ -9,9 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.bean.ActivitBean;
 import com.bb.hbx.bean.TopicBean;
+import com.bb.hbx.utils.GlideUtil;
+import com.bb.hbx.widget.RoundImageView;
+import com.bb.hbx.widget.XCRoundRectImageView;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
 import butterknife.BindView;
@@ -45,18 +49,18 @@ public class ActivitProvide extends ItemViewProvider<ActivitBean, ActivitProvide
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
-//        @BindView(R.id.img_pic)
-//        ImageView img_pic;
-//
+        @BindView(R.id.iv_pic)
+        RoundImageView iv_pic;
+        //
 //        @BindView(R.id.tv_price)
 //        TextView tv_price;
 //
-//        @BindView(R.id.tv_name)
-//        TextView tv_name;
+        @BindView(R.id.tv_name)
+        TextView tv_name;
+        //
 //
-//
-//        @BindView(R.id.tv_detail)
-//        TextView tv_detail;
+        @BindView(R.id.tv_detail)
+        TextView tv_detail;
 //
 //
 //        @BindView(R.id.tv_pro)
@@ -74,8 +78,11 @@ public class ActivitProvide extends ItemViewProvider<ActivitBean, ActivitProvide
         }
 
         void setData(@NonNull final ActivitBean squareBean) {
-
-
+            tv_name.setText(squareBean.getTitle());
+            tv_detail.setText(squareBean.getKeyWords());
+            GlideUtil.getInstance().loadCircleImage(MyApplication.getAppContext(), iv_pic,
+                    squareBean.getAdURL(),
+                    4);
         }
 
     }

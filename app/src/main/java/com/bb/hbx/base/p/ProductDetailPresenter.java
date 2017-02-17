@@ -4,6 +4,7 @@ import com.bb.hbx.api.PostCallback;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.base.v.ProductDetailContract;
 import com.bb.hbx.bean.ProductDetail;
+import com.bb.hbx.bean.ProductParamDetail;
 
 
 /**
@@ -22,9 +23,9 @@ public class ProductDetailPresenter extends ProductDetailContract.Presenter {
             @Override
             public void successCallback(Result_Api api) {
 
-                if (api.getOutput() instanceof ProductDetail) {
+                if (api.getOutput() instanceof ProductParamDetail) {
 
-                    ProductDetail detail = (ProductDetail) api.getOutput();
+                    ProductParamDetail detail = (ProductParamDetail) api.getOutput();
                     if (detail != null) {
                         mView.setProductDetail(detail);
                     }

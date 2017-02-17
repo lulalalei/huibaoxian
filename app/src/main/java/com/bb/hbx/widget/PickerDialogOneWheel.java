@@ -56,6 +56,14 @@ public class PickerDialogOneWheel extends BaseDialog implements
 
     private String strTitle = "选择日期";
 
+    public String getSelectValue() {
+        return selectValue;
+    }
+
+    public void setSelectValue(String selectValue) {
+        this.selectValue = selectValue;
+    }
+
     private String selectValue;
 
     private List<String> arry_value;

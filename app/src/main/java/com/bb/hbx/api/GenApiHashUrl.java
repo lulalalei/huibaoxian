@@ -25,6 +25,7 @@ public class GenApiHashUrl {
 
     //public static final String apiUrl = "http://192.168.32.144:8080/";//环境
     //public static final String apiUrl = "http://192.168.32.68:8082/api/";//环境
+    //public static final String apiUrl = "http://192.168.32.66:8080/";//环境
 
     public static final String md5_key = "md5_key";
 
