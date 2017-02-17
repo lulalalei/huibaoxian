@@ -3,6 +3,9 @@ package com.bb.hbx.api;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -39,6 +42,14 @@ public class RetrofitFactory {
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+
+        Gson gson = new GsonBuilder()
+                //配置你的Gson
+                .setDateFormat("yyyy-MM-dd hh:mm:ss")
+
+                .create();
+
 
 
         OkHttpClient client = new OkHttpClient.Builder()

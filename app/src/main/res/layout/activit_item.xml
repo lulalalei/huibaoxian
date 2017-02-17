@@ -8,12 +8,14 @@
   >
 
 
-    <ImageView
+    <com.bb.hbx.widget.RoundImageView
         android:id="@+id/iv_pic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/y270"
         android:layout_marginTop="@dimen/y42"
         android:scaleType="centerCrop"
+        app:borderRadius="4dp"
+        app:type="round"
         android:src="@drawable/holder" />
 
 
@@ -49,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="超值保障/全国统配"
+            tools:text="超值保障/全国统配"
             android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
 
 

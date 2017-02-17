@@ -2,6 +2,8 @@ package com.bb.hbx.bean;
 
 import com.bb.hbx.widget.multitype.data.Item;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/1/10.
  */
@@ -53,7 +55,9 @@ public class ProductListBean implements Item {
      */
 
     private String ageDesc;
-    private String benefitList;
+
+    private List<Benefit>benefitList;
+
     private String classId;
     private String commisionType;
     private String commisionValue1;
@@ -87,13 +91,7 @@ public class ProductListBean implements Item {
         this.ageDesc = ageDesc;
     }
 
-    public String getBenefitList() {
-        return benefitList;
-    }
 
-    public void setBenefitList(String benefitList) {
-        this.benefitList = benefitList;
-    }
 
     public String getClassId() {
         return classId;
@@ -261,5 +259,13 @@ public class ProductListBean implements Item {
 
     public void setPerferWords(String perferWords) {
         this.perferWords = perferWords;
+    }
+
+    public List<Benefit> getBenefitList() {
+        return benefitList;
+    }
+
+    public void setBenefitList(List<Benefit> benefitList) {
+        this.benefitList = benefitList;
     }
 }

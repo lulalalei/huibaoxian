@@ -1,6 +1,9 @@
 package com.bb.hbx.api;
 
+import com.bb.hbx.base.m.ActivitModel;
 import com.bb.hbx.bean.Account;
+import com.bb.hbx.bean.ActivitBean;
+import com.bb.hbx.bean.ActivitInfo;
 import com.bb.hbx.bean.AddConsignee;
 import com.bb.hbx.bean.AddInsured;
 import com.bb.hbx.bean.AreasListBean;
@@ -16,8 +19,11 @@ import com.bb.hbx.bean.OssBean;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.ProductDetail;
 import com.bb.hbx.bean.ProductItem;
+import com.bb.hbx.bean.ProductParamDetail;
+import com.bb.hbx.bean.RecommendBean;
 import com.bb.hbx.bean.RequestProduct;
 import com.bb.hbx.bean.Special;
+import com.bb.hbx.bean.TopicBean;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.bean.UpdateConsignee;
 import com.bb.hbx.bean.UpdateInsured;
@@ -212,12 +218,12 @@ public interface ApiService {
     //获取产品详情
     @FormUrlEncoded
     @POST("api.do?method=getProductDetail&type=post")
-    Call<Result_Api<ProductDetail>> getProductDetail(@Field("productId") String productId);
+    Call<Result_Api<ProductParamDetail>> getProductDetail(@Field("productId") String productId);
 
     //获取专题列表
     @FormUrlEncoded
     @POST("api.do?method=getSpecials&type=post")
-    Call<Result_Api<ProductDetail>> getSpecials(@Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
+    Call<Result_Api<TopicBean>> getSpecials(@Field("pageIndex") int pageIndex);
 
 
     //版本信息获取
@@ -255,6 +261,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=getUnReadMessageCount&type=post")
     Call<Result_Api<MsgInfo>> getUnReadMessageCount(@Field("userId") String userId);
+
+    //获取未读消息条数
+    @FormUrlEncoded
+    @POST("api.do?method=getAdsList&type=post")
+    Call<Result_Api<ActivitInfo>> getAdsList(@Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
+
+
+    //爆款推荐
+    @FormUrlEncoded
+    @POST("api.do?method=getSpecialProductList&type=post")
+    Call<Result_Api<RecommendBean>> getSpecialProductList(@Field("pageIndex") int pageIndex);
 
 
 }

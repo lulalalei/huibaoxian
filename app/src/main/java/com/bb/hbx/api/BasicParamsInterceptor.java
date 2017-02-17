@@ -60,7 +60,7 @@ public class BasicParamsInterceptor implements Interceptor {
         requestBuilder.addHeader("sessionId", MyApplication.user.getSessionId());
 
 
-        TreeMap<String, String> treeMap = new TreeMap<>();
+
         JSONObject jsonObject = new JSONObject();
         if (request.body() instanceof FormBody) {
             FormBody oldFormBody = (FormBody) request.body();
@@ -93,11 +93,12 @@ public class BasicParamsInterceptor implements Interceptor {
             e.printStackTrace();
         }
         RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, js.toString().getBytes());
-
+        Log.i("OkHttp", js.toString());
        // RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
         requestBuilder.method(request.method(), body);
         request = requestBuilder.build();
         Log.i("OkHttp", request.headers().toString());
+
         return chain.proceed(request);
     }
 

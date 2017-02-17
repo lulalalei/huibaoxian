@@ -18,7 +18,7 @@ public interface TopicListContract {
 
     interface Model extends BaseModel {
 
-        void getSpecials(int pageIndex, int pageSize, Callback callback);
+        void getSpecials(int pageIndex,Callback callback);
 
     }
 
@@ -29,6 +29,8 @@ public interface TopicListContract {
         void stopRefresh();
 
         void stopLoadMore();
+
+        void notfiy();
 
     }
 

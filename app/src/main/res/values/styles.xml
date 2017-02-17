@@ -149,6 +149,12 @@
 
     </style>
 
+    <style name="TextAppear.Theme.A2_Size14" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/A2</item>
+
+    </style>
+
 
     <style name="TextAppear.Theme.white_Size18" parent="android:TextAppearance.Theme">
         <item name="android:textSize">18sp</item>

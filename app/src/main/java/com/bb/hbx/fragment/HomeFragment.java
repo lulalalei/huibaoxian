@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.InsurancePlanActivity;
 import com.bb.hbx.activitiy.SearchActivity;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.base.m.HomeModle;
@@ -184,7 +185,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.lin_search:
-                AppManager.getInstance().showActivity(SearchActivity.class, null);
+                //AppManager.getInstance().showActivity(SearchActivity.class, null);
+
+                AppManager.getInstance().showActivity(InsurancePlanActivity.class, null);
                 break;
         }
     }

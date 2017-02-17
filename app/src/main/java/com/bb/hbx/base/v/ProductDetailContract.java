@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
 import com.bb.hbx.bean.ProductDetail;
+import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public interface ProductDetailContract {
 
     interface View extends BaseView {
 
-        void setProductDetail(ProductDetail detail);
+        void setProductDetail(ProductParamDetail detail);
 
     }
 

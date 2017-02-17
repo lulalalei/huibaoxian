@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.FilterActivity;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.base.m.Mall_itemModel;
 import com.bb.hbx.base.p.Mall_ItemPresenter;
@@ -14,6 +15,7 @@ import com.bb.hbx.bean.Product;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.provide.MallAllProvide;
+import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.Constants;
 import com.bb.hbx.widget.ConditionLayout;
 import com.bb.hbx.widget.freshlayout.OnPullListener;
@@ -98,7 +100,11 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
             }
 
             @Override
-            public void filterListener(ConditionLayout.STATE operat) {
+            public void filterListener() {
+                Log.i("fancl", "筛选");
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("title", model);
+                AppManager.getInstance().showActivity(FilterActivity.class, bundle);
 
             }
         });

@@ -6,11 +6,17 @@ import android.support.v7.widget.RecyclerView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.base.m.ActivitModel;
+import com.bb.hbx.base.p.ActivitPresenter;
+import com.bb.hbx.base.v.ActivitContract;
 import com.bb.hbx.bean.ActivitBean;
 
 
+import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.provide.ActivitProvide;
 import com.bb.hbx.widget.DottedLineItemDecoration;
+import com.bb.hbx.widget.freshlayout.OnPullListener;
+import com.bb.hbx.widget.freshlayout.RefreshLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -25,7 +31,7 @@ import butterknife.BindView;
  * 优选活动.
  */
 
-public class ActivitFragment extends BaseFragment {
+public class ActivitFragment extends BaseFragment<ActivitPresenter, ActivitModel> implements ActivitContract.View {
 
 
     private final String TAG = ActivitFragment.class.getSimpleName();
@@ -33,10 +39,13 @@ public class ActivitFragment extends BaseFragment {
     @BindView(R.id.rl_view)
     RecyclerView rl_view;
 
+    @BindView(R.id.refresh)
+    RefreshLayout refresh;
+
     private MultiTypeAdapter adapter;
 
 
-    private List<Item> items;
+
 
 
     @Override
@@ -53,14 +62,37 @@ public class ActivitFragment extends BaseFragment {
         adapter.register(ActivitBean.class, new ActivitProvide(getActivity()));
         rl_view.setAdapter(adapter);
         rl_view.addItemDecoration(new DottedLineItemDecoration());
+        refresh.setOnPullListener(new OnPullListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getAdsList(DataLoadDirection.Refresh);
+            }
+
+            @Override
+            public void onLoadMore() {
+                mPresenter.getAdsList(DataLoadDirection.LoadMore);
+            }
+        });
     }
 
     @Override
     protected void initdate(Bundle savedInstanceState) {
-        items = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            items.add(new ActivitBean());
-        }
-        adapter.setItems(items);
+        adapter.setItems(mPresenter.getList());
+        mPresenter.getAdsList(DataLoadDirection.Refresh);
+    }
+
+    @Override
+    public void stopRefresh() {
+        refresh.stopRefresh(true);
+    }
+
+    @Override
+    public void stopLoadMore() {
+        refresh.stopLoadMore(true);
+    }
+
+    @Override
+    public void notfiy() {
+        adapter.notifyDataSetChanged();
     }
 }

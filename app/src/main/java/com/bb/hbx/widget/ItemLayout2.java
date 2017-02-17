@@ -58,7 +58,16 @@ public class ItemLayout2 extends LinearLayout {
     OnUpListener listener;
 
 
+    private boolean isEnable = true;
 
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
+    }
 
     public void setListener(OnUpListener listener) {
         this.listener = listener;
@@ -91,12 +100,15 @@ public class ItemLayout2 extends LinearLayout {
         ButterKnife.bind(this);
         tv_comm.setTextAppearance(mContext, textAppearance);
 
+
         iv_last.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                iv_last.setImageResource(right_butIcon);
-                if (listener != null) {
-                    listener.onClick();
+                if (isEnable) {
+                    iv_last.setImageResource(right_butIcon);
+                    if (listener != null) {
+                        listener.onClick();
+                    }
                 }
 
 
@@ -106,9 +118,11 @@ public class ItemLayout2 extends LinearLayout {
         tv_comm.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                iv_last.setImageResource(right_butIcon);
-                if (listener != null) {
-                    listener.onClick();
+                if (isEnable) {
+                    iv_last.setImageResource(right_butIcon);
+                    if (listener != null) {
+                        listener.onClick();
+                    }
                 }
 
 
@@ -124,6 +138,13 @@ public class ItemLayout2 extends LinearLayout {
         iv_last.setImageResource(right_icon);
 
     }
+
+
+    public void setLeft_name(String left_name) {
+        this.left_name = left_name;
+        tv_type.setText(left_name);
+    }
+
 
     public void setText(String text) {
         this.text = text;

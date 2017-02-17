@@ -4,6 +4,8 @@ import com.bb.hbx.api.PostCallback;
 import com.bb.hbx.api.Result_Api;
 
 import com.bb.hbx.base.v.TopicListContract;
+import com.bb.hbx.bean.RecommendBean;
+import com.bb.hbx.bean.TopicBean;
 import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.widget.multitype.data.Item;
 
@@ -17,10 +19,9 @@ import java.util.List;
 public class ToplistPresenter extends TopicListContract.Presenter {
 
     private List<Item> items = new ArrayList<>();
-    private static final int PAGE_SIZE = 10;//
     private int PAGE_INDEX = 1;//
     private int loadType = DataLoadDirection.Refresh;
-    private boolean isloadmore = true;//是否还有更多
+
     private PostCallback postCallback;
 
 
@@ -30,7 +31,20 @@ public class ToplistPresenter extends TopicListContract.Presenter {
 
             @Override
             public void successCallback(Result_Api api) {
-
+                if(api.getOutput() instanceof TopicBean){
+                    TopicBean bean = (TopicBean) api.getOutput();
+                    if (loadType == DataLoadDirection.Refresh) {
+                        mView.stopRefresh();
+                        items.clear();
+                    } else {
+                        mView.stopLoadMore();
+                    }
+                    if (bean.getSpecialList() != null && bean.getSpecialList().size() > 0) {
+                        items.addAll(bean.getSpecialList());
+                        mView.notfiy();
+                        PAGE_INDEX++;
+                    }
+                }
             }
 
             @Override
@@ -53,16 +67,10 @@ public class ToplistPresenter extends TopicListContract.Presenter {
         loadType = type;
         if (loadType == DataLoadDirection.Refresh) {
             PAGE_INDEX = 1;
-            mModel.getSpecials(PAGE_INDEX, PAGE_SIZE, postCallback);
+            mModel.getSpecials(PAGE_INDEX, postCallback);
         } else {
-            if (isloadmore) {
-                PAGE_INDEX++;
-                mModel.getSpecials(PAGE_INDEX, PAGE_SIZE, postCallback);
-            } else {
-                mView.showMsg("没有数据啦...");
-                mView.stopLoadMore();
+            mModel.getSpecials(PAGE_INDEX, postCallback);
 
-            }
 
         }
     }

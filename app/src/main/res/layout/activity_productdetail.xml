@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x22"
-                    android:text="推广人口众多,推广人口众多,推广人口众多"
+                    tools:text="推广人口众多,推广人口众多,推广人口众多"
                     android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
 
             </LinearLayout>
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x22"
-                    android:text="推广人口众多"
+                    tools:text="推广人口众多"
                     android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
 
             </LinearLayout>
@@ -212,80 +212,16 @@
 
 
 
-
             <LinearLayout
+                android:id="@+id/lin_additem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x36"
-                android:layout_marginRight="@dimen/x36"
-                android:layout_marginTop="@dimen/y42">
-
-                <TextView
-                    android:id="@+id/tv_appendKey1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppear.Theme.A4_Size14"
-                    tools:text="人身意外伤害-身故、残疾" />
-
-                <TextView
-                    android:id="@+id/tv_appendValue1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppear.Theme.A3_Size14"
-                    tools:text="100万" />
+                android:orientation="vertical"
+                android:paddingTop="@dimen/y22">
 
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x36"
-                android:layout_marginRight="@dimen/x36"
-                android:layout_marginTop="@dimen/y20">
-
-                <TextView
-                    android:id="@+id/tv_appendKey2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppear.Theme.A4_Size14"
-                    tools:text="意外医疗费用(免配额100元，90%赔付)" />
-
-                <TextView
-                    android:id="@+id/tv_appendValue2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppear.Theme.A3_Size14"
-                    tools:text="5000万" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x36"
-                android:layout_marginRight="@dimen/x36"
-                android:layout_marginTop="@dimen/y20">
-
-                <TextView
-                    android:id="@+id/tv_appendKey3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppear.Theme.A4_Size14"
-                    tools:text="意外医疗费用(免配额100元，90%赔付)" />
-
-                <TextView
-                    android:id="@+id/tv_appendValue3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppear.Theme.A3_Size14"
-                    tools:text="5000万" />
-
-            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -307,6 +243,13 @@
                 android:orientation="vertical">
 
                 <include layout="@layout/item_insured_up" />
+                <LinearLayout
+                    android:id="@+id/ll_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -356,7 +299,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x36"
                 android:layout_marginRight="@dimen/x36"
-                android:layout_marginTop="@dimen/y42">
+                >
 
             </LinearLayout>
 
