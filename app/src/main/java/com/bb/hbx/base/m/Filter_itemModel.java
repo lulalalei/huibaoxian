@@ -18,10 +18,14 @@ public class Filter_itemModel implements Filter_ItemContract.Model {
     private ApiService service;
 
 
-
     public Filter_itemModel() {
         service = RetrofitFactory.getINSTANCE().create(ApiService.class);
     }
 
 
+    @Override
+    public void getInsurers(String parentId, String insurerId, String insurerType, Callback callback) {
+        Call call = service.getInsurers(parentId, insurerId, insurerType);
+        call.enqueue(callback);
+    }
 }

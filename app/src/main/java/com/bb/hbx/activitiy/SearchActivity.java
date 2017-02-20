@@ -1,14 +1,17 @@
 package com.bb.hbx.activitiy;
 
 
+import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.m.SearchHistoryModel;
@@ -94,6 +97,7 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
         adapter.register(SearchTitleBean2.class, searchTitleProvide2);
         adapter.register(LishiSearchBean.class, lishiSearchProvide);
         rl_view.setAdapter(adapter);
+        rl_view.addItemDecoration(new SpaceItemDecoration());
 
 
     }
@@ -174,49 +178,52 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
     }
 
 
-//    public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
-//
-//
-//        @Override
-//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//
-//
-//            int pos = parent.getChildAdapterPosition(view);
-//
-//            if (items.get(pos) instanceof HotSearchBean) {
-//                outRect.top = getResources().getDimensionPixelOffset(R.dimen.y26);
-//                outRect.bottom = 0;
-//
-//                outRect.right = 0;
-//
-//                outRect.left = (MyApplication.widthPixels - (4 * getResources().getDimensionPixelOffset(R.dimen.x160)
-//                        + 2 * getResources().getDimensionPixelOffset(R.dimen.x36))) / 3;
-//
-//
-//                if (pos > 0 && (pos - 1) / 4 == 0) {
-//                    outRect.top = getResources().getDimensionPixelOffset(R.dimen.y36);
-//                }
-//
-//                if (pos > 0 && (pos - 1) / 4 == 1) {
-//                    outRect.bottom = getResources().getDimensionPixelOffset(R.dimen.y36);
-//                }
-//
-//                if (pos > 0 && (pos - 1) % 4 == 0) {
-//                    outRect.left = getResources().getDimensionPixelOffset(R.dimen.x36);
-//                }
-//
-//                if (pos > 0 && (pos - 1) % 4 == 3) {
-//                    outRect.right = getResources().getDimensionPixelOffset(R.dimen.x36);
-//                }
-//
-//                Log.i(TAG, "left:" + outRect.left);
-//                Log.i(TAG, "right:" + outRect.right);
-//
-//            }
-//
-//
-//        }
-//
-//
-//    }
+    public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+
+
+            int pos = parent.getChildAdapterPosition(view);
+
+            if (items.get(pos) instanceof HotSearchBean) {
+                outRect.top = 0;
+                outRect.bottom = 0;
+
+                outRect.right = 0;
+
+
+                if (pos > 0 && (pos - 1) / 4 == 0) {
+                    outRect.top = getResources().getDimensionPixelOffset(R.dimen.y36);
+                }
+
+                if (pos > 0 && (pos - 1) / 4 == 1) {
+                    outRect.top = getResources().getDimensionPixelOffset(R.dimen.y26);
+                    outRect.bottom=getResources().getDimensionPixelOffset(R.dimen.y36);
+                }
+
+                if (pos > 0 && (pos - 1) % 4 == 0) {
+                    outRect.left = getResources().getDimensionPixelOffset(R.dimen.x36);
+
+                } else {
+                    outRect.left = getResources().getDimensionPixelOffset(R.dimen.x26);
+                }
+
+                if (pos > 0 && (pos - 1) % 4 == 3) {
+                    outRect.right = getResources().getDimensionPixelOffset(R.dimen.x36);
+                } else {
+
+                }
+
+                Log.i(TAG, "left:" + outRect.left);
+                Log.i(TAG, "right:" + outRect.right);
+
+            }
+
+
+        }
+
+
+    }
 }

@@ -40,4 +40,15 @@ public final class Constants {
     //B端用户
     public static final int BOSSUSER = 20;
 
+    public static final String BusInsurance = "20";
+
+    public static final String personInsurance = "10";
+
+    public static final String AllInsurance = "0";
+
+    public static final int NOMORE = 0;//正常
+
+    public static final int MORE = 1;//更多
+
+
 }

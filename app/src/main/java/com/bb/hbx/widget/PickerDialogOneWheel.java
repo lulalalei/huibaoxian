@@ -23,6 +23,7 @@ import com.bb.hbx.views.WheelView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.text;
 import static android.R.attr.value;
 import static com.bb.hbx.DatePickerDialog.DIALOG_MODE_BOTTOM;
 
@@ -194,7 +195,8 @@ public class PickerDialogOneWheel extends BaseDialog implements
     public void onClick(View v) {
         if (v == btnSure) {
             if (listener != null) {
-                listener.onClick(parentView, selectValue);
+                listener.onClick(parentView, selectValue, textAdapter.getItemsCount());
+
             }
         } else if (v == btnCancel) {
 
@@ -249,7 +251,7 @@ public class PickerDialogOneWheel extends BaseDialog implements
 
     public interface OnTextListener {
 
-        void onClick(View pv, String value);
+        void onClick(View pv, String value, int index);
 
         void dissmiss(View pv);
     }

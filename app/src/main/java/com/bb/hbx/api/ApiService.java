@@ -11,11 +11,13 @@ import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.Consignees;
 import com.bb.hbx.bean.DeleteConsignee;
+import com.bb.hbx.bean.FilterBean;
 import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.OssBean;
+import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.ProductDetail;
 import com.bb.hbx.bean.ProductItem;
@@ -266,6 +268,18 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=getSpecialProductList&type=post")
     Call<Result_Api<RecommendBean>> getSpecialProductList(@Field("pageIndex") int pageIndex);
+
+    //获取产品列表
+
+    @POST("api.do?method=applyTrade&type=post")
+    Call<Result_Api<ProductBean>> applyTrade(@Body ProdectDetalRequest request);
+
+
+    //获取保险公司列表
+    @FormUrlEncoded
+    @POST("api.do?method=getInsurers&type=post")
+    Call<Result_Api<FilterBean>> getInsurers(@Field("parentId") String parentId, @Field("insurerId") String insurerId,
+                                             @Field("insurerType") String insurerType);
 
 
 }

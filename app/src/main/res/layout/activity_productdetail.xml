@@ -136,7 +136,7 @@
                     android:background="@drawable/tuiguangfeibiaoqian"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="20%推广费"
+                    tools:text="20%推广费"
                     android:textAppearance="@style/TextAppear.Theme.white_Size11" />
 
             </LinearLayout>

@@ -13,6 +13,7 @@ import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.bean.Filter_tileItem;
 import com.bb.hbx.bean.ProductListBean;
+import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.RoundImageView;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
@@ -20,6 +21,8 @@ import com.bb.hbx.widget.multitype.ItemViewProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.attr.onClick;
+import static com.bb.hbx.R.drawable.on;
 import static com.bb.hbx.R.id.tv_detail;
 import static com.bb.hbx.R.id.tv_pro;
 
@@ -35,6 +38,20 @@ public class Filter_titleItemProvide extends ItemViewProvider<Filter_tileItem, F
 
     public Filter_titleItemProvide(Context context) {
         this.context = context;
+    }
+
+    public interface FilterListener {
+
+        void onClick(int type);
+    }
+
+    private FilterListener listener;
+
+    private boolean isLoadMore = false;
+
+
+    public void setListener(FilterListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -79,6 +96,31 @@ public class Filter_titleItemProvide extends ItemViewProvider<Filter_tileItem, F
                 tv_comm.setVisibility(View.GONE);
                 iv_last.setVisibility(View.GONE);
             }
+
+            iv_last.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (listener != null) {
+                        isLoadMore = !isLoadMore;
+                        listener.onClick(isLoadMore ? Constants.MORE : Constants.NOMORE);
+                        iv_last.setImageResource(isLoadMore ? R.drawable.xialaicon_xiangshang : R.drawable.xialaicon);
+                    }
+                }
+            });
+
+            tv_comm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (listener != null) {
+                        isLoadMore = !isLoadMore;
+                        listener.onClick(isLoadMore ? Constants.MORE : Constants.NOMORE);
+                        iv_last.setImageResource(isLoadMore ? R.drawable.xialaicon_xiangshang : R.drawable.xialaicon);
+                    }
+                }
+            });
+
 
         }
 

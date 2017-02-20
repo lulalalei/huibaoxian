@@ -101,7 +101,6 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
 
             @Override
             public void filterListener() {
-                Log.i("fancl", "筛选");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("title", model);
                 AppManager.getInstance().showActivity(FilterActivity.class, bundle);

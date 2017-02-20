@@ -12,11 +12,11 @@ public class Filter_tileItem implements Item {
 
     private boolean isVisiber;
 
-    private Filter_tileItem() {
+    public Filter_tileItem() {
 
     }
 
-    private Filter_tileItem(String name, boolean isVisiber) {
+    public Filter_tileItem(String name, boolean isVisiber) {
         this.name = name;
         this.isVisiber = isVisiber;
     }

@@ -113,6 +113,27 @@
     <string name="cp">车牌 : </string>
     <string name="cz">车主 : </string>
     <string name="zjhm">证件号码 : </string>
+    <string name="sendmessage">发送给客户</string>
+    <string name="confimpay">确认支付</string>
+    <string name="confimpay1">请在%1$s时%2$s分%3$s秒内完成支付,逾期将自动取消订单</string>
+    <string name="orderprice">订单总价 : </string>
+    <string name="hbdk">红包抵扣</string>
+    <string name="rxzf">仍需支付</string>
+    <string name="selectpay">选择支付方式</string>
+    <string name="zfbzf">支付宝支付</string>
+    <string name="wxzf">微信支付</string>
+    <string name="hj">合计 : </string>
+    <string name="ysprice">(已省￥%1$s)</string>
+    <string name="name">姓名 : </string>
+    <string name="idtype">证件类型 : </string>
+    <string name="idnumber">证件号码 : </string>
+    <string name="bznr">保障内容</string>
+    <string name="bxzr">保险责任 : </string>
+    <string name="bfze">保费总额</string>
+    <string name="hbdk1">- 红包抵扣</string>
+    <string name="sfje">实付金额</string>
+    <string name="zcgm">再次购买</string>
+
     <!-- behavior -->
 
     <string name="ToolbarAlphaBehavior">com.bb.hbx.behavior.ToolbarAlphaBehavior</string>

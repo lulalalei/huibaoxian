@@ -26,9 +26,11 @@ import com.bb.hbx.base.p.ProductDetailPresenter;
 import com.bb.hbx.base.v.ProductDetailContract;
 import com.bb.hbx.bean.Benefit;
 import com.bb.hbx.bean.Entry;
+import com.bb.hbx.bean.Insured;
 import com.bb.hbx.bean.KeyBean;
 import com.bb.hbx.bean.Plan;
 import com.bb.hbx.bean.PriceTag;
+import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.CardLayout;
@@ -127,35 +129,60 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     @BindView(R.id.tv_price)
     TextView tv_price;
 
+    @BindView(R.id.tv_buy)
+    TextView tv_buy;
+
+    @BindView(R.id.il_beinsurer1)
+    ItemLayout il_beinsurer1;
+
+
     //
 
-    String[] perids;
+    private String[] perids;//保障期限的列表
 
-    private String selectPerids;
-
+    private String selectPerids;//当前的选中的保障期限
 
     private String productId = "";
 
-    private int count = 1;
+    private int count = 1;//当前的投保份数
+
+    private int max_Quto;//投保最大份数
+
+    private double singlePrice;//机甲因子的求出的保额价格
 
 
-    private KeyBean keyBean;
+    private KeyBean keyBean;//价格因子生成的字符串
+
+    private Plan cruentPlan = new Plan();
 
     private PickerDialogOneWheel wheel_data;
 
     private ProductParamDetail productParamDetail;
 
+
+    private String[] beinsurer1_listvalue = {"父母", "子女", "配偶", "其他关系"};//关系
+
+    private int[] beinsurer1_listkey = {1, 2, 3, 9};//关系键
+
+    private int beinsurer1key = 1;
+
     private PickerDialogOneWheel.OnTextListener textListener = new PickerDialogOneWheel.OnTextListener() {
         @Override
-        public void onClick(View v, String value) {
+        public void onClick(View v, String value, int index) {
             if (v instanceof ItemLayout2) {
                 ((ItemLayout2) v).setText(value);
                 if ((int) (v.getTag()) == 0) {
+                    selectPerids = value;
                     keyBean.set(keyBean.size() - 1, value);
                 } else {
                     keyBean.set((Integer) v.getTag(), value);
                 }
                 setTextPrice();
+            } else if (v instanceof ItemLayout) {
+                if ((int) (v.getTag()) == 11) {
+                    il_beinsurer1.setText(beinsurer1_listvalue[index]);
+                    beinsurer1key = beinsurer1_listkey[index];
+                }
             }
         }
 
@@ -203,7 +230,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     @Override
     public void initListener() {
 
-
+        tv_buy.setOnClickListener(this);
         iv_add.setOnClickListener(this);
         iv_sub.setOnClickListener(this);
         tv_morefeature.setOnClickListener(this);
@@ -231,9 +258,9 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             public void onclick(int index) {
                 if (productParamDetail != null && !productParamDetail.getPlanList().isEmpty()) {
                     //index>=1;
-                    Plan plan = productParamDetail.getPlanList().get(index - 1);
-                    List<Benefit> benefits = plan.getClassNameList().get(0).getBenefitList();
-                    keyBean.set(0, plan.getPlanName().trim());
+                    cruentPlan = productParamDetail.getPlanList().get(index - 1);
+                    List<Benefit> benefits = cruentPlan.getClassNameList().get(0).getBenefitList();
+                    keyBean.set(0, cruentPlan.getPlanName().trim());
                     setTextPrice();
                     //----------------------------------
                     lin_additem.removeAllViews();
@@ -256,6 +283,19 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             }
         });
 
+
+        il_beinsurer1.setListener(new ItemLayout.OnBtnListener() {
+
+            @Override
+            public void onClick() {
+                il_beinsurer1.setTag(11);
+                PickerDialogOneWheel wheel = new PickerDialogOneWheel(mContext, Arrays.asList(beinsurer1_listvalue), il_beinsurer1);
+                wheel.setListener(textListener);
+                wheel.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
+                wheel.show();
+            }
+        });
+
     }
 
     @Override
@@ -266,6 +306,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         keyBean.add(" ");
 
 
+        il_beinsurer1.setText(beinsurer1_listvalue[0]);
+        beinsurer1key = beinsurer1_listkey[0];
         //clayout.setCount(3);
     }
 
@@ -282,6 +324,28 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                 ShareDailog shareDailog = new ShareDailog(this);
                 shareDailog.show();
                 break;
+            case R.id.tv_buy:
+                if (singlePrice > 0) {
+                    ProdectDetalRequest request = new ProdectDetalRequest();
+                    request.setUserId(MyApplication.user.getUserId());
+                    request.setProductId(productParamDetail.getProductId());
+                    request.setPriceKeyword(keyBean.toString());
+                    request.setPlanId(cruentPlan.getPlanId());
+                    request.setPeriod(selectPerids);
+//                    request.setStartTime();
+//                    request.setEndTime();
+                    request.setIsExpress("0");
+
+                    List<Insured> insuredList = new ArrayList<>();
+                    Insured insured = new Insured();
+                    //insured.setInsuredId();
+                    insured.setNum(count);
+                    insured.setRelationType(beinsurer1key + "");
+                    //request.setInsuredList();
+
+
+                }
+                break;
 
         }
     }
@@ -290,7 +354,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
         if (count == 1) {
             iv_sub.setVisibility(View.VISIBLE);
-        } else if (count == 9) {
+        } else if (count == max_Quto - 1) {
             iv_add.setVisibility(View.INVISIBLE);
         }
         count++;
@@ -299,11 +363,16 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     }
 
     public void subCount() {
-        if (count == 2) {
-            iv_sub.setVisibility(View.INVISIBLE);
-        } else if (count == 8) {
+
+
+        if (count <= max_Quto) {
             iv_add.setVisibility(View.VISIBLE);
         }
+
+        if (count <= 2) {
+            iv_sub.setVisibility(View.INVISIBLE);
+        }
+
         count--;
         tv_quantity.setText(count + "");
         setTextPrice();
@@ -318,8 +387,18 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
         tv_description1.setText(detail.getProductFeature());
         tv_description2.setText(detail.getPerferWords());
+        if (detail.getQuota() == 0) {
+            max_Quto = Integer.MAX_VALUE;
+        } else if (detail.getQuota() == 1) {
+            max_Quto = 1;
+            iv_add.setVisibility(View.INVISIBLE);
+        } else {
+            max_Quto = detail.getQuota();
+        }
+
         if (MyApplication.user.getIsBClient()) {
             tv_pro.setVisibility(View.VISIBLE);
+            tv_pro.setText(detail.getCommisionValue1() + "%推广费");
         } else {
             tv_pro.setVisibility(View.GONE);
         }
@@ -331,12 +410,13 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         String perid = productParamDetail.getGuaranteePeriod();
         if (perid != null && perid.indexOf(";") > -1) {
             perids = perid.split(";");
-            il_up1.setText(perids[0]);
         } else {
+            perid = "";
             perids = new String[]{perid};
-            il_up1.setText(perids[0]);
             il_up1.setEnable(false);
         }
+        il_up1.setText(perids[0]);
+        selectPerids = perids[0];
 
 
         if (detail.getPriceElements() != null) {
@@ -404,7 +484,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     }
 
     private void setTextPrice() {
-        double singlePrice = ischeckPrice();
+        singlePrice = ischeckPrice();
         tv_price.setText("￥" + singlePrice * count);
     }
 

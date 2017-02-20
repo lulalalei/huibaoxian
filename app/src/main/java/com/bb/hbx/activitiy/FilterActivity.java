@@ -4,18 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.BasePageAdapter;
+import com.bb.hbx.adapter.FilterPageAdapter;
 import com.bb.hbx.adapter.MallPageAdapter;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.m.FilterModel;
 import com.bb.hbx.base.p.FilterPresenter;
 import com.bb.hbx.base.v.FilterContract;
 import com.bb.hbx.bean.TypeModel;
+import com.bb.hbx.fragment.FilterFragment;
 import com.bb.hbx.fragment.Mall_ItemFragment;
 
 import java.util.List;
@@ -59,11 +62,13 @@ public class FilterActivity extends BaseActivity<FilterPresenter, FilterModel> i
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle("");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 
@@ -82,10 +87,10 @@ public class FilterActivity extends BaseActivity<FilterPresenter, FilterModel> i
 
     @Override
     public void initTitle(List<TypeModel> models) {
-        adapter = new MallPageAdapter(getSupportFragmentManager(), models);
+        adapter = new FilterPageAdapter(getSupportFragmentManager(), models);
 
         for (int i = 0; i < models.size(); i++) {
-            adapter.addFragment(new Mall_ItemFragment(models.get(i)));
+            adapter.addFragment(new FilterFragment(models.get(i)));
 
         }
         viewpager.setAdapter(adapter);

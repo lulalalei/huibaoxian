@@ -103,21 +103,27 @@ public class ItemLayout extends LinearLayout {
         iv_last.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isCheck) {
-                    if (isOpen) {
-                        iv_last.setImageResource(right_butIcon);
-                        if (listener != null) {
-                            listener.onClick();
-                        }
-                    } else {
-                        iv_last.setImageResource(right_icon);
-                    }
-                    isOpen = !isOpen;
-                } else {
-                    if (listener != null) {
-                        listener.onClick();
-                    }
+//                if (isCheck) {
+//                    if (isOpen) {
+//                        iv_last.setImageResource(right_butIcon);
+//                        if (listener != null) {
+//                            listener.onClick();
+//                        }
+//                    } else {
+//                        iv_last.setImageResource(right_icon);
+//                    }
+//                    isOpen = !isOpen;
+//                } else {
+//                    if (listener != null) {
+//                        listener.onClick();
+//                    }
+//                }
+
+                iv_last.setImageResource(right_butIcon);
+                if (listener != null) {
+                    listener.onClick();
                 }
+
             }
         });
 
@@ -145,6 +151,11 @@ public class ItemLayout extends LinearLayout {
         this.text = text;
         tv_comm.setText(text);
     }
+
+    public void setdownImageResource() {
+        iv_last.setImageResource(right_icon);
+    }
+
 
     public String getEtValue() {
         return et_comm.getText().toString().trim();

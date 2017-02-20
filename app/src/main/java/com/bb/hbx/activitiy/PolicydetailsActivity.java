@@ -4,13 +4,15 @@ import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 
 /**
- * 车险订单
+ * Created by Administrator on 2017/2/17.
  */
 
-public class OrderdetailsCarActivity extends BaseActivity {
+public class PolicydetailsActivity extends BaseActivity {
+
+
     @Override
     public int getLayoutId() {
-        return R.layout.activity_orderdetail_car;
+        return R.layout.activity_policydetails;
     }
 
     @Override

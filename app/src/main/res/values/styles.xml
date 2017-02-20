@@ -38,6 +38,12 @@
         <item name="android:textColor">@color/A3</item>
     </style>
 
+
+    <style name="TextAppear.Theme.A3_Size21" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">@color/A3</item>
+    </style>
+
     <style name="TextAppear.Theme.A4_Size13" parent="android:TextAppearance.Theme">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/A4</item>
@@ -123,6 +129,12 @@
 
     </style>
 
+    <style name="TextAppear.Theme.A2_Size17" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/A2</item>
+
+    </style>
+
 
     <style name="TextAppear.Theme.A3_Size12" parent="android:TextAppearance.Theme">
         <item name="android:textSize">12sp</item>
@@ -151,6 +163,12 @@
 
     <style name="TextAppear.Theme.A2_Size14" parent="android:TextAppearance.Theme">
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/A2</item>
+
+    </style>
+
+    <style name="TextAppear.Theme.A2_Size19" parent="android:TextAppearance.Theme">
+        <item name="android:textSize">19sp</item>
         <item name="android:textColor">@color/A2</item>
 
     </style>

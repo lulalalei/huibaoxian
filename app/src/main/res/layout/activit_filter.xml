@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/fanhui"
+
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
@@ -20,13 +22,7 @@
             android:text="@string/filter"
             android:textAppearance="@style/TextAppear.Theme.A1_Size17" />
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginRight="@dimen/x36"
-            android:src="@drawable/fanhui" />
+
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout

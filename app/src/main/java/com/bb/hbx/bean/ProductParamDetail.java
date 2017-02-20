@@ -80,7 +80,7 @@ public class ProductParamDetail {
     private String productProp;
     private String productTagUrls;
     private String prompt;
-    private String quota;
+    private int quota;
     private String refundFlag;
     private String startInsureTime;
     private String suitable;
@@ -88,6 +88,9 @@ public class ProductParamDetail {
     private int totalQuantity;
     private String productFeature;
     private String perferWords;
+    private String commisionType;
+    private String commisionValue1;
+    private String commisionValue2;
 
     private List<Plan> planList;
     private List<PriceTag> priceList;
@@ -324,11 +327,11 @@ public class ProductParamDetail {
         this.prompt = prompt;
     }
 
-    public String getQuota() {
+    public int getQuota() {
         return quota;
     }
 
-    public void setQuota(String quota) {
+    public void setQuota(int quota) {
         this.quota = quota;
     }
 
@@ -410,5 +413,29 @@ public class ProductParamDetail {
 
     public void setPerferWords(String perferWords) {
         this.perferWords = perferWords;
+    }
+
+    public String getCommisionType() {
+        return commisionType;
+    }
+
+    public void setCommisionType(String commisionType) {
+        this.commisionType = commisionType;
+    }
+
+    public String getCommisionValue1() {
+        return commisionValue1;
+    }
+
+    public void setCommisionValue1(String commisionValue1) {
+        this.commisionValue1 = commisionValue1;
+    }
+
+    public String getCommisionValue2() {
+        return commisionValue2;
+    }
+
+    public void setCommisionValue2(String commisionValue2) {
+        this.commisionValue2 = commisionValue2;
     }
 }

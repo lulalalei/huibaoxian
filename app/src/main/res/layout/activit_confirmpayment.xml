@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/A7"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/confimpay"
+            android:textAppearance="@style/TextAppear.Theme.A1_Size17" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/x36"
+            android:src="@drawable/fanhui" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/x36"
+            android:text="@string/sendmessage"
+            android:textAppearance="@style/TextAppear.Theme.A1_Size17" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y22"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="@string/confimpay1"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x36">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/orderprice"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/howPrice"
+                    android:textAppearance="@style/TextAppear.Theme.A2_Size21"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <include layout="@layout/line_e" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x36">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="成人险"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/x36"
+                    android:src="@drawable/nextstep" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y30"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x36">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/hbdk"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x12"
+                        android:text="省5元: 每周首单红包"
+                        android:textAppearance="@style/TextAppear.Theme.A1_Size14" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x36"
+                        android:src="@drawable/nextstep" />
+
+                </LinearLayout>
+
+                <include layout="@layout/line_e" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="可用很多积分"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x36"
+                        android:src="@drawable/off" />
+
+
+                </LinearLayout>
+
+                <include layout="@layout/line_e" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/rxzf"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x36"
+                        android:text="@string/howPrice"
+                        android:textAppearance="@style/TextAppear.Theme.A2_Size14" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y22"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="@string/selectpay"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x36">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/gouxuanxincheweishangpai"
+                        android:drawablePadding="@dimen/x30"
+                        android:gravity="center"
+                        android:text="@string/zfbzf"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+
+                </LinearLayout>
+
+                <include layout="@layout/line_e" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/gouxuanxincheweishangpai"
+                        android:drawablePadding="@dimen/x30"
+                        android:gravity="center"
+                        android:text="@string/wxzf"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y60"
+                android:layout_marginTop="@dimen/y30">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:src="@drawable/tishi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginRight="@dimen/x36"
+                    android:drawablePadding="@dimen/x22"
+                    android:text="本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品"
+                    android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/line_e" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hj"
+                android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="@string/howPrice"
+                android:textAppearance="@style/TextAppear.Theme.A2_Size17" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="@string/ysprice"
+                android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y98"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginLeft="@dimen/x36"
+            android:layout_marginRight="@dimen/x36"
+            android:layout_marginTop="@dimen/y36"
+            android:background="@drawable/shape_btn_a6"
+            android:gravity="center"
+            android:text="@string/confimpay" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
