@@ -2,12 +2,13 @@ package com.bb.hbx.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -23,6 +24,7 @@ import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.InsuredInfolBean;
 import com.bb.hbx.decoration.TitleItemDecoration;
 import com.bb.hbx.interfaces.OnItemClickListener;
+import com.bb.hbx.utils.GetPhoneContactsUtil;
 import com.bb.hbx.widget.IndexBar;
 
 import java.util.ArrayList;
@@ -160,34 +162,37 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
         mAdapter.setOnMyItemClickListener(new OnItemClickListener() {
             @Override
             public void onMyItemClickListener(int position) {
-                for (int i = 0; i < mDatas.size(); i++) {
-                    if (mDatas.get(position).getCity().equals(insuredList.get(i).getInsuredName()))
-                    {
-                        position=i;
-                        break;
+                if (mDatas!=null&&mDatas.size()>0)
+                {
+                    for (int i = 0; i < mDatas.size(); i++) {
+                        if (mDatas.get(position).getCity().equals(insuredList.get(i).getInsuredName()))
+                        {
+                            position=i;
+                            break;
+                        }
                     }
+                    Intent intent = new Intent(mContext, MyCustomActivity.class);
+                    String birthday = insuredList.get(position).getBirthday();
+                    String email = insuredList.get(position).getEmail();
+                    String gender = insuredList.get(position).getGender();
+                    String idNo = insuredList.get(position).getIdNo();
+                    String idType = insuredList.get(position).getIdType();
+                    String insurantDesc = insuredList.get(position).getInsurantDesc();
+                    String insuredAbbr = insuredList.get(position).getInsuredAbbr();
+                    String insuredAddress = insuredList.get(position).getInsuredAddress();
+                    String insuredEname = insuredList.get(position).getInsuredEname();
+                    String insuredId = insuredList.get(position).getInsuredId();
+                    String insuredName = insuredList.get(position).getInsuredName();
+                    String mobile = insuredList.get(position).getMobile();
+                    String occupation = insuredList.get(position).getOccupation();
+                    String relation = insuredList.get(position).getRelation();
+                    InsuredInfolBean insuredInfolBean = new InsuredInfolBean(birthday,email,gender,idNo,idType,insurantDesc,insuredAbbr,insuredAddress,
+                            insuredEname,insuredId,insuredName,mobile,occupation,relation);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("insuredInfolBean",insuredInfolBean);
+                    intent.putExtra("insuredInfolBean",bundle);
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(mContext, MyCustomActivity.class);
-                String birthday = insuredList.get(position).getBirthday();
-                String email = insuredList.get(position).getEmail();
-                String gender = insuredList.get(position).getGender();
-                String idNo = insuredList.get(position).getIdNo();
-                String idType = insuredList.get(position).getIdType();
-                String insurantDesc = insuredList.get(position).getInsurantDesc();
-                String insuredAbbr = insuredList.get(position).getInsuredAbbr();
-                String insuredAddress = insuredList.get(position).getInsuredAddress();
-                String insuredEname = insuredList.get(position).getInsuredEname();
-                String insuredId = insuredList.get(position).getInsuredId();
-                String insuredName = insuredList.get(position).getInsuredName();
-                String mobile = insuredList.get(position).getMobile();
-                String occupation = insuredList.get(position).getOccupation();
-                String relation = insuredList.get(position).getRelation();
-                InsuredInfolBean insuredInfolBean = new InsuredInfolBean(birthday,email,gender,idNo,idType,insurantDesc,insuredAbbr,insuredAddress,
-                                                                            insuredEname,insuredId,insuredName,mobile,occupation,relation);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("insuredInfolBean",insuredInfolBean);
-                intent.putExtra("insuredInfolBean",bundle);
-                startActivity(intent);
             }
         });
     }
@@ -313,21 +318,48 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
+
         switch (v.getId())
         {
             case R.id.fromContacts_tv:
                 //showTip("通讯录导入");
-                Toast.makeText(mContext,"通讯录导入",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext,"通讯录导入", Toast.LENGTH_SHORT).show();
+                Uri uri = ContactsContract.Contacts.CONTENT_URI;
+                Intent intentBuf = new Intent(Intent.ACTION_PICK,uri);
+                startActivityForResult(intentBuf,0);
                 break;
             case R.id.fromManual_tv:
                 //showTip("手动添加");
                 //Toast.makeText(mContext,"手动添加",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
                 intent.setClass(mContext, AddContactActivity.class);
                 startActivity(intent);
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 0:
+                if(data==null)
+                {
+                    return;
+                }
+                //处理返回的data,获取选择的联系人信息
+                Uri uri=data.getData();
+                String[] contacts= GetPhoneContactsUtil.getPhoneContacts(mContext,uri);
+                Intent intent = new Intent(mContext, AddContactActivity.class);
+                intent.putExtra("name",contacts[0]);
+                intent.putExtra("phone",contacts[1]);
+                startActivity(intent);
+                //name_et.setText(contacts[0]);
+                //phone_et.setText(contacts[1]);
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

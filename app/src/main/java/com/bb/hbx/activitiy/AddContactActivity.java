@@ -1,5 +1,8 @@
 package com.bb.hbx.activitiy;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +17,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.AddInsured;
+import com.bb.hbx.utils.GetPhoneContactsUtil;
 import com.smarttop.library.bean.City;
 import com.smarttop.library.bean.County;
 import com.smarttop.library.bean.Province;
@@ -66,6 +70,7 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
     private String cityCode;
     private String countyCode;
     private String streetCode;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_contact;
@@ -73,7 +78,17 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        String phone = intent.getStringExtra("phone");
+        if (!TextUtils.isEmpty(name))
+        {
+            name_et.setText(name);
+        }
+        if (!TextUtils.isEmpty(phone))
+        {
+            phone_et.setText(phone);
+        }
     }
 
     @Override
@@ -98,7 +113,10 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.fromContacts_tv:
-                showTip("从联系人导入");
+                //showTip("从联系人导入");
+                Uri uri = ContactsContract.Contacts.CONTENT_URI;
+                Intent intent = new Intent(Intent.ACTION_PICK,uri);
+                startActivityForResult(intent,0);
                 break;
             case R.id.birth_layout:
                 DatePickerDialog dialog = new DatePickerDialog(mContext);
@@ -161,6 +179,24 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 0:
+                if(data==null)
+                {
+                    return;
+                }
+                //处理返回的data,获取选择的联系人信息
+                Uri uri=data.getData();
+                String[] contacts= GetPhoneContactsUtil.getPhoneContacts(this,uri);
+                name_et.setText(contacts[0]);
+                phone_et.setText(contacts[1]);
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

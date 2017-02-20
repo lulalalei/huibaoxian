@@ -95,13 +95,16 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
         chart_lc.setNoDataTextDescription("设置当chart为空时显示描述的文字");
         chart_lc.setDrawGridBackground(true);//如果启用,chart绘图区后面的背景矩形将绘制
         chart_lc.setGridBackgroundColor(getResources().getColor(R.color.white));//设置网格背景应与绘制的颜色,若上一个属性为false,,则此属性无效
+        //chart_lc.setDrawBorders(true);
         //chart_lc.setDrawBorders(false);//启用或禁用绘制图表边框,即chart周围的线
         //chart_lc.setBorderColor(Color.RED);
         //chart_lc.setBorderWidth(2);//单位dp
         //chart_lc.setMaxVisibleValueCount(5);//设置最大可见绘制的chart count数量,,,,,需配合方法使用
 
         YAxis axisLeft = chart_lc.getAxisLeft();
+        axisLeft.enableGridDashedLine(2,2,0);//设置为虚线模式,线长,线间宽,起始点
         axisLeft.setTextColor(getResources().getColor(R.color.A4));
+        axisLeft.setAxisLineColor(getResources().getColor(R.color.white));
         YAxis axisRight = chart_lc.getAxisRight();
         axisRight.setEnabled(false);//设置右侧y轴是否显示
        /* axisRight.setValueFormatter(new YAxisValueFormatter() {
@@ -114,6 +117,9 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
         //-------------axisRight.setValueFormatter(new MyYAxisValueFormatter());//设置数据格式器
 
         XAxis xAxis = chart_lc.getXAxis();
+        //xAxis.enableGridDashedLine(4,2,-90);
+        //xAxis.setAxisLineColor(getResources().getColor(R.color.white));
+        xAxis.setGridColor(getResources().getColor(R.color.white));
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(getResources().getColor(R.color.A4));
         xAxis.setValueFormatter(new XAxisValueFormatter() {//设置数据格式器
