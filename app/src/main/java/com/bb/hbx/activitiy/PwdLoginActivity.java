@@ -230,6 +230,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
 
                                 MyApplication.user.setUserId(userId);
                                 MyApplication.user.setMobile(phone);
+                                MyApplication.user.setLoginPwd("1");//1表示已经设置过登录密码
                                 MyApplication.user.setSessionId(sessionId);
                                 MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
 
@@ -239,7 +240,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                             }
                             else
                             {
-                                showTip("不存在该用户");
+                                showTip(body.getRespMsg());
                             }
                         }
 

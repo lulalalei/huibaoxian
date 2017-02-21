@@ -322,7 +322,9 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
                 startActivity(intent);
                 break;
             case R.id.countSafe_layout:
-                Toast.makeText(PersonInfoSettingActivity.this,"点击",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PersonInfoSettingActivity.this,"点击",Toast.LENGTH_SHORT).show();
+                intent.setClass(PersonInfoSettingActivity.this,CountSecurityActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

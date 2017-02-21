@@ -1,8 +1,6 @@
 package com.bb.hbx.api;
 
-import com.bb.hbx.base.m.ActivitModel;
 import com.bb.hbx.bean.Account;
-import com.bb.hbx.bean.ActivitBean;
 import com.bb.hbx.bean.ActivitInfo;
 import com.bb.hbx.bean.AddConsignee;
 import com.bb.hbx.bean.AddInsured;
@@ -19,7 +17,6 @@ import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.OssBean;
 import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductBean;
-import com.bb.hbx.bean.ProductDetail;
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.bean.RecommendBean;
@@ -82,6 +79,11 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=forgetLoginPwd&type=post")
     Call<String> forgetLoginPwd(@Field("mobile") String mobile, @Field("newPwd") String newPwd, @Field("resetType") String resetType, @Field("smsCode") String smsCode);
+
+    //登录注销
+    @FormUrlEncoded
+    @POST("api.do?method=logout&type=post")
+    Call<Result_Api> logout(@Field("userId") String userId);
 
     //我的首页
     @FormUrlEncoded

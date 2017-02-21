@@ -306,28 +306,31 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
             public void onResponse(Call call, Response response) {
                 Result_Api body = (Result_Api) response.body();
                 Consignees consignees = (Consignees) body.getOutput();
-                List<Consignees.CneeListBean> cneeList = consignees.getCneeList();
-                totalCount = Integer.parseInt(consignees.getTotalCount());
-                if (cneeList!=null)
+                if (consignees!=null)
                 {
-                    if (cneeList.size()>0)
+                    List<Consignees.CneeListBean> cneeList = consignees.getCneeList();
+                    totalCount = Integer.parseInt(consignees.getTotalCount());
+                    if (cneeList!=null)
                     {
-                        for (int i = 0; i < cneeList.size(); i++) {
-                            mapSelect.put(i,cneeList.get(i).getDefaultFlag());
-                            if ("1".equals(cneeList.get(i).getDefaultFlag()))
-                            {
-                                selectedPosition=i;
+                        if (cneeList.size()>0)
+                        {
+                            for (int i = 0; i < cneeList.size(); i++) {
+                                mapSelect.put(i,cneeList.get(i).getDefaultFlag());
+                                if ("1".equals(cneeList.get(i).getDefaultFlag()))
+                                {
+                                    selectedPosition=i;
+                                }
                             }
+                            cneeTotalList.clear();
+                            cneeTotalList.addAll(cneeList);
                         }
-                        cneeTotalList.clear();
-                        cneeTotalList.addAll(cneeList);
+                        else
+                        {
+                            syncUser=true;
+                        }
+                        adapter.setPrePosition(selectedPosition);
+                        adapter.notifyDataSetChanged();
                     }
-                    else
-                    {
-                        syncUser=true;
-                    }
-                    adapter.setPrePosition(selectedPosition);
-                    adapter.notifyDataSetChanged();
                 }
             }
 

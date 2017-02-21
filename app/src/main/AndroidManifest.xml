@@ -112,9 +112,7 @@
         <activity android:name=".activitiy.AddressManagerActivity" />
         <activity android:name=".activitiy.BuildNewAddressActivity" />
         <activity android:name=".activitiy.PurchaseDetailActivity" />
-        <activity android:name=".activitiy.HomeActivity"
-
-            />
+        <activity android:name=".activitiy.HomeActivity" />
         <activity android:name=".activitiy.RealNameIdentifyActivity" />
         <activity android:name=".activitiy.RealNameCommitActivity" />
         <activity android:name=".activitiy.RealNameFinishActivity" />
@@ -139,21 +137,30 @@
         <activity android:name=".activitiy.MyCustomActivity" />
         <activity android:name=".activitiy.CustomServiceActivity" />
         <activity android:name=".activitiy.CustomServiceDetailActivity" />
-        <activity android:name=".activitiy.EditInsuredInfoActivity"></activity>
-
+        <activity android:name=".activitiy.EditInsuredInfoActivity" />
         <activity
             android:name=".activitiy.InsurancePlanActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
+        <activity android:name=".activitiy.InfoActivity" />
+        <activity android:name=".activitiy.CountSecurityActivity" />
+        <activity android:name=".activitiy.FixPwdActivity" />
+        <activity android:name=".activitiy.PayPwdActivity" />
+        <activity android:name=".activitiy.ChangePhoneActivity" />
+        <activity android:name=".activitiy.SetLoginPwdActivity" />
         <activity
             android:name=".activitiy.FilterActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activitiy.CheckIdentifyActivity" />
+        <activity android:name=".activitiy.FixPayPwdActivity" />
+        <activity android:name=".activitiy.CheckIdentifyInForgerActivity" />
+        <activity android:name=".activitiy.BindPhoneActivity" />
+        <activity android:name=".activitiy.CheckIdentifyUnderPwdActivity"></activity>
     </application>
 
 </manifest>

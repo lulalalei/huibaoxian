@@ -35,6 +35,12 @@ public class LoginPswEdit extends EditText {
 
     private Context context;
 
+    private String hintString;
+
+    public void setHintString(String hintString) {
+        this.hintString = hintString;
+        setHint(this.hintString);
+    }
 
     public LoginPswEdit(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -44,7 +50,7 @@ public class LoginPswEdit extends EditText {
         startDrawable = a.getDrawable(R.styleable.LoginPswEdit_edit_Drawable);
         edit_lookDrawable = a.getDrawable(R.styleable.LoginPswEdit_edit_lookDrawable);
         edit_unLookDrawable = a.getDrawable(R.styleable.LoginPswEdit_edit_unLookDrawable);
-
+        hintString=getResources().getString(R.string.passworddetail);
         a.recycle();
         initView();
     }
@@ -114,7 +120,7 @@ public class LoginPswEdit extends EditText {
             }
         });
 
-        SpannableString hintSp = new SpannableString(getResources().getString(R.string.passworddetail));
+        SpannableString hintSp = new SpannableString(hintString);
         hintSp.setSpan(new TextAppearanceSpan(
                 context, R.style.TextAppear_Theme_Size14), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         hintSp.setSpan(new TextAppearanceSpan(context, R.style.TextAppear_Theme_Size12), 5, 19,

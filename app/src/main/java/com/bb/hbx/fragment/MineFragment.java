@@ -1,9 +1,12 @@
 package com.bb.hbx.fragment;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -15,10 +18,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.CarInsuOrderActivity;
 import com.bb.hbx.activitiy.CustomServiceActivity;
 import com.bb.hbx.activitiy.CustomerManagerActivity;
+import com.bb.hbx.activitiy.InfoActivity;
 import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.MyOrderActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
@@ -153,10 +158,67 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         switch (v.getId())
         {
            case R.id.message_iv:
-                Toast.makeText(mContext,"消息",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext,"消息",Toast.LENGTH_SHORT).show();
+               intent.setClass(mContext,InfoActivity.class);
+               startActivity(intent);
                 break;
             case R.id.setting_iv:
-                Toast.makeText(mContext,"设置",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext,"设置",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("确认退出登录?");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (TextUtils.isEmpty(MyApplication.user.getUserId()))
+                        {
+                            Toast.makeText(mContext,"请先登录",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                        Call call=service.logout(MyApplication.user.getUserId());
+                        call.enqueue(new Callback() {
+                            @Override
+                            public void onResponse(Call call, Response response) {
+                                Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+                                if (cursor!=null)
+                                {
+                                    if (cursor.moveToNext())
+                                    {
+                                        ContentValues values = new ContentValues();
+                                        values.put("hasLogined", "false");//默认false,未登录
+                                        values.put("isBClient", false);//默认false
+                                        values.put("sessionId", "");
+                                        values.put("userId", "");
+                                        values.put("phone", "");
+                                        values.put("gender", "0");//默认为0
+                                        long flag = MyUsersSqlite.db.insert("userstb", null, values);
+                                        //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
+                                        values.clear();
+
+                                        MyApplication.user.setUserId("");
+                                        MyApplication.user.setMobile("");
+                                        MyApplication.user.setLoginPwd("0");
+                                        MyApplication.user.setSessionId("");
+                                        MyApplication.user.setIsBClient(false);
+                                        ShareSPUtils.writeShareSp(false,"","","默认用户名","", null);
+                                        ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,/*hasLogin_tv,*/mContext);
+                                        identify_tv.setVisibility(View.GONE);
+                                        identify_layout.removeView(hasLogin_tv);
+                                        isOnce=true;
+                                    }
+                                }
+                                cursor.close();
+                            }
+
+                            @Override
+                            public void onFailure(Call call, Throwable t) {
+
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("取消",null);
+                builder.show();
                 break;
             case R.id.myOrder_layout:
                 intent.setClass(mContext,MyOrderActivity.class);

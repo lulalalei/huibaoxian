@@ -317,6 +317,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                     String userId = user.getUserId();
                     String sessionId = user.getSessionId();
                     String isBClient = user.getIsBClient()+"";
+                    String loginPwd = user.getLoginPwd();
                     String gender = user.getGender();
                     String userName = user.getNickName();
                     String email = user.getEmail();
@@ -336,6 +337,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
 
                     MyApplication.user.setUserId(userId);
                     MyApplication.user.setMobile(phone);
+                    MyApplication.user.setLoginPwd(loginPwd);
                     MyApplication.user.setSessionId(sessionId);
                     MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
 

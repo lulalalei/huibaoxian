@@ -2,7 +2,9 @@ package com.bb.hbx.base.m;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.text.TextUtils;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.v.WelcomeContract;
@@ -11,6 +13,8 @@ import com.bb.hbx.utils.MyUsersSqlite;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+
+import static com.bb.hbx.MyApplication.user;
 
 /**
  * Created by Administrator on 2017/1/13.
@@ -36,7 +40,7 @@ public class WelcomeModel implements WelcomeContract.Model {
 
     @Override
     public User settingUser() {
-        User user=new User();
+        //User user=new User();
         //boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
         Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
         if (cursor != null) {
@@ -54,10 +58,11 @@ public class WelcomeModel implements WelcomeContract.Model {
                 //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
                 values.clear();
 
-                user.setUserId("");
-                user.setMobile("");
-                user.setSessionId("");
-                user.setIsBClient(false);
+                MyApplication.user.setUserId("");
+                MyApplication.user.setMobile("");
+                MyApplication.user.setLoginPwd("0");
+                MyApplication.user.setSessionId("");
+                MyApplication.user.setIsBClient(false);
             } else {
                 String hasLogined = cursor.getString(cursor.getColumnIndex("hasLogined"));
                 if (hasLogined.equals("true"))//首次登陆后,数据会被刷新
@@ -66,15 +71,18 @@ public class WelcomeModel implements WelcomeContract.Model {
                     String phone = cursor.getString(cursor.getColumnIndex("phone"));
                     String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));
                     String isBClient = cursor.getString(cursor.getColumnIndex("isBClient"));
-                    user.setUserId(userId);
-                    user.setMobile(phone);
-                    user.setSessionId(sessionId);
-                    user.setIsBClient(isBClient.equals("true") ? true : false);
+                    String pwd = cursor.getString(cursor.getColumnIndex("pwd"));
+                    MyApplication.user.setUserId(userId);
+                    MyApplication.user.setMobile(phone);
+                    MyApplication.user.setLoginPwd(TextUtils.isEmpty(pwd)?"0":"1");
+                    MyApplication.user.setSessionId(sessionId);
+                    MyApplication.user.setIsBClient(isBClient.equals("true") ? true : false);
                 } else {
-                    user.setUserId("");
-                    user.setMobile("");
-                    user.setSessionId("");
-                    user.setIsBClient(false);
+                    MyApplication.user.setUserId("");
+                    MyApplication.user.setMobile("");
+                    MyApplication.user.setLoginPwd("0");
+                    MyApplication.user.setSessionId("");
+                    MyApplication.user.setIsBClient(false);
                 }
             }
         }
