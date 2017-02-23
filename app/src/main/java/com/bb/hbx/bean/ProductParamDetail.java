@@ -91,6 +91,9 @@ public class ProductParamDetail {
     private String commisionType;
     private String commisionValue1;
     private String commisionValue2;
+    private String effectDate;
+
+    private int effectiveType;//1：即刻生效；2：次日生效；3：次月生效；10：指定天数后生效，天数存放在insure_windows字段中；99：指定日期生效；
 
     private List<Plan> planList;
     private List<PriceTag> priceList;
@@ -437,5 +440,21 @@ public class ProductParamDetail {
 
     public void setCommisionValue2(String commisionValue2) {
         this.commisionValue2 = commisionValue2;
+    }
+
+    public int getEffectiveType() {
+        return effectiveType;
+    }
+
+    public void setEffectiveType(int effectiveType) {
+        this.effectiveType = effectiveType;
+    }
+
+    public String getEffectDate() {
+        return effectDate;
+    }
+
+    public void setEffectDate(String effectDate) {
+        this.effectDate = effectDate;
     }
 }

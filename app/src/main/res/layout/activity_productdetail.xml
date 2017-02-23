@@ -251,7 +251,11 @@
 
                 </LinearLayout>
 
+                //
+                <include android:id="@+id/layout_tab2" layout="@layout/item_insured_up2"/>
+
                 <LinearLayout
+                    android:id="@+id/lin_count"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y112"
                     android:gravity="center_vertical"

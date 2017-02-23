@@ -14,6 +14,14 @@ public class Insured {
 
     private int num;//购买份数
 
+    private int idType;
+
+    private String idNo;//
+
+    private String mobile;//
+
+    private String insuredName;//
+
     private String occupation;//从事职业
 
     private List<Ben> benList;//受益人列表
@@ -57,5 +65,37 @@ public class Insured {
 
     public void setRelationType(String relationType) {
         this.relationType = relationType;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
+
+    public String getIdNo() {
+        return idNo;
+    }
+
+    public void setIdNo(String idNo) {
+        this.idNo = idNo;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getInsuredName() {
+        return insuredName;
+    }
+
+    public void setInsuredName(String insuredName) {
+        this.insuredName = insuredName;
     }
 }

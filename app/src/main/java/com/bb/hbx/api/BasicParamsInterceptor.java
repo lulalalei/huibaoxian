@@ -30,8 +30,6 @@ import okhttp3.Response;
 import okio.Buffer;
 
 
-
-
 /**
  * Created by Administrator on 2016/12/1.
  */
@@ -46,8 +44,8 @@ public class BasicParamsInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request.Builder requestBuilder = request.newBuilder();
-        HttpUrl url=request.url();
-        String params=url.encodedQuery();
+        HttpUrl url = request.url();
+        String params = url.encodedQuery();
         requestBuilder.addHeader("height", MyApplication.heightPixels + "");
         requestBuilder.addHeader("width", MyApplication.widthPixels + "");
         requestBuilder.addHeader("osName", Constants.OSNAME);
@@ -58,7 +56,6 @@ public class BasicParamsInterceptor implements Interceptor {
         requestBuilder.addHeader("deviceName", "10");
         requestBuilder.addHeader("domainId", "100");
         requestBuilder.addHeader("sessionId", MyApplication.user.getSessionId());
-
 
 
         JSONObject jsonObject = new JSONObject();
@@ -84,17 +81,17 @@ public class BasicParamsInterceptor implements Interceptor {
 //        treeMap.put("sign", sign);
 //        treeMap.put("method",params.substring(7,params.indexOf('&')));
 
-        JSONObject js=new JSONObject();
+        JSONObject js = new JSONObject();
         try {
             js.put("input", jsonObject.toString());
             js.put("sign", sign);
-            js.put("method",params.substring(7,params.indexOf('&')));
+            js.put("method", params.substring(7, params.indexOf('&')));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, js.toString().getBytes());
         Log.i("OkHttp", js.toString());
-       // RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
+        // RequestBody body = generateMultipartRequestBody(MEDIA_TYPE_JSON, treeMap);
         requestBuilder.method(request.method(), body);
         request = requestBuilder.build();
         Log.i("OkHttp", request.headers().toString());

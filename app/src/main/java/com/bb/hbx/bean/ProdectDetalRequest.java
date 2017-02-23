@@ -48,6 +48,14 @@ public class ProdectDetalRequest {
 
     private String extraInfos = "";//扩展信息
 
+    private String idNo = "";//证件号
+
+    private String mobile = "";//手机号码
+
+    private String applicant="";//投保人姓名
+
+    private int idType;
+
     private List<Insured> insuredList = new ArrayList<>();
 
 
@@ -201,5 +209,37 @@ public class ProdectDetalRequest {
 
     public void setInsuredList(List<Insured> insuredList) {
         this.insuredList = insuredList;
+    }
+
+    public String getIdNo() {
+        return idNo;
+    }
+
+    public void setIdNo(String idNo) {
+        this.idNo = idNo;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
+
+    public String getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(String applicant) {
+        this.applicant = applicant;
     }
 }

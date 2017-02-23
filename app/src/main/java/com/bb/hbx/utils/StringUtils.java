@@ -1,6 +1,10 @@
 package com.bb.hbx.utils;
 
 import android.text.TextUtils;
+import android.util.SparseArray;
+
+import static com.bb.hbx.utils.Constants.idType_keys;
+import static com.bb.hbx.utils.Constants.idTypes;
 
 /**
  *
@@ -170,16 +174,24 @@ public class StringUtils {
     }
 
     //检测目标字符串的长度
-    public static boolean checkStringLength(String string,int length)
-    {
-        if (TextUtils.isEmpty(string))
-        {
+    public static boolean checkStringLength(String string, int length) {
+        if (TextUtils.isEmpty(string)) {
             return false;
         }
-        if (string.trim().length()!=length)
-        {
+        if (string.trim().length() != length) {
             return false;
         }
         return true;
+    }
+
+    public static String idTostring(int id) {
+        for (int i = 0; i < Constants.idType_keys.length; i++) {
+            if (Constants.idType_keys[i] == id) {
+
+                return Constants.idTypes[i];
+            }
+        }
+
+        return Constants.idTypes[0];
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/A7"
@@ -54,14 +55,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.bb.hbx.widget.FancyCountDownTextview
+                    android:id="@+id/tv_timedetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/y22"
                     android:layout_marginLeft="@dimen/x36"
                     android:layout_marginTop="@dimen/y30"
                     android:text="@string/confimpay1"
-                    android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size12" />
 
             </LinearLayout>
 
@@ -80,6 +82,7 @@
                     android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
                 <TextView
+                    android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/howPrice"
@@ -90,6 +93,7 @@
             <include layout="@layout/line_e" />
 
             <LinearLayout
+                android:id="@+id/lin_Insurance"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@color/white"
@@ -98,10 +102,11 @@
                 android:paddingLeft="@dimen/x36">
 
                 <TextView
+                    android:id="@+id/tv_insuranceName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="成人险"
+                    tools:text="成人险"
                     android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
                 <ImageView
@@ -135,10 +140,11 @@
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_redenvelopes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x12"
-                        android:text="省5元: 每周首单红包"
+                        tools:text="省5元: 每周首单红包"
                         android:textAppearance="@style/TextAppear.Theme.A1_Size14" />
 
                     <ImageView
@@ -159,11 +165,72 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_jf"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="可用很多积分"
+                        android:text="@string/format_jf"
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x36"
+                        android:src="@drawable/off" />
+
+
+                </LinearLayout>
+
+                <include layout="@layout/line_e" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/format_ye"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x36"
+                        android:src="@drawable/off" />
+
+
+                </LinearLayout>
+
+                <include layout="@layout/line_e" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="@string/useacoupon"
+                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:text="WWWDDAFDSF"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppear.Theme.A4_Size14"/>
 
 
                     <ImageView
@@ -192,7 +259,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
                     <TextView
-
+                        android:id="@+id/tv_needprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x36"
@@ -284,12 +351,13 @@
                     android:src="@drawable/tishi" />
 
                 <TextView
+                    android:id="@+id/tv_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginRight="@dimen/x36"
                     android:drawablePadding="@dimen/x22"
-                    android:text="本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品"
+                    android:text=""
                     android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
 
             </LinearLayout>
@@ -338,6 +406,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_confim"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y98"
             android:layout_marginBottom="@dimen/y20"

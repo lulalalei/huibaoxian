@@ -4,6 +4,7 @@ import android.support.v7.widget.GridLayoutManager;
 
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
+import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductDetail;
 import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.widget.multitype.data.Item;
@@ -23,7 +24,7 @@ public interface ProductDetailContract {
 
         void getProductDetail(String productId, Callback callback);
 
-
+        void applyTrade(ProdectDetalRequest request, Callback callback);
 
     }
 
@@ -32,11 +33,15 @@ public interface ProductDetailContract {
 
         void setProductDetail(ProductParamDetail detail);
 
+
+
     }
 
     abstract class Presenter extends BasePresenter<ProductDetailContract.Model, ProductDetailContract.View> {
 
         public abstract void getProductDetail(String productId);
+
+        public abstract  void applyTrade(ProdectDetalRequest request);
 
     }
 }

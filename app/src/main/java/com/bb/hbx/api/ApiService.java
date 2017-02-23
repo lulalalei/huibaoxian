@@ -19,6 +19,7 @@ import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.OssBean;
+import com.bb.hbx.bean.PayDetail;
 import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.ProductItem;
@@ -27,6 +28,7 @@ import com.bb.hbx.bean.RecommendBean;
 import com.bb.hbx.bean.RequestProduct;
 import com.bb.hbx.bean.Special;
 import com.bb.hbx.bean.TopicBean;
+import com.bb.hbx.bean.TradeDetail;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.bean.UpdateConsignee;
 import com.bb.hbx.bean.UpdateInsured;
@@ -41,6 +43,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+
+import static com.bb.hbx.MyApplication.user;
 
 /**
  * Created by fancl.
@@ -226,10 +230,12 @@ public interface ApiService {
                                                                 @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
 
+
     //获取首页数据
     @FormUrlEncoded
     @POST("api.do?method=getHomePageInfo&type=post")
     Call<Result_Api<HomePageInfo>> getHomePageInfo(@Field("userId") String userId);
+
 
     //获取保险分类列表
     @FormUrlEncoded
@@ -312,10 +318,10 @@ public interface ApiService {
     @POST("api.do?method=getSpecialProductList&type=post")
     Call<Result_Api<RecommendBean>> getSpecialProductList(@Field("pageIndex") int pageIndex);
 
-    //获取产品列表
 
+    //提交订单
     @POST("api.do?method=applyTrade&type=post")
-    Call<Result_Api<ProductBean>> applyTrade(@Body ProdectDetalRequest request);
+    Call<Result_Api<PayDetail>> applyTrade(@Body ProdectDetalRequest request);
 
 
     //获取保险公司列表
@@ -323,6 +329,13 @@ public interface ApiService {
     @POST("api.do?method=getInsurers&type=post")
     Call<Result_Api<FilterBean>> getInsurers(@Field("parentId") String parentId, @Field("insurerId") String insurerId,
                                              @Field("insurerType") String insurerType);
+
+
+    //查看订单（保单）详情(getTradeDetail)
+    @FormUrlEncoded
+    @POST("api.do?method=getTradeDetail&type=post")
+    Call<Result_Api<TradeDetail>> getTradeDetail(@Field("userId") String userId, @Field("tradeId") String tradeId,
+                                                 @Field("detailId") String detailId);
 
 
 }

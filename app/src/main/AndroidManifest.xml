@@ -160,8 +160,21 @@
         <activity android:name=".activitiy.FixPayPwdActivity" />
         <activity android:name=".activitiy.CheckIdentifyInForgerActivity" />
         <activity android:name=".activitiy.BindPhoneActivity" />
-        <activity android:name=".activitiy.CheckIdentifyUnderPwdActivity" />
-        <activity android:name=".activitiy.MyAssertDetailActivity"></activity>
+        <activity android:name=".activitiy.CheckIdentifyUnderPwdActivity"></activity>
+
+        <activity
+            android:name=".activitiy.ConfirmpaymentActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activitiy.PolicydetailsActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

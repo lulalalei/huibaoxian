@@ -326,4 +326,12 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
 			return inflater.inflate(resource, parent, false);
 		}
 	}
+
+	public int getCurrentIndex() {
+		return currentIndex;
+	}
+
+	public void setCurrentIndex(int currentIndex) {
+		this.currentIndex = currentIndex;
+	}
 }

@@ -1,5 +1,6 @@
 package com.bb.hbx.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,13 +10,13 @@ import java.util.Date;
 
 public class TimeUtils {
 
-    public  static String getDateToString(long time) {
+    public static String getDateToString(long time) {
         Date d = new Date(time);
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sf.format(d);
     }
 
-    public  static String getDateNoHourToString(long time) {
+    public static String getDateNoHourToString(long time) {
         Date d = new Date(time);
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         return sf.format(d);
@@ -32,5 +33,18 @@ public class TimeUtils {
             e.printStackTrace();
         }
         return date.getTime();
+    }
+
+    public static String formatDate(String str) {
+        SimpleDateFormat sf1 = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
+        String sfstr = "";
+        try {
+            sfstr = sf2.format(sf1.parse(str));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return sfstr;
     }
 }

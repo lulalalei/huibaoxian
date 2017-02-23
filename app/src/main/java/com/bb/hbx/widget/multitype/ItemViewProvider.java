@@ -24,4 +24,6 @@ public abstract class ItemViewProvider<C extends Item, V extends RecyclerView.Vi
     protected  abstract  V onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent);
 
     protected  abstract  void onBindViewHolder(@NonNull V holder, @NonNull C c);
+
+
 }

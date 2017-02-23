@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/x36">
+
+    <ImageView
+        android:id="@+id/iv_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/xuanzhong_chexian" />
+
+    <TextView
+        android:id="@+id/tv_cartype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y42"
+        android:paddingRight="@dimen/x36"
+        android:singleLine="true"
+        android:text="@string/others"
+        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+    <TextView
+        android:id="@+id/tv_carparms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_cartype"
+        android:layout_marginTop="@dimen/y26"
+        android:paddingRight="@dimen/x36"
+        android:singleLine="true"
+        android:text="@string/others"
+        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+    <TextView
+        android:layout_marginTop="@dimen/y26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_carparms"
+        android:text="@string/newcarprice"
+        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+</RelativeLayout>

@@ -17,6 +17,7 @@
     </com.bb.hbx.widget.ItemLayout2>
 
     <LinearLayout
+        android:id="@+id/lin_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x36">

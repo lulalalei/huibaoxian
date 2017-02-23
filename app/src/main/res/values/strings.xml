@@ -131,8 +131,22 @@
     <string name="bxzr">保险责任 : </string>
     <string name="bfze">保费总额</string>
     <string name="hbdk1">- 红包抵扣</string>
+    <string name="yedk1">- 余额抵扣</string>
     <string name="sfje">实付金额</string>
     <string name="zcgm">再次购买</string>
+    <string name="syr">受益人 : 法定受益人</string>
+    <string name="qbsj2">起保时间</string>
+    <string name="selectcar">选择车型</string>
+    <string name="newcarprice">新车参考价 : </string>
+
+    <string name="others">君威\t\t别克牌POLO1.6轿车手自一体</string>
+    <string name="format_jf">可用%1$s积分抵扣￥%2$s</string>
+    <string name="format_ye">余额可抵扣￥%1$s</string>
+    <string name="useacoupon">使用优惠券</string>
+    <string name="fomartprice">价格格式不对</string>
+    <string name="bxzr">保险责任</string>
+    <string name="be">保额</string>
+
 
     <!-- behavior -->
 

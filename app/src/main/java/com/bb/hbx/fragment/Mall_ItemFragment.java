@@ -15,6 +15,7 @@ import com.bb.hbx.bean.Product;
 import com.bb.hbx.bean.TypeModel;
 import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.provide.MallAllProvide;
+import com.bb.hbx.provide.MallCarProvide;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.Constants;
 import com.bb.hbx.widget.ConditionLayout;
@@ -112,9 +113,9 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
         adapter.register(Product.class, new MallAllProvide(getActivity()));
+        //adapter.register(Product.class,new MallCarProvide(getActivity()));
         rl_view.setAdapter(adapter);
 
-//        refresh.setNeedLoadMore(true);
         refresh.setOnPullListener(new OnPullListener() {
             @Override
             public void onRefresh() {

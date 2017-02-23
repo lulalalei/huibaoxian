@@ -195,7 +195,7 @@ public class PickerDialogOneWheel extends BaseDialog implements
     public void onClick(View v) {
         if (v == btnSure) {
             if (listener != null) {
-                listener.onClick(parentView, selectValue, textAdapter.getItemsCount());
+                listener.onClick(parentView, selectValue, textAdapter.getCurrentIndex());
 
             }
         } else if (v == btnCancel) {

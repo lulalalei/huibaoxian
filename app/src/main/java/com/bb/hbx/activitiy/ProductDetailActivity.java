@@ -49,6 +49,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static com.bb.hbx.R.drawable.line;
+
 
 /**
  * Created by fancl.
@@ -106,11 +108,21 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     @BindView(R.id.il_insurer2)
     ItemLayout il_insurer2;
 
+    @BindView(R.id.il_beinsurer2)
+    ItemLayout il_beinsurer2;
+
+
+    @BindView(R.id.il_beinsurer4)
+    ItemLayout il_beinsurer4;
+
     @BindView(R.id.il_insurer3)
     ItemLayout il_insurer3;
 
     @BindView(R.id.il_insurer4)
     ItemLayout il_insurer4;
+
+    @BindView(R.id.il_beinsurer3)
+    ItemLayout il_beinsurer3;
 
 
     @BindView(R.id.lin_share)
@@ -134,6 +146,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
     @BindView(R.id.il_beinsurer1)
     ItemLayout il_beinsurer1;
+
+    @BindView(R.id.layout_tab2)
+    View layout_tab2;//起保时间
+
+    @BindView(R.id.lin_count)
+    LinearLayout lin_count;//购买的份数
 
 
     //
@@ -165,6 +183,15 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     private int[] beinsurer1_listkey = {1, 2, 3, 9};//关系键
 
     private int beinsurer1key = 1;
+
+
+    private String[] idTypes = {"身份证", "军官证", "护照", "驾驶证", "港澳台通行证", "回乡证"};
+    private int[] idType_keys = {1, 2, 3, 4, 5, 6};//
+
+    private int insureridType = 1;//投保人的idtype
+
+    private int beinsureridType = 1;//被保人的idtype;
+
 
     private PickerDialogOneWheel.OnTextListener textListener = new PickerDialogOneWheel.OnTextListener() {
         @Override
@@ -216,9 +243,6 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         hintSp.setSpan(new ClickAble(4), 4, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         hintSp.setSpan(new ClickAble(10), 10, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         hintSp.setSpan(new ClickAble(16), 16, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-//        hintSp.setSpan(new TextAppearanceSpan(
-//                this, R.style.TextAppear_Theme_A1_Size12), 4, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         hintSp.setSpan(new TextAppearanceSpan(
                 this, R.style.TextAppear_Theme_A3_Size12), 22, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -296,6 +320,45 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             }
         });
 
+        il_insurer2.setListener(new ItemLayout.OnBtnListener() {
+            @Override
+            public void onClick() {
+                if (idTypes != null && idTypes.length > 1) {
+                    PickerDialogOneWheel wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(idTypes), il_insurer2);
+                    wheel_data.setListener(textListener);
+                    wheel_data.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
+                    wheel_data.show();
+
+                }
+            }
+        });
+
+        il_insurer2.setListener(new ItemLayout.OnBtnListener() {
+            @Override
+            public void onClick() {
+                if (idTypes != null && idTypes.length > 1) {
+                    PickerDialogOneWheel wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(idTypes), il_insurer2);
+                    wheel_data.setListener(textListener);
+                    wheel_data.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
+                    wheel_data.show();
+
+                }
+            }
+        });
+
+        il_beinsurer3.setListener(new ItemLayout.OnBtnListener() {
+            @Override
+            public void onClick() {
+                if (idTypes != null && idTypes.length > 1) {
+                    PickerDialogOneWheel wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(idTypes), il_insurer2);
+                    wheel_data.setListener(textListener);
+                    wheel_data.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
+                    wheel_data.show();
+
+                }
+            }
+        });
+
     }
 
     @Override
@@ -308,6 +371,13 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
         il_beinsurer1.setText(beinsurer1_listvalue[0]);
         beinsurer1key = beinsurer1_listkey[0];
+
+        il_insurer2.setText(idTypes[0]);
+        insureridType = idType_keys[0];
+
+        il_beinsurer3.setText(idTypes[0]);
+        beinsureridType = idType_keys[0];
+
         //clayout.setCount(3);
     }
 
@@ -332,19 +402,31 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                     request.setPriceKeyword(keyBean.toString());
                     request.setPlanId(cruentPlan.getPlanId());
                     request.setPeriod(selectPerids);
-//                    request.setStartTime();
-//                    request.setEndTime();
+//                    request.setStartTime("20161205122222");
+//                    request.setEndTime("20161210122222");
                     request.setIsExpress("0");
 
                     List<Insured> insuredList = new ArrayList<>();
                     Insured insured = new Insured();
                     //insured.setInsuredId();
                     insured.setNum(count);
+                    insured.setOccupation(productParamDetail.getOccupation());
                     insured.setRelationType(beinsurer1key + "");
-                    //request.setInsuredList();
-
-
+                    insured.setIdNo(il_beinsurer4.getEtValue());
+                    insured.setIdType(beinsureridType);
+                    insured.setInsuredName(il_beinsurer2.getEtValue());
+                    insuredList.add(insured);
+                    request.setInsuredList(insuredList);
+                    request.setIdNo(il_insurer3.getEtValue());
+                    request.setMobile(il_insurer4.getEtValue());
+                    request.setIdType(insureridType);
+                    request.setApplicant(il_insurer1.getEtValue());
+                    mPresenter.applyTrade(request);
+                }else {
+                    showMsg("请把信息填写完整。。。");
                 }
+
+                //AppManager.getInstance().showActivity(ConfirmpaymentActivity.class, null);
                 break;
 
         }
@@ -395,6 +477,26 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         } else {
             max_Quto = detail.getQuota();
         }
+
+        if (max_Quto == 1) {//购买份数一份 隐藏
+            lin_count.setVisibility(View.GONE);
+        }
+
+        ItemLayout2 layout2 = (ItemLayout2) layout_tab2.findViewById(R.id.il_up1);
+        LinearLayout line = (LinearLayout) layout_tab2.findViewById(R.id.lin_line);
+        layout2.setLeft_name(getString(R.string.qbsj2));
+        if (detail.getEffectiveType() == 1) {
+            layout2.setText(detail.getEffectDate());
+            layout2.setButtonGone();
+        } else {
+            //
+        }
+
+
+        if (max_Quto == 1) {//隐藏横线
+            line.setVisibility(View.GONE);
+        }
+
 
         if (MyApplication.user.getIsBClient()) {
             tv_pro.setVisibility(View.VISIBLE);

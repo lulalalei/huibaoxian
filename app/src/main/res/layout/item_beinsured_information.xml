@@ -29,7 +29,7 @@
     </LinearLayout>
 
     <com.bb.hbx.widget.ItemLayout
-        android:id="@+id/il_insurer2"
+        android:id="@+id/il_beinsurer2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hint="@string/please_beinsurer"
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <com.bb.hbx.widget.ItemLayout
-        android:id="@+id/il_insurer3"
+        android:id="@+id/il_beinsurer3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:isCheck="false"
@@ -74,7 +74,7 @@
     </LinearLayout>
 
     <com.bb.hbx.widget.ItemLayout
-        android:id="@+id/il_insurer4"
+        android:id="@+id/il_beinsurer4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hint="@string/hinid"

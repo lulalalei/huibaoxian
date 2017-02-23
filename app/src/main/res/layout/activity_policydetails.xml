@@ -98,6 +98,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_tradeid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -119,6 +120,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_startTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -142,6 +144,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_endTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -189,6 +192,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -210,6 +214,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_idtype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -231,6 +236,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_idNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -254,6 +260,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_tel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -334,6 +341,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_productName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/y38"
@@ -343,7 +351,7 @@
                     android:drawablePadding="@dimen/x26"
                     android:drawableRight="@drawable/nextstep"
                     android:gravity="center_vertical"
-                    android:text="成人综合意外险"
+                    android:text=""
                     android:textAppearance="@style/TextAppear.Theme.A3_Size21" />
 
                 <include layout="@layout/line_e" />
@@ -355,6 +363,26 @@
                     android:layout_marginLeft="@dimen/x36"
                     android:layout_marginTop="@dimen/y36"
                     android:text="@string/bxzr"
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y36"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginRight="@dimen/x36"
+                    android:background="@drawable/shape_white_a6">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y38"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:text="@string/syr"
                     android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
             </LinearLayout>
@@ -381,6 +409,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppear.Theme.A2_Size14"
@@ -420,7 +449,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/hbdk1"
+                        android:text="@string/yedk1"
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
@@ -448,6 +477,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_realprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppear.Theme.A2_Size19"
@@ -470,12 +500,13 @@
                     android:src="@drawable/tishi" />
 
                 <TextView
+                    android:id="@+id/tv_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginRight="@dimen/x36"
                     android:drawablePadding="@dimen/x22"
-                    android:text="本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品本产品"
+                    android:text=""
                     android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
 
             </LinearLayout>

@@ -160,6 +160,11 @@ public class ItemLayout2 extends LinearLayout {
         iv_last.setImageResource(right_icon);
     }
 
+    public void setButtonGone() {
+        iv_last.setVisibility(View.INVISIBLE);
+        isEnable = false;
+    }
+
     public interface OnUpListener {
 
         void onClick();
