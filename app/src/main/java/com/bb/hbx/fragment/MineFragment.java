@@ -36,7 +36,7 @@ import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
-import com.bb.hbx.bean.Account;
+import com.bb.hbx.bean.GetMyPageInfoBean;
 import com.bb.hbx.bean.UserInfo;
 import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.ShareSPUtils;
@@ -104,6 +104,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     boolean isOnce=true;
     TextView hasLogin_tv;
+
+    //记录提现
+    int acctBalanceInt;
+    //记录积分
+    int accountScoreInt;
+    //记录本月收入
+    int acctMonthSumInt;
+    //记录结算中
+    int acctSettSumInt;
+    //记录累计收入
+    int acctSumInt;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -245,10 +256,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.myAsset_tv:
+                intent.putExtra("acctBalanceInt",acctBalanceInt);
+                intent.putExtra("acctMonthSumInt",acctMonthSumInt);
+                intent.putExtra("acctSettSumInt",acctSettSumInt);
+                intent.putExtra("acctSumInt",acctSumInt);
                 intent.setClass(mContext,MyAssertActivity.class);
                 startActivity(intent);
                 break;
             case R.id.score_layout:
+                intent.putExtra("accountScoreInt",accountScoreInt);
                 intent.setClass(mContext, ScoreActivity.class);
                 startActivity(intent);
                 break;
@@ -368,6 +384,36 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     //更新我的资产
     private void updateMyAccount(String userId) {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getMyPageInfo(userId);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                if (body!=null)
+                {
+                    GetMyPageInfoBean bean = (GetMyPageInfoBean) body.getOutput();
+                    if (bean!=null)
+                    {
+                        int acctBalance = bean.getAcctBalance();
+                        int acctSum = bean.getAcctSum();
+                        int score = bean.getScore();
+                        int couponCount = bean.getCouponCount();
+                        int realNameStatus = bean.getRealNameStatus();//0表示未认证,1表示已认证
+                        canCash_tv.setText((acctBalance/100)+"."+(acctBalance/10%10)+(acctBalance%10));
+                        leftMoney_tv.setText((acctSum/100)+"."+(acctSum/10%10)+(acctSum%10));
+                        score_tv.setText((score/100)+"."+(score/10%10)+(score%10));
+                        redPacket_tv.setText(couponCount+"");
+                        identify_tv.setText(0==realNameStatus?"未认证":"已认证");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+        /*ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
         Call call=service.getAccount(userId);
         call.enqueue(new Callback() {
             @Override
@@ -378,13 +424,20 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                     Account account = (Account) body.getOutput();
                     if (account!=null)
                     {
-                        String acctBalance = account.getAcctBalance();//可提现????
-                        String acctSum = account.getAcctSum();//余额????
-                        String accountScore = account.getAccountScore();
-                        String bonusCount = account.getBonusCount();
-                        canCash_tv.setText(TextUtils.isEmpty(acctBalance)?"0":acctBalance);
-                        leftMoney_tv.setText(TextUtils.isEmpty(acctSum)?"0":acctSum);
-                        score_tv.setText(TextUtils.isEmpty(accountScore)?"0":accountScore);
+                        String acctBalance = account.getAcctBalance();//可提现
+                        String acctSum = account.getAcctSum();//余额????收入,累计收入
+                        String accountScore = account.getAccountScore();//积分
+                        String bonusCount = account.getBonusCount();//红包个数
+                        String acctMonthSum = account.getAcctMonthSum();//本月收入
+                        String acctSettSum = account.getAcctSettSum();//结算中
+                        acctBalanceInt = Integer.parseInt(acctBalance);
+                        acctSumInt = Integer.parseInt(acctSum);
+                        accountScoreInt = Integer.parseInt(accountScore);
+                        acctMonthSumInt = Integer.parseInt(acctMonthSum);
+                        acctSettSumInt = Integer.parseInt(acctSettSum);
+                        canCash_tv.setText(TextUtils.isEmpty(acctBalance)?"0":(acctBalanceInt/100)+"."+(acctBalanceInt/10%10)+(acctBalanceInt%10));
+                        leftMoney_tv.setText(TextUtils.isEmpty(acctSum)?"0":(acctSumInt/100)+"."+(acctSumInt/10%10)+(acctSumInt%10));
+                        score_tv.setText(TextUtils.isEmpty(accountScore)?"0":(accountScoreInt/100)+"."+(accountScoreInt/10%10)+(accountScoreInt%10));
                         redPacket_tv.setText(TextUtils.isEmpty(bonusCount)?"0":bonusCount);
                     }
                 }
@@ -394,6 +447,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
             public void onFailure(Call call, Throwable t) {
                 showTip("服务器返回出错啦!");
             }
-        });
+        });*/
     }
 }

@@ -6,13 +6,19 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ScrollView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyAllInMyOrderAdapter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/1/23.
@@ -29,6 +35,8 @@ public class AllInMyOrderFragment extends BaseFragment{
     ArrayList<String> list=new ArrayList<>();
     GridLayoutManager manager;
     MyAllInMyOrderAdapter adapter;
+
+    int pageIndex=1;
     private static AllInMyOrderFragment fragment;
     public static AllInMyOrderFragment getInstance()
     {
@@ -64,6 +72,8 @@ public class AllInMyOrderFragment extends BaseFragment{
             }
         };
         recyclerView.setLayoutManager(manager);
+        adapter = new MyAllInMyOrderAdapter(mContext, list);
+        recyclerView.setAdapter(adapter);
         if (list!=null&&list.size()>0)
         {
             list.clear();
@@ -71,7 +81,23 @@ public class AllInMyOrderFragment extends BaseFragment{
         for (int i = 0; i < 10; i++) {
             list.add(path);
         }
-        adapter = new MyAllInMyOrderAdapter(mContext, list);
-        recyclerView.setAdapter(adapter);
+        showTradesList(pageIndex);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void showTradesList(int pageIndex) {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getTrades(MyApplication.user.getUserId(),"0",pageIndex+"","10");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
     }
 }

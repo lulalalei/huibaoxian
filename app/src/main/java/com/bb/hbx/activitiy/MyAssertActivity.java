@@ -3,13 +3,16 @@ package com.bb.hbx.activitiy;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.Account;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -28,13 +31,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /*
 * 点击 我的--我的资产 显示的 我的资产 页面*/
 public class MyAssertActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.detail_tv)
     TextView detail_tv;
     @BindView(R.id.cash_layout)
@@ -45,6 +51,14 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
     RelativeLayout settlement_layout;
     @BindView(R.id.allIncome_layout)
     RelativeLayout allIncome_layout;
+    @BindView(R.id.income_tv)
+    TextView income_tv;
+    @BindView(R.id.cash_tv)
+    TextView cash_tv;
+    @BindView(R.id.settlement_tv)
+    TextView settlement_tv;
+    @BindView(R.id.allIncome_tv)
+    TextView allIncome_tv;
     /*@BindView(R.id.income_itv)
     IncomesTableView income_itv;
     //设置横坐标显示的月份
@@ -61,6 +75,48 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
+        /*Intent intent = getIntent();
+        int acctBalanceInt = intent.getIntExtra("acctBalanceInt", 0);
+        int acctMonthSumInt = intent.getIntExtra("acctMonthSumInt", 0);
+        int acctSettSumInt = intent.getIntExtra("acctSettSumInt", 0);
+        int acctSumInt = intent.getIntExtra("acctSumInt", 0);
+        income_tv.setText((acctBalanceInt/100)+"."+(acctBalanceInt/10%10)+(acctBalanceInt%10));
+        cash_tv.setText((acctMonthSumInt/100)+"."+(acctMonthSumInt/10%10)+(acctMonthSumInt%10));
+        settlement_tv.setText((acctSettSumInt/100)+"."+(acctSettSumInt/10%10)+(acctSettSumInt%10));
+        allIncome_tv.setText((acctSumInt/100)+"."+(acctSumInt/10%10)+(acctSumInt%10));*/
+
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getAccount(MyApplication.user.getUserId(),"20");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                if (body!=null)
+                {
+                    Account account = (Account) body.getOutput();
+                    if (account!=null)
+                    {
+                        String acctBalance = account.getAcctBalance();//可提现
+                        String acctSum = account.getAcctSum();//余额????收入,累计收入
+                        String acctMonthSum = account.getAcctMonthSum();//本月收入
+                        String acctSettSum = account.getAcctSettSum();//结算中
+                        int acctBalanceInt = Integer.parseInt(acctBalance);
+                        int acctSumInt = Integer.parseInt(acctSum);
+                        int acctMonthSumInt = Integer.parseInt(acctMonthSum);
+                        int acctSettSumInt = Integer.parseInt(acctSettSum);
+                        income_tv.setText((acctBalanceInt/100)+"."+(acctBalanceInt/10%10)+(acctBalanceInt%10));
+                        cash_tv.setText((acctMonthSumInt/100)+"."+(acctMonthSumInt/10%10)+(acctMonthSumInt%10));
+                        settlement_tv.setText((acctSettSumInt/100)+"."+(acctSettSumInt/10%10)+(acctSettSumInt%10));
+                        allIncome_tv.setText((acctSumInt/100)+"."+(acctSumInt/10%10)+(acctSumInt%10));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
         /*for (int i = 0; i < xValues.length; i++) {
             xValues[i]= i+"";
         }
@@ -69,11 +125,12 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
             yValues[i]= 1+i*100;
         }
         income_itv.setYValues(yValues);*/
+
     }
 
     @Override
     public void initListener() {
-        back_iv.setOnClickListener(this);
+        back_layout.setOnClickListener(this);
         detail_tv.setOnClickListener(this);
         cash_layout.setOnClickListener(this);
         income_layout.setOnClickListener(this);
@@ -198,11 +255,13 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
         Intent intent = new Intent();
         switch (view.getId())
         {
-            case R.id.back_iv:
+            case R.id.back_layout:
                 finish();
                 break;
             case R.id.detail_tv:
-                Toast.makeText(this,"明细",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"明细",Toast.LENGTH_SHORT).show();
+                intent.setClass(this,MyAssertDetailActivity.class);
+                startActivity(intent);
                 break;
             case R.id.cash_layout:
                 intent.setClass(this,CashActivity.class);

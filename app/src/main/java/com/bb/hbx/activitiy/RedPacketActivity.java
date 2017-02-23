@@ -30,15 +30,15 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
     RelativeLayout back_layout;
     @BindView(R.id.menu_iv)
     ImageView menu_iv;
-    @BindView(R.id.viewPager)
-    ViewPager viewPager;
-    @BindView(R.id.tablayout)
-    TabLayout tablayout;
+    //@BindView(R.id.viewPager)
+    static ViewPager viewPager;
+    //@BindView(R.id.tablayout)
+    static TabLayout tablayout;
 
     ArrayList<RedPacketContentFragment> fragmentList=new ArrayList<>();
 
-    String []title=new String[]{"未使用(3)","使用记录(3)","已过期(5)"};
-    MyRedPacketAdapter adapter;
+    static String []title=new String[]{"未使用(0)","使用记录(0)","已过期(0)"};
+    static MyRedPacketAdapter adapter;
 
     @Override
     public int getLayoutId() {
@@ -47,7 +47,8 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView() {
-
+        viewPager= (ViewPager) findViewById(R.id.viewPager);
+        tablayout= (TabLayout) findViewById(R.id.tablayout);
     }
 
     @Override
@@ -56,6 +57,24 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
         menu_iv.setOnClickListener(this);
     }
 
+    public static void resetLabUnused(Context mContext,String count)
+    {
+        title[0]="未使用("+count+")";
+        tablayout.setupWithViewPager(viewPager);
+        setIndicator(mContext,tablayout,25,25);
+    }
+    public static void resetLabRecord(Context mContext,String count)
+    {
+        title[1]="使用记录("+count+")";
+        tablayout.setupWithViewPager(viewPager);
+        setIndicator(mContext,tablayout,25,25);
+    }
+    public static void resetLabUneff(Context mContext,String count)
+    {
+        title[2]="已过期("+count+")";
+        tablayout.setupWithViewPager(viewPager);
+        setIndicator(mContext,tablayout,25,25);
+    }
     @Override
     public void initdata() {
         Can.redPFragmentList=Can.getFragmentListInRedP();
@@ -74,7 +93,7 @@ public class RedPacketActivity extends BaseActivity implements View.OnClickListe
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);
-        setIndicator(this,tablayout,28,28);
+        setIndicator(this,tablayout,25,25);
 
 
     }

@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.GetUserCouponsListBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,10 +23,10 @@ import butterknife.ButterKnife;
 public class MyUnEfficientInRedPAdapter extends RecyclerView.Adapter<MyUnEfficientInRedPAdapter.MyViewHolder>{
 
     Context mContext;
-    ArrayList<String> list;
+    List<GetUserCouponsListBean.CouponListBean> list;
     LayoutInflater inflater;
 
-    public MyUnEfficientInRedPAdapter(Context mContext, ArrayList<String> list) {
+    public MyUnEfficientInRedPAdapter(Context mContext, List<GetUserCouponsListBean.CouponListBean> list) {
         this.mContext = mContext;
         this.list = list;
         inflater=LayoutInflater.from(mContext);
@@ -39,7 +41,10 @@ public class MyUnEfficientInRedPAdapter extends RecyclerView.Adapter<MyUnEfficie
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //Glide.with(mContext).load(list.get(position)).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(holder.pic_iv);
-
+        holder.price_tv.setText("¥"+list.get(position).getCouponValue());
+        holder.title_tv.setText(list.get(position).getCouponName());
+        holder.time_tv.setText("有效期:"+list.get(position).getEffTime()+"-"+list.get(position).getExpTime());
+        holder.condtion_tv.setText(list.get(position).getCouponDesc());
     }
 
     @Override
@@ -51,11 +56,18 @@ public class MyUnEfficientInRedPAdapter extends RecyclerView.Adapter<MyUnEfficie
 
         @BindView(R.id.divider_iv)
         ImageView divider_iv;
-        @BindView(R.id.deadLine_tv)
-        ImageView deadLine_tv;
+        @BindView(R.id.deadLine_iv)
+        ImageView deadLine_iv;
         @BindView(R.id.state_iv)
         ImageView state_iv;
-
+        @BindView(R.id.price_tv)
+        TextView price_tv;
+        @BindView(R.id.title_tv)
+        TextView title_tv;
+        @BindView(R.id.time_tv)
+        TextView time_tv;
+        @BindView(R.id.condtion_tv)
+        TextView condtion_tv;
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

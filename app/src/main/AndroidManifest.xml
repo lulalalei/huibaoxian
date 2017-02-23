@@ -160,7 +160,8 @@
         <activity android:name=".activitiy.FixPayPwdActivity" />
         <activity android:name=".activitiy.CheckIdentifyInForgerActivity" />
         <activity android:name=".activitiy.BindPhoneActivity" />
-        <activity android:name=".activitiy.CheckIdentifyUnderPwdActivity"></activity>
+        <activity android:name=".activitiy.CheckIdentifyUnderPwdActivity" />
+        <activity android:name=".activitiy.MyAssertDetailActivity"></activity>
     </application>
 
 </manifest>

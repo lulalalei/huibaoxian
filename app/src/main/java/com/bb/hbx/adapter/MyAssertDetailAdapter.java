@@ -17,32 +17,35 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Administrator on 2016/12/27.
+ * Created by Administrator on 2017/2/22.
  */
 
-public class MyScoreAdapter extends RecyclerView.Adapter<MyScoreAdapter.MyViewHolder>{
+public class MyAssertDetailAdapter extends RecyclerView.Adapter<MyAssertDetailAdapter.MyViewHolder>{
 
-    //ArrayList<MyScoreBean> list;
-    List<GetAccountDetailBean.AccountDetailListBean> list;
     Context mContext;
+    List<GetAccountDetailBean.AccountDetailListBean> list;
     LayoutInflater inflater;
 
-    public MyScoreAdapter(List<GetAccountDetailBean.AccountDetailListBean> list, Context mContext) {
-        this.list = list;
+    public MyAssertDetailAdapter(Context mContext, List<GetAccountDetailBean.AccountDetailListBean> list) {
         this.mContext = mContext;
+        this.list = list;
         inflater=LayoutInflater.from(mContext);
     }
+
+    public void setList(List<GetAccountDetailBean.AccountDetailListBean> list) {
+        this.list = list;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.layout_score,parent,false);
+        View view = inflater.inflate(R.layout.item_myassertdetail_layout, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.id_tv.setText(list.get(position).getTradeDesc());
-        String time = TimeUtils.getDateToString(list.get(position).getLogTime());
-        holder.time_tv.setText(time);
+        holder.title_tv.setText(list.get(position).getTradeDesc());
+        holder.time_tv.setText(TimeUtils.getDateNoHourToString(list.get(position).getLogTime()));
         int tradeType = list.get(position).getTradeType();
         int tradeAmount = list.get(position).getTradeAmount();
         if (tradeType==10||tradeType==21||tradeType==31)//判断是收入还是支出
@@ -62,8 +65,8 @@ public class MyScoreAdapter extends RecyclerView.Adapter<MyScoreAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.id_tv)
-        TextView id_tv;
+        @BindView(R.id.title_tv)
+        TextView title_tv;
         @BindView(R.id.time_tv)
         TextView time_tv;
         @BindView(R.id.price_tv)

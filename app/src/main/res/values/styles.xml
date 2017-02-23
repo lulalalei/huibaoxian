@@ -336,4 +336,12 @@
     <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>-->
     <!--<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
     <!--</style>-->
+    <style name="myDialogTheme" parent="@android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 </resources>

@@ -92,7 +92,7 @@
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"/>
         <ImageView
-            android:id="@+id/deadLine_tv"
+            android:id="@+id/deadLine_iv"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/hongbao_shengyitian"

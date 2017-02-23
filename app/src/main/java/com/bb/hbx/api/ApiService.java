@@ -10,7 +10,11 @@ import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.Consignees;
 import com.bb.hbx.bean.DeleteConsignee;
 import com.bb.hbx.bean.FilterBean;
+import com.bb.hbx.bean.GetAccountDetailBean;
+import com.bb.hbx.bean.GetAcctSettSumBean;
 import com.bb.hbx.bean.GetInsured;
+import com.bb.hbx.bean.GetMyPageInfoBean;
+import com.bb.hbx.bean.GetUserCouponsListBean;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
@@ -90,10 +94,34 @@ public interface ApiService {
     @POST("api.do?method=getUserInfo&type=post")
     Call<Result_Api<UserInfo>> getUserInfo(@Header("sessionId") String sessionId, @Field("userId") String userId);
 
+    //查询我的首页的账户信息
+    @FormUrlEncoded
+    @POST("api.do?method=getMyPageInfo&type=post")
+    Call<Result_Api<GetMyPageInfoBean>> getMyPageInfo(@Field("userId") String userId);
+
     //查询账户信息
     @FormUrlEncoded
     @POST("api.do?method=getAccount&type=post")
-    Call<Result_Api<Account>> getAccount(@Field("userId") String userId);
+    Call<Result_Api<Account>> getAccount(@Field("userId") String userId,@Field("acctType") String acctType);
+
+    //查询资金(积分)变动明细()--已测
+    @FormUrlEncoded
+    @POST("api.do?method=getAccountDetail&type=post")
+    Call<Result_Api<GetAccountDetailBean>> getAccountDetail(@Field("userId") String userId, @Field("acctType") String acctType,
+                                                            @Field("pageIndex") String pageIndex);
+
+    //积分签到--待测
+    @FormUrlEncoded
+    @POST("api.do?method=checkIn&type=post")
+    Call<String> checkIn(@Field("userId") String userId, @Field("acctType") String acctType);
+
+    //结算中金额明细列表--待测
+    @FormUrlEncoded
+    @POST("api.do?method=getAcctSettSumList&type=post")
+    Call<Result_Api<GetAcctSettSumBean>> getAcctSettSumList(@Field("userId") String userId, @Field("acctType") String acctType,
+                                                            @Field("beginDate") String beginDate, @Field("endDate") String endDate,
+                                                            @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize,
+                                                            @Field("commisionSts") String commisionSts);
 
     //修改用户信息,nickName
     @FormUrlEncoded
@@ -184,11 +212,18 @@ public interface ApiService {
     @POST("api.do?method=delInsured&type=post")
     Call<Result_Api<UpdateInsured>> delInsured(@Field("userId") String userId, @Field("insuredId") String insuredId);
 
-    //获取我的红包记录列表--待测
+    //获取我的订单列表--待测
     @FormUrlEncoded
-    @POST("api.do?method=getCouponList&type=post")
-    Call<String> getCouponList(@Field("userId") String userId, @Field("sts") String sts,
-                               @Field("pageIndex") String pageIndex,@Field("pageSize") String pageSize);
+    @POST("api.do?method=getTrades&type=post")
+    Call<String> getTrades(@Field("userId") String userId, @Field("tradeSts") String tradeSts,
+                           @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+
+
+    //获取我的红包记录列表--已测
+    @FormUrlEncoded
+    @POST("api.do?method=getUserCouponsList&type=post")
+    Call<Result_Api<GetUserCouponsListBean>> getUserCouponsList(@Field("userId") String userId, @Field("sts") String sts, @Field("couponType") String couponType,
+                                                                @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
 
     //获取首页数据

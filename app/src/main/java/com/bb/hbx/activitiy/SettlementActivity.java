@@ -4,24 +4,32 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MySettlementAdapter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MySettlementBean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /*
 * 点击 我的--我的资产--结算中 显示的页面*/
 public class SettlementActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.back_iv)
-    ImageView back_iv;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
     @BindView(R.id.menu_iv)
     ImageView menu_iv;
 
@@ -46,7 +54,7 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initListener() {
-        back_iv.setOnClickListener(this);
+        back_layout.setOnClickListener(this);
         menu_iv.setOnClickListener(this);
     }
 
@@ -59,6 +67,27 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
             }
         };
         recyclerView.setLayoutManager(manager);
+        adapter = new MySettlementAdapter(totalList, this);
+        recyclerView.setAdapter(adapter);
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String startTime=year+"-"+(month+1)+"-"+(day-15);
+        String endTime=year+"-"+month+"-"+(day-15);
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getAcctSettSumList(MyApplication.user.getUserId(),"20",endTime,startTime,"1","10","0");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
         for (int i = 0; i < 16; i++) {
             String date="今天:"+i;
             String time="12.:"+i/10+i%10;
@@ -68,8 +97,7 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
             MySettlementBean bean = new MySettlementBean(date, time, title, number, price);
             totalList.add(bean);
         }
-        adapter = new MySettlementAdapter(totalList, this);
-        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -82,7 +110,7 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.back_iv:
+            case R.id.back_layout:
                 finish();
                 break;
             case R.id.menu_iv:

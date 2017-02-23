@@ -1,14 +1,10 @@
 package com.bb.hbx.activitiy;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.KeyEvent;
-
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -21,12 +17,9 @@ import com.bb.hbx.bean.VersionInfo;
 import com.bb.hbx.service.DownloadIconService;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.DeviceUtils;
-
 import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.PermissionUtils;
 import com.bb.hbx.utils.ShareSPUtils;
-
-import static com.bb.hbx.R.drawable.my;
 
 
 public class WelcomeActivity extends BaseActivity<WelcomePresenter, WelcomeModel> implements
@@ -57,10 +50,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter, WelcomeModel
     public void initdata() {
         MyApplication.user = new User();
         utils = new PermissionUtils(this);
-        ShareSPUtils.initShareSP(this);
-        MyUsersSqlite.initUsersdb(this);
         Intent intentService = new Intent(this, DownloadIconService.class);
         startService(intentService);
+        ShareSPUtils.initShareSP(this);
+        MyUsersSqlite.initUsersdb(this);
         mPresenter.settingUser();
 
         comm();

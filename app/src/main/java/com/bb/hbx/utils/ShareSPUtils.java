@@ -38,13 +38,17 @@ public class ShareSPUtils {
             {
                 String parentPath = Can.getDefaultUsersIconFile();
                 File file = new File(parentPath);
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
                 String usersIconPath = new File(file, Can.userIconDefault.substring(Can.userIconDefault.lastIndexOf("/") + 1)).getAbsolutePath();
                 if (notLogin.getVisibility()== View.GONE)
                 {
                     notLogin.setVisibility(View.VISIBLE);
                     //hasLogin.setVisibility(View.GONE);
                 }
-                userIcon.setImageBitmap(BitmapFactory.decodeFile(usersIconPath));
+                userIcon.setImageBitmap(BitmapFactory.decodeFile(usersIconPath));//默认头像的下载是在downloadService中实现,此时可能未下载完成,,所以先用glide吧
+                //Glide.with(mContext).load(Can.userIconDefault).into(userIcon);
             }
             else //用户已登录执行的逻辑
             {
