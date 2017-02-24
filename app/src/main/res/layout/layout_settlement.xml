@@ -1,71 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="78dp"
+    android:layout_height="wrap_content"
     android:background="@color/white">
 
+    <TextView
+        android:id="@+id/divider_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="本月"
+        android:textColor="@color/A3"
+        android:textSize="13sp"
+        android:padding="18dp"
+        android:background="@color/colorDivider" />
     <RelativeLayout
-        android:id="@+id/time_layout"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="18dp"
-        android:layout_centerVertical="true"
-        android:background="@drawable/text_myassert_shape">
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_below="@id/divider_tv">
+        <RelativeLayout
+            android:id="@+id/time_layout"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/text_myassert_shape">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今天"
+                android:textSize="11sp"
+                android:textColor="@color/A4"
+                android:id="@+id/date_tv"
+                android:layout_marginTop="9dp"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08:35"
+                android:id="@+id/time_tv"
+                android:textSize="11sp"
+                android:textColor="@color/A4"
+                android:layout_below="@id/date_tv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"/>
+        </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="今天"
-            android:textSize="11sp"
-            android:textColor="@color/A4"
-            android:id="@+id/date_tv"
-            android:layout_marginTop="9dp"
-            android:layout_centerHorizontal="true"/>
+            android:text="驾车人员意外伤害保险"
+            android:id="@+id/title_tv"
+            android:layout_toRightOf="@id/time_layout"
+            android:layout_marginTop="17dp"
+            android:layout_marginLeft="18dp"
+            android:textColor="@color/A3"
+            android:textSize="16sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="08:35"
-            android:id="@+id/time_tv"
-            android:textSize="11sp"
+            android:text="保单号:xxxx"
+            android:id="@+id/number_tv"
+            android:layout_below="@id/title_tv"
+            android:layout_alignLeft="@id/title_tv"
+            android:layout_marginTop="3dp"
             android:textColor="@color/A4"
-            android:layout_below="@id/date_tv"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"/>
+            android:textSize="12sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/price_tv"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:text="+35.68"
+            android:textColor="@color/Z54"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorDivider"
+            android:layout_marginLeft="18dp"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="驾车人员意外伤害保险"
-        android:id="@+id/title_tv"
-        android:layout_toRightOf="@id/time_layout"
-        android:layout_marginTop="17dp"
-        android:layout_marginLeft="18dp"
-        android:textColor="@color/A3"
-        android:textSize="16sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="保单号:xxxx"
-        android:id="@+id/number_tv"
-        android:layout_below="@id/title_tv"
-        android:layout_alignLeft="@id/title_tv"
-        android:layout_marginTop="3dp"
-        android:textColor="@color/A4"
-        android:textSize="12sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/price_tv"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="18dp"
-        android:text="+35.68"
-        android:textColor="@color/Z54"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorDivider"
-        android:layout_marginLeft="18dp"
-        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

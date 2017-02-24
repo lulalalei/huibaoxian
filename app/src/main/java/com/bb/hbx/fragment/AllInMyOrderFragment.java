@@ -10,10 +10,13 @@ import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyAllInMyOrderAdapter;
 import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.bean.GetTradesBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -32,7 +35,7 @@ public class AllInMyOrderFragment extends BaseFragment{
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     String path="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
-    ArrayList<String> list=new ArrayList<>();
+    List<GetTradesBean.TradeListBean> list=new ArrayList<>();
     GridLayoutManager manager;
     MyAllInMyOrderAdapter adapter;
 
@@ -78,11 +81,8 @@ public class AllInMyOrderFragment extends BaseFragment{
         {
             list.clear();
         }
-        for (int i = 0; i < 10; i++) {
-            list.add(path);
-        }
         showTradesList(pageIndex);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 
     private void showTradesList(int pageIndex) {
@@ -91,7 +91,17 @@ public class AllInMyOrderFragment extends BaseFragment{
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-
+                Result_Api body = (Result_Api) response.body();
+                if (body!=null)
+                {
+                    GetTradesBean bean = (GetTradesBean) body.getOutput();
+                    if (bean!=null)
+                    {
+                        //List<GetTradesBean.TradeListBean> tradeList = bean.getTradeList();
+                        list.addAll(bean.getTradeList());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override

@@ -2,22 +2,29 @@ package com.bb.hbx.activitiy;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MySettlementAdapter;
 import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.bean.MySettlementBean;
+import com.bb.hbx.bean.Account;
+import com.bb.hbx.bean.GetAcctSettSumBean;
+import com.bb.hbx.utils.TimeUtils;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -34,14 +41,19 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
     ImageView menu_iv;
 
     @BindView(R.id.scrollView)
-    ScrollView scrollView;
+    PullToRefreshScrollView scrollView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.settlement_tv)
+    TextView settlement_tv;
     GridLayoutManager manager;
 
-    ArrayList<MySettlementBean> totalList=new ArrayList<>();
+    List<GetAcctSettSumBean.SettSumListBean> totalList=new ArrayList<>();
     MySettlementAdapter adapter;
 
+    String currentTime="";
+    String startTime="";
+    int pageIndex=1;
     @Override
     public int getLayoutId() {
         return R.layout.activity_settlement;
@@ -49,17 +61,57 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-
+        showAccount();
     }
 
     @Override
     public void initListener() {
         back_layout.setOnClickListener(this);
         menu_iv.setOnClickListener(this);
+        scrollView.setMode(PullToRefreshBase.Mode.BOTH);
+        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex=1;
+                showSettlementList(pageIndex,startTime,currentTime);
+                showAccount();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex++;
+                showSettlementList(pageIndex,startTime,currentTime);
+            }
+        });
     }
 
     @Override
     public void initdata() {
+        long monthFirstDay = TimeUtils.getMonthFirstDay();
+        String dateToString = TimeUtils.getDateNoHourToString(monthFirstDay);//得到当前月初时间  2017-02-01
+        currentTime = TimeUtils.getCurrentTime();//2017-02-24
+        long currentLogTime = TimeUtils.getStringToDateHaveSecondAndSpace(currentTime+" 00:00:00");
+        String[] timeBuf = currentTime.split("-");
+        String singleYearCurrent = timeBuf[0];//2017
+        String singleMonthCurrent = timeBuf[1];//02
+        String singleDayCurrent = timeBuf[2];//24
+        int singleYearCurrentInt = Integer.parseInt(singleYearCurrent);//2017
+        int singleMonthCurrentInt = Integer.parseInt(singleMonthCurrent);//2
+        int singleDayCurrentInt = Integer.parseInt(singleDayCurrent);//24
+        int singleYearStartInt=0;
+        int singleMonthStartInt=0;
+        //int singleDayStartInt=1;
+        if (singleMonthCurrentInt==1)
+        {
+            singleMonthStartInt=12;
+            singleYearStartInt=singleYearCurrentInt-1;
+        }
+        else
+        {
+            singleMonthStartInt=singleMonthCurrentInt-1;
+            singleYearStartInt=singleYearCurrentInt;
+        }
+        startTime=singleYearStartInt+"-"+(singleMonthStartInt/10)+(singleMonthStartInt%10)+"-"+"01";
         manager = new GridLayoutManager(this, 1){
             @Override
             public boolean canScrollVertically() {
@@ -67,20 +119,39 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
             }
         };
         recyclerView.setLayoutManager(manager);
-        adapter = new MySettlementAdapter(totalList, this);
+        adapter = new MySettlementAdapter(totalList,this,currentLogTime,singleMonthCurrent);
         recyclerView.setAdapter(adapter);
-        Calendar calendar = Calendar.getInstance();
+        /*Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        String startTime=year+"-"+(month+1)+"-"+(day-15);
-        String endTime=year+"-"+month+"-"+(day-15);
+        //String startTime=year+"-"+(month+1)+"-"+(day-15);
+        String endTime=year+"-"+month+"-"+(day-15);*/
+        showSettlementList(pageIndex,startTime,currentTime);
+
+    }
+
+    private void showAccount() {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call=service.getAcctSettSumList(MyApplication.user.getUserId(),"20",endTime,startTime,"1","10","0");
+        Call call=service.getAccount(MyApplication.user.getUserId(),"20");
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-
+                Result_Api body = (Result_Api) response.body();
+                if (body!=null)
+                {
+                    Account account = (Account) body.getOutput();
+                    if (account!=null)
+                    {
+                        String acctSettSum = account.getAcctSettSum();//结算中
+                        int acctSettSumInt=0;
+                        if (!TextUtils.isEmpty(acctSettSum))
+                        {
+                            acctSettSumInt = Integer.parseInt(acctSettSum);
+                        }
+                        settlement_tv.setText(TextUtils.isEmpty(acctSettSum)?"0.00":(acctSettSumInt/100)+"."+(acctSettSumInt/10%10)+(acctSettSumInt%10));
+                    }
+                }
             }
 
             @Override
@@ -88,16 +159,40 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
 
             }
         });
-        for (int i = 0; i < 16; i++) {
-            String date="今天:"+i;
-            String time="12.:"+i/10+i%10;
-            String title="驾乘人员意外伤害保险:"+i;
-            String number="保单号:"+i;
-            String price=20+i+"";
-            MySettlementBean bean = new MySettlementBean(date, time, title, number, price);
-            totalList.add(bean);
-        }
-        adapter.notifyDataSetChanged();
+    }
+
+    private void showSettlementList(final int pageIndex, String startTime, String currentTime) {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getAcctSettSumList(MyApplication.user.getUserId(),"20",startTime,currentTime,pageIndex+"","10","0");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                if (body!=null)
+                {
+                    GetAcctSettSumBean bean = (GetAcctSettSumBean) body.getOutput();
+                    if (bean!=null)
+                    {
+                        //List<GetAcctSettSumBean.SettSumListBean> settSumList = bean.getSettSumList();
+                        if (pageIndex==1)
+                        {
+                            totalList.clear();
+                        }
+                        totalList.addAll(bean.getSettSumList());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+                if (scrollView.isRefreshing())
+                {
+                    scrollView.onRefreshComplete();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

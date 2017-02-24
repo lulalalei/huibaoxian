@@ -14,6 +14,7 @@ import com.bb.hbx.bean.GetAccountDetailBean;
 import com.bb.hbx.bean.GetAcctSettSumBean;
 import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.GetMyPageInfoBean;
+import com.bb.hbx.bean.GetTradesBean;
 import com.bb.hbx.bean.GetUserCouponsListBean;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.MessageCodeBean;
@@ -83,10 +84,16 @@ public interface ApiService {
     @POST("api.do?method=login&type=post")
     Call<Result_Api<User>> login(@Field("userName") String userName, @Field("loginPwd") String loginPwd, @Field("loginType") String loginType);
 
-    //忘记密码------待测
+    //忘记密码------已测
     @FormUrlEncoded
     @POST("api.do?method=forgetLoginPwd&type=post")
-    Call<String> forgetLoginPwd(@Field("mobile") String mobile, @Field("newPwd") String newPwd, @Field("resetType") String resetType, @Field("smsCode") String smsCode);
+    Call<Result_Api> forgetLoginPwd(@Field("mobile") String mobile, @Field("newPwd") String newPwd, @Field("resetType") String resetType, @Field("smsCode") String smsCode);
+
+    //重设登录密码--待测
+    @FormUrlEncoded
+    @POST("api.do?method=resetLoginPwd&type=post")
+    Call<String> resetLoginPwd(@Field("userId") String userId,@Field("newPwd") String newPwd,
+                               @Field("resetType") String resetType,@Field("smsCode") String smsCode);
 
     //登录注销
     @FormUrlEncoded
@@ -219,8 +226,8 @@ public interface ApiService {
     //获取我的订单列表--待测
     @FormUrlEncoded
     @POST("api.do?method=getTrades&type=post")
-    Call<String> getTrades(@Field("userId") String userId, @Field("tradeSts") String tradeSts,
-                           @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+    Call<Result_Api<GetTradesBean>> getTrades(@Field("userId") String userId, @Field("tradeSts") String tradeSts,
+                                              @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
 
     //获取我的红包记录列表--已测

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.bean.GetUserCouponsListBean;
+import com.bb.hbx.interfaces.OnItemClickListener;
 
 import java.util.List;
 
@@ -25,11 +26,16 @@ public class MyUnEfficientInRedPAdapter extends RecyclerView.Adapter<MyUnEfficie
     Context mContext;
     List<GetUserCouponsListBean.CouponListBean> list;
     LayoutInflater inflater;
+    OnItemClickListener onMyItemClickListener;
 
     public MyUnEfficientInRedPAdapter(Context mContext, List<GetUserCouponsListBean.CouponListBean> list) {
         this.mContext = mContext;
         this.list = list;
         inflater=LayoutInflater.from(mContext);
+    }
+
+    public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
+        this.onMyItemClickListener = onMyItemClickListener;
     }
 
     @Override
@@ -39,12 +45,18 @@ public class MyUnEfficientInRedPAdapter extends RecyclerView.Adapter<MyUnEfficie
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         //Glide.with(mContext).load(list.get(position)).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(holder.pic_iv);
         holder.price_tv.setText("¥"+list.get(position).getCouponValue());
         holder.title_tv.setText(list.get(position).getCouponName());
         holder.time_tv.setText("有效期:"+list.get(position).getEffTime()+"-"+list.get(position).getExpTime());
         holder.condtion_tv.setText(list.get(position).getCouponDesc());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMyItemClickListener.onMyItemClickListener(position);
+            }
+        });
     }
 
     @Override

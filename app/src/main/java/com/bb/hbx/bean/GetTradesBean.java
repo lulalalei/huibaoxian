@@ -15,44 +15,6 @@ public class GetTradesBean {
      * success : true
      */
 
-    private OutputBean output;
-    private String respCode;
-    private String respMsg;
-    private boolean success;
-
-    public OutputBean getOutput() {
-        return output;
-    }
-
-    public void setOutput(OutputBean output) {
-        this.output = output;
-    }
-
-    public String getRespCode() {
-        return respCode;
-    }
-
-    public void setRespCode(String respCode) {
-        this.respCode = respCode;
-    }
-
-    public String getRespMsg() {
-        return respMsg;
-    }
-
-    public void setRespMsg(String respMsg) {
-        this.respMsg = respMsg;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public static class OutputBean {
         /**
          * pageSize : 2
          * totalCount : 2
@@ -272,5 +234,4 @@ public class GetTradesBean {
                 this.insuredList = insuredList;
             }
         }
-    }
 }

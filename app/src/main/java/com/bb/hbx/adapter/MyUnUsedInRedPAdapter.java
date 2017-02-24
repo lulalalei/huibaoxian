@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.bean.GetUserCouponsListBean;
+import com.bb.hbx.interfaces.OnItemClickListener;
 import com.bb.hbx.utils.TimeUtils;
 
 import java.util.List;
@@ -27,11 +28,16 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
     //ArrayList<String> list;
     List<GetUserCouponsListBean.CouponListBean> list;
     LayoutInflater inflater;
+    OnItemClickListener onMyItemClickListener;
 
     public MyUnUsedInRedPAdapter(Context mContext, List<GetUserCouponsListBean.CouponListBean> list) {
         this.mContext = mContext;
         this.list = list;
         inflater=LayoutInflater.from(mContext);
+    }
+
+    public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
+        this.onMyItemClickListener = onMyItemClickListener;
     }
 
     @Override
@@ -41,7 +47,7 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         //Glide.with(mContext).load(list.get(position)).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(holder.pic_iv);
         holder.price_tv.setText("¥"+list.get(position).getCouponValue());
         holder.title_tv.setText(list.get(position).getCouponName());
@@ -61,6 +67,12 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
         {
             holder.deadLine_iv.setVisibility(View.VISIBLE);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMyItemClickListener.onMyItemClickListener(position);
+            }
+        });
     }
 
     @Override
