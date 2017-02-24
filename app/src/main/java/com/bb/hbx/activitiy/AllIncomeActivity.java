@@ -1,12 +1,12 @@
 package com.bb.hbx.activitiy;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -77,7 +77,9 @@ public class AllIncomeActivity extends BaseActivity implements View.OnClickListe
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onMyItemClickListener(int position) {
-                Toast.makeText(AllIncomeActivity.this,"点击事件:"+position,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AllIncomeActivity.this,"点击事件:"+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AllIncomeActivity.this, SpecialMonthActivity.class);
+                startActivity(intent);
             }
         });
     }

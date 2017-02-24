@@ -7,7 +7,8 @@
     android:background="@color/A7"
     tools:context="com.bb.hbx.activitiy.SettlementActivity">
 
-    <RelativeLayout
+    <!--
+        <RelativeLayout
         android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -80,5 +81,70 @@
                 android:id="@+id/recyclerView"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
+    -->
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/A1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <RelativeLayout
+            android:id="@+id/back_layout"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="17dp"
+                android:id="@+id/back_iv"
+                android:src="@drawable/jiantou_bai"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="18dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="结算中"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
+        <ImageView
+            android:id="@+id/menu_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/baiwenhao"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"/>
+    </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_below="@id/topbar_layout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="148dp"
+                android:text="暂无收入"
+                android:textSize="36sp"
+                android:textColor="@color/white"
+                android:id="@+id/settlement_tv"
+                android:paddingTop="40dp"
+                android:gravity="center_horizontal"
+                android:background="@drawable/jiesuan_shouru" />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerView"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </RelativeLayout>

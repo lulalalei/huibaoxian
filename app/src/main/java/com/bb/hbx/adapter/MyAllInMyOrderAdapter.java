@@ -9,8 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.GetTradesBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,10 +23,10 @@ import butterknife.ButterKnife;
 public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAdapter.MyViewHolder>{
 
     Context mContext;
-    ArrayList<String> list;
+    List<GetTradesBean.TradeListBean> list;
     LayoutInflater inflater;
 
-    public MyAllInMyOrderAdapter(Context mContext, ArrayList<String> list) {
+    public MyAllInMyOrderAdapter(Context mContext, List<GetTradesBean.TradeListBean> list) {
         this.mContext = mContext;
         this.list = list;
         inflater=LayoutInflater.from(mContext);

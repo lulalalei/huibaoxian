@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
@@ -15,6 +16,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.GetUserCouponsListBean;
+import com.bb.hbx.interfaces.OnItemClickListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
@@ -96,6 +98,13 @@ public class RecordInRedPaFragment extends BaseFragment{
             list.clear();
         }
         showCouponsList(pageIndex);
+        adapter.setOnMyItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onMyItemClickListener(int position) {
+                Toast.makeText(mContext,"position:"+position,Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void showCouponsList(final int pageIndex) {

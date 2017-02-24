@@ -29,6 +29,7 @@ import com.bb.hbx.activitiy.MyOrderActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
 import com.bb.hbx.activitiy.PersonInfoSettingActivity;
 import com.bb.hbx.activitiy.PresentInsuActivity;
+import com.bb.hbx.activitiy.RecommendRewardActivity;
 import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
 import com.bb.hbx.activitiy.login.LoginActivity;
@@ -98,6 +99,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     RelativeLayout purchase_layout;
     @BindView(R.id.customers_layout)
     RelativeLayout customers_layout;
+    @BindView(R.id.invite_layout)
+    RelativeLayout invite_layout;
     @BindView(R.id.service_layout)
     RelativeLayout service_layout;
     Context mContext;
@@ -142,6 +145,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
         purchase_layout.setOnClickListener(this);
         customers_layout.setOnClickListener(this);
+        invite_layout.setOnClickListener(this);
         service_layout.setOnClickListener(this);
 
         ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,/*,hasLogin_tv,*/mContext);
@@ -288,6 +292,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case R.id.customers_layout:
                 intent.setClass(mContext, CustomerManagerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.invite_layout:
+                intent.setClass(mContext, RecommendRewardActivity.class);
                 startActivity(intent);
                 break;
             case R.id.service_layout:
