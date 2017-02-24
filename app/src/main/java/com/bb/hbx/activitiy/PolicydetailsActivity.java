@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
@@ -15,6 +17,7 @@ import com.bb.hbx.bean.TradeDetail;
 import com.bb.hbx.bean.TradeDetailType;
 import com.bb.hbx.provide.PolicyFormProvide;
 import com.bb.hbx.utils.AppManager;
+import com.bb.hbx.utils.StringUtils;
 import com.bb.hbx.utils.TimeUtils;
 import com.bb.hbx.utils.Utils;
 import com.bb.hbx.widget.RecycleViewDivider;
@@ -31,7 +34,7 @@ import butterknife.BindView;
  */
 
 public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, PolicydetailModel>
-        implements PolicydetailsContract.View {
+        implements PolicydetailsContract.View, View.OnClickListener {
 
 
     @BindView(R.id.recyclerView)
@@ -69,7 +72,18 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
 
     @BindView(R.id.tv_tip)
     TextView tv_tip;
+
+    @BindView(R.id.iv_back)
+    ImageView iv_back;
     //
+
+    @BindView(R.id.tv_paytype)
+    TextView tv_paytype;
+
+    @BindView(R.id.tv_reation)
+    TextView tv_reation;
+    //
+
 
     private MultiTypeAdapter adapter;
 
@@ -101,7 +115,7 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
 
     @Override
     public void initListener() {
-
+        iv_back.setOnClickListener(this);
     }
 
     @Override
@@ -130,6 +144,15 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
     @Override
     public void getTradeDetail(TradeDetail detail) {
         tv_tradeid.setText(tradeId);
+
+        if ("10".equalsIgnoreCase(detail.getSts())) {
+            tv_paytype.setText("待支付");
+        } else if ("20".equalsIgnoreCase(detail.getSts())) {
+            tv_paytype.setText("已支付");
+        } else if ("20".equalsIgnoreCase(detail.getSts())) {
+            tv_paytype.setText("已失效");
+        }
+
         tv_startTime.setText(TimeUtils.formatDate(detail.getStartTime()));
         tv_endTime.setText(TimeUtils.formatDate(detail.getEndTime()));
         tv_name.setText(detail.getApplicant());
@@ -142,8 +165,20 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
             items.addAll(detail.getTypeList().get(0).getInsureList());
             adapter.notifyDataSetChanged();
         }
+        if (detail.getInsuredList() != null && detail.getInsuredList().size() > 0) {
+            tv_reation.setText(StringUtils.reationTostring(detail.getInsuredList().get(0).getRelation()));
+        }
 
         //tv_tip.setText();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_back:
+                this.finish();
+                break;
+        }
     }
 }

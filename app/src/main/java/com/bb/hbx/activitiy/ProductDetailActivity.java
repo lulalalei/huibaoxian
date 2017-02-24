@@ -419,15 +419,23 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                     insured.setNum(count);
                     insured.setOccupation(productParamDetail.getOccupation());
                     insured.setRelationType(beinsurer1key + "");
-                    insured.setIdNo(il_beinsurer4.getEtValue());
+
+                    //------------------------------------------------------------
+
+                    //insured.setIdNo(il_beinsurer4.getEtValue());
+                    insured.setIdNo("330621198903134673");
                     insured.setIdType(beinsureridType);
-                    insured.setInsuredName(il_beinsurer2.getEtValue());
+                    //insured.setInsuredName(il_beinsurer2.getEtValue());
+                    insured.setInsuredName("123");
                     insuredList.add(insured);
                     request.setInsuredList(insuredList);
-                    request.setIdNo(il_insurer3.getEtValue());
-                    request.setMobile(il_insurer4.getEtValue());
+//                    request.setIdNo(il_insurer3.getEtValue());
+//                    request.setMobile(il_insurer4.getEtValue());
+                    request.setIdNo("330621198903134674");
+                    request.setMobile("13656714459");
                     request.setIdType(insureridType);
-                    request.setApplicant(il_insurer1.getEtValue());
+                    //request.setApplicant(il_insurer1.getEtValue());
+                    request.setApplicant("456");
                     mPresenter.applyTrade(request);
                 } else {
                     showMsg("请把信息填写完整。。。");

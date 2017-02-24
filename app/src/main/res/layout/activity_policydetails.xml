@@ -77,6 +77,7 @@
                         android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
 
                     <TextView
+                        android:id="@+id/tv_paytype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x163"
@@ -307,6 +308,7 @@
                          android:textAppearance="@style/TextAppear.Theme.A4_Size14" />-->
 
                     <TextView
+                        android:id="@+id/tv_reation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14"

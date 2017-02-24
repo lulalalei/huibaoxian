@@ -352,6 +352,7 @@ public class TradeDetail {
         private String insuredNamePinyin;
         private String mobile;
         private String policyURL;
+        private int relation;
         private List<BenListBean> benList;
 
         public String getBirthday() {
@@ -456,6 +457,14 @@ public class TradeDetail {
 
         public void setBenList(List<BenListBean> benList) {
             this.benList = benList;
+        }
+
+        public int getRelation() {
+            return relation;
+        }
+
+        public void setRelation(int relation) {
+            this.relation = relation;
         }
 
         public static class BenListBean {
