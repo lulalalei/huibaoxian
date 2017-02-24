@@ -43,6 +43,9 @@ public class RedPacketContentFragment extends BaseFragment {
         switch (position)
         {
             case 0:
+
+
+
                 if (UnUsedInRedPaFragment.getInstance().isAdded())
                 {
                     getChildFragmentManager().beginTransaction().hide(Can.redPFragmentList.get(Can.preFragmentPositionInRedP))

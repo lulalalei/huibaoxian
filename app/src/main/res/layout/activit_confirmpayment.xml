@@ -126,6 +126,7 @@
                 android:paddingLeft="@dimen/x36">
 
                 <LinearLayout
+                    android:id="@+id/lin_hb"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@color/white"
@@ -202,8 +203,6 @@
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
 
-
-
                     <CheckBox
                         android:id="@+id/ck_ye"
                         style="@style/checkboxoffon"
@@ -223,8 +222,8 @@
                     android:layout_height="56dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -269,7 +268,7 @@
                         android:text="@string/rxzf"
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
-                    <TextView
+                    <com.bb.hbx.widget.TextviewObserver
                         android:id="@+id/tv_needprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -399,19 +398,22 @@
                 android:text="@string/hj"
                 android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
-            <TextView
+            <com.bb.hbx.widget.TextviewObserver
+                android:id="@+id/tv_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
                 android:text="@string/howPrice"
                 android:textAppearance="@style/TextAppear.Theme.A2_Size17" />
 
-            <TextView
+            <com.bb.hbx.widget.TextviewObserver
+                android:id="@+id/tv_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
-                android:text="@string/ysprice"
-                android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+                android:textAppearance="@style/TextAppear.Theme.A4_Size14"
+                app:format_string="@string/ysprice"
+                app:getnumber="1" />
 
 
         </LinearLayout>

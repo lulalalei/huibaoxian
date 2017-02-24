@@ -141,5 +141,13 @@
         <attr name="type" />
     </declare-styleable>
 
+    <declare-styleable name="TextviewObserver">
+
+        <!-- 输入框的开始说明图标和结束图标 -->
+        <attr name="format_string" format="reference" />
+        <attr name="getnumber" format="integer"></attr>
+
+
+    </declare-styleable>
 
 </resources>

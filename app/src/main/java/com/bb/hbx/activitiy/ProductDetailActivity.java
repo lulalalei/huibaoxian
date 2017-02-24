@@ -32,6 +32,7 @@ import com.bb.hbx.bean.Plan;
 import com.bb.hbx.bean.PriceTag;
 import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductParamDetail;
+import com.bb.hbx.observable.KeyBeanObservable;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.CardLayout;
 import com.bb.hbx.widget.ClickAble;
@@ -47,10 +48,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import butterknife.BindView;
 
 
+import static com.bb.hbx.R.drawable.on;
 import static com.bb.hbx.utils.Constants.idType_keys;
 import static com.bb.hbx.utils.Constants.idTypes;
 
@@ -61,7 +65,7 @@ import static com.bb.hbx.utils.Constants.idTypes;
  */
 
 public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, ProductDetailModle> implements ProductDetailContract.View,
-        View.OnClickListener {
+        View.OnClickListener, Observer {
 
 
     @BindView(R.id.sl)
@@ -172,7 +176,9 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     private double singlePrice;//机甲因子的求出的保额价格
 
 
-    private KeyBean keyBean;//价格因子生成的字符串
+    //private KeyBean keyBean;//价格因子生成的字符串
+
+    private KeyBeanObservable observable;
 
     private Plan cruentPlan = new Plan();
 
@@ -200,11 +206,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                 ((ItemLayout2) v).setText(value);
                 if ((int) (v.getTag()) == 0) {
                     selectPerids = perids[index];
-                    keyBean.set(keyBean.size() - 1, perids[index]);
+                    //keyBean.set(keyBean.size() - 1, perids[index]);
+                    observable.set(observable.size() - 1, perids[index]);
                 } else {
-                    keyBean.set((Integer) v.getTag(), value);
+                    observable.set((Integer) v.getTag(), value);
                 }
-                setTextPrice();
+
             } else if (v instanceof ItemLayout) {
                 if ((int) (v.getTag()) == 11) {
                     il_beinsurer1.setText(beinsurer1_listvalue[index]);
@@ -292,8 +299,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                     //index>=1;
                     cruentPlan = productParamDetail.getPlanList().get(index - 1);
                     List<Benefit> benefits = cruentPlan.getClassNameList().get(0).getBenefitList();
-                    keyBean.set(0, cruentPlan.getPlanName().trim());
-                    setTextPrice();
+                    observable.set(0, cruentPlan.getPlanName().trim());
+
                     //----------------------------------
                     lin_additem.removeAllViews();
                     if (benefits != null && benefits.size() > 0) {
@@ -363,9 +370,11 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     public void initdata() {
         mPresenter.getProductDetail(productId);
         tv_quantity.setText(count + "");
-        keyBean = new KeyBean();
-        keyBean.add(" ");
 
+        observable = new KeyBeanObservable();
+        observable.setBean(new KeyBean());
+        observable.addObserver(this);
+        observable.add(" ");
 
         il_beinsurer1.setText(beinsurer1_listvalue[0]);
         beinsurer1key = beinsurer1_listkey[0];
@@ -377,6 +386,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         beinsureridType = idType_keys[0];
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -396,7 +406,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                     ProdectDetalRequest request = new ProdectDetalRequest();
                     request.setUserId(MyApplication.user.getUserId());
                     request.setProductId(productParamDetail.getProductId());
-                    request.setPriceKeyword(keyBean.toString());
+                    request.setPriceKeyword(observable.toString());
                     request.setPlanId(cruentPlan.getPlanId());
                     request.setPeriod(selectPerids);
 //                    request.setStartTime("20161205122222");
@@ -438,7 +448,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         }
         count++;
         tv_quantity.setText(count + "");
-        setTextPrice();
+        observable.setCount(count);
+
     }
 
     public void subCount() {
@@ -454,7 +465,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
         count--;
         tv_quantity.setText(count + "");
-        setTextPrice();
+        observable.setCount(count);
     }
 
     @Override
@@ -547,7 +558,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
                     }
                     list.add(entry);
-                    keyBean.add(entry.getOption().get(0));
+                    observable.add(entry.getOption().get(0));
                     View view = LayoutInflater.from(mContext).inflate(R.layout.item_insured_up2, null);
                     ll_add.addView(view);
                     final ItemLayout2 up = (ItemLayout2) view.findViewById(R.id.il_up1);
@@ -580,22 +591,16 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
         }
 
-        keyBean.add(perids[0]);
-        setTextPrice();
+        observable.add(perids[0]);
 
-    }
 
-    private void setTextPrice() {
-        singlePrice = ischeckPrice();
-        tv_price.setText("￥" + singlePrice * count);
     }
 
 
     public double ischeckPrice() {
-        if (productParamDetail.getPriceList() != null && !productParamDetail.getPriceList().isEmpty()) {
-
+        if (productParamDetail != null && productParamDetail.getPriceList() != null && !productParamDetail.getPriceList().isEmpty()) {
             for (PriceTag tag : productParamDetail.getPriceList()) {
-                if (keyBean.toString().trim().equalsIgnoreCase(tag.getPriceKeyword().trim())) {
+                if (observable.toString().trim().equalsIgnoreCase(tag.getPriceKeyword().trim())) {
                     return Double.valueOf(tag.getProductPremium());
                 }
             }
@@ -604,4 +609,9 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+        singlePrice = ischeckPrice();
+        tv_price.setText("￥" + singlePrice * observable.getCount());
+    }
 }

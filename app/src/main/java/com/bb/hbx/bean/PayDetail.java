@@ -20,22 +20,22 @@ public class PayDetail implements Serializable {
      */
 
     private int acctBalanceJF;
-    private String acctBalanceYE;
-    private String payPrice;
-    private String tradeId;
+    private String acctBalanceYE="";
+    private String payPrice="";
+    private String tradeId="";
     private List<GetUserCouponsListBean.CouponListBean> couponList;
     private List<Payment> payments;
 
-    private String paymentId;
+    private String paymentId="";
 
 
-    private String productName;//
+    private String productName="";//
 
-    private String tips;//
+    private String tips="";//
 
     private long payDeadline;//
 
-    private String deductible;//
+    private String deductible="";//
 
     public int getAcctBalanceJF() {
         return acctBalanceJF;

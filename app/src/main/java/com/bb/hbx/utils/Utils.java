@@ -47,8 +47,7 @@ public class Utils {
     /**
      * 分转换为元.
      *
-     * @param fen
-     *            分
+     * @param fen 分
      * @return 元
      */
     public static String fromFenToYuan(final String fen) {
@@ -57,19 +56,27 @@ public class Utils {
 //        Pattern pattern = Pattern.compile("^[1-9][0-9]*{1}");
 //        Matcher matcher = pattern.matcher(fen);
 //        if (matcher.matches()) {
-            yuan = new BigDecimal(fen).divide(new BigDecimal(MULTIPLIER)).setScale(2).toString();
+        yuan = new BigDecimal(fen).divide(new BigDecimal(MULTIPLIER)).setScale(2).toString();
 //        }
         return yuan;
     }
 
-
+    /**
+     * 分转换为元.
+     *
+     * @param fen 分
+     * @return 元
+     */
+    public static BigDecimal fromFenToYuanBd(final String fen) {
+        final int MULTIPLIER = 100;
+        return new BigDecimal(fen).divide(new BigDecimal(MULTIPLIER)).setScale(2);
+    }
 
 
     /**
      * 元转换为分.
      *
-     * @param yuan
-     *            元
+     * @param yuan 元
      * @return 分
      */
     public static String fromYuanToFen(final String yuan) {
@@ -89,12 +96,11 @@ public class Utils {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             System.out.println("参数格式不正确!");
         }
         return fen;
     }
-
 
 
 }
