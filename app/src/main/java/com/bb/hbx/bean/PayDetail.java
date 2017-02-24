@@ -20,18 +20,20 @@ public class PayDetail implements Serializable {
      */
 
     private int acctBalanceJF;
-    private int acctBalanceYE;
+    private String acctBalanceYE;
     private String payPrice;
     private String tradeId;
     private List<GetUserCouponsListBean.CouponListBean> couponList;
     private List<Payment> payments;
+
+    private String paymentId;
 
 
     private String productName;//
 
     private String tips;//
 
-    private String payDeadline;//
+    private long payDeadline;//
 
     private String deductible;//
 
@@ -43,11 +45,11 @@ public class PayDetail implements Serializable {
         this.acctBalanceJF = acctBalanceJF;
     }
 
-    public int getAcctBalanceYE() {
+    public String getAcctBalanceYE() {
         return acctBalanceYE;
     }
 
-    public void setAcctBalanceYE(int acctBalanceYE) {
+    public void setAcctBalanceYE(String acctBalanceYE) {
         this.acctBalanceYE = acctBalanceYE;
     }
 
@@ -99,11 +101,11 @@ public class PayDetail implements Serializable {
         this.deductible = deductible;
     }
 
-    public String getPayDeadline() {
+    public long getPayDeadline() {
         return payDeadline;
     }
 
-    public void setPayDeadline(String payDeadline) {
+    public void setPayDeadline(long payDeadline) {
         this.payDeadline = payDeadline;
     }
 
@@ -115,6 +117,13 @@ public class PayDetail implements Serializable {
         this.tips = tips;
     }
 
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
 
     public static class Payment {
         private String paymentId;//支付方式编号

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bb.hbx.R;
 
 
-
 /**
  * Created by Administrator on 2017/2/20.
  */
@@ -20,6 +19,8 @@ public class FancyCountDownTextview extends TextView {
 
 
     private Context mContext;
+
+    private long time = 1800000;
 
     public FancyCountDownTextview(Context context) {
         this(context, null, 0);
@@ -35,7 +36,7 @@ public class FancyCountDownTextview extends TextView {
     }
 
 
-    private CountDownTimer mCountDownTimer = new CountDownTimer(1800000, 1000) {
+    private CountDownTimer mCountDownTimer = new CountDownTimer(time, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             int progress = (int) millisUntilFinished / 1000;
@@ -100,4 +101,11 @@ public class FancyCountDownTextview extends TextView {
     }
 
 
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
 }

@@ -35,6 +35,7 @@ public class TimeUtils {
         return date.getTime();
     }
 
+
     public static String formatDate(String str) {
         SimpleDateFormat sf1 = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,5 +47,11 @@ public class TimeUtils {
             e.printStackTrace();
         }
         return sfstr;
+    }
+
+    public static long divlong(long last) {
+        Date dt = new Date();
+        long now = dt.getTime();
+        return last - now;
     }
 }

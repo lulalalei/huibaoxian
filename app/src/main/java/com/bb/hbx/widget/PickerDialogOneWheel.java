@@ -73,6 +73,8 @@ public class PickerDialogOneWheel extends BaseDialog implements
 
     private View parentView;
 
+    private int currentIndex=0;
+
 
     public PickerDialogOneWheel(Context context, List<String> arry_value, View view) {
         super(context, R.layout.dialog_picker_center);
@@ -117,6 +119,7 @@ public class PickerDialogOneWheel extends BaseDialog implements
         }
         textAdapter = new TextAdapter(mContext, arry_value, 0, maxTextSize, minTextSize);
         selectValue = arry_value.get(0);
+        currentIndex=0;
         wheelView.setVisibleItems(5);
         wheelView.setViewAdapter(textAdapter);
         wheelView.setCurrentItem(0);
@@ -127,6 +130,7 @@ public class PickerDialogOneWheel extends BaseDialog implements
                 String currentText = (String) textAdapter.getItemText(wheel
                         .getCurrentItem());
                 selectValue = currentText;
+                currentIndex=wheel.getCurrentItem();
                 setTextviewSize(currentText, textAdapter);
 
             }
@@ -141,6 +145,7 @@ public class PickerDialogOneWheel extends BaseDialog implements
             public void onScrollingFinished(WheelView wheel) {
                 String currentText = (String) textAdapter.getItemText(wheel
                         .getCurrentItem());
+                currentIndex=wheel.getCurrentItem();
                 setTextviewSize(currentText, textAdapter);
             }
         });
@@ -195,7 +200,7 @@ public class PickerDialogOneWheel extends BaseDialog implements
     public void onClick(View v) {
         if (v == btnSure) {
             if (listener != null) {
-                listener.onClick(parentView, selectValue, textAdapter.getCurrentIndex());
+                listener.onClick(parentView, selectValue, currentIndex);
 
             }
         } else if (v == btnCancel) {

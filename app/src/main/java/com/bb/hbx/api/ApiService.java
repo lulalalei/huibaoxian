@@ -337,5 +337,9 @@ public interface ApiService {
     Call<Result_Api<TradeDetail>> getTradeDetail(@Field("userId") String userId, @Field("tradeId") String tradeId,
                                                  @Field("detailId") String detailId);
 
+    //6.1.6.获取支付签名信息
+    @POST("api.do?method=getPaySign&type=post")
+    Call<Result_Api<TradeDetail>> getPaySign(@Body PayDetail request);
+
 
 }

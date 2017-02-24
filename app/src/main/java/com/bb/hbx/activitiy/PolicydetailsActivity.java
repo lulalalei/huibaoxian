@@ -108,7 +108,7 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
     public void initdata() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            if (bundle.containsKey("content")) {
+            if (bundle.containsKey("tradeId")) {
                 tradeId = bundle.getString("tradeId");
             }
         }
@@ -138,7 +138,7 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
         tv_productName.setText(detail.getProductName());
         tv_price.setText(getString(R.string.howPrice, Utils.fromFenToYuan(detail.getSumPremium())));
         tv_realprice.setText(getString(R.string.howPrice, Utils.fromFenToYuan(detail.getPayAmount())));
-        if (detail.getTypeList() != null) {
+        if (detail.getTypeList() != null && detail.getTypeList().size() > 0) {
             items.addAll(detail.getTypeList().get(0).getInsureList());
             adapter.notifyDataSetChanged();
         }

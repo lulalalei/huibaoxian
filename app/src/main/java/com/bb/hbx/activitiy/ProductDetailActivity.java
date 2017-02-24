@@ -34,6 +34,7 @@ import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.CardLayout;
+import com.bb.hbx.widget.ClickAble;
 import com.bb.hbx.widget.ItemLayout;
 import com.bb.hbx.widget.ItemLayout2;
 import com.bb.hbx.widget.PickerDialogOneWheel;
@@ -49,7 +50,9 @@ import java.util.List;
 
 import butterknife.BindView;
 
-import static com.bb.hbx.R.drawable.line;
+
+import static com.bb.hbx.utils.Constants.idType_keys;
+import static com.bb.hbx.utils.Constants.idTypes;
 
 
 /**
@@ -185,9 +188,6 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     private int beinsurer1key = 1;
 
 
-    private String[] idTypes = {"身份证", "军官证", "护照", "驾驶证", "港澳台通行证", "回乡证"};
-    private int[] idType_keys = {1, 2, 3, 4, 5, 6};//
-
     private int insureridType = 1;//投保人的idtype
 
     private int beinsureridType = 1;//被保人的idtype;
@@ -199,8 +199,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             if (v instanceof ItemLayout2) {
                 ((ItemLayout2) v).setText(value);
                 if ((int) (v.getTag()) == 0) {
-                    selectPerids = value;
-                    keyBean.set(keyBean.size() - 1, value);
+                    selectPerids = perids[index];
+                    keyBean.set(keyBean.size() - 1, perids[index]);
                 } else {
                     keyBean.set((Integer) v.getTag(), value);
                 }
@@ -209,6 +209,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                 if ((int) (v.getTag()) == 11) {
                     il_beinsurer1.setText(beinsurer1_listvalue[index]);
                     beinsurer1key = beinsurer1_listkey[index];
+                } else if ((int) (v.getTag()) == 12) {
+                    il_insurer2.setText(idTypes[index]);
+                    insureridType = idType_keys[index];
+                } else if ((int) v.getTag() == 13) {
+                    il_beinsurer3.setText(idTypes[index]);
+                    beinsureridType = idType_keys[index];
                 }
             }
         }
@@ -217,6 +223,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         public void dissmiss(View v) {
             if (v instanceof ItemLayout2) {
                 ((ItemLayout2) v).setdownImageResource();
+            } else if (v instanceof ItemLayout) {
+                ((ItemLayout) v).setdownImageResource();
             }
         }
     };
@@ -239,21 +247,17 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         SpannableString hintSp = new SpannableString(getResources().getString(R.string.agreement2));
         hintSp.setSpan(new TextAppearanceSpan(
                 this, R.style.TextAppear_Theme_A3_Size12), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        hintSp.setSpan(new ClickAble(4), 4, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        hintSp.setSpan(new ClickAble(10), 10, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        hintSp.setSpan(new ClickAble(16), 16, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+        hintSp.setSpan(new ClickAble(4, mContext), 4, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        hintSp.setSpan(new ClickAble(10, mContext), 10, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        hintSp.setSpan(new ClickAble(16, mContext), 16, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         hintSp.setSpan(new TextAppearanceSpan(
                 this, R.style.TextAppear_Theme_A3_Size12), 22, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         tv_agree.setText(hintSp);
         tv_agree.setMovementMethod(LinkMovementMethod.getInstance());//不设置 没有点击事件
     }
 
     @Override
     public void initListener() {
-
         tv_buy.setOnClickListener(this);
         iv_add.setOnClickListener(this);
         iv_sub.setOnClickListener(this);
@@ -264,8 +268,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             @Override
             public void onClick() {
                 if (perids != null && perids.length > 1) {
+                    String[] ps = new String[perids.length];
+                    for (int i = 0; i < ps.length; i++) {
+                        ps[i] = perids[i].substring(0, perids[i].indexOf("_"));
+                    }
                     if (wheel_data == null) {
-                        wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(perids), il_up1);
+                        wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(ps), il_up1);
                         wheel_data.setListener(textListener);
                         wheel_data.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
                     }
@@ -320,6 +328,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             }
         });
 
+
+        il_insurer2.setTag(12);
         il_insurer2.setListener(new ItemLayout.OnBtnListener() {
             @Override
             public void onClick() {
@@ -333,24 +343,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             }
         });
 
-        il_insurer2.setListener(new ItemLayout.OnBtnListener() {
-            @Override
-            public void onClick() {
-                if (idTypes != null && idTypes.length > 1) {
-                    PickerDialogOneWheel wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(idTypes), il_insurer2);
-                    wheel_data.setListener(textListener);
-                    wheel_data.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
-                    wheel_data.show();
-
-                }
-            }
-        });
-
+        il_beinsurer3.setTag(13);
         il_beinsurer3.setListener(new ItemLayout.OnBtnListener() {
             @Override
             public void onClick() {
                 if (idTypes != null && idTypes.length > 1) {
-                    PickerDialogOneWheel wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(idTypes), il_insurer2);
+                    PickerDialogOneWheel wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(idTypes), il_beinsurer3);
                     wheel_data.setListener(textListener);
                     wheel_data.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
                     wheel_data.show();
@@ -378,7 +376,6 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         il_beinsurer3.setText(idTypes[0]);
         beinsureridType = idType_keys[0];
 
-        //clayout.setCount(3);
     }
 
     @Override
@@ -422,7 +419,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                     request.setIdType(insureridType);
                     request.setApplicant(il_insurer1.getEtValue());
                     mPresenter.applyTrade(request);
-                }else {
+                } else {
                     showMsg("请把信息填写完整。。。");
                 }
 
@@ -517,7 +514,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             perids = new String[]{perid};
             il_up1.setEnable(false);
         }
-        il_up1.setText(perids[0]);
+        il_up1.setText(perids[0].substring(0, perids[0].indexOf("_")));
         selectPerids = perids[0];
 
 
@@ -528,54 +525,57 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JSONArray jaList = jsonObject.optJSONArray("price_element");
-            List<Entry> list = new ArrayList<>();
-            for (int i = 0; i < jaList.length(); i++) {
-                JSONObject obj = jaList.optJSONObject(i);
-                final Entry entry = new Entry();
-                if (obj.has("name"))
-                    entry.setName(obj.optString("name"));
-                if (obj.has("option")) {
-                    String opt = obj.optString("option");
-                    if (opt.indexOf(",") > -1) {
-                        String[] opts = opt.split(",");
-                        entry.setOption(Arrays.asList(opts));
-                    } else {
-                        String[] opts = {opt};
-                        entry.setOption(Arrays.asList(opts));
+
+            if (jsonObject.has("price_element")) {
+                JSONArray jaList = jsonObject.optJSONArray("price_element");
+                List<Entry> list = new ArrayList<>();
+                for (int i = 0; i < jaList.length(); i++) {
+                    JSONObject obj = jaList.optJSONObject(i);
+                    final Entry entry = new Entry();
+                    if (obj.has("name"))
+                        entry.setName(obj.optString("name"));
+                    if (obj.has("option")) {
+                        String opt = obj.optString("option");
+                        if (opt.indexOf(",") > -1) {
+                            String[] opts = opt.split(",");
+                            entry.setOption(Arrays.asList(opts));
+                        } else {
+                            String[] opts = {opt};
+                            entry.setOption(Arrays.asList(opts));
+                        }
+
+
+                    }
+                    list.add(entry);
+                    keyBean.add(entry.getOption().get(0));
+                    View view = LayoutInflater.from(mContext).inflate(R.layout.item_insured_up2, null);
+                    ll_add.addView(view);
+                    final ItemLayout2 up = (ItemLayout2) view.findViewById(R.id.il_up1);
+                    up.setTag(i + 1);
+                    up.setLeft_name(entry.getName());
+                    if (entry.getOption() != null && !entry.getOption().isEmpty()) {
+                        if (entry.getOption().size() > 1) {
+                            up.setText(entry.getOption().get(0));
+                            up.setListener(new ItemLayout2.OnUpListener() {
+                                @Override
+                                public void onClick() {
+                                    PickerDialogOneWheel wheel = new PickerDialogOneWheel(mContext, entry.getOption(), up);
+                                    wheel.setListener(textListener);
+                                    wheel.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
+                                    wheel.show();
+                                }
+                            });
+                        } else {
+                            up.setText(entry.getOption().get(0));
+                            up.setEnabled(false);
+                        }
+
                     }
 
-
-                }
-                list.add(entry);
-                keyBean.add(entry.getOption().get(0));
-                View view = LayoutInflater.from(mContext).inflate(R.layout.item_insured_up2, null);
-                ll_add.addView(view);
-                final ItemLayout2 up = (ItemLayout2) view.findViewById(R.id.il_up1);
-                up.setTag(i + 1);
-                up.setLeft_name(entry.getName());
-                if (entry.getOption() != null && !entry.getOption().isEmpty()) {
-                    if (entry.getOption().size() > 1) {
-                        up.setText(entry.getOption().get(0));
-                        up.setListener(new ItemLayout2.OnUpListener() {
-                            @Override
-                            public void onClick() {
-                                PickerDialogOneWheel wheel = new PickerDialogOneWheel(mContext, entry.getOption(), up);
-                                wheel.setListener(textListener);
-                                wheel.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
-                                wheel.show();
-                            }
-                        });
-                    } else {
-                        up.setText(entry.getOption().get(0));
-                        up.setEnabled(false);
-                    }
-
                 }
 
+                detail.setEntries(list);
             }
-
-            detail.setEntries(list);
 
 
         }
@@ -601,33 +601,6 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             }
         }
         return 0;
-    }
-
-    //Span的点击事件
-    class ClickAble extends ClickableSpan {
-
-        public int index;
-
-        ClickAble(int index) {
-            this.index = index;
-        }
-
-        @Override
-        public void onClick(View widget) {
-//            Bundle bundle=new Bundle();
-//            bundle.putString("","");
-//            AppManager.getInstance().showActivity();
-            Log.i("fancl", index + "---");
-        }
-
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            super.updateDrawState(ds);
-            ds.setColor(Color.parseColor("#2dce8f"));
-            ds.setTextSize(AppManager.getInstance().sp2px(ProductDetailActivity.this, 12));
-            ds.setUnderlineText(false);
-
-        }
     }
 
 

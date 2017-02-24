@@ -2,14 +2,19 @@ package com.bb.hbx.activitiy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.base.m.ConfimpaymentlModel;
+import com.bb.hbx.base.p.ConfimpaymentPresenter;
+import com.bb.hbx.base.v.ConfimpaymentContract;
 import com.bb.hbx.bean.PayDetail;
 import com.bb.hbx.utils.AppManager;
+import com.bb.hbx.utils.TimeUtils;
 import com.bb.hbx.utils.Utils;
 import com.bb.hbx.widget.FancyCountDownTextview;
 
@@ -20,7 +25,8 @@ import butterknife.BindView;
  * 确认订单
  */
 
-public class ConfirmpaymentActivity extends BaseActivity implements View.OnClickListener {
+public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter, ConfimpaymentlModel>
+        implements View.OnClickListener, ConfimpaymentContract.View {
 
 
     @BindView(R.id.tv_timedetail)
@@ -47,6 +53,10 @@ public class ConfirmpaymentActivity extends BaseActivity implements View.OnClick
     @BindView(R.id.tv_jf)
     TextView tv_jf;//积分
 
+    @BindView(R.id.tv_ye)
+    TextView tv_ye;//积分
+    //
+
 
     @BindView(R.id.lin_Insurance)
     LinearLayout lin_Insurance;//险种
@@ -68,6 +78,7 @@ public class ConfirmpaymentActivity extends BaseActivity implements View.OnClick
     @Override
     public void initListener() {
         lin_Insurance.setOnClickListener(this);
+        tv_confim.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +97,17 @@ public class ConfirmpaymentActivity extends BaseActivity implements View.OnClick
         tv_insuranceName.setText(detail.getProductName());
         tv_tip.setText(detail.getTips());
         tv_jf.setText(getString(R.string.format_jf, detail.getAcctBalanceJF(), Utils.fromFenToYuan(detail.getDeductible())));
+        long last = TimeUtils.divlong(detail.getPayDeadline());//与当前时间差的长整形
+        if (last <= 0) {
+            tv_timedetail.setText("订单已经失效");
+        } else {
+            tv_timedetail.setTime(last);
+            tv_timedetail.startTime();
+        }
+
+        tv_ye.setText(getString(R.string.format_ye, Utils.fromFenToYuan(detail.getAcctBalanceYE())));
+
+
     }
 
 
@@ -96,6 +118,10 @@ public class ConfirmpaymentActivity extends BaseActivity implements View.OnClick
                 Bundle bundle = new Bundle();
                 bundle.putString("tradeId", detail.getTradeId());
                 AppManager.getInstance().showActivity(PolicydetailsActivity.class, bundle);
+                break;
+            case R.id.tv_confim:
+                detail.setPaymentId("10");
+                mPresenter.getPaySign(detail);
                 break;
         }
     }

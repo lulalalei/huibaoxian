@@ -234,6 +234,11 @@
     </style>
 
 
+    <style name="checkboxoffon" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/agree_off_on</item>
+
+    </style>
+
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
 
         <item name="tabIndicatorColor">?attr/colorAccent</item>

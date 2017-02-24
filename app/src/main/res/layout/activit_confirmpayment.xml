@@ -106,8 +106,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    tools:text="成人险"
-                    android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size14"
+                    tools:text="成人险" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -144,8 +144,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x12"
-                        tools:text="省5元: 每周首单红包"
-                        android:textAppearance="@style/TextAppear.Theme.A1_Size14" />
+                        android:textAppearance="@style/TextAppear.Theme.A1_Size14"
+                        tools:text="省5元: 每周首单红包" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -173,11 +173,13 @@
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
 
-                    <ImageView
+                    <CheckBox
+                        android:id="@+id/ck_jf"
+                        style="@style/checkboxoffon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x36"
-                        android:src="@drawable/off" />
+                        android:checked="false" />
 
 
                 </LinearLayout>
@@ -192,6 +194,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_ye"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -199,11 +202,15 @@
                         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
 
-                    <ImageView
+
+
+                    <CheckBox
+                        android:id="@+id/ck_ye"
+                        style="@style/checkboxoffon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x36"
-                        android:src="@drawable/off" />
+                        android:checked="false" />
 
 
                 </LinearLayout>
@@ -211,10 +218,12 @@
                 <include layout="@layout/line_e" />
 
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
@@ -228,16 +237,18 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="WWWDDAFDSF"
                         android:gravity="center"
-                        android:textAppearance="@style/TextAppear.Theme.A4_Size14"/>
+                        android:textAppearance="@style/TextAppear.Theme.A4_Size14"
+                        tools:text="WWWDDAFDSF" />
 
 
-                    <ImageView
+                    <CheckBox
+                        android:id="@+id/ck_yhq"
+                        style="@style/checkboxoffon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/x36"
-                        android:src="@drawable/off" />
+                        android:checked="false" />
 
 
                 </LinearLayout>
@@ -413,7 +424,7 @@
             android:layout_marginLeft="@dimen/x36"
             android:layout_marginRight="@dimen/x36"
             android:layout_marginTop="@dimen/y36"
-            android:background="@drawable/shape_btn_a6"
+            android:background="@drawable/shape_btn_a1"
             android:gravity="center"
             android:text="@string/confimpay" />
 
