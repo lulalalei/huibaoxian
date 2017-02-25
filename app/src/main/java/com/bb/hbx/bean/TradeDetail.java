@@ -59,10 +59,11 @@ public class TradeDetail {
     private String policyId;
     private String productId;
     private String productName;
+    private int applicantType;
     private int productProp;
     private String sex;
     private String startTime;
-    private String sts;
+    private int sts;
     private String sumAmount;
     private String sumPremium;
     private String tradeAmount;
@@ -74,6 +75,14 @@ public class TradeDetail {
     private List<InsuredListBean> insuredList;
     private List<?> paymentList;
     private List<TradeDetailType> typeList;
+
+    public int getApplicantType() {
+        return applicantType;
+    }
+
+    public void setApplicantType(int applicantType) {
+        this.applicantType = applicantType;
+    }
 
     public String getApplicant() {
         return applicant;
@@ -227,11 +236,11 @@ public class TradeDetail {
         this.startTime = startTime;
     }
 
-    public String getSts() {
+    public int getSts() {
         return sts;
     }
 
-    public void setSts(String sts) {
+    public void setSts(int sts) {
         this.sts = sts;
     }
 
@@ -532,5 +541,17 @@ public class TradeDetail {
                 this.relation = relation;
             }
         }
+
+        public static  class Payment {
+            private String benId;
+            private String paymentName;
+            private String payTime;
+            private String payAmount;
+            private String refundTime;
+            private String refundOrganization;
+            private String refundAccount;
+
+        }
     }
+
 }

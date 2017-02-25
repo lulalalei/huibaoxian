@@ -54,7 +54,7 @@ import java.util.Observer;
 import butterknife.BindView;
 
 
-import static com.bb.hbx.R.drawable.on;
+
 import static com.bb.hbx.utils.Constants.idType_keys;
 import static com.bb.hbx.utils.Constants.idTypes;
 
@@ -101,6 +101,9 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
     @BindView(R.id.tv_quantity)
     TextView tv_quantity;
+
+
+
 
     @BindView(R.id.tv_agree)
     TextView tv_agree;

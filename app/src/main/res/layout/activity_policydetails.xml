@@ -390,6 +390,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lin_pay"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y26"
@@ -523,13 +525,14 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_confim"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y98"
             android:layout_marginBottom="@dimen/y10"
             android:layout_marginLeft="@dimen/x36"
             android:layout_marginRight="@dimen/x36"
             android:layout_marginTop="@dimen/y10"
-            android:background="@drawable/shape_btn_a6"
+            android:background="@drawable/shape_btn_a1"
             android:gravity="center"
             android:text="@string/zcgm"
             android:textAppearance="@style/TextAppear.Theme.white_Size18" />

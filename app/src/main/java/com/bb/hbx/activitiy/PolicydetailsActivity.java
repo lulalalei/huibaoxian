@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
@@ -84,12 +85,22 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
     TextView tv_reation;
     //
 
+    @BindView(R.id.lin_pay)
+    LinearLayout lin_pay;
+    //
+
+    @BindView(R.id.tv_confim)
+    TextView tv_confim;
+
 
     private MultiTypeAdapter adapter;
 
     private List<Item> items;
 
+
     private String tradeId = "";//订单号
+
+    private int paysts = 0;
 
 
     @Override
@@ -116,6 +127,7 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
     @Override
     public void initListener() {
         iv_back.setOnClickListener(this);
+        tv_confim.setOnClickListener(this);
     }
 
     @Override
@@ -144,20 +156,27 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
     @Override
     public void getTradeDetail(TradeDetail detail) {
         tv_tradeid.setText(tradeId);
-
-        if ("10".equalsIgnoreCase(detail.getSts())) {
+        paysts = detail.getSts();
+        if (paysts == 10) {
             tv_paytype.setText("待支付");
-        } else if ("20".equalsIgnoreCase(detail.getSts())) {
+            lin_pay.setVisibility(View.GONE);
+            tv_confim.setText("去支付");
+        } else if (paysts == 20) {
             tv_paytype.setText("已支付");
-        } else if ("20".equalsIgnoreCase(detail.getSts())) {
+            lin_pay.setVisibility(View.VISIBLE);
+            tv_confim.setText("再次购买");
+        } else if (paysts == -11) {
             tv_paytype.setText("已失效");
+            lin_pay.setVisibility(View.GONE);
+            tv_confim.setText("去购买");
         }
 
         tv_startTime.setText(TimeUtils.formatDate(detail.getStartTime()));
         tv_endTime.setText(TimeUtils.formatDate(detail.getEndTime()));
         tv_name.setText(detail.getApplicant());
-        //tv_idtype.setText(StringUtils.idTostring(detail.get));
-        tv_idNo.setText(detail.getApplicantMobile());
+        tv_idtype.setText(StringUtils.idTostring(detail.getApplicantType()));
+        tv_idNo.setText(detail.getApplicantIdNo());
+        tv_tel.setText(detail.getApplicantMobile());
         tv_productName.setText(detail.getProductName());
         tv_price.setText(getString(R.string.howPrice, Utils.fromFenToYuan(detail.getSumPremium())));
         tv_realprice.setText(getString(R.string.howPrice, Utils.fromFenToYuan(detail.getPayAmount())));
@@ -169,7 +188,6 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
             tv_reation.setText(StringUtils.reationTostring(detail.getInsuredList().get(0).getRelation()));
         }
 
-        //tv_tip.setText();
 
     }
 
@@ -178,6 +196,18 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
         switch (v.getId()) {
             case R.id.iv_back:
                 this.finish();
+                break;
+            case R.id.tv_confim:
+                if (paysts == 10) {
+                    this.finish();
+                } else if (paysts == 20) {
+                    this.finish();
+                    AppManager.getInstance().finishActivity(ConfirmpaymentActivity.class);
+                    AppManager.getInstance().finishActivity(ProductDetailActivity.class);
+                } else if (paysts == -11) {
+                    this.finish();
+                    AppManager.getInstance().finishActivity(ConfirmpaymentActivity.class);
+                }
                 break;
         }
     }
