@@ -26,6 +26,7 @@ import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.InsuredInfolBean;
 import com.bb.hbx.decoration.TitleItemDecoration;
 import com.bb.hbx.interfaces.OnItemClickListener;
+import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.GetPhoneContactsUtil;
 import com.bb.hbx.widget.IndexBar;
 
@@ -193,10 +194,11 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("insuredInfolBean",insuredInfolBean);
                     intent.putExtra("insuredInfolBean",bundle);
-                    CustomerManagerActivity.intentFromProDetail.putExtra("insuredInfolBean",bundle);
-                    if (CustomerManagerActivity.typeFromProDetail==1)
+                    CustomerManagerActivity.intentFromProDetail.putExtra(Constants.TRANSTATION,insuredInfolBean);
+                    //CustomerManagerActivity.intentFromProDetail.putExtra("insuredInfolBean",bundle);
+                    if (CustomerManagerActivity.typeFromProDetail==Constants.GETSURED)
                     {
-                        getActivity().setResult(Activity.RESULT_OK,intent);
+                        getActivity().setResult(Activity.RESULT_OK,CustomerManagerActivity.intentFromProDetail);
                         getActivity().finish();
                     }
                     else
