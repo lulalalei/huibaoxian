@@ -34,6 +34,7 @@ import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.observable.KeyBeanObservable;
 import com.bb.hbx.utils.AppManager;
+import com.bb.hbx.utils.Constants;
 import com.bb.hbx.widget.CardLayout;
 import com.bb.hbx.widget.ClickAble;
 import com.bb.hbx.widget.ItemLayout;
@@ -52,7 +53,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import butterknife.BindView;
-
 
 
 import static com.bb.hbx.utils.Constants.idType_keys;
@@ -101,8 +101,6 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
     @BindView(R.id.tv_quantity)
     TextView tv_quantity;
-
-
 
 
     @BindView(R.id.tv_agree)
@@ -202,6 +200,9 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     private int beinsureridType = 1;//被保人的idtype;
 
 
+    private final static int REQUEST_GETTBR = 0x001;
+
+
     private PickerDialogOneWheel.OnTextListener textListener = new PickerDialogOneWheel.OnTextListener() {
         @Override
         public void onClick(View v, String value, int index) {
@@ -280,7 +281,11 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                 if (perids != null && perids.length > 1) {
                     String[] ps = new String[perids.length];
                     for (int i = 0; i < ps.length; i++) {
-                        ps[i] = perids[i].substring(0, perids[i].indexOf("_"));
+                        if (perids[i].indexOf("_") > 1) {
+                            ps[i] = perids[i].substring(0, perids[i].indexOf("_"));
+                        } else {
+                            ps[i] = perids[i];
+                        }
                     }
                     if (wheel_data == null) {
                         wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(ps), il_up1);
@@ -364,6 +369,16 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                     wheel_data.show();
 
                 }
+            }
+        });
+
+        il_insurer1.setListener(new ItemLayout.OnBtnListener() {
+            @Override
+            public void onClick() {
+
+                Bundle b = new Bundle();
+                b.putInt("type", Constants.GETSURED);
+                AppManager.getInstance().showActivityForResult(CustomerManagerActivity.class, b, REQUEST_GETTBR);
             }
         });
 
@@ -536,7 +551,11 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             perids = new String[]{perid};
             il_up1.setEnable(false);
         }
-        il_up1.setText(perids[0].substring(0, perids[0].indexOf("_")));
+        if (perids[0].length() > 2 && perids[0].indexOf("_") > 1) {
+            il_up1.setText(perids[0].substring(0, perids[0].indexOf("_")));
+        } else {
+            il_up1.setText(perids[0]);
+        }
         selectPerids = perids[0];
 
 
@@ -548,7 +567,7 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                 e.printStackTrace();
             }
 
-            if (jsonObject.has("price_element")) {
+            if (jsonObject != null && jsonObject.has("price_element")) {
                 JSONArray jaList = jsonObject.optJSONArray("price_element");
                 List<Entry> list = new ArrayList<>();
                 for (int i = 0; i < jaList.length(); i++) {
@@ -624,5 +643,13 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     public void update(Observable o, Object arg) {
         singlePrice = ischeckPrice();
         tv_price.setText("￥" + singlePrice * observable.getCount());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_GETTBR) {
+            Log.i("fancl", "传至传过来");
+        }
     }
 }

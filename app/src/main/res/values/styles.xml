@@ -239,6 +239,11 @@
 
     </style>
 
+    <style name="radiopay" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/radiobutton_bg</item>
+
+    </style>
+
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
 
         <item name="tabIndicatorColor">?attr/colorAccent</item>

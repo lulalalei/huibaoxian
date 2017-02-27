@@ -298,55 +298,19 @@
             </LinearLayout>
 
 
-            <LinearLayout
+            <RadioGroup
+                android:id="@+id/rg_select"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/x36">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/gouxuanxincheweishangpai"
-                        android:drawablePadding="@dimen/x30"
-                        android:gravity="center"
-                        android:text="@string/zfbzf"
-                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
 
-                </LinearLayout>
-
-                <include layout="@layout/line_e" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/gouxuanxincheweishangpai"
-                        android:drawablePadding="@dimen/x30"
-                        android:gravity="center"
-                        android:text="@string/wxzf"
-                        android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
 
-                </LinearLayout>
-
-
-            </LinearLayout>
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="wrap_content"
