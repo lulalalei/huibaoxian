@@ -12,11 +12,14 @@ import android.widget.TextView;
 import com.bb.hbx.DatePickerDialog;
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.AddInsured;
+import com.bb.hbx.bean.SingleCustomBean;
+import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.GetPhoneContactsUtil;
 import com.smarttop.library.bean.City;
 import com.smarttop.library.bean.County;
@@ -32,7 +35,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddContactActivity extends BaseActivity implements View.OnClickListener,OnAddressSelectedListener,AddressSelector.OnDialogCloseListener{
+public class AddContactActivity extends BaseActivity implements View.OnClickListener,OnAddressSelectedListener,
+                                                            AddressSelector.OnDialogCloseListener,LoginContract.View{
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
@@ -71,6 +75,9 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
     private String countyCode;
     private String streetCode;
 
+    String birthday="";
+    String [] itemBuf=new String[4];
+    String [] infoBuf=new String[4];
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_contact;
@@ -98,6 +105,10 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
         fromContacts_tv.setOnClickListener(this);
         area_layout.setOnClickListener(this);
         verify_tv.setOnClickListener(this);
+        name_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
+        //idType_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
+        idNumber_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
+        phone_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
     }
 
     @Override
@@ -126,6 +137,7 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onClick(String year, String month, String day) {
                         birth_et.setText(year + "-" + month + "-" + day);
+                        birthday=year+month+day;
                     }
 
                     @Override
@@ -150,30 +162,55 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.verify_tv:
                 String name = name_et.getText().toString();
+                String sex = sex_et.getText().toString();
+                String gender="男".equals(sex)?"1":"2";
+                String birthday = birth_et.getText().toString();
                 String phone = phone_et.getText().toString().trim();
                 String idType = idType_et.getText().toString();
                 String idNumber = idNumber_et.getText().toString();
-                if (!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(phone)/*&&!TextUtils.isEmpty(idType)*/&&!TextUtils.isEmpty(idNumber))
+                String address = area_et.getText().toString();
+                String street = address_et.getText().toString();
+                String email = email_et.getText().toString();
+                String descr = more_et.getText().toString();
+                itemBuf[0]=name;
+                itemBuf[1]=phone;
+                //itemBuf[2]=idType;
+                itemBuf[2]="1";
+                itemBuf[3]=idNumber;
+                infoBuf[0]="姓名";
+                infoBuf[1]="手机号";
+                infoBuf[2]="证件类型";
+                infoBuf[3]="证件号码";
+                SingleCustomBean singleCustomBean = new SingleCustomBean(MyApplication.user.getUserId(), name, gender, birthday, phone, "1", idNumber, address, street, email, descr);
+                //!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(phone)/*&&!TextUtils.isEmpty(idType)*/&&!TextUtils.isEmpty(idNumber)
+                if (isverTel()&&isverCode()&&isverpassword()&&isCheckbx())
                 {
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.addInsured(MyApplication.user.getUserId(),name,phone,"1",idNumber);
+                    //Call call=service.addInsured(MyApplication.user.getUserId(),name,phone,"1",idNumber);
+                    Call call=service.addInsured(singleCustomBean);
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
                             Result_Api body = (Result_Api) response.body();
                             AddInsured addInsured = (AddInsured) body.getOutput();
-                            showTip("添加联系人成功!");
+                            showTip(body.getRespMsg());
                         }
 
                         @Override
                         public void onFailure(Call call, Throwable t) {
-                            showTip("新增联系人失败,改用户已添加");
+                            showTip("新增联系人失败");
                         }
                     });
                 }
                 else
                 {
-                    showTip("用户名,手机号,证件类型和证件号码不能为空!");
+                    for (int i = 0; i < itemBuf.length; i++) {
+                        if (TextUtils.isEmpty(itemBuf[i]))
+                        {
+                            showTip(infoBuf[i]+"不能为空!");
+                            return;
+                        }
+                    }
                 }
                 break;
             default:
@@ -226,5 +263,44 @@ public class AddContactActivity extends BaseActivity implements View.OnClickList
         if (dialogAddress != null) {
             dialogAddress.dismiss();
         }
+    }
+
+    @Override
+    public void loginSuccess() {
+
+    }
+
+
+    //判断姓名
+    @Override
+    public boolean isverTel() {
+        if (!TextUtils.isEmpty(name_et.getText()) ) {
+            return true;
+        }
+        return false;
+    }
+
+    //判断证件类型
+    @Override
+    public boolean isverCode() {
+        return true;
+    }
+
+    //判断证件号码
+    @Override
+    public boolean isverpassword() {
+        if (!TextUtils.isEmpty(idNumber_et.getText())) {
+            return true;
+        }
+        return false;
+    }
+
+    //判断手机号码
+    @Override
+    public boolean isCheckbx() {
+        if (!TextUtils.isEmpty(phone_et.getText())) {
+            return true;
+        }
+        return false;
     }
 }

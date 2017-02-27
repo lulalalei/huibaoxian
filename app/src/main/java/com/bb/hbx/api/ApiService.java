@@ -14,6 +14,7 @@ import com.bb.hbx.bean.GetAccountDetailBean;
 import com.bb.hbx.bean.GetAcctSettSumBean;
 import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.GetMyPageInfoBean;
+import com.bb.hbx.bean.GetTotalIncomeBean;
 import com.bb.hbx.bean.GetTradesBean;
 import com.bb.hbx.bean.GetUserCouponsListBean;
 import com.bb.hbx.bean.HomePageInfo;
@@ -27,6 +28,8 @@ import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.bean.RecommendBean;
 import com.bb.hbx.bean.RequestProduct;
+import com.bb.hbx.bean.SingleCustomBean;
+import com.bb.hbx.bean.SingleCustomEditBean;
 import com.bb.hbx.bean.Special;
 import com.bb.hbx.bean.TopicBean;
 import com.bb.hbx.bean.TradeDetail;
@@ -44,8 +47,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-
-import static com.bb.hbx.MyApplication.user;
 
 /**
  * Created by fancl.
@@ -89,11 +90,16 @@ public interface ApiService {
     @POST("api.do?method=forgetLoginPwd&type=post")
     Call<Result_Api> forgetLoginPwd(@Field("mobile") String mobile, @Field("newPwd") String newPwd, @Field("resetType") String resetType, @Field("smsCode") String smsCode);
 
-    //重设登录密码--待测
+    //重设登录密码--已测  已经注册过登录密码
     @FormUrlEncoded
     @POST("api.do?method=resetLoginPwd&type=post")
-    Call<String> resetLoginPwd(@Field("userId") String userId,@Field("newPwd") String newPwd,
+    Call<Result_Api> resetLoginPwd(@Field("userId") String userId,@Field("newPwd") String newPwd,
                                @Field("resetType") String resetType,@Field("smsCode") String smsCode);
+
+    //重设登录密码--已测  未注册过登录密码
+    @FormUrlEncoded
+    @POST("api.do?method=resetLoginPwd&type=post")
+    Call<Result_Api> resetLoginPwdFirst(@Field("userId") String userId,@Field("newPwd") String newPwd, @Field("resetType") String resetType);
 
     //登录注销
     @FormUrlEncoded
@@ -125,6 +131,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=checkIn&type=post")
     Call<String> checkIn(@Field("userId") String userId, @Field("acctType") String acctType);
+
+    //累计收入--待测
+    @FormUrlEncoded
+    @POST("api.do?method=getTotalIncome&type=post")
+    Call<Result_Api<GetTotalIncomeBean>> getTotalIncome(@Field("userId") String userId, @Field("acctType") String acctType,
+                                                        @Field("beginDate") String beginDate, @Field("endDate") String endDate,
+                                                        @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
     //结算中金额明细列表--待测
     @FormUrlEncoded
@@ -206,17 +219,26 @@ public interface ApiService {
     Call<Result_Api<GetInsured>> getInsured(@Field("userId") String userId, @Field("mobile") String mobile,
                                             @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
-    //新增常用保险联系人--已测,
+    /*//新增常用保险联系人--已测,
     @FormUrlEncoded
     @POST("api.do?method=addInsured&type=post")
     Call<Result_Api<AddInsured>> addInsured(@Field("userId") String userId, @Field("insuredName") String insuredName, @Field("mobile") String mobile,
-                                            @Field("idType") String idType, @Field("idNo") String idNo);
+                                            @Field("idType") String idType, @Field("idNo") String idNo);*/
 
-    //修改常用保险联系人--已测
+    //新增常用保险联系人--已测,
+
+    @POST("api.do?method=addInsured&type=post")
+    Call<Result_Api<AddInsured>> addInsured(@Body SingleCustomBean bean);
+
+    /*//修改常用保险联系人--已测
     @FormUrlEncoded
     @POST("api.do?method=updateInsured&type=post")
     Call<Result_Api<UpdateInsured>> updateInsured(@Field("userId") String userId, @Field("insuredId") String insuredId, @Field("insuredName") String insuredName,
-                                                  @Field("mobile") String mobile, @Field("idType") String idType, @Field("idNo") String idNo);
+                                                  @Field("mobile") String mobile, @Field("idType") String idType, @Field("idNo") String idNo);*/
+
+    //修改常用保险联系人--已测
+    @POST("api.do?method=updateInsured&type=post")
+    Call<Result_Api<UpdateInsured>> updateInsured(@Body SingleCustomEditBean beanEdit);
 
     //删除常用保险联系人--已测
     @FormUrlEncoded
@@ -228,6 +250,12 @@ public interface ApiService {
     @POST("api.do?method=getTrades&type=post")
     Call<Result_Api<GetTradesBean>> getTrades(@Field("userId") String userId, @Field("tradeSts") String tradeSts,
                                               @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+
+    //获取我的保单列表--待测
+    @FormUrlEncoded
+    @POST("api.do?method=getPolicies&type=post")
+    Call<String> getPolicies(@Field("userId") String userId, @Field("policySts") String policySts,
+                             @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
 
     //获取我的红包记录列表--已测

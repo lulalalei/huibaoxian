@@ -11,15 +11,12 @@ import com.bb.hbx.MyApplication;
 import com.bb.hbx.bean.AdBean;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.LishiSearchBean;
-import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.Special;
 import com.bb.hbx.bean.XhbMsg;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.bb.hbx.MyApplication.user;
 
 /**
  * Created by Administrator on 2017/1/3.
@@ -122,7 +119,8 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
 
         //name表示nickName
-        String sql = "create table if not exists userstb(_id integer primary key autoincrement,currentUser text,hasLogined text,userId text,sessionId text,isBClient text,name text,gender text,email text,phone text,pwd text,usericon text)";
+        String sql = "create table if not exists userstb(_id integer primary key autoincrement,currentUser text,hasLogined text,userId text,sessionId text," +
+                "isBClient text,name text,gender text,email text,phone text,pwd text,paymentPwd text,usericon text)";
 
         db.execSQL(sql);
     }

@@ -39,7 +39,7 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
     @BindView(R.id.verify_tv)
     TextView verify_tv;
 
-    String smsCode;
+    String smsCode="";
     @Override
     public int getLayoutId() {
         return R.layout.activity_set_pay_pwd;
@@ -76,13 +76,16 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
                 if (!TextUtils.isEmpty(phone)&&phone.length()==11)
                 {
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.getVerifyCode("1",phone,"13");
+                    Call call=service.getVerifyCode("1",phone,"12");//12
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
                             Result_Api body = (Result_Api) response.body();
                             MessageCodeBean bean = (MessageCodeBean) body.getOutput();
-                            smsCode = bean.getSmsCode();
+                            if (bean!=null)
+                            {
+                                smsCode = bean.getSmsCode();
+                            }
                         }
 
                         @Override

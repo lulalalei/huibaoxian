@@ -1,5 +1,6 @@
 package com.bb.hbx.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.AddContactActivity;
+import com.bb.hbx.activitiy.CustomerManagerActivity;
 import com.bb.hbx.activitiy.MyCustomActivity;
 import com.bb.hbx.adapter.ContactAdapter;
 import com.bb.hbx.api.ApiService;
@@ -174,7 +176,7 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
                     Intent intent = new Intent(mContext, MyCustomActivity.class);
                     String birthday = insuredList.get(position).getBirthday();
                     String email = insuredList.get(position).getEmail();
-                    String gender = insuredList.get(position).getGender();
+                    String gender = "1".equals(insuredList.get(position).getGender())?"男":"女";
                     String idNo = insuredList.get(position).getIdNo();
                     String idType = insuredList.get(position).getIdType();
                     String insurantDesc = insuredList.get(position).getInsurantDesc();
@@ -191,7 +193,17 @@ public class CustomersManagerFragment extends BaseFragment implements View.OnCli
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("insuredInfolBean",insuredInfolBean);
                     intent.putExtra("insuredInfolBean",bundle);
-                    startActivity(intent);
+                    CustomerManagerActivity.intentFromProDetail.putExtra("insuredInfolBean",bundle);
+                    if (CustomerManagerActivity.typeFromProDetail==1)
+                    {
+                        getActivity().setResult(Activity.RESULT_OK,intent);
+                        getActivity().finish();
+                    }
+                    else
+                    {
+                        startActivity(intent);
+                    }
+
                 }
             }
         });

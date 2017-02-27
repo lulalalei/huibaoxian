@@ -7,9 +7,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ScrollView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.PerOrderDetailActivity;
 import com.bb.hbx.adapter.MyAllInPIOAdapter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.MyPIOederBean;
 import com.bb.hbx.interfaces.OnItemClickListener;
@@ -17,6 +20,9 @@ import com.bb.hbx.interfaces.OnItemClickListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/12/26.
@@ -32,6 +38,8 @@ public class AllInPIOFragment extends BaseFragment{
     GridLayoutManager manager;
     ArrayList<MyPIOederBean> totalList=new ArrayList<>();
     Context mContext;
+
+    int pageIndex=1;
     MyAllInPIOAdapter myAllInPIOAdapter;
     private static AllInPIOFragment fragment;
     public static AllInPIOFragment getInstance()
@@ -68,10 +76,25 @@ public class AllInPIOFragment extends BaseFragment{
             }
         };
         recyclerView.setLayoutManager(manager);
+        myAllInPIOAdapter = new MyAllInPIOAdapter(totalList, mContext);
+        recyclerView.setAdapter(myAllInPIOAdapter);
         if (totalList!=null&&totalList.size()>0)
         {
             totalList.clear();
         }
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getPolicies(MyApplication.user.getUserId(),"0","1","10");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
         for (int i = 0; i < 16; i++) {
             String title="户外运动保险计划:"+i;
             String number="订单号:"+i;
@@ -82,8 +105,7 @@ public class AllInPIOFragment extends BaseFragment{
             MyPIOederBean bean = new MyPIOederBean(title, number, theInsured, insuranceHolder, time, state);
             totalList.add(bean);
         }
-        myAllInPIOAdapter = new MyAllInPIOAdapter(totalList, mContext);
-        recyclerView.setAdapter(myAllInPIOAdapter);
+        myAllInPIOAdapter.notifyDataSetChanged();
         myAllInPIOAdapter.setOnMyItemClickListener(new OnItemClickListener() {
             @Override
             public void onMyItemClickListener(int position) {
@@ -94,14 +116,5 @@ public class AllInPIOFragment extends BaseFragment{
         });
         //listView.setAdapter(myAllInPIOAdapter);
 
-        //跳转页面已经写好
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //Toast.makeText(mContext,"当前条目位置:"+position,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, PerOrderDetailActivity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 }

@@ -2,16 +2,17 @@ package com.bb.hbx.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.MyAllIncomeBean;
+import com.bb.hbx.bean.GetTotalIncomeBean;
 import com.bb.hbx.interfaces.OnItemClickListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,12 +23,13 @@ import butterknife.ButterKnife;
 
 public class MyAllIncomeAdapter extends RecyclerView.Adapter<MyAllIncomeAdapter.MyViewHolder>{
 
-    ArrayList<MyAllIncomeBean> list;
+    List<GetTotalIncomeBean.TotalIncomeListBean> list;
     Context mContext;
     LayoutInflater inflater;
     OnItemClickListener onItemClickListener;
+    int monthTotalAmountInt=0;
 
-    public MyAllIncomeAdapter(ArrayList<MyAllIncomeBean> list, Context mContext) {
+    public MyAllIncomeAdapter(List<GetTotalIncomeBean.TotalIncomeListBean> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
         inflater=LayoutInflater.from(mContext);
@@ -45,8 +47,14 @@ public class MyAllIncomeAdapter extends RecyclerView.Adapter<MyAllIncomeAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.date_tv.setText(list.get(position).getDate());
-        holder.money_tv.setText(list.get(position).getMoney());
+        holder.date_tv.setText(list.get(position).getTradeTime());
+        String monthTotalAmount = list.get(position).getMonthTotalAmount();
+        //int monthTotalAmountInt=0;
+        if (!TextUtils.isEmpty(monthTotalAmount))
+        {
+            monthTotalAmountInt = Integer.parseInt(monthTotalAmount);
+        }
+        holder.money_tv.setText(TextUtils.isEmpty(monthTotalAmount)?"0.00":(monthTotalAmountInt/100)+"."+(monthTotalAmountInt/10%10)+(monthTotalAmountInt%10));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

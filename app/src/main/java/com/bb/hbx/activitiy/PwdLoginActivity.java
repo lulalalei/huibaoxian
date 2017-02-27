@@ -211,6 +211,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                                 String sessionId = user.getSessionId();
                                 String isBClient = user.getIsBClient()+"";
                                 String gender = user.getGender();
+                                String paymentPwd = user.getPaymentPwd();
                                 String userName = user.getNickName();
                                 String email = user.getEmail();
                                 if (TextUtils.isEmpty(gender))
@@ -224,13 +225,14 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                                 //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
                                 ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, pwd);
                                 //更新表数据
-                                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,usericon=? where currentUser=currentUser ",
-                                        new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,pwd,null});
+                                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
+                                        new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,"1"/*pwd*/,paymentPwd,null});
                                 showTip("登陆成功");
 
                                 MyApplication.user.setUserId(userId);
                                 MyApplication.user.setMobile(phone);
                                 MyApplication.user.setLoginPwd("1");//1表示已经设置过登录密码
+                                MyApplication.user.setPaymentPwd(paymentPwd);
                                 MyApplication.user.setSessionId(sessionId);
                                 MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
 

@@ -53,6 +53,8 @@ public class CustomerManagerActivity extends BaseActivity implements View.OnClic
     RemindingFragment remindingFragment;
 
     boolean isEmpty=true;
+    public static Intent intentFromProDetail;
+    public static int typeFromProDetail;
     @Override
     public int getLayoutId() {
         return R.layout.activity_customer_manager;
@@ -60,6 +62,8 @@ public class CustomerManagerActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void initView() {
+        intentFromProDetail = getIntent();
+        typeFromProDetail = intentFromProDetail.getIntExtra("type", -1);
         fragmentManager = getSupportFragmentManager();
         customersManagerFragment = new CustomersManagerFragment();
         remindingFragment = new RemindingFragment();

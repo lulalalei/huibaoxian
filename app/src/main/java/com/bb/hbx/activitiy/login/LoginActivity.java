@@ -318,6 +318,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                     String sessionId = user.getSessionId();
                     String isBClient = user.getIsBClient()+"";
                     String loginPwd = user.getLoginPwd();
+                    String paymentPwd = user.getPaymentPwd();
                     String gender = user.getGender();
                     String userName = user.getNickName();
                     String email = user.getEmail();
@@ -331,13 +332,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                     }
                     ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, null);
                     //更新表数据
-                    MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,usericon=? where currentUser=currentUser ",
-                            new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,null});
+                    MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
+                            new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,loginPwd,paymentPwd,null});
                     showTip("登陆成功");
 
                     MyApplication.user.setUserId(userId);
                     MyApplication.user.setMobile(phone);
                     MyApplication.user.setLoginPwd(loginPwd);
+                    MyApplication.user.setPaymentPwd(paymentPwd);
                     MyApplication.user.setSessionId(sessionId);
                     MyApplication.user.setIsBClient(isBClient.equals("true")?true:false);
 

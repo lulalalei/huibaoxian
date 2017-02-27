@@ -2,7 +2,6 @@ package com.bb.hbx.base.m;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.text.TextUtils;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.api.ApiService;
@@ -61,6 +60,7 @@ public class WelcomeModel implements WelcomeContract.Model {
                 MyApplication.user.setUserId("");
                 MyApplication.user.setMobile("");
                 MyApplication.user.setLoginPwd("0");
+                MyApplication.user.setPaymentPwd("0");//是否设置过支付密码
                 MyApplication.user.setSessionId("");
                 MyApplication.user.setIsBClient(false);
             } else {
@@ -72,15 +72,19 @@ public class WelcomeModel implements WelcomeContract.Model {
                     String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));
                     String isBClient = cursor.getString(cursor.getColumnIndex("isBClient"));
                     String pwd = cursor.getString(cursor.getColumnIndex("pwd"));
+                    String paymentPwd = cursor.getString(cursor.getColumnIndex("paymentPwd"));
                     MyApplication.user.setUserId(userId);
                     MyApplication.user.setMobile(phone);
-                    MyApplication.user.setLoginPwd(TextUtils.isEmpty(pwd)?"0":"1");
+                    //MyApplication.user.setLoginPwd(TextUtils.isEmpty(pwd)?"0":"1");
+                    MyApplication.user.setLoginPwd(pwd);
+                    MyApplication.user.setPaymentPwd(paymentPwd);
                     MyApplication.user.setSessionId(sessionId);
                     MyApplication.user.setIsBClient(isBClient.equals("true") ? true : false);
                 } else {
                     MyApplication.user.setUserId("");
                     MyApplication.user.setMobile("");
                     MyApplication.user.setLoginPwd("0");
+                    MyApplication.user.setPaymentPwd("0");
                     MyApplication.user.setSessionId("");
                     MyApplication.user.setIsBClient(false);
                 }

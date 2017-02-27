@@ -394,7 +394,7 @@
             </RelativeLayout>
             <TextView
                 android:id="@+id/verify_tv"
-                android:background="@drawable/shape_btn_a1"
+                android:background="@drawable/shape_btn_a6"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginLeft="18dp"

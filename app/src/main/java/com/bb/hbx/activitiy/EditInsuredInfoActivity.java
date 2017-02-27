@@ -8,16 +8,19 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.SingleCustomEditBean;
+import com.bb.hbx.interfaces.LoginTextWatcher;
 
 import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditInsuredInfoActivity extends BaseActivity implements View.OnClickListener{
+public class EditInsuredInfoActivity extends BaseActivity implements View.OnClickListener,LoginContract.View{
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
@@ -81,6 +84,10 @@ public class EditInsuredInfoActivity extends BaseActivity implements View.OnClic
         idType_layout.setOnClickListener(this);
         area_layout.setOnClickListener(this);
         verify_tv.setOnClickListener(this);
+        name_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
+        //idType_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
+        idNumber_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
+        phone_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
     }
 
     @Override
@@ -131,7 +138,9 @@ public class EditInsuredInfoActivity extends BaseActivity implements View.OnClic
                 mobile = phone_et.getText().toString().trim();
                 idNo = idNumber_et.getText().toString().trim();
                 area = area_et.getText().toString().trim();
+                String street = address_et.getText().toString();
                 email = email_et.getText().toString().trim();
+                String descr = more_et.getText().toString();
                 idType = idType_et.getText().toString().trim();
 
                 itemBuf[0]=name;
@@ -150,8 +159,11 @@ public class EditInsuredInfoActivity extends BaseActivity implements View.OnClic
                     }
                 }
                 ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                Call call=service.updateInsured(MyApplication.user.getUserId(),MyCustomActivity.insuredInfolBean.getInsuredId(),name,
-                                    mobile,"1",idNo);
+               /* Call call=service.updateInsured(MyApplication.user.getUserId(),MyCustomActivity.insuredInfolBean.getInsuredId(),name,
+                                    mobile,"1",idNo);*/
+                SingleCustomEditBean editBean = new SingleCustomEditBean(MyApplication.user.getUserId(), MyCustomActivity.insuredInfolBean.getInsuredId(), name, "男".equals(sex) ? "1" : "0", birth,
+                        mobile, "1", idNo, area, street, email, descr);
+                Call call=service.updateInsured(editBean);
                 call.enqueue(new Callback() {
                     @Override
                     public void onResponse(Call call, Response response) {
@@ -182,5 +194,43 @@ public class EditInsuredInfoActivity extends BaseActivity implements View.OnClic
             default:
                 break;
         }
+    }
+
+    @Override
+    public void loginSuccess() {
+
+    }
+
+    //判断姓名
+    @Override
+    public boolean isverTel() {
+        if (!TextUtils.isEmpty(name_et.getText()) ) {
+            return true;
+        }
+        return false;
+    }
+
+    //判断证件类型
+    @Override
+    public boolean isverCode() {
+        return true;
+    }
+
+    //判断证件号码
+    @Override
+    public boolean isverpassword() {
+        if (!TextUtils.isEmpty(idNumber_et.getText())) {
+            return true;
+        }
+        return false;
+    }
+
+    //判断手机号码
+    @Override
+    public boolean isCheckbx() {
+        if (!TextUtils.isEmpty(phone_et.getText())) {
+            return true;
+        }
+        return false;
     }
 }

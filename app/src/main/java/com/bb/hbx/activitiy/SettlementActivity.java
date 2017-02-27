@@ -61,7 +61,7 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-        showAccount();
+        //showAccount();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
                 pageIndex=1;
                 showSettlementList(pageIndex,startTime,currentTime);
-                showAccount();
+                //showAccount();
             }
 
             @Override
@@ -173,6 +173,13 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
                     GetAcctSettSumBean bean = (GetAcctSettSumBean) body.getOutput();
                     if (bean!=null)
                     {
+                        String totalAmount = bean.getTotalAmount();
+                        int totalAmountInt=0;
+                        if (!TextUtils.isEmpty(totalAmount))
+                        {
+                            totalAmountInt = Integer.parseInt(totalAmount);
+                        }
+                        settlement_tv.setText(TextUtils.isEmpty(totalAmount)?"0.00":(totalAmountInt/100)+"."+(totalAmountInt/10%10)+(totalAmountInt%10));
                         //List<GetAcctSettSumBean.SettSumListBean> settSumList = bean.getSettSumList();
                         if (pageIndex==1)
                         {

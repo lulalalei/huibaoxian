@@ -8,9 +8,13 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.MessageCodeBean;
+import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.widget.CountDownTextView;
 import com.bb.hbx.widget.LoginPswEdit;
 
@@ -20,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 //修改登录密码
-public class FixPwdActivity extends BaseActivity implements View.OnClickListener{
+public class FixPwdActivity extends BaseActivity implements View.OnClickListener,LoginContract.View{
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
@@ -34,6 +38,9 @@ public class FixPwdActivity extends BaseActivity implements View.OnClickListener
     TextView warn_tv;
     @BindView(R.id.verify_tv)
     TextView verify_tv;
+
+    String mobile;
+    String smsCode;
     @Override
     public int getLayoutId() {
         return R.layout.activity_fix_pwd;
@@ -43,7 +50,7 @@ public class FixPwdActivity extends BaseActivity implements View.OnClickListener
     public void initView() {
         pwd_et.setHintString("新密码(6-20位数字、字母组合)");
         //pwd_et.invalidate();
-        String mobile = MyApplication.user.getMobile();
+        mobile = MyApplication.user.getMobile();
         warn_tv.setText("验证码将发送已绑定手机号"+mobile);
     }
 
@@ -52,6 +59,8 @@ public class FixPwdActivity extends BaseActivity implements View.OnClickListener
         back_layout.setOnClickListener(this);
         getcode_tv.setOnClickListener(this);
         verify_tv.setOnClickListener(this);
+        checkCode_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
+        pwd_et.addTextChangedListener(new LoginTextWatcher(verify_tv, this));
     }
 
     @Override
@@ -68,30 +77,100 @@ public class FixPwdActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.getcode_tv:
                 getcode_tv.startTime();
+                ApiService serviceCode = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                Call callCode=serviceCode.getVerifyCode("1",mobile,"12");
+                callCode.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Result_Api body = (Result_Api) response.body();
+                        if (body!=null)
+                        {
+                            MessageCodeBean beanCode = (MessageCodeBean) body.getOutput();
+                            smsCode = beanCode.getSmsCode();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+
+                    }
+                });
                 break;
             case R.id.verify_tv:
-                showTip("确认");
+                //showTip("确认");
                 String code = checkCode_et.getText().toString();
                 String pwd = pwd_et.getText().toString();
-                if (!TextUtils.isEmpty(code)&&!TextUtils.isEmpty(pwd))
+                //!TextUtils.isEmpty(code)&&!TextUtils.isEmpty(pwd)
+                if (isverTel()&&isverpassword())
                 {
-                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.resetLoginPwd(MyApplication.user.getUserId(),pwd,"2",code);
-                    call.enqueue(new Callback() {
-                        @Override
-                        public void onResponse(Call call, Response response) {
+                    if (code.equals(smsCode))
+                    {
+                        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                        Call call=service.resetLoginPwd(MyApplication.user.getUserId(),pwd,"2",code);
+                        call.enqueue(new Callback() {
+                            @Override
+                            public void onResponse(Call call, Response response) {
+                                Result_Api body = (Result_Api) response.body();
+                                if (body!=null)
+                                {
+                                    showTip(body.getRespMsg());
+                                    if (body.isSuccess())
+                                    {
+                                        finish();
+                                    }
+                                }
+                            }
 
-                        }
+                            @Override
+                            public void onFailure(Call call, Throwable t) {
 
-                        @Override
-                        public void onFailure(Call call, Throwable t) {
-
-                        }
-                    });
+                            }
+                        });
+                    }
+                    else
+                    {
+                        showTip("输入验证码有误");
+                    }
+                }
+                else
+                {
+                    showTip("请核对输入信息");
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void loginSuccess() {
+
+    }
+
+    @Override
+    public boolean isverTel() {
+        if (!TextUtils.isEmpty(checkCode_et.getText()) && checkCode_et.getText().toString().trim().length() == 4) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isverCode() {
+        return true;
+    }
+
+    @Override
+    public boolean isverpassword() {
+        if (!TextUtils.isEmpty(pwd_et.getText()) && pwd_et.getText().toString().trim().length() >= 6
+                && pwd_et.getText().toString().trim().length() <= 20) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isCheckbx() {
+        return true;
     }
 }

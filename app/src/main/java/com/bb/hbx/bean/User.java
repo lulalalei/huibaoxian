@@ -61,7 +61,7 @@ public class User {
     private String sessionId = "";
     private String userId = "";
     private String userName = "";
-
+    private String paymentPwd="";
     private String nickName="";
 
     public String getAddress() {
@@ -246,5 +246,13 @@ public class User {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getPaymentPwd() {
+        return paymentPwd;
+    }
+
+    public void setPaymentPwd(String paymentPwd) {
+        this.paymentPwd = paymentPwd;
     }
 }
