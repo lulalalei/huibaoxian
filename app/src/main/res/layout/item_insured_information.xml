@@ -13,6 +13,7 @@
         app:isEdit="true"
         app:isright_icon="true"
         app:left_name="@string/insurer"
+        app:right_butIcon="@drawable/tianjialianxiren"
         app:right_icon="@drawable/tianjialianxiren">
 
     </com.bb.hbx.widget.ItemLayout>
