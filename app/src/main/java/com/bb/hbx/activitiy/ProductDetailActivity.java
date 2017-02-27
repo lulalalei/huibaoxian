@@ -27,6 +27,7 @@ import com.bb.hbx.base.v.ProductDetailContract;
 import com.bb.hbx.bean.Benefit;
 import com.bb.hbx.bean.Entry;
 import com.bb.hbx.bean.Insured;
+import com.bb.hbx.bean.InsuredInfolBean;
 import com.bb.hbx.bean.KeyBean;
 import com.bb.hbx.bean.Plan;
 import com.bb.hbx.bean.PriceTag;
@@ -35,6 +36,7 @@ import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.observable.KeyBeanObservable;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.Constants;
+import com.bb.hbx.utils.StringUtils;
 import com.bb.hbx.widget.CardLayout;
 import com.bb.hbx.widget.ClickAble;
 import com.bb.hbx.widget.ItemLayout;
@@ -57,6 +59,7 @@ import butterknife.BindView;
 
 import static com.bb.hbx.utils.Constants.idType_keys;
 import static com.bb.hbx.utils.Constants.idTypes;
+import static com.bb.hbx.utils.StringUtils.getJsonOpt;
 
 
 /**
@@ -559,68 +562,39 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         selectPerids = perids[0];
 
 
-        if (detail.getPriceElements() != null) {
-            JSONObject jsonObject = null;
-            try {
-                jsonObject = new JSONObject(detail.getPriceElements());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            if (jsonObject != null && jsonObject.has("price_element")) {
-                JSONArray jaList = jsonObject.optJSONArray("price_element");
-                List<Entry> list = new ArrayList<>();
-                for (int i = 0; i < jaList.length(); i++) {
-                    JSONObject obj = jaList.optJSONObject(i);
-                    final Entry entry = new Entry();
-                    if (obj.has("name"))
-                        entry.setName(obj.optString("name"));
-                    if (obj.has("option")) {
-                        String opt = obj.optString("option");
-                        if (opt.indexOf(",") > -1) {
-                            String[] opts = opt.split(",");
-                            entry.setOption(Arrays.asList(opts));
-                        } else {
-                            String[] opts = {opt};
-                            entry.setOption(Arrays.asList(opts));
+        List<Entry> entries = StringUtils.getJsonOpt(detail.getPriceElements());
+        int i = 0;
+        for (final Entry entry : entries) {
+            observable.add(entry.getOption().get(0));
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_insured_up2, null);
+            ll_add.addView(view);
+            final ItemLayout2 up = (ItemLayout2) view.findViewById(R.id.il_up1);
+            up.setTag(i + 1);
+            i++;
+            up.setLeft_name(entry.getName());
+            if (entry.getOption() != null && !entry.getOption().isEmpty()) {
+                if (entry.getOption().size() > 1) {
+                    up.setText(entry.getOption().get(0));
+                    up.setListener(new ItemLayout2.OnUpListener() {
+                        @Override
+                        public void onClick() {
+                            PickerDialogOneWheel wheel = new PickerDialogOneWheel(mContext, entry.getOption(), up);
+                            wheel.setListener(textListener);
+                            wheel.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
+                            wheel.show();
                         }
-
-
-                    }
-                    list.add(entry);
-                    observable.add(entry.getOption().get(0));
-                    View view = LayoutInflater.from(mContext).inflate(R.layout.item_insured_up2, null);
-                    ll_add.addView(view);
-                    final ItemLayout2 up = (ItemLayout2) view.findViewById(R.id.il_up1);
-                    up.setTag(i + 1);
-                    up.setLeft_name(entry.getName());
-                    if (entry.getOption() != null && !entry.getOption().isEmpty()) {
-                        if (entry.getOption().size() > 1) {
-                            up.setText(entry.getOption().get(0));
-                            up.setListener(new ItemLayout2.OnUpListener() {
-                                @Override
-                                public void onClick() {
-                                    PickerDialogOneWheel wheel = new PickerDialogOneWheel(mContext, entry.getOption(), up);
-                                    wheel.setListener(textListener);
-                                    wheel.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
-                                    wheel.show();
-                                }
-                            });
-                        } else {
-                            up.setText(entry.getOption().get(0));
-                            up.setEnabled(false);
-                        }
-
-                    }
-
+                    });
+                } else {
+                    up.setText(entry.getOption().get(0));
+                    up.setEnabled(false);
                 }
-
-                detail.setEntries(list);
             }
 
 
         }
 
+
+        detail.setEntries(entries);
         observable.add(perids[0]);
 
 
@@ -649,7 +623,10 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_GETTBR) {
-            Log.i("fancl", "传至传过来");
+            InsuredInfolBean bean = data.getParcelableExtra(Constants.TRANSTATION);
+            if (bean != null) {
+
+            }
         }
     }
 }

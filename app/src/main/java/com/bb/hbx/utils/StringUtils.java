@@ -3,6 +3,16 @@ package com.bb.hbx.utils;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
+import com.bb.hbx.bean.Entry;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static com.bb.hbx.utils.Constants.idType_keys;
 import static com.bb.hbx.utils.Constants.idTypes;
 
@@ -204,5 +214,38 @@ public class StringUtils {
         }
 
         return Constants.beinsurer1_listvalue[0];
+    }
+
+    public static List<Entry> getJsonOpt(String priceElements) {
+        List<Entry> entries = new ArrayList<>();
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(priceElements);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (jsonObject != null && jsonObject.has("price_element")) {
+            JSONArray jaList = jsonObject.optJSONArray("price_element");
+            for (int i = 0; i < jaList.length(); i++) {
+                JSONObject obj = jaList.optJSONObject(i);
+                final Entry entry = new Entry();
+                if (obj.has("name"))
+                    entry.setName(obj.optString("name"));
+                if (obj.has("option")) {
+                    String opt = obj.optString("option");
+                    if (opt.indexOf(",") > -1) {
+                        String[] opts = opt.split(",");
+                        entry.setOption(Arrays.asList(opts));
+                    } else {
+                        String[] opts = {opt};
+                        entry.setOption(Arrays.asList(opts));
+                    }
+                }
+                entries.add(entry);
+            }
+        }
+
+        return entries;
+
     }
 }
