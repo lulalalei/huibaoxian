@@ -97,18 +97,18 @@ public class AllIncomeActivity extends BaseActivity implements View.OnClickListe
         int singleYearCurrentInt = Integer.parseInt(singleYearCurrent);//2017
         int singleMonthCurrentInt = Integer.parseInt(singleMonthCurrent);//2
         int singleDayCurrentInt = Integer.parseInt(singleDayCurrent);//24
-        int singleYearStartInt=0;
+        int singleYearStartInt=singleYearCurrentInt;
         int singleMonthStartInt=0;
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i <=6; i++) {
             if (singleMonthCurrentInt==1)
             {
                 singleMonthStartInt=12;
+                singleMonthCurrentInt=12;
                 singleYearStartInt=singleYearCurrentInt-1;
             }
             else
             {
-                singleMonthStartInt=singleMonthCurrentInt-1;
-                singleYearStartInt=singleYearCurrentInt;
+                singleMonthStartInt=singleMonthCurrentInt--;
             }
         }
         startTime=singleYearStartInt+"-"+(singleMonthStartInt/10)+(singleMonthStartInt%10)+"-"+"01";
@@ -118,6 +118,7 @@ public class AllIncomeActivity extends BaseActivity implements View.OnClickListe
             public void onMyItemClickListener(int position) {
                 //Toast.makeText(AllIncomeActivity.this,"点击事件:"+position,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AllIncomeActivity.this, SpecialMonthActivity.class);
+                intent.putExtra("specialMonth",totalList.get(position).getTradeTime());
                 startActivity(intent);
             }
         });

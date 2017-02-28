@@ -83,27 +83,29 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
                 if(newState == RecyclerView.SCROLL_STATE_IDLE){
                     //得到当前显示的最后一个item的view
                     View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
-                    //得到lastChildView的bottom的坐标值
-                    int lastChildBottom = lastChildView.getBottom();
-                    //得到recyclerview的底部坐标减去底部padding值,也就是显示内容最底部的坐标
-                    int recyclerBottom = recyclerView.getBottom() - recyclerView.getPaddingBottom();
-                    //通过lastChildView得到这个view当前的position值
-                    int lastPosition = recyclerView.getLayoutManager().getPosition(lastChildView);
-                    //判断lastChildView的bottom值跟recyclerview的bottom,判断lastPosition是不是最后一个position
-                    //如果条件都满足则说明真正滑动到了最底部
-                    if (scrollY>0&&lastChildBottom==recyclerBottom&&lastPosition==recyclerView.getLayoutManager().getItemCount()-1)
+                    if (lastChildView!=null)
                     {
-                        pageIndex++;
-                        if (pageIndex>((totalCount/10)+1))
+                        //得到lastChildView的bottom的坐标值
+                        int lastChildBottom = lastChildView.getBottom();
+                        //得到recyclerview的底部坐标减去底部padding值,也就是显示内容最底部的坐标
+                        int recyclerBottom = recyclerView.getBottom() - recyclerView.getPaddingBottom();
+                        //通过lastChildView得到这个view当前的position值
+                        int lastPosition = recyclerView.getLayoutManager().getPosition(lastChildView);
+                        //判断lastChildView的bottom值跟recyclerview的bottom,判断lastPosition是不是最后一个position
+                        //如果条件都满足则说明真正滑动到了最底部
+                        if (scrollY>0&&lastChildBottom==recyclerBottom&&lastPosition==recyclerView.getLayoutManager().getItemCount()-1)
                         {
-                            showTip("已经到底啦!");
-                            pageIndex--;
+                            pageIndex++;
+                            if (pageIndex>((totalCount/10)+1))
+                            {
+                                showTip("已经到底啦!");
+                                pageIndex--;
+                            }
+                            else
+                            {
+                                expandConsigneesList();
+                            }
                         }
-                        else
-                        {
-                            expandConsigneesList();
-                        }
-                    }
                     /*int lastVisiblePosition = manager.findLastVisibleItemPosition();
                     if(scrollY>0&&lastVisiblePosition >=manager.getItemCount()-1){
                         pageIndex++;
@@ -119,6 +121,8 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
                             expandConsigneesList();
                         }
                     }*/
+
+                    }
                 }
             }
         });

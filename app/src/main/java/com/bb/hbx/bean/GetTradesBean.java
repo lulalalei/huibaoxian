@@ -8,17 +8,18 @@ import java.util.List;
 
 public class GetTradesBean {
 
+
     /**
-     * output : {"pageSize":"2","totalCount":"2","tradeList":[{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"234235235235","policyHolderName":"孙悟空","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"20","sts":"20","tradeDate":"20170113201749","tradeId":"20170112194801002"},{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"13989857704","policyHolderName":"猪八戒","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"35","sts":"20","tradeDate":"20170112201749","tradeId":"20170112194801001"}]}
+     * output : {"pageSize":"3","totalCount":"3","tradeList":[{"attachId":0,"auditSts":0,"classId":"103249","insuredList":[{"insuredId":"156","insuredMobile":"","insuredName":"222"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092","payAmount":"64700","policyHolderMobile":"111111","policyHolderName":"1111","productId":"1092","productName":"车险测试产品","productProp":528,"spxSts":"10","sts":"10","tradeDate":"20170227193252","tradeId":"20170227193252677649"},{"attachId":0,"auditSts":0,"classId":"310022","insuredList":[{"insuredId":"142","insuredMobile":"","insuredName":"123"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","sts":"10","tradeDate":"20170227103315","tradeId":"20170227103315836882"},{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"13989857704","policyHolderName":"猪八戒","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"35","sts":"20","tradeDate":"20170112201749","tradeId":"20170112194801001"}]}
      * respCode : 000000
      * respMsg : 获取订单列表成功
      * success : true
      */
 
         /**
-         * pageSize : 2
-         * totalCount : 2
-         * tradeList : [{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"234235235235","policyHolderName":"孙悟空","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"20","sts":"20","tradeDate":"20170113201749","tradeId":"20170112194801002"},{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"13989857704","policyHolderName":"猪八戒","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"35","sts":"20","tradeDate":"20170112201749","tradeId":"20170112194801001"}]
+         * pageSize : 3
+         * totalCount : 3
+         * tradeList : [{"attachId":0,"auditSts":0,"classId":"103249","insuredList":[{"insuredId":"156","insuredMobile":"","insuredName":"222"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092","payAmount":"64700","policyHolderMobile":"111111","policyHolderName":"1111","productId":"1092","productName":"车险测试产品","productProp":528,"spxSts":"10","sts":"10","tradeDate":"20170227193252","tradeId":"20170227193252677649"},{"attachId":0,"auditSts":0,"classId":"310022","insuredList":[{"insuredId":"142","insuredMobile":"","insuredName":"123"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","sts":"10","tradeDate":"20170227103315","tradeId":"20170227103315836882"},{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"13989857704","policyHolderName":"猪八戒","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"35","sts":"20","tradeDate":"20170112201749","tradeId":"20170112194801001"}]
          */
 
         private String pageSize;
@@ -53,22 +54,22 @@ public class GetTradesBean {
             /**
              * attachId : 0
              * auditSts : 0
-             * classId : 210001
-             * insuredList : []
+             * classId : 103249
+             * insuredList : [{"insuredId":"156","insuredMobile":"","insuredName":"222"}]
              * insurerId : 1
              * insurerLogo :
              * insurerName : 人保财险
-             * orderURL : http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100
-             * payAmount : 2000
-             * policyHolderMobile : 234235235235
-             * policyHolderName : 孙悟空
-             * productId : 100
-             * productName : 航空意外保障
-             * productProp : 0
-             * spxSts : 20
-             * sts : 20
-             * tradeDate : 20170113201749
-             * tradeId : 20170112194801002
+             * orderURL : http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092
+             * payAmount : 64700
+             * policyHolderMobile : 111111
+             * policyHolderName : 1111
+             * productId : 1092
+             * productName : 车险测试产品
+             * productProp : 528
+             * spxSts : 10
+             * sts : 10
+             * tradeDate : 20170227193252
+             * tradeId : 20170227193252677649
              */
 
             private int attachId;
@@ -88,7 +89,8 @@ public class GetTradesBean {
             private String sts;
             private String tradeDate;
             private String tradeId;
-            private List<?> insuredList;
+            private List<InsuredListBean> insuredList;
+
 
             public int getAttachId() {
                 return attachId;
@@ -226,12 +228,48 @@ public class GetTradesBean {
                 this.tradeId = tradeId;
             }
 
-            public List<?> getInsuredList() {
+            public List<InsuredListBean> getInsuredList() {
                 return insuredList;
             }
 
-            public void setInsuredList(List<?> insuredList) {
+            public void setInsuredList(List<InsuredListBean> insuredList) {
                 this.insuredList = insuredList;
+            }
+
+            public static class InsuredListBean {
+                /**
+                 * insuredId : 156
+                 * insuredMobile :
+                 * insuredName : 222
+                 */
+
+                private String insuredId;
+                private String insuredMobile;
+                private String insuredName;
+
+                public String getInsuredId() {
+                    return insuredId;
+                }
+
+                public void setInsuredId(String insuredId) {
+                    this.insuredId = insuredId;
+                }
+
+                public String getInsuredMobile() {
+                    return insuredMobile;
+                }
+
+                public void setInsuredMobile(String insuredMobile) {
+                    this.insuredMobile = insuredMobile;
+                }
+
+                public String getInsuredName() {
+                    return insuredName;
+                }
+
+                public void setInsuredName(String insuredName) {
+                    this.insuredName = insuredName;
+                }
             }
         }
 }

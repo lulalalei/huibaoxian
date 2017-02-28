@@ -81,10 +81,13 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
                         @Override
                         public void onResponse(Call call, Response response) {
                             Result_Api body = (Result_Api) response.body();
-                            MessageCodeBean bean = (MessageCodeBean) body.getOutput();
-                            if (bean!=null)
+                            if (body!=null)
                             {
-                                smsCode = bean.getSmsCode();
+                                MessageCodeBean bean = (MessageCodeBean) body.getOutput();
+                                if (bean!=null)
+                                {
+                                    smsCode = bean.getSmsCode();
+                                }
                             }
                         }
 
@@ -112,7 +115,7 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
                         if (checkCode.equals(smsCode))
                         {
                             ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                            Call call=service.updatePayPassword(pwd, MyApplication.user.getUserId());
+                            Call call=service.updatePayPassword(MyApplication.user.getUserId(),pwd,checkCode);
                             call.enqueue(new Callback() {
                                 @Override
                                 public void onResponse(Call call, Response response) {

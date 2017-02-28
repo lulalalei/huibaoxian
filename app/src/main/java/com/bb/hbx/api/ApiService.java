@@ -15,6 +15,7 @@ import com.bb.hbx.bean.GetAcctSettSumBean;
 import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.GetMyPageInfoBean;
 import com.bb.hbx.bean.GetTotalIncomeBean;
+import com.bb.hbx.bean.GetTotalIncomeDetail;
 import com.bb.hbx.bean.GetTradesBean;
 import com.bb.hbx.bean.GetUserCouponsListBean;
 import com.bb.hbx.bean.HomePageInfo;
@@ -133,14 +134,21 @@ public interface ApiService {
     @POST("api.do?method=checkIn&type=post")
     Call<String> checkIn(@Field("userId") String userId, @Field("acctType") String acctType);
 
-    //累计收入--待测
+    //累计收入
     @FormUrlEncoded
     @POST("api.do?method=getTotalIncome&type=post")
     Call<Result_Api<GetTotalIncomeBean>> getTotalIncome(@Field("userId") String userId, @Field("acctType") String acctType,
                                                         @Field("beginDate") String beginDate, @Field("endDate") String endDate,
                                                         @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
-    //结算中金额明细列表--待测
+    //收入月账单--待测
+    @FormUrlEncoded
+    @POST("api.do?method=getTotalIncomeDetail&type=post")
+    Call<Result_Api<GetTotalIncomeDetail>> getTotalIncomeDetail(@Field("userId") String userId, @Field("acctType") String acctType,
+                                                                @Field("beginDate") String beginDate, @Field("endDate") String endDate,
+                                                                @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+
+    //结算中金额明细列表--已测
     @FormUrlEncoded
     @POST("api.do?method=getAcctSettSumList&type=post")
     Call<Result_Api<GetAcctSettSumBean>> getAcctSettSumList(@Field("userId") String userId, @Field("acctType") String acctType,
@@ -204,10 +212,15 @@ public interface ApiService {
     Call<Result_Api> applyCash(@Field("userId") String userId, @Field("cashAmount") String cashAmount, @Field("accountName") String accountName,
                                @Field("bankName") String bankName, @Field("cashIp") String cashIp);
 
-    //设置,修改支付密码
+    /*//设置,修改支付密码
     @FormUrlEncoded
     @POST("api.do?method=updatePayPassword&type=post")
-    Call<Result_Api> updatePayPassword(@Field("payPassword") String payPassword, @Field("userId") String userId);
+    Call<Result_Api> updatePayPassword(@Field("payPassword") String payPassword, @Field("userId") String userId);*/
+
+    //设置支付密码--待测
+    @FormUrlEncoded
+    @POST("api.do?method=updatePayPassword&type=post")
+    Call<Result_Api> updatePayPassword(@Field("userId") String userId,@Field("payPassword") String payPassword,@Field("smsCode") String smsCode);
 
     //上传用户头像,阿里云
     @FormUrlEncoded

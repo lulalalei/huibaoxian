@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
@@ -54,8 +55,7 @@ public class ResetPswActivity extends BaseActivity implements View.OnClickListen
                 if (isverpassword()) {
                     //AppManager.getInstance().showActivity(PwdLoginActivity.class, null);
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.forgetLoginPwd(mobile,et_psw.getText().toString().trim(),"2",smsCode);
-
+                    Call call=service.resetLoginPwd(MyApplication.user.getUserId(),et_psw.getText().toString().trim(),"2",smsCode);
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
@@ -73,7 +73,28 @@ public class ResetPswActivity extends BaseActivity implements View.OnClickListen
 
                         }
                     });
+                    //Call call=service.forgetLoginPwd(mobile,et_psw.getText().toString().trim(),"2",smsCode);
+                    /*call.enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            Result_Api body = (Result_Api) response.body();
+                            if (body!=null)
+                            {
+                                setResult(Can.FINISH_GETPSW,intentFromGetPsw);
+                                showTip(body.getRespMsg());
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+
+                        }
+                    });
                 } else {
+                    showTip("请正确填写密码");*/
+                }
+                else {
                     showTip("请正确填写密码");
                 }
                 break;

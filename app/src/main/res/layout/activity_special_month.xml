@@ -35,40 +35,40 @@
             android:layout_centerInParent="true"
             android:gravity="center"/>
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="158dp"
-        android:background="@drawable/jiesuan_shouru"
-        android:layout_below="@id/topbar_layout"
-        android:gravity="center">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="本月暂无收入"
-            android:textSize="36sp"
-            android:textColor="@color/white"
-            android:id="@+id/allIncome_tv"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="本月收入"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/allIncome_tv"
-            android:layout_marginTop="13dp"/>
-    </RelativeLayout>
-    <ScrollView
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout">
+        android:layout_below="@+id/topbar_layout">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="158dp"
+                android:background="@drawable/jiesuan_shouru"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    android:textSize="36sp"
+                    android:textColor="@color/white"
+                    android:id="@+id/allIncome_tv"
+                    android:gravity="center_horizontal" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="本月收入"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/allIncome_tv"
+                    android:layout_marginTop="13dp"/>
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="13dp"
@@ -78,5 +78,5 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
-    </ScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 </RelativeLayout>

@@ -1,7 +1,6 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,17 +8,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
-import com.bb.hbx.api.ApiService;
-import com.bb.hbx.api.Result_Api;
-import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 
 import butterknife.BindView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AddBankCardActivity extends BaseActivity implements View.OnClickListener{
 
@@ -76,11 +68,13 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                 Toast.makeText(this,"选择银行",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.verify_tv:
-                String name = name_et.getText().toString();
+                Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
+                startActivity(intent);
+                /*String name = name_et.getText().toString();
                 String idCard = idCard_et.getText().toString();
                 String bankCard = bankCard_et.getText().toString();
                 String bank = choseBank_et.getText().toString();
-                if (!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(idCard)&&!TextUtils.isEmpty(bankCard)/*&&!TextUtils.isEmpty(bank)*/)
+                if (!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(idCard)&&!TextUtils.isEmpty(bankCard)*//*&&!TextUtils.isEmpty(bank)*//*)
                 {
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
                     Call call=service.bindingBankCard(name,"工商银行",bankCard, MyApplication.user.getUserId());
@@ -91,8 +85,8 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                             boolean success = body.isSuccess();
                             if (success)
                             {
-                                /*Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
-                                startActivity(intent);*/
+                                *//*Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
+                                startActivity(intent);*//*
                             }
                             else
                             {
@@ -111,7 +105,7 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                 else
                 {
                     showTip("请核对信息!");
-                }
+                }*/
                 break;
             default:
                 break;

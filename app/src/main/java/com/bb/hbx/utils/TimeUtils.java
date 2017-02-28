@@ -41,6 +41,18 @@ public class TimeUtils {
         }
         return date.getTime();
     }
+    //将字符串转为时间戳
+    public static long getStringToDateNoSpace(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        try {
+            date = sdf.parse(time);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return date.getTime();
+    }
 
     //将字符串转为时间戳
     public static long getStringToDateHaveSecond(String time) {

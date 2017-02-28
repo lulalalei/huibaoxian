@@ -2,6 +2,7 @@ package com.bb.hbx.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.bean.GetTradesBean;
+import com.bb.hbx.utils.TimeUtils;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
     Context mContext;
     List<GetTradesBean.TradeListBean> list;
     LayoutInflater inflater;
+    int payAmountInt=0;
 
     public MyAllInMyOrderAdapter(Context mContext, List<GetTradesBean.TradeListBean> list) {
         this.mContext = mContext;
@@ -40,6 +44,23 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        String tradeDate = list.get(position).getTradeDate();
+        long logTime = TimeUtils.getStringToDateNoSpace(tradeDate);
+        String time = TimeUtils.getDateToString(logTime);
+        holder.time_tv.setText(time);
+        holder.itemO_tv.setText(list.get(position).getProductName());
+        holder.orderNumber_tv.setText(list.get(position).getTradeId());
+        holder.itemTw_tv.setText(list.get(position).getInsuredList().get(0).getInsuredName());//投保人
+        holder.itemTh_tv.setText("字段空缺: 被保人");
+        holder.itemF_tv.setText("字段空缺: 保险期限");
+        String payAmount = list.get(position).getPayAmount();
+        if (!TextUtils.isEmpty(payAmount))
+        {
+            payAmountInt = Integer.parseInt(payAmount);
+        }
+        holder.price_tv.setText(TextUtils.isEmpty(payAmount)?"0.00":(payAmountInt/100)+"."+(payAmountInt/10%10)+(payAmountInt%10));
+        holder.income_tv.setText("字段空缺: 推广费");
+        Glide.with(mContext).load(list.get(position).getInsurerLogo()).placeholder(R.drawable.shangcheng).into(holder.logo_iv);
 
     }
 
