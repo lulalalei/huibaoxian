@@ -2,14 +2,20 @@ package com.bb.hbx.activitiy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.m.ConfimpaymentlModel;
@@ -18,18 +24,14 @@ import com.bb.hbx.base.v.ConfimpaymentContract;
 import com.bb.hbx.bean.PayDetail;
 import com.bb.hbx.observable.PriceObservable;
 import com.bb.hbx.utils.AppManager;
+import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.TimeUtils;
 import com.bb.hbx.utils.Utils;
 import com.bb.hbx.widget.FancyCountDownTextview;
 import com.bb.hbx.widget.TextviewObserver;
 
-import java.util.Observable;
-import java.util.Observer;
 
 import butterknife.BindView;
-
-import static com.bb.hbx.R.drawable.on;
-import static com.bb.hbx.R.id.ck_jf;
 
 
 /**
@@ -91,6 +93,8 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
     @BindView(R.id.tv_save)
     TextviewObserver tv_save;//节省
 
+    @BindView(R.id.rg_select)
+    RadioGroup rg_select;//险种
 
     @BindView(R.id.lin_Insurance)
     LinearLayout lin_Insurance;//险种
@@ -99,6 +103,8 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
     private PriceObservable priceObservable;
 
     private final static int REU_A = 0x111;
+
+    private long timeoutLast;
 
 
     @Override
@@ -173,16 +179,16 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
         tv_insuranceName.setText(detail.getProductName());
         tv_tip.setText(detail.getTips());
         tv_jf.setText(getString(R.string.format_jf, detail.getAcctBalanceJF(), Utils.fromFenToYuan(detail.getDeductible())));
-        long last = TimeUtils.divlong(detail.getPayDeadline());//与当前时间差的长整形
-        if (last <= 0) {
+        timeoutLast = TimeUtils.divlong(detail.getPayDeadline());//与当前时间差的长整形
+        if (timeoutLast <= 0) {
             tv_timedetail.setText("订单已经失效");
         } else {
-            tv_timedetail.setTime(last);
+            tv_timedetail.setTime(timeoutLast);
             tv_timedetail.startTime();
         }
 
         tv_ye.setText(getString(R.string.format_ye, Utils.fromFenToYuan(detail.getAcctBalanceYE())));
-
+        addPayLayout();
 
     }
 
@@ -196,8 +202,29 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
                 AppManager.getInstance().showActivity(PolicydetailsActivity.class, bundle);
                 break;
             case R.id.tv_confim:
-                detail.setPaymentId("10");
-                mPresenter.getPaySign(detail);
+                int id = rg_select.getCheckedRadioButtonId();
+                PayDetail detail2 = new PayDetail();
+                detail2.setAcctBalanceJF(ck_jf.isChecked() ? detail.getAcctBalanceJF() : 0);
+                detail2.setUserId(MyApplication.user.getUserId());
+                detail2.setAcctBalanceYE(ck_ye.isChecked() ? detail.getAcctBalanceYE() : "0");
+                detail2.setCouponCode(detail.getCouponCode());
+                detail2.setDeductible(detail.getDeductible());
+                detail2.setPayDeadline(detail.getPayDeadline());
+                detail2.setCouponList(detail.getCouponList());
+                detail2.setPayments(detail.getPayments());
+                detail2.setProductName(detail.getProductName());
+                detail2.setTradeId(detail.getTradeId());
+                detail2.setPayPrice(detail.getPayPrice());
+                if (id == R.id.rg_zfbid) {
+                    detail2.setPaymentId(Constants.ZFBPAY + "");
+                    mPresenter.getPaySign(detail2);
+                } else if (id == R.id.rg_wxid) {
+                    detail2.setPaymentId(Constants.WXPAY + "");
+                    mPresenter.getPaySign(detail2);
+                } else {
+                    showMsg("抱歉没有支付方式可以支付");
+                }
+
                 break;
             case R.id.iv_back:
                 this.finish();
@@ -213,6 +240,40 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REU_A && resultCode == RESULT_OK) {
 
+        }
+    }
+
+    //动态加载支付列表
+    private void addPayLayout() {
+        if (detail.getPayments() != null && detail.getPayments().size() > 0) {
+            for (int i = 0; i < detail.getPayments().size(); i++) {
+                RadioButton button = new RadioButton(mContext);
+                RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT,
+                        AppManager.getInstance().dp2px(mContext, 56));
+                layoutParams.gravity = Gravity.CENTER_VERTICAL;
+                button.setLayoutParams(layoutParams);
+                button.setBackgroundResource(R.color.white);
+                button.setChecked(false);
+                button.setPadding((int) getResources().getDimension(R.dimen.x30), 0, 0, 0);
+                button.setTextColor(getResources().getColor(R.color.A3));
+                button.setTextSize(14);
+                button.setButtonDrawable(R.drawable.radiobutton_bg);
+                if (detail.getPayments().get(i).getPaymentId() == Constants.ZFBPAY) {
+                    button.setText(getString(R.string.zfbzf));
+                    button.setId(R.id.rg_zfbid);
+
+                } else if (detail.getPayments().get(i).getPaymentId() == Constants.WXPAY) {
+                    button.setText(getString(R.string.wxzf));
+                    button.setId(R.id.rg_wxid);
+                }
+
+                rg_select.addView(button);
+                if (i != detail.getPayments().size() - 1) {
+                    View view = LayoutInflater.from(mContext).inflate(R.layout.line_e, null);
+                    rg_select.addView(view);
+                }
+
+            }
         }
     }
 }

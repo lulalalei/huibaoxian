@@ -93,11 +93,29 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
             @Override
             public void priceListener(ConditionLayout.STATE operat) {
                 state = operat;
+                if (ConditionLayout.STATE.PRICE_DOWN == operat) {
+                    mPresenter.setSortCode(-1);
+                } else if (ConditionLayout.STATE.PRICE_UP == operat) {
+                    mPresenter.setSortCode(1);
+                } else {
+                    mPresenter.setSortCode(0);
+                }
+                mPresenter.getProducts(DataLoadDirection.Refresh);
+
             }
 
             @Override
             public void saleListener(ConditionLayout.STATE operat) {
                 state = operat;
+                if (ConditionLayout.STATE.SALE_DOWN == operat) {
+                    mPresenter.setSortCode(-2);
+                } else if (ConditionLayout.STATE.SALE_UP == operat) {
+                    mPresenter.setSortCode(2);
+                } else {
+                    mPresenter.setSortCode(0);
+                }
+                mPresenter.getProducts(DataLoadDirection.Refresh);
+
             }
 
             @Override

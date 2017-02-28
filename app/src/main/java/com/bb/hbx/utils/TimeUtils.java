@@ -17,7 +17,7 @@ public class TimeUtils {
         return sf.format(d);
     }
 
-    public  static String getDateToStringWithLine(long time) {
+    public static String getDateToStringWithLine(long time) {
         Date d = new Date(time);
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         return sf.format(d);
@@ -54,6 +54,7 @@ public class TimeUtils {
         }
         return date.getTime();
     }
+
     //将字符串转为时间戳
     public static long getStringToDateHaveSecondAndSpace(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -78,6 +79,7 @@ public class TimeUtils {
 
         return calendar.getTimeInMillis();
     }
+
     /**
      * 获取当前时间
      *
@@ -87,6 +89,7 @@ public class TimeUtils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(new java.util.Date());
     }
+
     /**
      * 获取当前时间
      *
@@ -96,6 +99,7 @@ public class TimeUtils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         return sdf.format(new java.util.Date());
     }
+
     /**
      * 获取当前时间
      *
@@ -147,7 +151,7 @@ public class TimeUtils {
 
 
     public static String formatDate(String str) {
-        SimpleDateFormat sf1 = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sf1 = new SimpleDateFormat("yyyyMMddHHmmss");
         SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
         String sfstr = "";
         try {
@@ -159,9 +163,17 @@ public class TimeUtils {
         return sfstr;
     }
 
+    //减去当前时间的long整形的
     public static long divlong(long last) {
         Date dt = new Date();
         long now = dt.getTime();
         return last - now;
+    }
+
+    //long转成分(如 15m,15分)
+    public static String secondTomillio(long last) {
+        int min = (int) ((last / 1000) / 60);
+        String m = String.format("%02dm", min);
+        return m;
     }
 }

@@ -18,7 +18,7 @@ public class GenApiHashUrl {
     private static GenApiHashUrl INSTANCE = null;
     //public static final String apiUrl = "http://wg.bettapharma.cn/api/service.ashx";//正式环境
     //public static final String apiUrl = "http://wg.bettapharma.cn/api/";//正式环境
-    public static final String apiUrl = "http://192.168.32.95:8080/api/";//环境,啊亮
+      public static final String apiUrl = "http://192.168.32.95:8080/api/";//环境,啊亮
     //public static final String apiUrl = "http://192.168.32.95:8079/api/";//环境
    // public static final String apiUrl = "http://192.168.32.210:18080/seaway-ebao-api-server/";//环境
     //http://192.168.32.176:8080/api.do
@@ -27,6 +27,8 @@ public class GenApiHashUrl {
     //public static final String apiUrl = "http://192.168.32.144:8080/";//环境
     //public static final String apiUrl = "http://192.168.32.68:8082/api/";//环境
     //public static final String apiUrl = "http://192.168.32.66:8080/";//环境
+
+    public static final String apiUrl2 = "http://ebao.seaway.net.cn:18150/seaway-ebao-api-server/payNotify/alipay.do";//
 
     public static final String md5_key = "md5_key";
 
@@ -137,7 +139,7 @@ public class GenApiHashUrl {
 
             byte[] data = params.getBytes();
 
-            URL url = new URL(apiUrl);
+            URL url = new URL(apiUrl2);
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoInput(true); //允许输入流，即允许下载
             conn.setDoOutput(true); //允许输出流，即允许上传

@@ -37,6 +37,8 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
 
     private boolean isloadmore = true;
 
+    private int sortCode;
+
 
     @Override
     public void onAttached() {
@@ -52,7 +54,7 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
                         items.clear();
                         isloadmore = true;
                     }
-                    
+
                     if (bean.getPageSize() < PAGE_SIZE) {
                         isloadmore = false;
                     }
@@ -99,6 +101,7 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
         if (loadType == DataLoadDirection.Refresh) {
             PAGE_INDEX = 1;
             rp.setPageIndex(PAGE_INDEX);
+            rp.setSortCode(sortCode);
             mModel.getProducts(rp, postCallback);
         } else {
             if (isloadmore) {
@@ -114,6 +117,11 @@ public class Mall_ItemPresenter extends Mall_ItemContract.Presenter {
         }
 
 
+    }
+
+    @Override
+    public void setSortCode(int SortCode) {
+        sortCode = SortCode;
     }
 
 

@@ -17,7 +17,7 @@ public interface ConfimpaymentContract {
     interface Model extends BaseModel {
 
 
-        void getPaySign(PayDetail request, Callback callback);
+        void getPaySign(PayDetail detail, Callback callback);
 
     }
 
@@ -29,6 +29,6 @@ public interface ConfimpaymentContract {
 
     abstract class Presenter extends BasePresenter<ConfimpaymentContract.Model, ConfimpaymentContract.View> {
 
-       public abstract void getPaySign(PayDetail request);
+       public abstract void getPaySign(PayDetail detail);
     }
 }

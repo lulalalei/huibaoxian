@@ -43,6 +43,9 @@ public abstract class BaseAsyncTask<Input, Result> extends AsyncTask<Input, Inte
         view.initLoading();
     }
 
+    public BaseAsyncTask() {
+    }
+
 
     @Override
     public void onCancelled() {

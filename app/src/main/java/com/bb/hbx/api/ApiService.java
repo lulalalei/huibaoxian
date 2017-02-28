@@ -22,6 +22,7 @@ import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.OssBean;
 import com.bb.hbx.bean.PayDetail;
+import com.bb.hbx.bean.PaySign;
 import com.bb.hbx.bean.ProdectDetalRequest;
 import com.bb.hbx.bean.ProductBean;
 import com.bb.hbx.bean.ProductItem;
@@ -373,8 +374,9 @@ public interface ApiService {
                                                  @Field("detailId") String detailId);
 
     //6.1.6.获取支付签名信息
+
     @POST("api.do?method=getPaySign&type=post")
-    Call<Result_Api<TradeDetail>> getPaySign(@Body PayDetail request);
+    Call<Result_Api<PaySign>> getPaySign(@Body PayDetail detail);
 
 
 }

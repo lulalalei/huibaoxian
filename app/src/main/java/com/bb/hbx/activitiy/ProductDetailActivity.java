@@ -36,7 +36,9 @@ import com.bb.hbx.bean.ProductParamDetail;
 import com.bb.hbx.observable.KeyBeanObservable;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.Constants;
+import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.utils.StringUtils;
+import com.bb.hbx.utils.Utils;
 import com.bb.hbx.widget.CardLayout;
 import com.bb.hbx.widget.ClickAble;
 import com.bb.hbx.widget.ItemLayout;
@@ -57,6 +59,14 @@ import java.util.Observer;
 import butterknife.BindView;
 
 
+import static android.R.attr.entries;
+import static com.bb.hbx.R.drawable.line;
+import static com.bb.hbx.R.id.clayout;
+import static com.bb.hbx.R.id.il_up1;
+import static com.bb.hbx.R.id.lin_count;
+import static com.bb.hbx.R.id.tv_quantity;
+import static com.bb.hbx.utils.Constants.beinsurer1_listkey;
+import static com.bb.hbx.utils.Constants.beinsurer1_listvalue;
 import static com.bb.hbx.utils.Constants.idType_keys;
 import static com.bb.hbx.utils.Constants.idTypes;
 import static com.bb.hbx.utils.StringUtils.getJsonOpt;
@@ -68,7 +78,7 @@ import static com.bb.hbx.utils.StringUtils.getJsonOpt;
  */
 
 public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, ProductDetailModle> implements ProductDetailContract.View,
-        View.OnClickListener, Observer {
+        View.OnClickListener {
 
 
     @BindView(R.id.sl)
@@ -165,43 +175,15 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     LinearLayout lin_count;//购买的份数
 
 
-    //
+    private ItemLayout2 layout2;
 
-    private String[] perids;//保障期限的列表
+    private LinearLayout line;
 
-    private String selectPerids;//当前的选中的保障期限
 
     private String productId = "";
 
-    private int count = 1;//当前的投保份数
-
-    private int max_Quto;//投保最大份数
-
-    private double singlePrice;//机甲因子的求出的保额价格
-
-
-    //private KeyBean keyBean;//价格因子生成的字符串
-
-    private KeyBeanObservable observable;
-
-    private Plan cruentPlan = new Plan();
 
     private PickerDialogOneWheel wheel_data;
-
-    private ProductParamDetail productParamDetail;
-
-
-    private String[] beinsurer1_listvalue = {"父母", "子女", "配偶", "其他关系"};//关系
-
-    private int[] beinsurer1_listkey = {1, 2, 3, 9};//关系键
-
-    private int beinsurer1key = 1;
-
-
-    private int insureridType = 1;//投保人的idtype
-
-    private int beinsureridType = 1;//被保人的idtype;
-
 
     private final static int REQUEST_GETTBR = 0x001;
 
@@ -212,23 +194,21 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             if (v instanceof ItemLayout2) {
                 ((ItemLayout2) v).setText(value);
                 if ((int) (v.getTag()) == 0) {
-                    selectPerids = perids[index];
-                    //keyBean.set(keyBean.size() - 1, perids[index]);
-                    observable.set(observable.size() - 1, perids[index]);
+                    mPresenter.setSelectPerids(index);
                 } else {
-                    observable.set((Integer) v.getTag(), value);
+                    mPresenter.setkeybeanOther((Integer) v.getTag(), value, index);
                 }
 
             } else if (v instanceof ItemLayout) {
                 if ((int) (v.getTag()) == 11) {
-                    il_beinsurer1.setText(beinsurer1_listvalue[index]);
-                    beinsurer1key = beinsurer1_listkey[index];
+                    setReationShipValue(beinsurer1_listvalue[index]);
+                    mPresenter.setKey(index);
                 } else if ((int) (v.getTag()) == 12) {
-                    il_insurer2.setText(idTypes[index]);
-                    insureridType = idType_keys[index];
+                    setInsurerType(idTypes[index]);
+                    mPresenter.setInsureridType(index);
                 } else if ((int) v.getTag() == 13) {
-                    il_beinsurer3.setText(idTypes[index]);
-                    beinsureridType = idType_keys[index];
+                    setInsuredIdType(idTypes[index]);
+                    mPresenter.setBeinsureridType(index);
                 }
             }
         }
@@ -268,6 +248,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                 this, R.style.TextAppear_Theme_A3_Size12), 22, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_agree.setText(hintSp);
         tv_agree.setMovementMethod(LinkMovementMethod.getInstance());//不设置 没有点击事件
+
+
+        //-------
+        layout2 = (ItemLayout2) layout_tab2.findViewById(R.id.il_up1);
+        line = (LinearLayout) layout_tab2.findViewById(R.id.lin_line);
+        layout2.setLeft_name(getString(R.string.qbsj2));
     }
 
     @Override
@@ -281,17 +267,10 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         il_up1.setListener(new ItemLayout2.OnUpListener() {
             @Override
             public void onClick() {
-                if (perids != null && perids.length > 1) {
-                    String[] ps = new String[perids.length];
-                    for (int i = 0; i < ps.length; i++) {
-                        if (perids[i].indexOf("_") > 1) {
-                            ps[i] = perids[i].substring(0, perids[i].indexOf("_"));
-                        } else {
-                            ps[i] = perids[i];
-                        }
-                    }
+                final String[] subPerids = mPresenter.substringperids();
+                if (subPerids != null && subPerids.length > 1) {
                     if (wheel_data == null) {
-                        wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(ps), il_up1);
+                        wheel_data = new PickerDialogOneWheel(mContext, Arrays.asList(subPerids), il_up1);
                         wheel_data.setListener(textListener);
                         wheel_data.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
                     }
@@ -303,33 +282,11 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
             }
         });
 
+
         clayout.setListener(new CardLayout.CardListener() {
             @Override
             public void onclick(int index) {
-                if (productParamDetail != null && !productParamDetail.getPlanList().isEmpty()) {
-                    //index>=1;
-                    cruentPlan = productParamDetail.getPlanList().get(index - 1);
-                    List<Benefit> benefits = cruentPlan.getClassNameList().get(0).getBenefitList();
-                    observable.set(0, cruentPlan.getPlanName().trim());
-
-                    //----------------------------------
-                    lin_additem.removeAllViews();
-                    if (benefits != null && benefits.size() > 0) {
-
-                        for (int i = 0; i < benefits.size(); i++) {
-                            if (i > 3) {
-                                break;
-                            }
-                            Benefit benefit = benefits.get(i);
-                            View view = LayoutInflater.from(mContext).inflate(R.layout.cardlayout_item, null, false);
-                            lin_additem.addView(view);
-                            TextView tv_appendKey = (TextView) view.findViewById(R.id.tv_appendKey);
-                            TextView tv_appendValue = (TextView) view.findViewById(R.id.tv_appendValue);
-                            tv_appendKey.setText(benefit.getBenefitName());
-                            tv_appendValue.setText(benefit.getInsuredAmount());
-                        }
-                    }
-                }
+                mPresenter.TraversalPlans(index);
             }
         });
 
@@ -390,21 +347,6 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     @Override
     public void initdata() {
         mPresenter.getProductDetail(productId);
-        tv_quantity.setText(count + "");
-
-        observable = new KeyBeanObservable();
-        observable.setBean(new KeyBean());
-        observable.addObserver(this);
-        observable.add(" ");
-
-        il_beinsurer1.setText(beinsurer1_listvalue[0]);
-        beinsurer1key = beinsurer1_listkey[0];
-
-        il_insurer2.setText(idTypes[0]);
-        insureridType = idType_keys[0];
-
-        il_beinsurer3.setText(idTypes[0]);
-        beinsureridType = idType_keys[0];
 
     }
 
@@ -413,211 +355,206 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_add:
-                addCount();
+                mPresenter.addCount();
                 break;
             case R.id.iv_sub:
-                subCount();
+                mPresenter.subCount();
                 break;
             case R.id.lin_share:
                 ShareDailog shareDailog = new ShareDailog(this);
                 shareDailog.show();
                 break;
             case R.id.tv_buy:
-                if (singlePrice > 0) {
-                    ProdectDetalRequest request = new ProdectDetalRequest();
-                    request.setUserId(MyApplication.user.getUserId());
-                    request.setProductId(productParamDetail.getProductId());
-                    request.setPriceKeyword(observable.toString());
-                    request.setPlanId(cruentPlan.getPlanId());
-                    request.setPeriod(selectPerids);
-//                    request.setStartTime("20161205122222");
-//                    request.setEndTime("20161210122222");
-                    request.setIsExpress("0");
-
-                    List<Insured> insuredList = new ArrayList<>();
-                    Insured insured = new Insured();
-                    //insured.setInsuredId();
-                    insured.setNum(count);
-                    insured.setOccupation(productParamDetail.getOccupation());
-                    insured.setRelationType(beinsurer1key + "");
-
-                    //------------------------------------------------------------
-
-                    //insured.setIdNo(il_beinsurer4.getEtValue());
-                    insured.setIdNo("330621198903134673");
-                    insured.setIdType(beinsureridType);
-                    //insured.setInsuredName(il_beinsurer2.getEtValue());
-                    insured.setInsuredName("123");
-                    insuredList.add(insured);
-                    request.setInsuredList(insuredList);
-//                    request.setIdNo(il_insurer3.getEtValue());
-//                    request.setMobile(il_insurer4.getEtValue());
-                    request.setIdNo("330621198903134674");
-                    request.setMobile("13656714459");
-                    request.setIdType(insureridType);
-                    //request.setApplicant(il_insurer1.getEtValue());
-                    request.setApplicant("456");
-                    mPresenter.applyTrade(request);
-                } else {
-                    showMsg("请把信息填写完整。。。");
-                }
-
-                //AppManager.getInstance().showActivity(ConfirmpaymentActivity.class, null);
+                mPresenter.GetProdectDetalRequest();
                 break;
 
         }
     }
 
-    public void addCount() {
-
-        if (count == 1) {
-            iv_sub.setVisibility(View.VISIBLE);
-        } else if (count == max_Quto - 1) {
-            iv_add.setVisibility(View.INVISIBLE);
-        }
-        count++;
-        tv_quantity.setText(count + "");
-        observable.setCount(count);
-
-    }
-
-    public void subCount() {
-
-
-        if (count <= max_Quto) {
-            iv_add.setVisibility(View.VISIBLE);
-        }
-
-        if (count <= 2) {
-            iv_sub.setVisibility(View.INVISIBLE);
-        }
-
-        count--;
-        tv_quantity.setText(count + "");
-        observable.setCount(count);
-    }
 
     @Override
     public void setProductDetail(ProductParamDetail detail) {
-        productParamDetail = detail;
-        //GlideUtil.getInstance().loadImage(this, iv_pic, detail.getProductLogo(), true);
-        tv_matchall.setText(detail.getInsurerName() + " | 销量 " + detail.getTotalAmount());
-        tv_name.setText(detail.getProductName());
-
-        tv_description1.setText(detail.getProductFeature());
-        tv_description2.setText(detail.getPerferWords());
-        if (detail.getQuota() == 0) {
-            max_Quto = Integer.MAX_VALUE;
-        } else if (detail.getQuota() == 1) {
-            max_Quto = 1;
-            iv_add.setVisibility(View.INVISIBLE);
-        } else {
-            max_Quto = detail.getQuota();
-        }
-
-        if (max_Quto == 1) {//购买份数一份 隐藏
-            lin_count.setVisibility(View.GONE);
-        }
-
-        ItemLayout2 layout2 = (ItemLayout2) layout_tab2.findViewById(R.id.il_up1);
-        LinearLayout line = (LinearLayout) layout_tab2.findViewById(R.id.lin_line);
-        layout2.setLeft_name(getString(R.string.qbsj2));
-        if (detail.getEffectiveType() == 1) {
-            layout2.setText(detail.getEffectDate());
-            layout2.setButtonGone();
-        } else {
-            //
-        }
-
-
-        if (max_Quto == 1) {//隐藏横线
-            line.setVisibility(View.GONE);
-        }
-
-
-        if (MyApplication.user.getIsBClient()) {
-            tv_pro.setVisibility(View.VISIBLE);
-            tv_pro.setText(detail.getCommisionValue1() + "%推广费");
-        } else {
-            tv_pro.setVisibility(View.GONE);
-        }
-        if (detail.getPlanList() != null) {
-            clayout.setPlanList(detail.getPlanList());
-            clayout.setCount(detail.getPlanList().size());
-        }
-
-        String perid = productParamDetail.getGuaranteePeriod();
-        if (perid != null && perid.indexOf(";") > -1) {
-            perids = perid.split(";");
-        } else {
-            perid = "";
-            perids = new String[]{perid};
-            il_up1.setEnable(false);
-        }
-        if (perids[0].length() > 2 && perids[0].indexOf("_") > 1) {
-            il_up1.setText(perids[0].substring(0, perids[0].indexOf("_")));
-        } else {
-            il_up1.setText(perids[0]);
-        }
-        selectPerids = perids[0];
-
-
-        List<Entry> entries = StringUtils.getJsonOpt(detail.getPriceElements());
-        int i = 0;
-        for (final Entry entry : entries) {
-            observable.add(entry.getOption().get(0));
-            View view = LayoutInflater.from(mContext).inflate(R.layout.item_insured_up2, null);
-            ll_add.addView(view);
-            final ItemLayout2 up = (ItemLayout2) view.findViewById(R.id.il_up1);
-            up.setTag(i + 1);
-            i++;
-            up.setLeft_name(entry.getName());
-            if (entry.getOption() != null && !entry.getOption().isEmpty()) {
-                if (entry.getOption().size() > 1) {
-                    up.setText(entry.getOption().get(0));
-                    up.setListener(new ItemLayout2.OnUpListener() {
-                        @Override
-                        public void onClick() {
-                            PickerDialogOneWheel wheel = new PickerDialogOneWheel(mContext, entry.getOption(), up);
-                            wheel.setListener(textListener);
-                            wheel.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
-                            wheel.show();
-                        }
-                    });
-                } else {
-                    up.setText(entry.getOption().get(0));
-                    up.setEnabled(false);
-                }
-            }
-
-
-        }
-
-
-        detail.setEntries(entries);
-        observable.add(perids[0]);
-
 
     }
 
+    @Override
+    public void iv_subVisibility() {
+        iv_sub.setVisibility(View.VISIBLE);
+    }
 
-    public double ischeckPrice() {
-        if (productParamDetail != null && productParamDetail.getPriceList() != null && !productParamDetail.getPriceList().isEmpty()) {
-            for (PriceTag tag : productParamDetail.getPriceList()) {
-                if (observable.toString().trim().equalsIgnoreCase(tag.getPriceKeyword().trim())) {
-                    return Double.valueOf(tag.getProductPremium());
-                }
-            }
-        }
-        return 0;
+    @Override
+    public void iv_subInVisibility() {
+        iv_sub.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void iv_addVisibility() {
+        iv_add.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void iv_addInVisibility() {
+        iv_add.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void tv_quantity_setText(int count) {
+        tv_quantity.setText(count + "");
+    }
+
+    @Override
+    public void loadimage(String logo) {
+        //GlideUtil.getInstance().loadImage(this, iv_pic, logo, true);
+    }
+
+    @Override
+    public void setText_insurname_totalmount(String insurerName, String totalAmount) {
+        tv_matchall.setText(insurerName + " | 销量 " + totalAmount);
     }
 
 
     @Override
-    public void update(Observable o, Object arg) {
-        singlePrice = ischeckPrice();
-        tv_price.setText("￥" + singlePrice * observable.getCount());
+    public void setText_ProductName(String productName) {
+        tv_name.setText(productName);
     }
+
+    @Override
+    public void setText_Feature(String productFeature, String perferWords) {
+        tv_description1.setText(productFeature);
+        tv_description2.setText(perferWords);
+    }
+
+    @Override
+    public void setlin_countInvisiblity() {
+        lin_count.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setEffectiveTypewithButon(String effectDate) {
+        layout2.setText(effectDate);
+        layout2.setButtonGone();
+    }
+
+    @Override
+    public void setlineGone() {
+        line.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void IsBClientView(boolean isClient, String CommisionValue1) {
+        if (isClient) {
+            tv_pro.setVisibility(View.VISIBLE);
+            tv_pro.setText(CommisionValue1 + "%推广费");
+        } else {
+            tv_pro.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setPlanView(List<Plan> list) {
+        clayout.setPlanList(list);
+        clayout.setCount(list.size());
+    }
+
+    @Override
+    public void setil_up1ckickenable(boolean enable) {
+        il_up1.setEnable(false);
+    }
+
+    @Override
+    public void setil_up1Textvalue(String value) {
+        il_up1.setText(value);
+    }
+
+    @Override
+    public void setEntryView(final Entry entry, int index) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_insured_up2, null);
+        ll_add.addView(view);
+        final ItemLayout2 up = (ItemLayout2) view.findViewById(R.id.il_up1);
+        up.setTag(index + 1);
+        up.setLeft_name(entry.getName());
+        if (entry.getOption() != null && !entry.getOption().isEmpty()) {
+            if (entry.getOption().size() > 1) {
+                up.setText(entry.getOption().get(0));
+                up.setListener(new ItemLayout2.OnUpListener() {
+                    @Override
+                    public void onClick() {
+                        PickerDialogOneWheel wheel = new PickerDialogOneWheel(mContext, entry.getOption(), up);
+                        wheel.setListener(textListener);
+                        wheel.setDialogMode(PickerDialogOneWheel.DIALOG_MODE_BOTTOM);
+                        wheel.show();
+                    }
+                });
+            } else {
+                up.setText(entry.getOption().get(0));
+                up.setEnabled(false);
+            }
+        }
+
+    }
+
+    @Override
+    public void setReationShipValue(String value) {
+        il_beinsurer1.setText(value);
+    }
+
+    @Override
+    public void setInsuredIdType(String idTypeValue) {
+        il_beinsurer3.setText(idTypeValue);
+    }
+
+    @Override
+    public void setInsurerType(String idTypeValue) {
+        il_insurer2.setText(idTypeValue);
+
+    }
+
+    @Override
+    public void setPrice(String price) {
+
+        tv_price.setText(getString(R.string.howPrice, Utils.fromFenToYuan(price)));
+    }
+
+    @Override
+    public void removeLinView() {
+        lin_additem.removeAllViews();
+    }
+
+    @Override
+    public void addLinView(Benefit benefit) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.cardlayout_item, null, false);
+        TextView tv_appendKey = (TextView) view.findViewById(R.id.tv_appendKey);
+        TextView tv_appendValue = (TextView) view.findViewById(R.id.tv_appendValue);
+        tv_appendKey.setText(benefit.getBenefitName());
+        tv_appendValue.setText(benefit.getInsuredAmount());
+        lin_additem.addView(view);
+    }
+
+    @Override
+    public String getTBRIDEtValue() {
+        return il_insurer3.getEtValue();
+    }
+
+    @Override
+    public String getTBRMobileEtValue() {
+        return il_insurer4.getEtValue();
+    }
+
+    @Override
+    public String getTBRNameEtValue() {
+        return il_insurer1.getEtValue();
+    }
+
+    @Override
+    public String getBBRIDEtValue() {
+        return il_beinsurer4.getEtValue();
+    }
+
+    @Override
+    public String getBBRNameEtValue() {
+        return il_beinsurer2.getEtValue();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

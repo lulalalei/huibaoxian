@@ -28,6 +28,25 @@ public class PayDetail implements Serializable {
 
     private String paymentId="";
 
+    private String userId="";
+
+    private String couponCode="";
+
+    public String getCouponCode() {
+        return couponCode;
+    }
+
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     private String productName="";//
 
@@ -125,17 +144,19 @@ public class PayDetail implements Serializable {
         this.paymentId = paymentId;
     }
 
-    public static class Payment {
-        private String paymentId;//支付方式编号
+    public static class Payment implements Serializable{
+
+        private int paymentId;//支付方式编号
+
         private String quotaUsage;//限额方式
 
         private String quota;//支付限额
 
-        public String getPaymentId() {
+        public int getPaymentId() {
             return paymentId;
         }
 
-        public void setPaymentId(String paymentId) {
+        public void setPaymentId(int paymentId) {
             this.paymentId = paymentId;
         }
 

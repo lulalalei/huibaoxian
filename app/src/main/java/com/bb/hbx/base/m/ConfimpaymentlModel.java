@@ -26,8 +26,8 @@ public class ConfimpaymentlModel implements ConfimpaymentContract.Model {
 
 
     @Override
-    public void getPaySign(PayDetail request, Callback callback) {
-        Call call = service.getPaySign(request);
+    public void getPaySign(PayDetail detail, Callback callback) {
+        Call call = service.getPaySign(detail);
         call.enqueue(callback);
     }
 }

@@ -27,7 +27,6 @@ public interface Mall_ItemContract {
     interface View extends BaseView {
 
 
-
         void notfiy();
 
         TypeModel getTypeModel();
@@ -37,18 +36,15 @@ public interface Mall_ItemContract {
         void stopLoadMore();
 
 
-
     }
 
     abstract class Presenter extends BasePresenter<Mall_ItemContract.Model, Mall_ItemContract.View> {
-
-
 
 
         public abstract List<Item> getList();
 
         public abstract void getProducts(int type);
 
-
+        public abstract void setSortCode(int SortCode);
     }
 }

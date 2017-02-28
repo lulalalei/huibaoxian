@@ -71,6 +71,9 @@ public class PriceObservable extends Observable {
     public String calculation() {
         BigDecimal ret = Utils.fromFenToYuanBd(allPrice).subtract(Utils.fromFenToYuanBd(price_jf)).subtract(
                 Utils.fromFenToYuanBd(price_ye));
+        if (ret.compareTo(new BigDecimal(0)) <= 0) {//小于等于0时，都让支付0
+            ret = new BigDecimal(0.01).setScale(2,BigDecimal.ROUND_DOWN);
+        }
         return ret.toString();
     }
 
