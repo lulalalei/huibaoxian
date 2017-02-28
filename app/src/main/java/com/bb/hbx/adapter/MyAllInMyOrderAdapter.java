@@ -23,22 +23,22 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2017/1/23.
  */
 
-public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAdapter.MyViewHolder>{
+public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAdapter.MyViewHolder> {
 
     Context mContext;
     List<GetTradesBean.TradeListBean> list;
     LayoutInflater inflater;
-    int payAmountInt=0;
+    int payAmountInt = 0;
 
     public MyAllInMyOrderAdapter(Context mContext, List<GetTradesBean.TradeListBean> list) {
         this.mContext = mContext;
         this.list = list;
-        inflater=LayoutInflater.from(mContext);
+        inflater = LayoutInflater.from(mContext);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.all_myorder_item,parent,false);
+        View view = inflater.inflate(R.layout.all_myorder_item, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -50,15 +50,16 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
         holder.time_tv.setText(time);
         holder.itemO_tv.setText(list.get(position).getProductName());
         holder.orderNumber_tv.setText(list.get(position).getTradeId());
-        holder.itemTw_tv.setText(list.get(position).getInsuredList().get(0).getInsuredName());//投保人
+        if (list.get(position).getInsuredList() != null && !list.get(position).getInsuredList().isEmpty()) {
+            holder.itemTw_tv.setText(list.get(position).getInsuredList().get(0).getInsuredName());//投保人
+        }
         holder.itemTh_tv.setText("字段空缺: 被保人");
         holder.itemF_tv.setText("字段空缺: 保险期限");
         String payAmount = list.get(position).getPayAmount();
-        if (!TextUtils.isEmpty(payAmount))
-        {
+        if (!TextUtils.isEmpty(payAmount)) {
             payAmountInt = Integer.parseInt(payAmount);
         }
-        holder.price_tv.setText(TextUtils.isEmpty(payAmount)?"0.00":(payAmountInt/100)+"."+(payAmountInt/10%10)+(payAmountInt%10));
+        holder.price_tv.setText(TextUtils.isEmpty(payAmount) ? "0.00" : (payAmountInt / 100) + "." + (payAmountInt / 10 % 10) + (payAmountInt % 10));
         holder.income_tv.setText("字段空缺: 推广费");
         Glide.with(mContext).load(list.get(position).getInsurerLogo()).placeholder(R.drawable.shangcheng).into(holder.logo_iv);
 
@@ -69,7 +70,7 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
         return list.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.state_tv)
         TextView state_tv;
@@ -91,9 +92,10 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
         TextView income_tv;
         @BindView(R.id.logo_iv)
         ImageView logo_iv;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
