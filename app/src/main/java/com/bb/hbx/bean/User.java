@@ -61,8 +61,10 @@ public class User {
     private String sessionId = "";
     private String userId = "";
     private String userName = "";
-    private String paymentPwd="";
-    private String nickName="";
+    private String paymentPwd = "";
+    private String nickName = "";
+
+    private String authority = "0";
 
     public String getAddress() {
         return address;
@@ -254,5 +256,13 @@ public class User {
 
     public void setPaymentPwd(String paymentPwd) {
         this.paymentPwd = paymentPwd;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }
