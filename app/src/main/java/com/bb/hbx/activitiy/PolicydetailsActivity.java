@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -87,7 +88,10 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
 
     @BindView(R.id.lin_pay)
     LinearLayout lin_pay;
-    //
+
+    @BindView(R.id.lin_payments)
+    LinearLayout lin_payments;
+
 
     @BindView(R.id.tv_confim)
     TextView tv_confim;
@@ -165,6 +169,18 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
             tv_paytype.setText("已支付");
             lin_pay.setVisibility(View.VISIBLE);
             tv_confim.setText("再次购买");
+
+            if (detail.getPaymentList() != null && !detail.getPaymentList().isEmpty()) {
+                for (TradeDetail.InsuredListBean.Payment payment : detail.getPaymentList()) {
+                    View view = LayoutInflater.from(mContext).inflate(R.layout.item_payment, null);
+                    TextView tv_paykey = (TextView) view.findViewById(R.id.tv_paykey);
+                    TextView tv_payvalue = (TextView) view.findViewById(R.id.tv_payvalue);
+                    tv_paykey.setText(getString(R.string.dk, payment.getPaymentName()));
+                    tv_payvalue.setText(getString(R.string.howPrice, payment.getPayAmount()));
+                    lin_payments.addView(view);
+                }
+            }
+
         } else if (paysts == -11) {
             tv_paytype.setText("已失效");
             lin_pay.setVisibility(View.GONE);
@@ -187,6 +203,8 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
         if (detail.getInsuredList() != null && detail.getInsuredList().size() > 0) {
             tv_reation.setText(StringUtils.reationTostring(detail.getInsuredList().get(0).getRelation()));
         }
+
+        tv_tip.setText(getString(R.string.tip2, detail.getInsurerName(), detail.getInsurerTels()));
 
 
     }

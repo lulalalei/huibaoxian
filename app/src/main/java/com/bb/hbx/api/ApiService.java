@@ -98,13 +98,13 @@ public interface ApiService {
     //重设登录密码--已测  已经注册过登录密码
     @FormUrlEncoded
     @POST("api.do?method=resetLoginPwd&type=post")
-    Call<Result_Api> resetLoginPwd(@Field("userId") String userId,@Field("newPwd") String newPwd,
-                               @Field("resetType") String resetType,@Field("smsCode") String smsCode);
+    Call<Result_Api> resetLoginPwd(@Field("userId") String userId, @Field("newPwd") String newPwd,
+                                   @Field("resetType") String resetType, @Field("smsCode") String smsCode);
 
     //重设登录密码--已测  未注册过登录密码
     @FormUrlEncoded
     @POST("api.do?method=resetLoginPwd&type=post")
-    Call<Result_Api> resetLoginPwdFirst(@Field("userId") String userId,@Field("newPwd") String newPwd, @Field("resetType") String resetType);
+    Call<Result_Api> resetLoginPwdFirst(@Field("userId") String userId, @Field("newPwd") String newPwd, @Field("resetType") String resetType);
 
     //登录注销
     @FormUrlEncoded
@@ -124,7 +124,7 @@ public interface ApiService {
     //查询账户信息
     @FormUrlEncoded
     @POST("api.do?method=getAccount&type=post")
-    Call<Result_Api<Account>> getAccount(@Field("userId") String userId,@Field("acctType") String acctType);
+    Call<Result_Api<Account>> getAccount(@Field("userId") String userId, @Field("acctType") String acctType);
 
     //查询资金(积分)变动明细()--已测
     @FormUrlEncoded
@@ -223,17 +223,17 @@ public interface ApiService {
     //修改支付密码
     @FormUrlEncoded
     @POST("api.do?method=modPayPwd&type=post")
-    Call<Result_Api> modPayPwd(@Field("userId") String userId,@Field("oldPayPwd") String oldPayPwd,@Field("newPayPwd") String newPayPwd);
+    Call<Result_Api> modPayPwd(@Field("userId") String userId, @Field("oldPayPwd") String oldPayPwd, @Field("newPayPwd") String newPayPwd);
 
     //忘记支付密码
     @FormUrlEncoded
     @POST("api.do?method=forgetPayPwd&type=post")
-    Call<Result_Api> forgetPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
+    Call<Result_Api> forgetPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd, @Field("smsCode") String smsCode);
 
     //设置支付密码--已测
     @FormUrlEncoded
     @POST("api.do?method=setPayPwd&type=post")
-    Call<Result_Api> setPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
+    Call<Result_Api> setPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd, @Field("smsCode") String smsCode);
 
     //上传用户头像,阿里云
     @FormUrlEncoded
@@ -290,7 +290,6 @@ public interface ApiService {
     @POST("api.do?method=getUserCouponsList&type=post")
     Call<Result_Api<GetUserCouponsListBean>> getUserCouponsList(@Field("userId") String userId, @Field("sts") String sts, @Field("couponType") String couponType,
                                                                 @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
-
 
 
     //获取首页数据
@@ -405,4 +404,8 @@ public interface ApiService {
     Call<Result_Api<PaySign>> getPaySign(@Body PayDetail detail);
 
 
+    //校验支付密码
+    @FormUrlEncoded
+    @POST("api.do?method=verifyPayPwd&type=post")
+    Call<Result_Api> verifyPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd);
 }

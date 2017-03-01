@@ -68,12 +68,12 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 //
 //                }
 
-                if (api.getOutput() == null) {
-                    failCallback();
-                    throw new JsonIOException("解析出错或者数据格式返回错误");
-
-
-                }
+//                if (api.getOutput() == null) {
+//                    failCallback();
+//                    throw new JsonIOException("解析出错或者数据格式返回错误");
+//
+//
+//                }
 
                 successCallback(api);
             } else if (view != null) {

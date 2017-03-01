@@ -51,6 +51,7 @@ public class TradeDetail {
     private String discountAmount;
     private String endTime;
     private String insureAmount;
+    private String insurerTels;
     private String insurerId;
     private String insurerLogo;
     private String insurerName;
@@ -73,8 +74,16 @@ public class TradeDetail {
     private String tradeTime;
     private String userId;
     private List<InsuredListBean> insuredList;
-    private List<?> paymentList;
+    private List<InsuredListBean.Payment> paymentList;
     private List<TradeDetailType> typeList;
+
+    public String getInsurerTels() {
+        return insurerTels;
+    }
+
+    public void setInsurerTels(String insurerTels) {
+        this.insurerTels = insurerTels;
+    }
 
     public int getApplicantType() {
         return applicantType;
@@ -316,11 +325,11 @@ public class TradeDetail {
         this.insuredList = insuredList;
     }
 
-    public List<?> getPaymentList() {
+    public List<InsuredListBean.Payment> getPaymentList() {
         return paymentList;
     }
 
-    public void setPaymentList(List<?> paymentList) {
+    public void setPaymentList(List<InsuredListBean.Payment> paymentList) {
         this.paymentList = paymentList;
     }
 
@@ -542,7 +551,7 @@ public class TradeDetail {
             }
         }
 
-        public static  class Payment {
+        public static class Payment {
             private String benId;
             private String paymentName;
             private String payTime;
@@ -551,7 +560,64 @@ public class TradeDetail {
             private String refundOrganization;
             private String refundAccount;
 
+            public String getBenId() {
+                return benId;
+            }
+
+            public void setBenId(String benId) {
+                this.benId = benId;
+            }
+
+            public String getRefundAccount() {
+                return refundAccount;
+            }
+
+            public void setRefundAccount(String refundAccount) {
+                this.refundAccount = refundAccount;
+            }
+
+            public String getRefundOrganization() {
+                return refundOrganization;
+            }
+
+            public void setRefundOrganization(String refundOrganization) {
+                this.refundOrganization = refundOrganization;
+            }
+
+            public String getRefundTime() {
+                return refundTime;
+            }
+
+            public void setRefundTime(String refundTime) {
+                this.refundTime = refundTime;
+            }
+
+            public String getPayTime() {
+                return payTime;
+            }
+
+            public void setPayTime(String payTime) {
+                this.payTime = payTime;
+            }
+
+            public String getPayAmount() {
+                return payAmount;
+            }
+
+            public void setPayAmount(String payAmount) {
+                this.payAmount = payAmount;
+            }
+
+            public String getPaymentName() {
+                return paymentName;
+            }
+
+            public void setPaymentName(String paymentName) {
+                this.paymentName = paymentName;
+            }
         }
     }
+
+
 
 }

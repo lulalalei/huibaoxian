@@ -67,6 +67,8 @@ public final class Constants {
     public static final String TRANSTATION = "insuredInfolBean";
 
 
+
+
     /**
      * 支付宝账号的配置项目
      */

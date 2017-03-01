@@ -420,48 +420,19 @@
                         tools:text="@string/howPrice" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x36"
-                    android:layout_marginRight="@dimen/x36"
-                    android:layout_marginTop="@dimen/y20">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/hbdk1"
-                        android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppear.Theme.A2_Size14"
-                        tools:text="@string/howPrice" />
-                </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/lin_payments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/y38"
+                    android:layout_marginBottom="@dimen/y18"
                     android:layout_marginLeft="@dimen/x36"
                     android:layout_marginRight="@dimen/x36"
-                    android:layout_marginTop="@dimen/y20">
+                    android:layout_marginTop="@dimen/y20"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/yedk1"
-                        android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppear.Theme.A2_Size14"
-                        tools:text="@string/howPrice" />
                 </LinearLayout>
+
 
                 <include layout="@layout/line_e" />
 

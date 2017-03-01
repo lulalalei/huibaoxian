@@ -1,5 +1,6 @@
 package com.bb.hbx.activitiy;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -27,11 +28,15 @@ import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.TimeUtils;
 import com.bb.hbx.utils.Utils;
+import com.bb.hbx.widget.BlanceDailog;
 import com.bb.hbx.widget.FancyCountDownTextview;
+import com.bb.hbx.widget.PasswordDailog;
 import com.bb.hbx.widget.TextviewObserver;
 
 
 import butterknife.BindView;
+
+import static com.bb.hbx.R.drawable.on;
 
 
 /**
@@ -66,6 +71,10 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
     @BindView(R.id.tv_jf)
     TextView tv_jf;//积分
 
+    @BindView(R.id.tv_yhq)
+    TextView tv_yhq;//优惠券
+    //
+
     @BindView(R.id.tv_ye)
     TextView tv_ye;//积分
 
@@ -99,12 +108,17 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
     @BindView(R.id.lin_Insurance)
     LinearLayout lin_Insurance;//险种
 
+    @BindView(R.id.lin_yhq)
+    LinearLayout lin_yhq;
+
     private PayDetail detail;
     private PriceObservable priceObservable;
 
     private final static int REU_A = 0x111;
 
     private long timeoutLast;
+
+    private PasswordDailog dailog;
 
 
     @Override
@@ -137,21 +151,45 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
         ck_ye.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (isChecked) {
-                    priceObservable.setPrice_ye(detail.getAcctBalanceYE());
+                    if ("1".equalsIgnoreCase(MyApplication.user.getPaymentPwd())) {
+                        if (mPresenter.isdialogshowisdialogshow()) {
+                            showDialog();
+                        } else {
+                            priceObservable.setPrice_ye(detail.getAcctBalanceYE());
+                        }
+
+                    } else {
+                        BlanceDailog dailog = new BlanceDailog(mContext);
+                        dailog.show();
+                    }
+
                 } else {
                     priceObservable.setPrice_ye("0");
                 }
             }
         });
+
+
         ck_yhq.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    priceObservable.setPrice_yhq(detail.getAcctBalanceYE());
-//                }else {
-//                    priceObservable.setPrice_yhq("0");
-//                }
+                if (isChecked) {
+                    priceObservable.setPrice_yhq(detail.getPayPrice());
+                } else {
+                    priceObservable.setPrice_yhq("0");
+                }
+            }
+        });
+
+        dailog = new PasswordDailog(mContext, ConfirmpaymentActivity.this);
+        dailog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (mPresenter.getPayPassword().isEmpty()) {
+                    ck_ye.setChecked(false);
+                }
             }
         });
     }
@@ -188,7 +226,17 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
         }
 
         tv_ye.setText(getString(R.string.format_ye, Utils.fromFenToYuan(detail.getAcctBalanceYE())));
+
+        detail.setCouponCode("asfjdskfjsanfd");
+        if (!detail.getCouponCode().isEmpty()) {
+            lin_yhq.setVisibility(View.VISIBLE);
+            tv_yhq.setText(detail.getCouponCode());
+        } else {
+            lin_yhq.setVisibility(View.GONE);
+        }
+
         addPayLayout();
+
 
     }
 
@@ -274,6 +322,27 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
                 }
 
             }
+        }
+    }
+
+    @Override
+    public void getverifyPayPwd(String payPwd) {
+        mPresenter.verifyPayPwd(payPwd);
+    }
+
+    @Override
+    public void showDialog() {
+        if (!dailog.isShowing()) {
+            dailog.show();
+        }
+    }
+
+    @Override
+    public void dissDialog() {
+        if (dailog == null) {
+        } else if (dailog.isShowing()) {
+            mPresenter.setPayPassword(dailog.getPassword());
+            dailog.dismiss();
         }
     }
 }

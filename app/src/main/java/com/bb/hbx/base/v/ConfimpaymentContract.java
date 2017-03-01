@@ -19,16 +19,31 @@ public interface ConfimpaymentContract {
 
         void getPaySign(PayDetail detail, Callback callback);
 
+        void verifyPayPwd(String userId, String payPwd, Callback callback);
+
     }
 
 
     interface View extends BaseView {
 
+        void getverifyPayPwd(String payPwd);
 
+        void showDialog();
+
+        void dissDialog();
     }
 
     abstract class Presenter extends BasePresenter<ConfimpaymentContract.Model, ConfimpaymentContract.View> {
 
-       public abstract void getPaySign(PayDetail detail);
+        public abstract void getPaySign(PayDetail detail);
+
+        public abstract boolean isdialogshowisdialogshow();
+
+        public abstract void verifyPayPwd(String payPwd);
+
+        public abstract void setPayPassword(String payPassword);
+
+        public abstract String getPayPassword();
+
     }
 }

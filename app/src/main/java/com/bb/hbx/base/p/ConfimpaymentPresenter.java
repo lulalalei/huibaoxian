@@ -13,6 +13,7 @@ import com.bb.hbx.utils.ZfbUtils;
 import retrofit2.Callback;
 
 import static android.view.View.Z;
+import static com.bb.hbx.R.drawable.my;
 
 /**
  * Created by fancl.
@@ -23,6 +24,16 @@ public class ConfimpaymentPresenter extends ConfimpaymentContract.Presenter {
 
     private PostCallback postCallback;
 
+    private String payPassword = "";
+
+
+    public void setPayPassword(String payPassword) {
+        this.payPassword = payPassword;
+    }
+
+    public String getPayPassword() {
+        return payPassword;
+    }
 
     @Override
     public void onAttached() {
@@ -34,6 +45,8 @@ public class ConfimpaymentPresenter extends ConfimpaymentContract.Presenter {
                 if (api.getOutput() instanceof PaySign) {
                     PaySign paySign = (PaySign) api.getOutput();
                     ZfbUtils.getInstance().startPay(paySign);
+                } else {//
+                    mView.dissDialog();
                 }
 
 
@@ -53,4 +66,16 @@ public class ConfimpaymentPresenter extends ConfimpaymentContract.Presenter {
     public void getPaySign(PayDetail detail) {
         mModel.getPaySign(detail, postCallback);
     }
+
+    @Override
+    public boolean isdialogshowisdialogshow() {
+        return payPassword.isEmpty() ? true : false;
+    }
+
+    @Override
+    public void verifyPayPwd(String payPwd) {
+        mModel.verifyPayPwd(MyApplication.user.getUserId(), payPwd, postCallback);
+    }
+
+
 }

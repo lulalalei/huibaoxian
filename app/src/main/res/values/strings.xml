@@ -146,7 +146,14 @@
     <string name="fomartprice">价格格式不对</string>
     <string name="bxzr2">保险责任</string>
     <string name="be">保额</string>
-
+    <string name="dk">-%1$s抵扣</string>
+    <string name="pay">支付</string>
+    <string name="tip2">温馨提示：本产品由%1$s股份有限公司承保\n联系电话:</string>
+    <string name="password2">请输入支付密码</string>
+    <string name="losspsw2">忘记密码？</string>
+    <string name="setting2">使用余额抵扣需要设置支付密码</string>
+    <string name="next2">下次吧</string>
+    <string name="setting3">去设置</string>
 
     <!-- behavior -->
 

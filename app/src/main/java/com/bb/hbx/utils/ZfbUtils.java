@@ -3,6 +3,7 @@ package com.bb.hbx.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,11 +26,14 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.jar.Attributes;
 
 import static com.alipay.sdk.app.statistic.c.s;
 import static com.bb.hbx.utils.Constants.PARTNER;
 import static com.bb.hbx.utils.Constants.RSA_PRIVATE;
 import static com.bb.hbx.utils.Constants.SELLER;
+import static com.bb.hbx.utils.Constants.SUCCESS;
 import static com.bb.hbx.utils.ShareSPUtils.mContext;
 import static org.greenrobot.greendao.async.AsyncOperation.OperationType.Load;
 
@@ -206,18 +210,27 @@ public class ZfbUtils {
         @Override
         public String doInBackground(Void... params) {
             String result = "";
-            try {
+//            try {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("isPaySuccess", true);
-                jsonObject.put("spOrderId", paySign.getOuttradeno());
-                jsonObject.put("payChannel", "");
-                jsonObject.put("payTimeEnd", new Date().getTime());
-                jsonObject.put("totalFee", paySign.getTotalfee());
-                jsonObject.put("payNo", "");
-                result = GenApiHashUrl.getInstance().Http_Post(jsonObject.toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                HashMap<String, String> map = new HashMap<>();
+                StringBuilder builder = new StringBuilder();
+                builder.append("out_trade_no=" + paySign.getOuttradeno() + "&");
+                builder.append("trade_no=" + "20170301101350000000&");
+                builder.append("gmt_payment=" + TimeUtils.getCurrentTimeWithSecondAndSpace() + "&");
+                builder.append("totalFee=" + paySign.getTotalfee() + "&");
+                builder.append("trade_status=" + "TRADE_SUCCESS,TRADE_FINISHED");
+
+//                map.put("out_trade_no", paySign.getOuttradeno());
+//                map.put("trade_no", "20170301101350000000");
+//                map.put("gmt_payment", TimeUtils.getCurrentTimeWithSecondAndSpace());
+//                map.put("totalFee", paySign.getTotalfee());
+//                map.put("trade_status", "TRADE_SUCCESS,TRADE_FINISHED");
+                Log.i("fancl", "jsonObject:" + builder.toString());
+                result = GenApiHashUrl.getInstance().Http_Post(builder.toString());
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+
 
             Log.i("fancl", "result:" + result);
             return result;

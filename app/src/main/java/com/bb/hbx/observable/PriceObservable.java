@@ -42,7 +42,7 @@ public class PriceObservable extends Observable {
         this.price_yhq = price_yhq;
         String ret = calculation();
         setChanged();
-        //notifyObservers(new String[]{price_yhq, "0"});
+        notifyObservers(new String[]{ret, addall2()});
     }
 
     public String getPrice_ye() {
@@ -70,15 +70,21 @@ public class PriceObservable extends Observable {
 
     public String calculation() {
         BigDecimal ret = Utils.fromFenToYuanBd(allPrice).subtract(Utils.fromFenToYuanBd(price_jf)).subtract(
-                Utils.fromFenToYuanBd(price_ye));
+                Utils.fromFenToYuanBd(price_ye)).subtract(
+                Utils.fromFenToYuanBd(price_yhq));
         if (ret.compareTo(new BigDecimal(0)) <= 0) {//小于等于0时，都让支付0
-            ret = new BigDecimal(0.01).setScale(2,BigDecimal.ROUND_DOWN);
+            ret = new BigDecimal(0.01).setScale(2, BigDecimal.ROUND_DOWN);
         }
         return ret.toString();
     }
 
     public String addall() {
         BigDecimal ret = Utils.fromFenToYuanBd(price_jf).add(Utils.fromFenToYuanBd(price_ye));
+        return ret.toString();
+    }
+
+    public String addall2() {
+        BigDecimal ret = Utils.fromFenToYuanBd(allPrice).subtract(new BigDecimal(calculation())).setScale(2, BigDecimal.ROUND_DOWN);
         return ret.toString();
     }
 
