@@ -119,7 +119,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
 
         //name表示nickName
-        String sql = "create table if not exists userstb(_id integer primary key autoincrement,currentUser text,hasLogined text,userId text,sessionId text," +
+        String sql = "create table if not exists userstb(_id integer primary key autoincrement,currentUser text,hasLogined text,authority text,userId text,sessionId text," +
                 "isBClient text,name text,gender text,email text,phone text,pwd text,paymentPwd text,usericon text)";
 
         db.execSQL(sql);

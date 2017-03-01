@@ -51,6 +51,7 @@ public class WelcomeModel implements WelcomeContract.Model {
                 values.put("isBClient", false);//默认false
                 values.put("sessionId", "");
                 values.put("userId", "");
+                values.put("authority", "0");
                 values.put("phone", "");
                 values.put("gender", "0");//默认为0
                 long flag = MyUsersSqlite.db.insert("userstb", null, values);
@@ -58,6 +59,7 @@ public class WelcomeModel implements WelcomeContract.Model {
                 values.clear();
 
                 MyApplication.user.setUserId("");
+                MyApplication.user.setAuthority("0");
                 MyApplication.user.setMobile("");
                 MyApplication.user.setLoginPwd("0");
                 MyApplication.user.setPaymentPwd("0");//是否设置过支付密码
@@ -68,12 +70,14 @@ public class WelcomeModel implements WelcomeContract.Model {
                 if (hasLogined.equals("true"))//首次登陆后,数据会被刷新
                 {
                     String userId = cursor.getString(cursor.getColumnIndex("userId"));
+                    String authority = cursor.getString(cursor.getColumnIndex("authority"));
                     String phone = cursor.getString(cursor.getColumnIndex("phone"));
                     String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));
                     String isBClient = cursor.getString(cursor.getColumnIndex("isBClient"));
                     String pwd = cursor.getString(cursor.getColumnIndex("pwd"));
                     String paymentPwd = cursor.getString(cursor.getColumnIndex("paymentPwd"));
                     MyApplication.user.setUserId(userId);
+                    MyApplication.user.setAuthority(authority);
                     MyApplication.user.setMobile(phone);
                     //MyApplication.user.setLoginPwd(TextUtils.isEmpty(pwd)?"0":"1");
                     MyApplication.user.setLoginPwd(pwd);
@@ -82,6 +86,7 @@ public class WelcomeModel implements WelcomeContract.Model {
                     MyApplication.user.setIsBClient(isBClient.equals("true") ? true : false);
                 } else {
                     MyApplication.user.setUserId("");
+                    MyApplication.user.setAuthority("0");
                     MyApplication.user.setMobile("");
                     MyApplication.user.setLoginPwd("0");
                     MyApplication.user.setPaymentPwd("0");

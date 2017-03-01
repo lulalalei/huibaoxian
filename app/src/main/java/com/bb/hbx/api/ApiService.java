@@ -223,17 +223,19 @@ public interface ApiService {
     //修改支付密码
     @FormUrlEncoded
     @POST("api.do?method=modPayPwd&type=post")
-    Call<Result_Api> modPayPwd(@Field("userId") String userId, @Field("oldPayPwd") String oldPayPwd, @Field("newPayPwd") String newPayPwd);
+    Call<Result_Api> modPayPwd(@Field("userId") String userId,@Field("oldPayPwd") String oldPayPwd,@Field("newPayPwd") String newPayPwd);
+
 
     //忘记支付密码
     @FormUrlEncoded
     @POST("api.do?method=forgetPayPwd&type=post")
-    Call<Result_Api> forgetPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd, @Field("smsCode") String smsCode);
+    Call<Result_Api> forgetPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
 
     //设置支付密码--已测
     @FormUrlEncoded
     @POST("api.do?method=setPayPwd&type=post")
-    Call<Result_Api> setPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd, @Field("smsCode") String smsCode);
+    Call<Result_Api> setPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
+
 
     //上传用户头像,阿里云
     @FormUrlEncoded
