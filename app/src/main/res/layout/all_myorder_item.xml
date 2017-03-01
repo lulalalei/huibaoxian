@@ -49,8 +49,10 @@
         android:layout_marginRight="18dp"
         android:layout_below="@id/time_layout"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:background="@drawable/item_gopay_shape"/>
+        android:gravity="center" />
+    <!--
+        android:background="@drawable/item_gopay_shape"
+    -->
     <TextView
         android:id="@+id/itemO_tv"
         android:layout_width="230dp"

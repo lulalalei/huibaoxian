@@ -95,6 +95,12 @@ public class Can {
     //结束找回密码Activity
     public static final int FINISH_GETPSW=301;
 
+    //忘记支付密码
+    public static final int FORGET_PWD=400;
+
+    //修改支付密码
+    public static final int FIX_PWD=401;
+
     //在 我的--个险--个险订单 页面中记录上一个fragment的位置,用于hide,show上一个fragment
     public static int preFragmentPositionInPIO;
     //在 我的--红包--我的红包 页面中记录上一个fragment的位置,用于hide,show上一个fragment

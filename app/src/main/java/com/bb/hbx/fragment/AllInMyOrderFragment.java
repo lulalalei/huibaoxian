@@ -14,6 +14,8 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.GetTradesBean;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ public class AllInMyOrderFragment extends BaseFragment{
 
     Context mContext;
     @BindView(R.id.scrollView)
-    ScrollView scrollView;
+    PullToRefreshScrollView scrollView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     String path="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
@@ -63,7 +65,20 @@ public class AllInMyOrderFragment extends BaseFragment{
 
     @Override
     public void initView() {
+        scrollView.setMode(PullToRefreshBase.Mode.BOTH);
+        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex=1;
+                showTradesList(pageIndex);
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex++;
+                showTradesList(pageIndex);
+            }
+        });
     }
 
     @Override
@@ -85,7 +100,7 @@ public class AllInMyOrderFragment extends BaseFragment{
         //adapter.notifyDataSetChanged();
     }
 
-    private void showTradesList(int pageIndex) {
+    private void showTradesList(final int pageIndex) {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
         Call call=service.getTrades(MyApplication.user.getUserId(),"0",pageIndex+"","10");
         call.enqueue(new Callback() {
@@ -98,9 +113,17 @@ public class AllInMyOrderFragment extends BaseFragment{
                     if (bean!=null)
                     {
                         //List<GetTradesBean.TradeListBean> tradeList = bean.getTradeList();
+                        if (pageIndex==1)
+                        {
+                            list.clear();
+                        }
                         list.addAll(bean.getTradeList());
                         adapter.notifyDataSetChanged();
                     }
+                }
+                if (scrollView.isRefreshing())
+                {
+                    scrollView.onRefreshComplete();
                 }
             }
 

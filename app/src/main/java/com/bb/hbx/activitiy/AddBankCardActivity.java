@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -8,10 +9,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddBankCardActivity extends BaseActivity implements View.OnClickListener{
 
@@ -68,29 +76,35 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                 Toast.makeText(this,"选择银行",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.verify_tv:
-                Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
-                startActivity(intent);
-                /*String name = name_et.getText().toString();
+
+                String name = name_et.getText().toString();
                 String idCard = idCard_et.getText().toString();
                 String bankCard = bankCard_et.getText().toString();
                 String bank = choseBank_et.getText().toString();
-                if (!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(idCard)&&!TextUtils.isEmpty(bankCard)*//*&&!TextUtils.isEmpty(bank)*//*)
+                if (!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(idCard)&&!TextUtils.isEmpty(bankCard))
                 {
+
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.bindingBankCard(name,"工商银行",bankCard, MyApplication.user.getUserId());
+                    Call call=service.bindingBankCard(MyApplication.user.getUserId(),name,idCard,bankCard,"工商银行");
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
                             Result_Api body = (Result_Api) response.body();
                             boolean success = body.isSuccess();
-                            if (success)
+                            /*if (success)
                             {
-                                *//*Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
-                                startActivity(intent);*//*
+                                Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
+                                startActivity(intent);
+                            }*/
+                            showTip(body.getRespMsg());
+                            String paymentPwd = MyApplication.user.getPaymentPwd();
+                            if ("1".equals(paymentPwd))//已经设置过支付密码
+                            {
+                                Intent intent = new Intent(AddBankCardActivity.this, WithdrawActivity.class);
+                                startActivity(intent);
                             }
                             else
                             {
-                                showTip("该银行卡已被绑定,请先解绑");
                                 Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
                                 startActivity(intent);
                             }
@@ -98,14 +112,14 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
 
                         @Override
                         public void onFailure(Call call, Throwable t) {
-                            showTip("上传失败!");
+
                         }
                     });
                 }
                 else
                 {
                     showTip("请核对信息!");
-                }*/
+                }
                 break;
             default:
                 break;

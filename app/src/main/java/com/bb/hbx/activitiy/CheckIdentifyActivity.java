@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.cans.Can;
 
 import butterknife.BindView;
 
@@ -19,6 +21,7 @@ public class CheckIdentifyActivity extends BaseActivity implements View.OnClickL
     EditText pwd_et;
     @BindView(R.id.nextStep_tv)
     TextView nextStep_tv;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_check_identify;
@@ -49,8 +52,19 @@ public class CheckIdentifyActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.nextStep_tv:
                 //showTip("下一步");
-                Intent intent = new Intent(this, FixPayPwdActivity.class);
-                startActivity(intent);
+                String pwd = pwd_et.getText().toString();
+                if (!TextUtils.isEmpty(pwd))
+                {
+                    Intent intent = new Intent(this, FixPayPwdActivity.class);
+                    intent.putExtra("flag", Can.FIX_PWD);
+                    intent.putExtra("oldPwd",pwd);
+                    startActivity(intent);
+
+                }
+                else
+                {
+                    showTip("信息不能为空");
+                }
                 break;
             default:
                 break;

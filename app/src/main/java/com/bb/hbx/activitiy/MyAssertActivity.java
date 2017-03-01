@@ -2,6 +2,7 @@ package com.bb.hbx.activitiy;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.Account;
+import com.bb.hbx.bean.GetBankCardList;
 import com.bb.hbx.bean.GetTotalIncomeBean;
 import com.bb.hbx.utils.TimeUtils;
 import com.github.mikephil.charting.charts.LineChart;
@@ -442,7 +444,7 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         switch (view.getId())
         {
             case R.id.back_layout:
@@ -454,8 +456,37 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
                 startActivity(intent);
                 break;
             case R.id.cash_layout:
-                intent.setClass(this,CashActivity.class);
-                startActivity(intent);
+                //intent.setClass(this,CashActivity.class);
+                ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                Call call=service.getBankCardList(MyApplication.user.getUserId());
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Result_Api body = (Result_Api) response.body();
+                        if (body!=null)
+                        {
+                            GetBankCardList cardBean = (GetBankCardList) body.getOutput();
+                            if (cardBean!=null)
+                            {
+                                if (!TextUtils.isEmpty(cardBean.getLastDigits()))
+                                {
+                                    intent.setClass(MyAssertActivity.this,WithdrawActivity.class);
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    intent.setClass(MyAssertActivity.this,AddBankCardActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+
+                    }
+                });
                 break;
             case R.id.settlement_layout:
                 intent.setClass(this,SettlementActivity.class);

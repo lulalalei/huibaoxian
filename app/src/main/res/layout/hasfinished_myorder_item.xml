@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/time_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
         android:background="@color/A7">
         <TextView
             android:id="@+id/time_tv"
@@ -16,8 +16,7 @@
             android:text="2016-12-22 12:54:56"
             android:textColor="@color/A4"
             android:textSize="9sp"
-            android:layout_marginTop="18dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="18dp"/>
     </RelativeLayout>
 
@@ -35,7 +34,7 @@
         android:gravity="center" />
     <TextView
         android:id="@+id/itemO_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="浙AY9X62"
         android:textColor="@color/A3"
@@ -51,7 +50,7 @@
         android:src="@drawable/shangcheng"
         android:scaleType="centerCrop"
         android:layout_below="@id/itemO_tv"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="18dp"/>
     <TextView
         android:id="@+id/orderNumber_tv"
@@ -102,66 +101,70 @@
         android:background="@color/colorDivider"
         android:layout_below="@id/itemF_tv"
         android:layout_marginTop="24dp"/>
-    <TextView
-        android:id="@+id/priceShow_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="订单金额:"
-        android:textSize="12sp"
-        android:textColor="@color/A4"
-        android:layout_below="@id/divider_tv"
-        android:layout_marginTop="17dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginBottom="17dp"/>
-    <TextView
-        android:id="@+id/price_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4345.00"
-        android:textSize="14sp"
-        android:textColor="@color/A2"
-        android:layout_toRightOf="@id/priceShow_tv"
-        android:layout_alignBottom="@id/priceShow_tv"
-        android:layout_marginLeft="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="元"
-        android:textSize="12sp"
-        android:textColor="@color/A4"
-        android:layout_toRightOf="@id/price_tv"
-        android:layout_alignBottom="@id/priceShow_tv"
-        android:layout_marginLeft="10dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@id/divider_tv">
+        <TextView
+            android:id="@+id/priceShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单金额:"
+            android:textSize="12sp"
+            android:textColor="@color/A4"
+            android:layout_marginLeft="18dp"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4345.00"
+            android:textSize="14sp"
+            android:textColor="@color/A2"
+            android:layout_toRightOf="@id/priceShow_tv"
+            android:layout_alignBottom="@id/priceShow_tv"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textSize="12sp"
+            android:textColor="@color/A4"
+            android:layout_toRightOf="@id/price_tv"
+            android:layout_alignBottom="@id/priceShow_tv"
+            android:layout_marginLeft="10dp"/>
 
-    <TextView
-        android:id="@+id/unit_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="元"
-        android:textSize="12sp"
-        android:textColor="@color/A4"
-        android:layout_alignParentRight="true"
-        android:layout_alignBottom="@id/priceShow_tv"
-        android:layout_marginRight="18dp"/>
+        <TextView
+            android:id="@+id/unit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textSize="12sp"
+            android:textColor="@color/A4"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/priceShow_tv"
+            android:layout_marginRight="18dp"/>
 
-    <TextView
-        android:id="@+id/income_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="670.00"
-        android:textSize="14sp"
-        android:textColor="@color/A2"
-        android:layout_alignBottom="@id/priceShow_tv"
-        android:layout_toLeftOf="@id/unit_tv"
-        android:layout_marginRight="10dp"/>
-    <TextView
-        android:id="@+id/incomeShow_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="推广费:"
-        android:textSize="12sp"
-        android:textColor="@color/A4"
-        android:layout_alignBottom="@id/priceShow_tv"
-        android:layout_toLeftOf="@id/income_tv"
-        android:layout_marginRight="10dp" />
+        <TextView
+            android:id="@+id/income_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="670.00"
+            android:textSize="14sp"
+            android:textColor="@color/A2"
+            android:layout_alignBottom="@id/priceShow_tv"
+            android:layout_toLeftOf="@id/unit_tv"
+            android:layout_marginRight="10dp"/>
+        <TextView
+            android:id="@+id/incomeShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推广费:"
+            android:textSize="12sp"
+            android:textColor="@color/A4"
+            android:layout_alignBottom="@id/priceShow_tv"
+            android:layout_toLeftOf="@id/income_tv"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+
 </RelativeLayout>

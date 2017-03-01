@@ -1,5 +1,6 @@
 package com.bb.hbx.activitiy;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MessageCodeBean;
+import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.widget.CountDownTextView;
 
 import butterknife.BindView;
@@ -76,7 +78,7 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
                 if (!TextUtils.isEmpty(phone)&&phone.length()==11)
                 {
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.getVerifyCode("1",phone,"12");//12
+                    Call call=service.getVerifyCode("1",phone,"14");//14
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
@@ -112,14 +114,28 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
                 {
                     if (pwd.equals(checkPwd))
                     {
-                        if (checkCode.equals(smsCode))
-                        {
+                        /*if (checkCode.equals(smsCode))
+                        {*/
                             ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                            Call call=service.updatePayPassword(MyApplication.user.getUserId(),pwd,checkCode);
+                            Call call=service.setPayPwd(MyApplication.user.getUserId(),pwd,checkCode);
                             call.enqueue(new Callback() {
                                 @Override
                                 public void onResponse(Call call, Response response) {
-                                    showTip("设置密码成功");
+                                    Result_Api body = (Result_Api) response.body();
+                                    if (body!=null)
+                                    {
+                                        if (body.isSuccess())
+                                        {
+                                            //更新表数据
+                                            MyUsersSqlite.db.execSQL("update userstb set paymentPwd=? where currentUser=currentUser ",
+                                                    new String[]{"1"});
+                                            MyApplication.user.setPaymentPwd("1");
+                                            Intent intent = new Intent(SetPayPwdActivity.this, WithdrawActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                        showTip(body.getRespMsg());
+                                    }
                                 }
 
                                 @Override
@@ -127,11 +143,11 @@ public class SetPayPwdActivity extends BaseActivity implements View.OnClickListe
                                     showTip("设置密码失败");
                                 }
                             });
-                        }
+                        /*}
                         else
                         {
                             showTip("输入验证码有误"+smsCode);
-                        }
+                        }*/
                     }
                     else
                     {

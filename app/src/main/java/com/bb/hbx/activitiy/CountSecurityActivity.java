@@ -68,7 +68,15 @@ public class CountSecurityActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.pwdPay_layout:
                 //showTip("支付密码");
-                intent.setClass(this,PayPwdActivity.class);
+                String paymentPwd = MyApplication.user.getPaymentPwd();
+                if ("1".equals(paymentPwd))
+                {
+                    intent.setClass(this,PayPwdActivity.class);
+                }
+                else
+                {
+                    intent.setClass(this,SetPayPwdActivity.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.checkPhone_layout:

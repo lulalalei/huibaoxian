@@ -10,16 +10,16 @@ public class GetTradesBean {
 
 
     /**
-     * output : {"pageSize":"3","totalCount":"3","tradeList":[{"attachId":0,"auditSts":0,"classId":"103249","insuredList":[{"insuredId":"156","insuredMobile":"","insuredName":"222"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092","payAmount":"64700","policyHolderMobile":"111111","policyHolderName":"1111","productId":"1092","productName":"车险测试产品","productProp":528,"spxSts":"10","sts":"10","tradeDate":"20170227193252","tradeId":"20170227193252677649"},{"attachId":0,"auditSts":0,"classId":"310022","insuredList":[{"insuredId":"142","insuredMobile":"","insuredName":"123"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","sts":"10","tradeDate":"20170227103315","tradeId":"20170227103315836882"},{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"13989857704","policyHolderName":"猪八戒","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"35","sts":"20","tradeDate":"20170112201749","tradeId":"20170112194801001"}]}
+     * output : {"pageSize":"10","totalCount":"15","tradeList":[{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180223112921","extraInfos":"","insuredList":[{"insuredId":"162","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170228112921","sts":"10","tradeDate":"20170228112821","tradeId":"20170228112821394136"}]}
      * respCode : 000000
      * respMsg : 获取订单列表成功
      * success : true
      */
 
         /**
-         * pageSize : 3
-         * totalCount : 3
-         * tradeList : [{"attachId":0,"auditSts":0,"classId":"103249","insuredList":[{"insuredId":"156","insuredMobile":"","insuredName":"222"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092","payAmount":"64700","policyHolderMobile":"111111","policyHolderName":"1111","productId":"1092","productName":"车险测试产品","productProp":528,"spxSts":"10","sts":"10","tradeDate":"20170227193252","tradeId":"20170227193252677649"},{"attachId":0,"auditSts":0,"classId":"310022","insuredList":[{"insuredId":"142","insuredMobile":"","insuredName":"123"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","sts":"10","tradeDate":"20170227103315","tradeId":"20170227103315836882"},{"attachId":0,"auditSts":0,"classId":"210001","insuredList":[],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/100","payAmount":"2000","policyHolderMobile":"13989857704","policyHolderName":"猪八戒","productId":"100","productName":"航空意外保障","productProp":0,"spxSts":"35","sts":"20","tradeDate":"20170112201749","tradeId":"20170112194801001"}]
+         * pageSize : 10
+         * totalCount : 15
+         * tradeList : [{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180223112921","extraInfos":"","insuredList":[{"insuredId":"162","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170228112921","sts":"10","tradeDate":"20170228112821","tradeId":"20170228112821394136"}]
          */
 
         private String pageSize;
@@ -54,27 +54,36 @@ public class GetTradesBean {
             /**
              * attachId : 0
              * auditSts : 0
-             * classId : 103249
-             * insuredList : [{"insuredId":"156","insuredMobile":"","insuredName":"222"}]
+             * classId : 310022
+             * classType : 2
+             * commisionValue1 : 0
+             * endTime : 20180223112921
+             * extraInfos :
+             * insuredList : [{"insuredId":"162","insuredMobile":"","insuredName":"123","licenseNo":""}]
              * insurerId : 1
              * insurerLogo :
              * insurerName : 人保财险
-             * orderURL : http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092
+             * orderURL : http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049
              * payAmount : 64700
-             * policyHolderMobile : 111111
-             * policyHolderName : 1111
-             * productId : 1092
-             * productName : 车险测试产品
-             * productProp : 528
+             * policyHolderMobile : 13656714459
+             * policyHolderName : 456
+             * productId : 1049
+             * productName : 安联国际旅行保险
+             * productProp : 1040
              * spxSts : 10
+             * startTime : 20170228112921
              * sts : 10
-             * tradeDate : 20170227193252
-             * tradeId : 20170227193252677649
+             * tradeDate : 20170228112821
+             * tradeId : 20170228112821394136
              */
 
             private int attachId;
             private int auditSts;
             private String classId;
+            private int classType;
+            private int commisionValue1;
+            private String endTime;
+            private String extraInfos;
             private String insurerId;
             private String insurerLogo;
             private String insurerName;
@@ -86,11 +95,11 @@ public class GetTradesBean {
             private String productName;
             private int productProp;
             private String spxSts;
+            private String startTime;
             private String sts;
             private String tradeDate;
             private String tradeId;
             private List<InsuredListBean> insuredList;
-
 
             public int getAttachId() {
                 return attachId;
@@ -114,6 +123,38 @@ public class GetTradesBean {
 
             public void setClassId(String classId) {
                 this.classId = classId;
+            }
+
+            public int getClassType() {
+                return classType;
+            }
+
+            public void setClassType(int classType) {
+                this.classType = classType;
+            }
+
+            public int getCommisionValue1() {
+                return commisionValue1;
+            }
+
+            public void setCommisionValue1(int commisionValue1) {
+                this.commisionValue1 = commisionValue1;
+            }
+
+            public String getEndTime() {
+                return endTime;
+            }
+
+            public void setEndTime(String endTime) {
+                this.endTime = endTime;
+            }
+
+            public String getExtraInfos() {
+                return extraInfos;
+            }
+
+            public void setExtraInfos(String extraInfos) {
+                this.extraInfos = extraInfos;
             }
 
             public String getInsurerId() {
@@ -204,6 +245,14 @@ public class GetTradesBean {
                 this.spxSts = spxSts;
             }
 
+            public String getStartTime() {
+                return startTime;
+            }
+
+            public void setStartTime(String startTime) {
+                this.startTime = startTime;
+            }
+
             public String getSts() {
                 return sts;
             }
@@ -238,14 +287,16 @@ public class GetTradesBean {
 
             public static class InsuredListBean {
                 /**
-                 * insuredId : 156
+                 * insuredId : 162
                  * insuredMobile :
-                 * insuredName : 222
+                 * insuredName : 123
+                 * licenseNo :
                  */
 
                 private String insuredId;
                 private String insuredMobile;
                 private String insuredName;
+                private String licenseNo;
 
                 public String getInsuredId() {
                     return insuredId;
@@ -269,6 +320,14 @@ public class GetTradesBean {
 
                 public void setInsuredName(String insuredName) {
                     this.insuredName = insuredName;
+                }
+
+                public String getLicenseNo() {
+                    return licenseNo;
+                }
+
+                public void setLicenseNo(String licenseNo) {
+                    this.licenseNo = licenseNo;
                 }
             }
         }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ScrollView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.PerOrderDetailActivity;
@@ -13,6 +12,7 @@ import com.bb.hbx.adapter.MyHadPaiedInPIOAdapter;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.MyPIOederBean;
 import com.bb.hbx.interfaces.OnItemClickListener;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import butterknife.BindView;
 public class HadPaiedInPIOFragment extends BaseFragment{
 
     @BindView(R.id.scrollView)
-    ScrollView scrollView;
+    PullToRefreshScrollView scrollView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -51,7 +51,7 @@ public class HadPaiedInPIOFragment extends BaseFragment{
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_all_inpio_layout;
+        return R.layout.fragment_hadpay_inpio_layout;
     }
 
     @Override

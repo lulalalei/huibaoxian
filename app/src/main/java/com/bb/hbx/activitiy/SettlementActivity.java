@@ -152,6 +152,7 @@ public class SettlementActivity extends BaseActivity implements View.OnClickList
                         settlement_tv.setText(TextUtils.isEmpty(acctSettSum)?"0.00":(acctSettSumInt/100)+"."+(acctSettSumInt/10%10)+(acctSettSumInt%10));
                     }
                 }
+
             }
 
             @Override

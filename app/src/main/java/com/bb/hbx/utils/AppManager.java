@@ -83,6 +83,17 @@ public class AppManager {
         }
     }
 
+    /**
+     * 结束指定的Activity
+     */
+    public void finishParticularActivity(Activity activity) {
+        if (activity != null) {
+            activity.finish();
+            activityStack.remove(activity);
+            activity = null;
+        }
+    }
+
 
     /**
      * 结束指定类名的Activity

@@ -6,14 +6,17 @@ import com.bb.hbx.bean.AddConsignee;
 import com.bb.hbx.bean.AddInsured;
 import com.bb.hbx.bean.AreasListBean;
 import com.bb.hbx.bean.BannerBean;
+import com.bb.hbx.bean.BindingBankCard;
 import com.bb.hbx.bean.BobaoItem;
 import com.bb.hbx.bean.Consignees;
 import com.bb.hbx.bean.DeleteConsignee;
 import com.bb.hbx.bean.FilterBean;
 import com.bb.hbx.bean.GetAccountDetailBean;
 import com.bb.hbx.bean.GetAcctSettSumBean;
+import com.bb.hbx.bean.GetBankCardList;
 import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.GetMyPageInfoBean;
+import com.bb.hbx.bean.GetPolicies;
 import com.bb.hbx.bean.GetTotalIncomeBean;
 import com.bb.hbx.bean.GetTotalIncomeDetail;
 import com.bb.hbx.bean.GetTradesBean;
@@ -141,7 +144,7 @@ public interface ApiService {
                                                         @Field("beginDate") String beginDate, @Field("endDate") String endDate,
                                                         @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
-    //收入月账单--待测
+    //收入月账单--已测
     @FormUrlEncoded
     @POST("api.do?method=getTotalIncomeDetail&type=post")
     Call<Result_Api<GetTotalIncomeDetail>> getTotalIncomeDetail(@Field("userId") String userId, @Field("acctType") String acctType,
@@ -200,11 +203,16 @@ public interface ApiService {
     @POST("api.do?method=getAreaList&type=post")
     Call<Result_Api<AreasListBean>> getAreaList(@Field("findAllFlag") boolean findAllFlag);
 
+    //获取用户银行卡信息
+    @FormUrlEncoded
+    @POST("api.do?method=getBankCardList&type=post")
+    Call<Result_Api<GetBankCardList>> getBankCardList(@Field("userId") String userId);
+
     //添加银行卡
     @FormUrlEncoded
     @POST("api.do?method=bindingBankCard&type=post")
-    Call<Result_Api> bindingBankCard(@Field("accountName") String accountName, @Field("bankName") String bankName,
-                                     @Field("cardNo") String cardNo, @Field("userId") String userId);
+    Call<Result_Api<BindingBankCard>> bindingBankCard(@Field("userId") String userId, @Field("accountName") String accountName, @Field("idNo") String idNo,
+                                                      @Field("cardNo") String cardNo, @Field("bankName") String bankName);
 
     //提现
     @FormUrlEncoded
@@ -212,15 +220,20 @@ public interface ApiService {
     Call<Result_Api> applyCash(@Field("userId") String userId, @Field("cashAmount") String cashAmount, @Field("accountName") String accountName,
                                @Field("bankName") String bankName, @Field("cashIp") String cashIp);
 
-    /*//设置,修改支付密码
+    //修改支付密码
     @FormUrlEncoded
-    @POST("api.do?method=updatePayPassword&type=post")
-    Call<Result_Api> updatePayPassword(@Field("payPassword") String payPassword, @Field("userId") String userId);*/
+    @POST("api.do?method=modPayPwd&type=post")
+    Call<Result_Api> modPayPwd(@Field("userId") String userId,@Field("oldPayPwd") String oldPayPwd,@Field("newPayPwd") String newPayPwd);
 
-    //设置支付密码--待测
+    //忘记支付密码
     @FormUrlEncoded
-    @POST("api.do?method=updatePayPassword&type=post")
-    Call<Result_Api> updatePayPassword(@Field("userId") String userId,@Field("payPassword") String payPassword,@Field("smsCode") String smsCode);
+    @POST("api.do?method=forgetPayPwd&type=post")
+    Call<Result_Api> forgetPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
+
+    //设置支付密码--已测
+    @FormUrlEncoded
+    @POST("api.do?method=setPayPwd&type=post")
+    Call<Result_Api> setPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
 
     //上传用户头像,阿里云
     @FormUrlEncoded
@@ -268,8 +281,8 @@ public interface ApiService {
     //获取我的保单列表--待测
     @FormUrlEncoded
     @POST("api.do?method=getPolicies&type=post")
-    Call<String> getPolicies(@Field("userId") String userId, @Field("policySts") String policySts,
-                             @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+    Call<Result_Api<GetPolicies>> getPolicies(@Field("userId") String userId, @Field("policySts") String policySts, @Field("classType") String classType,
+                                              @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
 
     //获取我的红包记录列表--已测

@@ -2,6 +2,7 @@ package com.bb.hbx.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.GetTradesBean;
+import com.bb.hbx.utils.TimeUtils;
+import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,10 +26,13 @@ import butterknife.ButterKnife;
 public class MyHasFinishedInMyOrderAdapter extends RecyclerView.Adapter<MyHasFinishedInMyOrderAdapter.MyViewHolder>{
 
     Context mContext;
-    ArrayList<String> list;
+    List<GetTradesBean.TradeListBean> list;
     LayoutInflater inflater;
+    int payAmountInt=0;
+    int classType=1;//1表示车险,2表示个险
+    String sts="";
 
-    public MyHasFinishedInMyOrderAdapter(Context mContext, ArrayList<String> list) {
+    public MyHasFinishedInMyOrderAdapter(Context mContext, List<GetTradesBean.TradeListBean> list) {
         this.mContext = mContext;
         this.list = list;
         inflater=LayoutInflater.from(mContext);
@@ -39,7 +46,46 @@ public class MyHasFinishedInMyOrderAdapter extends RecyclerView.Adapter<MyHasFin
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        //sts = list.get(position).getSts();
+        //holder.state_tv.setBackgroundResource(R.drawable.item_havepay_shape);
+        holder.state_tv.setText("已完成");
+        //holder.state_tv.setTextColor(mContext.getResources().getColor(R.color.A4));
 
+        classType = list.get(position).getClassType();
+        String tradeDate = list.get(position).getTradeDate();
+        long logTime = TimeUtils.getStringToDateNoSpace(tradeDate);
+        String time = TimeUtils.getDateToString(logTime);
+        holder.time_tv.setText(time);
+        holder.itemO_tv.setText(list.get(position).getProductName());
+        holder.orderNumber_tv.setText(list.get(position).getTradeId());
+        if (list.get(position).getInsuredList()!=null&&list.get(position).getInsuredList().size()>0)
+        {
+            holder.itemTw_tv.setText("被保人: "+list.get(position).getInsuredList().get(0).getInsuredName());//被保人
+        }
+        if (2==classType)//2表示个险
+        {
+            holder.itemTh_tv.setText("投保人: "+list.get(position).getPolicyHolderName());
+            String startTime = list.get(position).getStartTime();
+            String endTime = list.get(position).getEndTime();
+            long logStartTime = TimeUtils.getStringToDateNoSpace(startTime);
+            String startTimeBuff = TimeUtils.getDateNoHourToString(logStartTime);
+            long logEndTime = TimeUtils.getStringToDateNoSpace(endTime);
+            String endTimeBuff = TimeUtils.getDateNoHourToString(logEndTime);
+            holder.itemF_tv.setText("保险期间: "+startTimeBuff+"至"+endTimeBuff);
+        }
+        else
+        {
+            //holder.itemTh_tv.setText(list.get(position).getPolicyHolderName());
+        }
+        String payAmount = list.get(position).getPayAmount();
+        if (!TextUtils.isEmpty(payAmount))
+        {
+            payAmountInt = Integer.parseInt(payAmount);
+        }
+        holder.price_tv.setText(TextUtils.isEmpty(payAmount)?"0.00":(payAmountInt/100)+"."+(payAmountInt/10%10)+(payAmountInt%10));
+        int commisionValue1 = list.get(position).getCommisionValue1();
+        holder.income_tv.setText((commisionValue1/100)+"."+(commisionValue1/10%10)+(commisionValue1%10));
+        Glide.with(mContext).load(list.get(position).getInsurerLogo()).placeholder(R.drawable.shangcheng).into(holder.logo_iv);
     }
 
     @Override

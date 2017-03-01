@@ -47,6 +47,7 @@ public class MySettlementAdapter extends RecyclerView.Adapter<MySettlementAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String dateTime = list.get(position).getTradeTime();
+        //String dateTime = "2015-12-28 12:12:12";
         long logTime = TimeUtils.getStringToDateHaveSecondAndSpace(dateTime);
         String[] split = dateTime.split("[- :]");//2017,02,24,12,00,00
         if (position==0)
@@ -58,7 +59,7 @@ public class MySettlementAdapter extends RecyclerView.Adapter<MySettlementAdapte
             }
             else
             {
-                holder.divider_tv.setText("上一个月");
+                holder.divider_tv.setText("上个月");
                 isOnce=false;
             }
         }
@@ -73,7 +74,7 @@ public class MySettlementAdapter extends RecyclerView.Adapter<MySettlementAdapte
                 if (isOnce)
                 {
                     holder.divider_tv.setVisibility(View.VISIBLE);
-                    holder.divider_tv.setText("上一个月");
+                    holder.divider_tv.setText("上个月");
                     isOnce=false;
                 }
                 else
@@ -84,15 +85,15 @@ public class MySettlementAdapter extends RecyclerView.Adapter<MySettlementAdapte
         }
         holder.date_tv.setText(TimeUtils.week(dateTime));
         holder.time_tv.setText(split[1]+"-"+split[2]);
-        if (currentLogTime-logTime<=86400000)
+        if (logTime-currentLogTime<=86400000&&logTime-currentLogTime>=0)
         {
             holder.date_tv.setText("今天");
-            holder.time_tv.setText(split[3]+"-"+split[4]);
+            holder.time_tv.setText(split[3]+":"+split[4]);
         }
-        else if (currentLogTime-logTime<=172800000)
+        else if (currentLogTime-logTime<=86400000&&currentLogTime-logTime>=0)
         {
             holder.date_tv.setText("昨天");
-            holder.time_tv.setText(split[3]+"-"+split[4]);
+            holder.time_tv.setText(split[3]+":"+split[4]);
         }
         /*holder.date_tv.setText(list.get(position).getDate());
         holder.time_tv.setText(list.get(position).getTime());*/
