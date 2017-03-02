@@ -471,6 +471,12 @@ public class MyAssertActivity extends BaseActivity implements View.OnClickListen
                                 if (!TextUtils.isEmpty(cardBean.getLastDigits()))
                                 {
                                     intent.setClass(MyAssertActivity.this,WithdrawActivity.class);
+                                    String bankName = cardBean.getBankName();
+                                    String lastDigits = cardBean.getLastDigits();
+                                    String cardType = cardBean.getCardType();
+                                    intent.putExtra("bankName",bankName);
+                                    intent.putExtra("lastDigits",lastDigits);
+                                    intent.putExtra("cardType",cardType);
                                     startActivity(intent);
                                 }
                                 else

@@ -31,7 +31,10 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
     int payAmountInt=0;
     int classType=1;//1表示车险,2表示个险
     String sts="";
-
+    long logJqxStartTime;
+    String jqxStartTimeBuff="";
+    long logJqxEndTime;
+    String jqxEndTimeBuff="";
     public MyAllInMyOrderAdapter(Context mContext, List<GetTradesBean.TradeListBean> list) {
         this.mContext = mContext;
         this.list = list;
@@ -70,20 +73,36 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
         {
             holder.itemTw_tv.setText(list.get(position).getInsuredList().get(0).getInsuredName());//被保人
         }
+        String startTime = list.get(position).getStartTime();
+        String endTime = list.get(position).getEndTime();
+        long logStartTime = TimeUtils.getStringToDateNoSpace(startTime);
+        String startTimeBuff = TimeUtils.getDateNoHourToString(logStartTime);
+        long logEndTime = TimeUtils.getStringToDateNoSpace(endTime);
+        String endTimeBuff = TimeUtils.getDateNoHourToString(logEndTime);
         if (2==classType)//2表示个险
         {
             holder.itemTh_tv.setText(list.get(position).getPolicyHolderName());
-            String startTime = list.get(position).getStartTime();
-            String endTime = list.get(position).getEndTime();
-            long logStartTime = TimeUtils.getStringToDateNoSpace(startTime);
-            String startTimeBuff = TimeUtils.getDateNoHourToString(logStartTime);
-            long logEndTime = TimeUtils.getStringToDateNoSpace(endTime);
-            String endTimeBuff = TimeUtils.getDateNoHourToString(logEndTime);
             holder.itemF_tv.setText("保险期间: "+startTimeBuff+"至"+endTimeBuff);
         }
         else
         {
             //holder.itemTh_tv.setText(list.get(position).getPolicyHolderName());
+            String jqxStartTime = list.get(position).getJqxStartTime();
+            String jqxEndTime = list.get(position).getJqxEndTime();
+            if (TextUtils.isEmpty(jqxStartTime))
+            {
+                holder.itemTh_tv.setVisibility(View.GONE);
+            }
+            else
+            {
+                holder.itemTh_tv.setVisibility(View.VISIBLE);
+                logJqxStartTime = TimeUtils.getStringToDateNoSpace(jqxStartTime);
+                jqxStartTimeBuff = TimeUtils.getDateNoHourToString(logJqxStartTime);
+                logJqxEndTime = TimeUtils.getStringToDateNoSpace(jqxEndTime);
+                jqxEndTimeBuff = TimeUtils.getDateNoHourToString(logJqxEndTime);
+                holder.itemTh_tv.setText("交强险起期: "+jqxStartTimeBuff+"至"+jqxEndTimeBuff);
+            }
+            holder.itemF_tv.setText("商业险起期: "+startTimeBuff+"至"+endTimeBuff);
         }
         String payAmount = list.get(position).getPayAmount();
         if (!TextUtils.isEmpty(payAmount))

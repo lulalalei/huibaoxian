@@ -277,5 +277,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/title_layout"
         android:layout_marginBottom="30dp"
-        android:layout_marginRight="46dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 </RelativeLayout>

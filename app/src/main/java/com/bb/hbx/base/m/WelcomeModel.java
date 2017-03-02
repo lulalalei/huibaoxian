@@ -48,7 +48,7 @@ public class WelcomeModel implements WelcomeContract.Model {
                 ContentValues values = new ContentValues();
                 values.put("currentUser", "currentUser");
                 values.put("hasLogined", "false");//默认false,未登录
-                values.put("isBClient", false);//默认false
+                values.put("isBClient", "false");//默认false
                 values.put("sessionId", "");
                 values.put("userId", "");
                 values.put("authority", "0");

@@ -163,7 +163,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="5份保单"
+                            android:text="0份保单"
                             android:textColor="@color/colorTextSub"
                             android:textSize="11sp"
                             android:id="@+id/pCount_tv"
@@ -200,7 +200,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="5份保单"
+                            android:text="0份保单"
                             android:textColor="@color/colorTextSub"
                             android:textSize="11sp"
                             android:id="@+id/cCount_tv"

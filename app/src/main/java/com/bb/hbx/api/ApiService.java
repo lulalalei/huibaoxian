@@ -214,11 +214,11 @@ public interface ApiService {
     Call<Result_Api<BindingBankCard>> bindingBankCard(@Field("userId") String userId, @Field("accountName") String accountName, @Field("idNo") String idNo,
                                                       @Field("cardNo") String cardNo, @Field("bankName") String bankName);
 
-    //提现
+    //提现--待测
     @FormUrlEncoded
-    @POST("api.do?method=applyCash&type=post")
-    Call<Result_Api> applyCash(@Field("userId") String userId, @Field("cashAmount") String cashAmount, @Field("accountName") String accountName,
-                               @Field("bankName") String bankName, @Field("cashIp") String cashIp);
+    @POST("api.do?method=withdraw&type=post")
+    Call<Result_Api> withdraw(@Field("userId") String userId,  @Field("cardNo") String cardNo,
+                              @Field("accountName") String accountName, @Field("cashAmount") String cashAmount);
 
     //修改支付密码
     @FormUrlEncoded

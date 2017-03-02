@@ -1,23 +1,18 @@
 package com.bb.hbx.activitiy;
 
-import android.support.v7.widget.Toolbar;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
-import com.bb.hbx.api.ApiService;
-import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.interfaces.PointTextWatcher;
 import com.bb.hbx.widget.LoginTelEdit;
 
 import butterknife.BindView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -28,12 +23,12 @@ import retrofit2.Response;
 public class WithdrawActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @BindView(R.id.iv_question)
-    ImageView iv_question;
+    @BindView(R.id.menu_iv)
+    ImageView menu_iv;
 
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.back_layout)
+    RelativeLayout back_layout;
 
     @BindView(R.id.iv_bankicon)
     ImageView iv_bankicon;
@@ -44,6 +39,8 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
     @BindView(R.id.tv_bankstatus)
     TextView tv_bankstatus;
 
+    @BindView(R.id.tv_cardType)
+    TextView tv_cardType;
     @BindView(R.id.tv_cardNo)
     TextView tv_cardNo;
 
@@ -53,20 +50,32 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
     @BindView(R.id.et_price)
     LoginTelEdit et_price;
 
-
+    String bankName="";
+    String lastDigits="";
+    String cardType="";
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.iv_question:
+            case R.id.back_layout:
+                finish();
+                break;
+            case R.id.menu_iv:
 
+                break;
+            case R.id.tv_bankstatus:
+                Intent intent = new Intent(this, MyBankCardActivity.class);
+                intent.putExtra("bankName",bankName);
+                intent.putExtra("lastDigits",lastDigits);
+                intent.putExtra("cardType",cardType);
+                startActivity(intent);
                 break;
             case R.id.tv_withdraw:
                 String price = et_price.getText().toString().trim();
                 if (!TextUtils.isEmpty(price))
                 {
-                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.applyCash(MyApplication.user.getUserId(),price,"阿亮","工商银行","1");
+                    /*ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                    Call call=service.withdraw(MyApplication.user.getUserId(),price,"阿亮","工商银行","1");
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
@@ -77,7 +86,7 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
                         public void onFailure(Call call, Throwable t) {
                             showTip("提现失败");
                         }
-                    });
+                    });*/
                 }
                 break;
             default:
@@ -92,23 +101,24 @@ public class WithdrawActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("");
+        Intent intent = getIntent();
+        bankName = intent.getStringExtra("bankName");
+        lastDigits = intent.getStringExtra("lastDigits");
+        cardType = intent.getStringExtra("cardType");
+
+        tv_banktitle.setText(bankName);
+        tv_cardNo.setText(lastDigits);
+        tv_cardType.setText(cardType);
 
 
     }
 
     @Override
     public void initListener() {
-        iv_question.setOnClickListener(this);
+        menu_iv.setOnClickListener(this);
         tv_withdraw.setOnClickListener(this);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        back_layout.setOnClickListener(this);
+        tv_bankstatus.setOnClickListener(this);
 
         et_price.addTextChangedListener(new PointTextWatcher(et_price, tv_withdraw));
     }

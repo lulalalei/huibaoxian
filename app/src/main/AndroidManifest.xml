@@ -13,11 +13,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
-
-
-
-
     <!--
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -169,15 +164,13 @@
         <activity android:name=".activitiy.CheckIdentifyUnderPwdActivity" />
         <activity android:name=".activitiy.MyAssertDetailActivity" />
         <activity android:name=".activitiy.SpecialMonthActivity" />
-        <activity android:name=".activitiy.RecommendRewardActivity"/>
-
+        <activity android:name=".activitiy.RecommendRewardActivity" />
         <activity
             android:name=".activitiy.ConfirmpaymentActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".activitiy.PolicydetailsActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -185,24 +178,18 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
-
-
-
-        <!-- 支付宝支付-->
+        <!-- 支付宝支付 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
+        <activity android:name=".activitiy.MyBankCardActivity"></activity>
     </application>
-
-
 
 </manifest>

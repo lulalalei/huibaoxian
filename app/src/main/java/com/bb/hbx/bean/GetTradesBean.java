@@ -10,16 +10,16 @@ public class GetTradesBean {
 
 
     /**
-     * output : {"pageSize":"10","totalCount":"15","tradeList":[{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180223112921","extraInfos":"","insuredList":[{"insuredId":"162","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170228112921","sts":"10","tradeDate":"20170228112821","tradeId":"20170228112821394136"}]}
+     * output : {"pageSize":"4","totalCount":"4","tradeList":[{"attachId":0,"auditSts":0,"classId":"103249","classType":1,"commisionValue1":0,"endTime":"20180222193352","extraInfos":"","insuredList":[{"insuredId":"156","insuredMobile":"","insuredName":"222","licenseNo":"浙12345"},{"insuredId":"180","insuredMobile":"","insuredName":"222","licenseNo":"浙12345"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"20170302093723","jqxStartTime":"20170302093723","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092","payAmount":"64700","policyHolderMobile":"111111","policyHolderName":"1111","productId":"1092","productName":"车险测试产品","productProp":528,"spxSts":"10","startTime":"20170227193352","sts":"10","tradeDate":"20170227193252","tradeId":"20170227193252677649"},{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180222133409","extraInfos":"","insuredList":[{"insuredId":"144","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"","jqxStartTime":"","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170227133409","sts":"10","tradeDate":"20170227133309","tradeId":"20170227133309455272"},{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180222104041","extraInfos":"","insuredList":[{"insuredId":"143","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"","jqxStartTime":"","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170227104041","sts":"10","tradeDate":"20170227103941","tradeId":"20170227103941584210"},{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180222103415","extraInfos":"","insuredList":[{"insuredId":"142","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"","jqxStartTime":"","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170227103415","sts":"10","tradeDate":"20170227103315","tradeId":"20170227103315836882"}]}
      * respCode : 000000
      * respMsg : 获取订单列表成功
      * success : true
      */
 
         /**
-         * pageSize : 10
-         * totalCount : 15
-         * tradeList : [{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180223112921","extraInfos":"","insuredList":[{"insuredId":"162","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170228112921","sts":"10","tradeDate":"20170228112821","tradeId":"20170228112821394136"}]
+         * pageSize : 4
+         * totalCount : 4
+         * tradeList : [{"attachId":0,"auditSts":0,"classId":"103249","classType":1,"commisionValue1":0,"endTime":"20180222193352","extraInfos":"","insuredList":[{"insuredId":"156","insuredMobile":"","insuredName":"222","licenseNo":"浙12345"},{"insuredId":"180","insuredMobile":"","insuredName":"222","licenseNo":"浙12345"}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"20170302093723","jqxStartTime":"20170302093723","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092","payAmount":"64700","policyHolderMobile":"111111","policyHolderName":"1111","productId":"1092","productName":"车险测试产品","productProp":528,"spxSts":"10","startTime":"20170227193352","sts":"10","tradeDate":"20170227193252","tradeId":"20170227193252677649"},{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180222133409","extraInfos":"","insuredList":[{"insuredId":"144","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"","jqxStartTime":"","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170227133409","sts":"10","tradeDate":"20170227133309","tradeId":"20170227133309455272"},{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180222104041","extraInfos":"","insuredList":[{"insuredId":"143","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"","jqxStartTime":"","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170227104041","sts":"10","tradeDate":"20170227103941","tradeId":"20170227103941584210"},{"attachId":0,"auditSts":0,"classId":"310022","classType":2,"commisionValue1":0,"endTime":"20180222103415","extraInfos":"","insuredList":[{"insuredId":"142","insuredMobile":"","insuredName":"123","licenseNo":""}],"insurerId":"1","insurerLogo":"","insurerName":"人保财险","jqxEndTime":"","jqxStartTime":"","orderURL":"http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049","payAmount":"64700","policyHolderMobile":"13656714459","policyHolderName":"456","productId":"1049","productName":"安联国际旅行保险","productProp":1040,"spxSts":"10","startTime":"20170227103415","sts":"10","tradeDate":"20170227103315","tradeId":"20170227103315836882"}]
          */
 
         private String pageSize;
@@ -54,27 +54,29 @@ public class GetTradesBean {
             /**
              * attachId : 0
              * auditSts : 0
-             * classId : 310022
-             * classType : 2
+             * classId : 103249
+             * classType : 1
              * commisionValue1 : 0
-             * endTime : 20180223112921
+             * endTime : 20180222193352
              * extraInfos :
-             * insuredList : [{"insuredId":"162","insuredMobile":"","insuredName":"123","licenseNo":""}]
+             * insuredList : [{"insuredId":"156","insuredMobile":"","insuredName":"222","licenseNo":"浙12345"},{"insuredId":"180","insuredMobile":"","insuredName":"222","licenseNo":"浙12345"}]
              * insurerId : 1
              * insurerLogo :
              * insurerName : 人保财险
-             * orderURL : http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1049
+             * jqxEndTime : 20170302093723
+             * jqxStartTime : 20170302093723
+             * orderURL : http://ebao.seaway.net.cn:18100/product_details.html#productDetails/1092
              * payAmount : 64700
-             * policyHolderMobile : 13656714459
-             * policyHolderName : 456
-             * productId : 1049
-             * productName : 安联国际旅行保险
-             * productProp : 1040
+             * policyHolderMobile : 111111
+             * policyHolderName : 1111
+             * productId : 1092
+             * productName : 车险测试产品
+             * productProp : 528
              * spxSts : 10
-             * startTime : 20170228112921
+             * startTime : 20170227193352
              * sts : 10
-             * tradeDate : 20170228112821
-             * tradeId : 20170228112821394136
+             * tradeDate : 20170227193252
+             * tradeId : 20170227193252677649
              */
 
             private int attachId;
@@ -87,6 +89,8 @@ public class GetTradesBean {
             private String insurerId;
             private String insurerLogo;
             private String insurerName;
+            private String jqxEndTime;
+            private String jqxStartTime;
             private String orderURL;
             private String payAmount;
             private String policyHolderMobile;
@@ -179,6 +183,22 @@ public class GetTradesBean {
 
             public void setInsurerName(String insurerName) {
                 this.insurerName = insurerName;
+            }
+
+            public String getJqxEndTime() {
+                return jqxEndTime;
+            }
+
+            public void setJqxEndTime(String jqxEndTime) {
+                this.jqxEndTime = jqxEndTime;
+            }
+
+            public String getJqxStartTime() {
+                return jqxStartTime;
+            }
+
+            public void setJqxStartTime(String jqxStartTime) {
+                this.jqxStartTime = jqxStartTime;
             }
 
             public String getOrderURL() {
@@ -287,10 +307,10 @@ public class GetTradesBean {
 
             public static class InsuredListBean {
                 /**
-                 * insuredId : 162
+                 * insuredId : 156
                  * insuredMobile :
-                 * insuredName : 123
-                 * licenseNo :
+                 * insuredName : 222
+                 * licenseNo : 浙12345
                  */
 
                 private String insuredId;

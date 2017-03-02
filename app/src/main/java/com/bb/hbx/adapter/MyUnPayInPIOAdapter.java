@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.MyPIOederBean;
+import com.bb.hbx.bean.GetPolicies;
 import com.bb.hbx.interfaces.OnItemClickListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,12 +23,12 @@ import butterknife.ButterKnife;
 
 public class MyUnPayInPIOAdapter extends RecyclerView.Adapter<MyUnPayInPIOAdapter.MyViewHolder>{
 //convertView=inflater.inflate(R.layout.unpay_pio_item,parent,false);
-    ArrayList<MyPIOederBean> list;
+    List<GetPolicies.PolicyListBean> list;
     Context mContext;
     LayoutInflater inflater;
     OnItemClickListener onMyItemClickListener;
 
-    public MyUnPayInPIOAdapter(ArrayList<MyPIOederBean> list, Context mContext) {
+    public MyUnPayInPIOAdapter(List<GetPolicies.PolicyListBean> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
         inflater=LayoutInflater.from(mContext);

@@ -6,8 +6,9 @@ package com.bb.hbx.bean;
 
 public class GetMyPageInfoBean {
 
+
     /**
-     * output : {"acctBalance":9993,"acctSum":54645,"carPolicyList":0,"couponCount":2,"nickName":"好去","policyCount":0,"realNameStatus":0,"score":9999,"userId":"","userLogo":"http://img.51hbx.com/resource/images/user/logo/43.jpg"}
+     * output : {"acctBalance":9993,"acctSum":54645,"carPolicyCount":1,"couponCount":0,"nickName":"好去","policyCount":0,"realNameStatus":0,"score":9999,"userId":"","userLogo":"http://img.51hbx.com/resource/images/user/logo/43.jpg"}
      * respCode : 000000
      * respMsg : 用户首页信息取得成功
      * success : true
@@ -16,8 +17,8 @@ public class GetMyPageInfoBean {
         /**
          * acctBalance : 9993
          * acctSum : 54645
-         * carPolicyList : 0
-         * couponCount : 2
+         * carPolicyCount : 1
+         * couponCount : 0
          * nickName : 好去
          * policyCount : 0
          * realNameStatus : 0
@@ -28,7 +29,7 @@ public class GetMyPageInfoBean {
 
         private int acctBalance;
         private int acctSum;
-        private int carPolicyList;
+        private int carPolicyCount;
         private int couponCount;
         private String nickName;
         private int policyCount;
@@ -53,12 +54,12 @@ public class GetMyPageInfoBean {
             this.acctSum = acctSum;
         }
 
-        public int getCarPolicyList() {
-            return carPolicyList;
+        public int getCarPolicyCount() {
+            return carPolicyCount;
         }
 
-        public void setCarPolicyList(int carPolicyList) {
-            this.carPolicyList = carPolicyList;
+        public void setCarPolicyCount(int carPolicyCount) {
+            this.carPolicyCount = carPolicyCount;
         }
 
         public int getCouponCount() {

@@ -15,6 +15,7 @@ import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.bean.BindingBankCard;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -101,6 +102,13 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                             if ("1".equals(paymentPwd))//已经设置过支付密码
                             {
                                 Intent intent = new Intent(AddBankCardActivity.this, WithdrawActivity.class);
+                                BindingBankCard bindingBean = (BindingBankCard) body.getOutput();
+                                String bankName = bindingBean.getBankName();
+                                String lastDigits = bindingBean.getLastDigits();
+                                String cardType = bindingBean.getCardType();
+                                intent.putExtra("bankName",bankName);
+                                intent.putExtra("lastDigits",lastDigits);
+                                intent.putExtra("cardType",cardType);
                                 startActivity(intent);
                             }
                             else

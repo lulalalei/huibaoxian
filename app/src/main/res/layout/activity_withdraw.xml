@@ -9,81 +9,113 @@
     android:orientation="vertical"
     tools:context="com.bb.hbx.activitiy.CashActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="?attr/colorPrimary"
-
-        app:navigationIcon="@drawable/fanhui">
-
-
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <RelativeLayout
+            android:id="@+id/back_layout"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="17dp"
+                android:id="@+id/back_iv"
+                android:src="@drawable/fanhui"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="18dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
         <TextView
-            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/withdraw"
-            android:textAppearance="@style/TextAppear.Theme.A1_Size17" />
-
+            android:layout_height="match_parent"
+            android:text="提现"
+            android:textSize="17sp"
+            android:textColor="@color/A1"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         <ImageView
-            android:id="@+id/iv_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="@dimen/x36"
-            android:src="@drawable/lvwenhao" />
-
-    </android.support.v7.widget.Toolbar>
+            android:id="@+id/menu_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/lvwenhao"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"/>
+    </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y26"
+        android:layout_marginTop="13dp"
         android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_bankicon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x36"
-            android:layout_marginTop="@dimen/y36"
-            tools:src="@drawable/classroom" />
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/yinhangbiaozhi"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/tv_banktitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x28"
-            android:layout_marginTop="@dimen/y48"
+            android:layout_marginTop="21dp"
             android:layout_toRightOf="@+id/iv_bankicon"
             android:textAppearance="@style/TextAppear.Theme.A3_Size18"
             tools:text="中国工商银行" />
 
-
         <TextView
             android:id="@+id/tv_bankstatus"
-            android:layout_width="@dimen/x148"
+            android:layout_width="74dp"
             android:layout_height="@dimen/x48"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x36"
-            android:layout_marginTop="@dimen/y36"
+            android:layout_marginTop="18dp"
             android:background="@drawable/shape_c3_a6"
             android:gravity="center"
             android:textAppearance="@style/TextAppear.Theme.A5_Size12"
-            tools:text="已绑定" />
+            android:text="已绑定" />
 
+        <ImageView
+            android:id="@+id/iv_cardNoHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_bankicon"
+            android:layout_marginBottom="18dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/yinhangkahao_hui"/>
         <TextView
             android:id="@+id/tv_cardNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_bankicon"
-            android:layout_marginBottom="@dimen/y30"
-            android:layout_marginLeft="@dimen/x36"
-            android:layout_marginTop="@dimen/y30"
-            android:textAppearance="@style/TextAppear.Theme.A5_Size14"
-            tools:text="●●●● ●●●● ●●●● 2068 储蓄卡" />
+            android:layout_toRightOf="@id/iv_cardNoHead"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/iv_bankicon"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/A5"
+            android:textSize="14sp"
+            android:text="11"/>
+        <TextView
+            android:id="@+id/tv_cardType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_cardNo"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@id/tv_cardNo"
+            android:textColor="@color/A5"
+            android:textSize="14sp"
+            android:text="银行"/>
 
     </RelativeLayout>
 
@@ -144,7 +176,6 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:drawablePadding="@dimen/x26"
-                android:hint="请输入提现金额"
                 android:inputType="numberDecimal"
                 android:maxLength="8"
                 android:textAppearance="@style/TextAppear.Theme.A3_Size36"

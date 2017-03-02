@@ -1,6 +1,5 @@
 package com.bb.hbx.fragment;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -94,6 +93,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     TextView hasLogin_tv;*/
     @BindView(R.id.pCount_tv)
     TextView pCount_tv;
+    @BindView(R.id.cCount_tv)
+    TextView cCount_tv;
 
     @BindView(R.id.purchase_layout)
     RelativeLayout purchase_layout;
@@ -199,7 +200,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                                 {
                                     if (cursor.moveToNext())
                                     {
-                                        ContentValues values = new ContentValues();
+                                       /* ContentValues values = new ContentValues();
                                         values.put("hasLogined", "false");//默认false,未登录
                                         values.put("isBClient", false);//默认false
                                         values.put("sessionId", "");
@@ -208,8 +209,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                                         values.put("gender", "0");//默认为0
                                         long flag = MyUsersSqlite.db.insert("userstb", null, values);
                                         //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
-                                        values.clear();
-
+                                        values.clear();*/
+                                        //更新表数据
+                                        MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,gender=?,phone=? where currentUser=currentUser ",
+                                                new String[]{"false","","","false","0",""});
                                         MyApplication.user.setUserId("");
                                         MyApplication.user.setMobile("");
                                         MyApplication.user.setLoginPwd("0");
@@ -407,6 +410,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                         int score = bean.getScore();
                         int couponCount = bean.getCouponCount();
                         int realNameStatus = bean.getRealNameStatus();//0表示未认证,1表示已认证
+                        int policyCount = bean.getPolicyCount();
+                        int carPolicyCount = bean.getCarPolicyCount();
+                        pCount_tv.setText(policyCount+"份保单");
+                        cCount_tv.setText(carPolicyCount+"份保单");
                         canCash_tv.setText((acctBalance/100)+"."+(acctBalance/10%10)+(acctBalance%10));
                         leftMoney_tv.setText((acctSum/100)+"."+(acctSum/10%10)+(acctSum%10));
                         score_tv.setText((score/100)+"."+(score/10%10)+(score%10));
