@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.FilterActivity;
@@ -88,6 +89,8 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
 
     @Override
     public void initView() {
+
+
         cl_condit.setSate(state);
         cl_condit.setListener(new ConditionLayout.ConditionListener() {
             @Override
@@ -130,8 +133,13 @@ public class Mall_ItemFragment extends BaseFragment<Mall_ItemPresenter, Mall_ite
         rl_view.setLayoutManager(manager);
         adapter = new MultiTypeAdapter();
         adapter.applyGlobalMultiTypePool();
-        adapter.register(Product.class, new MallAllProvide(getActivity()));
-        //adapter.register(Product.class,new MallCarProvide(getActivity()));
+        if (model != null && "车险".equalsIgnoreCase(model.getTypeName())) {
+            cl_condit.setVisibility(View.GONE);
+            adapter.register(Product.class,new MallCarProvide(getActivity()));
+        }else {
+            adapter.register(Product.class, new MallAllProvide(getActivity()));
+        }
+
         rl_view.setAdapter(adapter);
 
         refresh.setOnPullListener(new OnPullListener() {

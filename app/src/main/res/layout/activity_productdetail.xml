@@ -135,8 +135,8 @@
                     android:background="@drawable/tuiguangfeibiaoqian"
                     android:gravity="center"
                     android:singleLine="true"
-                    tools:text="20%推广费"
-                    android:textAppearance="@style/TextAppear.Theme.white_Size11" />
+                    android:textAppearance="@style/TextAppear.Theme.white_Size11"
+                    tools:text="20%推广费" />
 
             </LinearLayout>
 
@@ -160,8 +160,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x22"
-                    tools:text="推广人口众多,推广人口众多,推广人口众多"
-                    android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size13"
+                    tools:text="推广人口众多,推广人口众多,推广人口众多" />
 
             </LinearLayout>
 
@@ -184,8 +184,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x22"
-                    tools:text="推广人口众多"
-                    android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
+                    android:textAppearance="@style/TextAppear.Theme.A3_Size13"
+                    tools:text="推广人口众多" />
 
             </LinearLayout>
 
@@ -201,14 +201,12 @@
                 android:textAppearance="@style/TextAppear.Theme.A1_Size13" />
 
 
-
             <com.bb.hbx.widget.CardLayout
                 android:id="@+id/clayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
             </com.bb.hbx.widget.CardLayout>
-
 
 
             <LinearLayout
@@ -219,7 +217,6 @@
                 android:paddingTop="@dimen/y22">
 
             </LinearLayout>
-
 
 
             <TextView
@@ -242,6 +239,7 @@
                 android:orientation="vertical">
 
                 <include layout="@layout/item_insured_up" />
+
                 <LinearLayout
                     android:id="@+id/ll_add"
                     android:layout_width="match_parent"
@@ -251,7 +249,10 @@
                 </LinearLayout>
 
                 //
-                <include android:id="@+id/layout_tab2" layout="@layout/item_insured_up2"/>
+
+                <include
+                    android:id="@+id/layout_tab2"
+                    layout="@layout/item_insured_up2" />
 
                 <LinearLayout
                     android:id="@+id/lin_count"
@@ -301,8 +302,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x36"
-                android:layout_marginRight="@dimen/x36"
-                >
+                android:layout_marginRight="@dimen/x36">
 
             </LinearLayout>
 
@@ -434,11 +434,11 @@
 
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbar"
-        android:layout_marginTop="@dimen/y20"
-        android:paddingRight="18dp">
+        android:fitsSystemWindows="true">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -447,17 +447,19 @@
                 android:id="@+id/back_iv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/fanhui_chanpingxinagqingye"
+                android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/fanhui_chanpingxinagqingye" />
+
             <ImageView
                 android:id="@+id/collect_iv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/shoucang_xiangqing"
-                android:scaleType="centerCrop"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x36"
+                android:scaleType="centerCrop"
+                android:src="@drawable/shoucang_xiangqing" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

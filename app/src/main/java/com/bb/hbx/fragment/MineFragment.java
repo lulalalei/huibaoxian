@@ -24,6 +24,7 @@ import com.bb.hbx.R;
 import com.bb.hbx.activitiy.CarInsuOrderActivity;
 import com.bb.hbx.activitiy.CustomServiceActivity;
 import com.bb.hbx.activitiy.CustomerManagerActivity;
+import com.bb.hbx.activitiy.HomeActivity;
 import com.bb.hbx.activitiy.InfoActivity;
 import com.bb.hbx.activitiy.MyAssertActivity;
 import com.bb.hbx.activitiy.MyOrderActivity;
@@ -52,7 +53,7 @@ import retrofit2.Response;
  * Created by Administrator on 2016/12/20.
  */
 
-public class MineFragment extends BaseFragment implements View.OnClickListener{
+public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.setting_iv)
     ImageView setting_iv;
@@ -107,7 +108,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     RelativeLayout service_layout;
     Context mContext;
 
-    boolean isOnce=true;
+    boolean isOnce = true;
     TextView hasLogin_tv;
 
     //记录提现
@@ -120,10 +121,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     int acctSettSumInt;
     //记录累计收入
     int acctSumInt;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext=context;
+        mContext = context;
     }
 
     @Override
@@ -150,11 +152,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         invite_layout.setOnClickListener(this);
         service_layout.setOnClickListener(this);
 
-        ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,/*,hasLogin_tv,*/mContext);
+        ShareSPUtils.readShareSP(notLogin_layout, userIcon_civ,/*,hasLogin_tv,*/mContext);
         hasLoginShow();
         //updateMyAccount();
     }
-
 
 
     @Override
@@ -165,19 +166,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
-        ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,/*hasLogin_tv,*/mContext);
+        ShareSPUtils.readShareSP(notLogin_layout, userIcon_civ,/*hasLogin_tv,*/mContext);
         hasLoginShow();
     }
 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
-        switch (v.getId())
-        {
-           case R.id.message_iv:
+        switch (v.getId()) {
+            case R.id.message_iv:
                 //Toast.makeText(mContext,"消息",Toast.LENGTH_SHORT).show();
-               intent.setClass(mContext,InfoActivity.class);
-               startActivity(intent);
+                intent.setClass(mContext, InfoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.setting_iv:
                 //Toast.makeText(mContext,"设置",Toast.LENGTH_SHORT).show();
@@ -186,22 +186,19 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (TextUtils.isEmpty(MyApplication.user.getUserId()))
-                        {
-                            Toast.makeText(mContext,"请先登录",Toast.LENGTH_SHORT).show();
+                        if (TextUtils.isEmpty(MyApplication.user.getUserId())) {
+                            Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                        Call call=service.logout(MyApplication.user.getUserId());
+                        Call call = service.logout(MyApplication.user.getUserId());
                         call.enqueue(new Callback() {
                             @Override
                             public void onResponse(Call call, Response response) {
-                                SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+                                SQLiteDatabase db = DatabaseImpl.getInstance().getReadableDatabase();
                                 Cursor cursor = db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
-                                if (cursor!=null)
-                                {
-                                    if (cursor.moveToNext())
-                                    {
+                                if (cursor != null) {
+                                    if (cursor.moveToNext()) {
                                        /* ContentValues values = new ContentValues();
                                         values.put("hasLogined", "false");//默认false,未登录
                                         values.put("isBClient", false);//默认false
@@ -215,18 +212,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                                         //更新表数据
 
                                         db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,gender=?,phone=? where currentUser=currentUser ",
-                                                new String[]{"false","","","false","0",""});
+                                                new String[]{"false", "", "", "false", "0", ""});
 
                                         MyApplication.user.setUserId("");
                                         MyApplication.user.setMobile("");
                                         MyApplication.user.setLoginPwd("0");
                                         MyApplication.user.setSessionId("");
                                         MyApplication.user.setIsBClient(false);
-                                        ShareSPUtils.writeShareSp(false,"","","默认用户名","", null);
-                                        ShareSPUtils.readShareSP(notLogin_layout,userIcon_civ,/*hasLogin_tv,*/mContext);
+                                        ShareSPUtils.writeShareSp(false, "", "", "默认用户名", "", null);
+                                        ShareSPUtils.readShareSP(notLogin_layout, userIcon_civ,/*hasLogin_tv,*/mContext);
                                         identify_tv.setVisibility(View.GONE);
                                         identify_layout.removeView(hasLogin_tv);
-                                        isOnce=true;
+                                        isOnce = true;
                                     }
                                 }
                                 cursor.close();
@@ -240,43 +237,40 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                         });
                     }
                 });
-                builder.setNegativeButton("取消",null);
+                builder.setNegativeButton("取消", null);
                 builder.show();
                 break;
             case R.id.myOrder_layout:
-                intent.setClass(mContext,MyOrderActivity.class);
+                intent.setClass(mContext, MyOrderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.pInsurance_layout:
-                intent.setClass(mContext,PerInsuOrderActivity.class);
+                intent.setClass(mContext, PerInsuOrderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.cInsurance_layout:
-                intent.setClass(mContext,CarInsuOrderActivity.class);
+                intent.setClass(mContext, CarInsuOrderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.userIcon_civ:
                 boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
-                if (hasLogined)
-                {
-                    intent.setClass(mContext,PersonInfoSettingActivity.class);
-                }
-                else
-                {
+                if (hasLogined) {
+                    intent.setClass(mContext, PersonInfoSettingActivity.class);
+                } else {
                     intent.setClass(mContext, LoginActivity.class);
                 }
                 startActivity(intent);
                 break;
             case R.id.myAsset_tv:
-                intent.putExtra("acctBalanceInt",acctBalanceInt);
-                intent.putExtra("acctMonthSumInt",acctMonthSumInt);
-                intent.putExtra("acctSettSumInt",acctSettSumInt);
-                intent.putExtra("acctSumInt",acctSumInt);
-                intent.setClass(mContext,MyAssertActivity.class);
+                intent.putExtra("acctBalanceInt", acctBalanceInt);
+                intent.putExtra("acctMonthSumInt", acctMonthSumInt);
+                intent.putExtra("acctSettSumInt", acctSettSumInt);
+                intent.putExtra("acctSumInt", acctSumInt);
+                intent.setClass(mContext, MyAssertActivity.class);
                 startActivity(intent);
                 break;
             case R.id.score_layout:
-                intent.putExtra("accountScoreInt",accountScoreInt);
+                intent.putExtra("accountScoreInt", accountScoreInt);
                 intent.setClass(mContext, ScoreActivity.class);
                 startActivity(intent);
                 break;
@@ -287,7 +281,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
             case R.id.notLogin_layout:
                 intent.setClass(mContext, LoginActivity.class);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slide_in_from_bottom,R.anim.activity_stay);
+                getActivity().overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.activity_stay);
                 break;
            /* case hasLogin_tv:
                 Toast.makeText(mContext,"点了我",Toast.LENGTH_SHORT).show();
@@ -318,11 +312,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
                     }
                 });*/
-                View b2cView = View.inflate(mContext, R.layout.b2c_layout, null);
-                PopupWindow pw = new PopupWindow(b2cView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, false);
-                pw.setOutsideTouchable(true);
-                pw.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.b2c_bg));
-                pw.showAsDropDown(service_layout);
+                HomeActivity activity = (HomeActivity) getActivity();
+                if (activity != null) {
+                    activity.updateViewWithCToB();
+                }
                 break;
             case R.id.service_layout:
                 intent.setClass(mContext, CustomServiceActivity.class);
@@ -332,104 +325,87 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
         }
     }
+
     //用户已经登录后,更改显示的页面
-    public void hasLoginShow()
-    {
+    public void hasLoginShow() {
         boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
-        if (hasLogined)
-        {
+        if (hasLogined) {
             identify_tv.setVisibility(View.VISIBLE);
-            String userName=null;
-            SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+            String userName = null;
+            SQLiteDatabase db = DatabaseImpl.getInstance().getReadableDatabase();
             Cursor cursor = db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
-            if (cursor!=null)
-            {
-                if (cursor.moveToNext())
-                {
+            if (cursor != null) {
+                if (cursor.moveToNext()) {
                     final String userId = cursor.getString(cursor.getColumnIndex("userId"));
                     final String sessionId = cursor.getString(cursor.getColumnIndex("sessionId"));
                     userName = cursor.getString(cursor.getColumnIndex("name"));
-                    if (!TextUtils.isEmpty(userId)&&!TextUtils.isEmpty(sessionId))
-                    {
+                    if (!TextUtils.isEmpty(userId) && !TextUtils.isEmpty(sessionId)) {
                         //调用更新账户方法
                         updateMyAccount(userId);
                         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                        Call call=service.getUserInfo(sessionId,userId);
+                        Call call = service.getUserInfo(sessionId, userId);
                         call.enqueue(new Callback() {
                             @Override
                             public void onResponse(Call call, Response response) {
                                 //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
                                 //正常,,不吐司
                                 Result_Api body = (Result_Api) response.body();
-                                if (body!=null)
-                                {
+                                if (body != null) {
                                     UserInfo userInfo = (UserInfo) body.getOutput();
-                                    if (userInfo!=null)
-                                    {
+                                    if (userInfo != null) {
                                         String userName1 = userInfo.getUserName();
                                     }
-                                }
-                                else
-                                {
-                                    Toast.makeText(mContext,"服务器异常!",Toast.LENGTH_SHORT);
+                                } else {
+                                    Toast.makeText(mContext, "服务器异常!", Toast.LENGTH_SHORT);
                                 }
                             }
 
                             @Override
                             public void onFailure(Call call, Throwable t) {
-                                Toast.makeText(mContext,"error",Toast.LENGTH_SHORT);
+                                Toast.makeText(mContext, "error", Toast.LENGTH_SHORT);
                             }
                         });
                     }
-                }
-                else
-                {
-                    Toast.makeText(mContext,"cursor下一条不存在",Toast.LENGTH_SHORT);
+                } else {
+                    Toast.makeText(mContext, "cursor下一条不存在", Toast.LENGTH_SHORT);
                 }
                 db.close();
+            } else {
+                Toast.makeText(mContext, "cursor为空", Toast.LENGTH_SHORT);
             }
-            else
-            {
-                Toast.makeText(mContext,"cursor为空",Toast.LENGTH_SHORT);
-            }
-            if (isOnce)
-            {
+            if (isOnce) {
                 hasLogin_tv = new TextView(mContext);
-                FrameLayout.LayoutParams params=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.gravity= Gravity.CENTER;
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.gravity = Gravity.CENTER;
                 hasLogin_tv.setLayoutParams(params);
                 identify_layout.addView(hasLogin_tv);
-                isOnce=false;
+                isOnce = false;
                 hasLogin_tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(mContext,"点了我",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "点了我", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
-            if (!TextUtils.isEmpty(userName))
-            {
+            if (!TextUtils.isEmpty(userName)) {
                 hasLogin_tv.setText(userName);
-            }
-            else
-            {
-                Toast.makeText(mContext,"用户名为空",Toast.LENGTH_SHORT);
+            } else {
+                Toast.makeText(mContext, "用户名为空", Toast.LENGTH_SHORT);
             }
         }
     }
+
     //更新我的资产
     private void updateMyAccount(String userId) {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call=service.getMyPageInfo(userId);
+        Call call = service.getMyPageInfo(userId);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 Result_Api body = (Result_Api) response.body();
-                if (body!=null)
-                {
+                if (body != null) {
                     GetMyPageInfoBean bean = (GetMyPageInfoBean) body.getOutput();
-                    if (bean!=null)
-                    {
+                    if (bean != null) {
                         int acctBalance = bean.getAcctBalance();
                         int acctSum = bean.getAcctSum();
                         int score = bean.getScore();
@@ -437,13 +413,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                         int realNameStatus = bean.getRealNameStatus();//0表示未认证,1表示已认证
                         int policyCount = bean.getPolicyCount();
                         int carPolicyCount = bean.getCarPolicyCount();
-                        pCount_tv.setText(policyCount+"份保单");
-                        cCount_tv.setText(carPolicyCount+"份保单");
-                        canCash_tv.setText((acctBalance/100)+"."+(acctBalance/10%10)+(acctBalance%10));
-                        leftMoney_tv.setText((acctSum/100)+"."+(acctSum/10%10)+(acctSum%10));
-                        score_tv.setText((score/100)+"."+(score/10%10)+(score%10));
-                        redPacket_tv.setText(couponCount+"");
-                        identify_tv.setText(0==realNameStatus?"未认证":"已认证");
+                        pCount_tv.setText(policyCount + "份保单");
+                        cCount_tv.setText(carPolicyCount + "份保单");
+                        canCash_tv.setText((acctBalance / 100) + "." + (acctBalance / 10 % 10) + (acctBalance % 10));
+                        leftMoney_tv.setText((acctSum / 100) + "." + (acctSum / 10 % 10) + (acctSum % 10));
+                        score_tv.setText((score / 100) + "." + (score / 10 % 10) + (score % 10));
+                        redPacket_tv.setText(couponCount + "");
+                        identify_tv.setText(0 == realNameStatus ? "未认证" : "已认证");
                     }
                 }
             }

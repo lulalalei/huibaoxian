@@ -4,6 +4,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
@@ -41,6 +42,9 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
 
     @BindView(R.id.tv_search)
     TextView tv_search;
+
+    @BindView(R.id.iv_banner)
+    ImageView iv_banner;
 
 
     @Override

@@ -1,6 +1,7 @@
 package com.bb.hbx.provide;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.CarInformationActivity;
 import com.bb.hbx.bean.Product;
+import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.GlideUtil;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
@@ -58,14 +61,11 @@ public class MallCarProvide extends ItemViewProvider<Product, MallCarProvide.Vie
         TextView tv_name;
 
 
-
-
         @BindView(R.id.tv_detail1)
         TextView tv_detail1;
 
         @BindView(R.id.tv_detail2)
         TextView tv_detail2;
-
 
 
         @BindView(R.id.tv_sales)
@@ -98,6 +98,14 @@ public class MallCarProvide extends ItemViewProvider<Product, MallCarProvide.Vie
 
             GlideUtil.getInstance().loadImage(context, img_pic, squareBean.getProductLogo(), true);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("product", squareBean);
+                    AppManager.getInstance().showActivity(CarInformationActivity.class, bundle);
+                }
+            });
 
         }
 

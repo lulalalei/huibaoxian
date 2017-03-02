@@ -2,13 +2,14 @@ package com.bb.hbx.bean;
 
 import com.bb.hbx.widget.multitype.data.Item;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/16.
  */
 
-public class Product implements Item{
+public class Product implements Item,Serializable{
 
 
     /**

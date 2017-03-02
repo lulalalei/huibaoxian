@@ -1,24 +1,16 @@
 package com.bb.hbx.activitiy;
 
-import android.app.Fragment;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.fragment.ClassFragment;
@@ -30,8 +22,6 @@ import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.BottomBar;
 
 import butterknife.BindView;
-
-import static com.alipay.sdk.app.statistic.c.v;
 
 
 /**
@@ -53,7 +43,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-//        initState();
+        initState();
         return R.layout.activity_home;
     }
 
@@ -234,7 +224,7 @@ public class HomeActivity extends BaseActivity {
 
     PopupWindow pw;
 
-    private void updateViewWithCToB() {
+    public void updateViewWithCToB() {
         View b2cView = View.inflate(mContext, R.layout.b2c_layout, null);
         pw = new PopupWindow(b2cView,
                 MyApplication.widthPixels - 2 * AppManager.getInstance().dp2px(mContext, 18),

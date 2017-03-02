@@ -5,35 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <RelativeLayout
-        android:id="@+id/topbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/A1">
-        <ImageView
-            android:id="@+id/setting_iv"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/setting"
-            android:scaleType="centerCrop"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="10dp"/>
-        <ImageView
-            android:id="@+id/message_iv"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/message"
-            android:scaleType="centerCrop"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="10dp"/>
-    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/topbar_layout"
         android:id="@+id/scrollView"
         android:scrollbars="none">
         <LinearLayout
@@ -547,4 +522,31 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="@color/A1">
+        <ImageView
+            android:id="@+id/setting_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/setting"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"/>
+        <ImageView
+            android:id="@+id/message_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/message"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="10dp"/>
+    </RelativeLayout>
 </RelativeLayout>

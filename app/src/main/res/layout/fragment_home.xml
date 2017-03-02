@@ -27,10 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:fitsSystemWindows="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp">
+        >
 
 
         <LinearLayout
@@ -38,6 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_marginBottom="7dp"
+            android:layout_marginLeft="18dp"
             android:layout_marginTop="7dp"
             android:layout_weight="1"
             android:background="@drawable/shape_alpha_white"
@@ -71,6 +72,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="-8dp"
             android:layout_marginTop="-12dp"
+            android:layout_marginRight="18dp"
             android:background="@drawable/shape_z56"
             android:gravity="center"
             android:textAppearance="@style/TextAppear.Theme.Z55_Size8"
