@@ -20,9 +20,9 @@ public class AppManager {
 
 
     private static final String DEFAULT_DATA_BASEPATH = "/huibx"; // 缓存目录
-    public  String DEFAULT_DATA_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/IMAGE"; // 小图缓存地址
-    public  String DEFAULT_DATA_TEMP = DEFAULT_DATA_BASEPATH + "/TEMP"; // 备份数据地址
-    public  String DEFAULT_DATA_BIG_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/BIGIMAGE"; // 大图缓存地址
+    public String DEFAULT_DATA_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/IMAGE"; // 小图缓存地址
+    public String DEFAULT_DATA_TEMP = DEFAULT_DATA_BASEPATH + "/TEMP"; // 备份数据地址
+    public String DEFAULT_DATA_BIG_IMAGEPATH = DEFAULT_DATA_BASEPATH + "/BIGIMAGE"; // 大图缓存地址
 
     private AppManager() {
         String rootPath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -86,12 +86,17 @@ public class AppManager {
     /**
      * 结束指定的Activity
      */
-    public void finishParticularActivity(Activity activity) {
-        if (activity != null) {
-            activity.finish();
-            activityStack.remove(activity);
-            activity = null;
+    public void finishParticularActivity(Class<?> tClass) {
+        for (Activity activity : activityStack) {
+            if (activity.getClass().equals(tClass)) {
+                if (activity != null) {
+                    activity.finish();
+                  
+                }
+            }
         }
+
+
     }
 
 
@@ -174,12 +179,12 @@ public class AppManager {
     }
 
 
-    public  int dp2px(Context context,int dp) {
+    public int dp2px(Context context, int dp) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return (int) ((dp * displayMetrics.density) + 0.5);
     }
 
-    public  int dp2px( Context context,double dp) {
+    public int dp2px(Context context, double dp) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return (int) ((dp * displayMetrics.density) + 0.5);
     }

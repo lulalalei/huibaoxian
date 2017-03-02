@@ -40,7 +40,7 @@ import static com.bb.hbx.R.drawable.on;
 
 
 /**
- * 确认订单
+ * 确认支付
  */
 
 public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter, ConfimpaymentlModel>
@@ -227,7 +227,7 @@ public class ConfirmpaymentActivity extends BaseActivity<ConfimpaymentPresenter,
 
         tv_ye.setText(getString(R.string.format_ye, Utils.fromFenToYuan(detail.getAcctBalanceYE())));
 
-        detail.setCouponCode("asfjdskfjsanfd");
+
         if (!detail.getCouponCode().isEmpty()) {
             lin_yhq.setVisibility(View.VISIBLE);
             tv_yhq.setText(detail.getCouponCode());

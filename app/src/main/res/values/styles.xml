@@ -233,6 +233,11 @@
 
     </style>
 
+    <style name="carinfoselect" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/select</item>
+
+    </style>
+
 
     <style name="checkboxoffon" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/agree_off_on</item>

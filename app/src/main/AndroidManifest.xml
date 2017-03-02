@@ -178,7 +178,16 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
-        <!-- 支付宝支付 -->
+
+        <activity
+            android:name=".activitiy.CarInformationActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+
+        <!-- 支付宝支付-->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"

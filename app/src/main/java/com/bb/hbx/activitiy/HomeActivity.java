@@ -5,16 +5,22 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.bean.User;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.fragment.ClassFragment;
 import com.bb.hbx.fragment.FindFragment;
 import com.bb.hbx.fragment.HomeFragment;
@@ -25,7 +31,7 @@ import com.bb.hbx.widget.BottomBar;
 
 import butterknife.BindView;
 
-
+import static com.alipay.sdk.app.statistic.c.v;
 
 
 /**
@@ -80,6 +86,10 @@ public class HomeActivity extends BaseActivity {
                             // 如果MessageFragment不为空，则直接将它显示出来
                             transaction.show(homeFragment);
                         }
+
+                        if (pw != null && pw.isShowing()) {
+                            pw.dismiss();
+                        }
                         break;
                     case 1:
                         // 当点击了消息tab时，改变控件的图片和文字颜色
@@ -92,7 +102,11 @@ public class HomeActivity extends BaseActivity {
                             // 如果MessageFragment不为空，则直接将它显示出来
                             transaction.show(mallFragment);
                         }
+                        if (pw != null && pw.isShowing()) {
+                            pw.dismiss();
+                        }
                         break;
+
 
                     case 2:
                         // 当点击了消息tab时，改变控件的图片和文字颜色
@@ -104,6 +118,9 @@ public class HomeActivity extends BaseActivity {
                         } else {
                             // 如果MessageFragment不为空，则直接将它显示出来
                             transaction.show(findFragment);
+                        }
+                        if (pw != null && pw.isShowing()) {
+                            pw.dismiss();
                         }
                         break;
 
@@ -118,6 +135,11 @@ public class HomeActivity extends BaseActivity {
                             // 如果MessageFragment不为空，则直接将它显示出来
                             transaction.show(classFragment);
                         }
+
+                        if (pw != null && pw.isShowing()) {
+                            pw.dismiss();
+                        }
+
                         break;
 
 
@@ -131,6 +153,12 @@ public class HomeActivity extends BaseActivity {
                         } else {
                             // 如果MessageFragment不为空，则直接将它显示出来
                             transaction.show(mineFragment);
+
+                        }
+
+                        User user = DatabaseImpl.getInstance().getUser();
+                        if (!MyApplication.user.getIsBClient() && user != null && "1".equalsIgnoreCase(user.getAuthority())) {
+                            updateViewWithCToB();
                         }
                         break;
 
@@ -201,6 +229,23 @@ public class HomeActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+
+    }
+
+    PopupWindow pw;
+
+    private void updateViewWithCToB() {
+        View b2cView = View.inflate(mContext, R.layout.b2c_layout, null);
+        pw = new PopupWindow(b2cView,
+                MyApplication.widthPixels - 2 * AppManager.getInstance().dp2px(mContext, 18),
+                RelativeLayout.LayoutParams.WRAP_CONTENT, false);
+        pw.setOutsideTouchable(false);
+        b2cView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupHeight = b2cView.getMeasuredHeight();
+        int[] location = new int[2];
+        bb.getLocationOnScreen(location);
+        pw.showAtLocation(bb, Gravity.NO_GRAVITY, AppManager.getInstance().dp2px(mContext, 18),
+                location[1] - popupHeight);
 
     }
 

@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.bb.hbx.MyApplication;
+import com.bb.hbx.activitiy.ConfirmpaymentActivity;
 import com.bb.hbx.activitiy.PolicydetailsActivity;
+import com.bb.hbx.activitiy.ProductDetailActivity;
 import com.bb.hbx.api.GenApiHashUrl;
 import com.bb.hbx.base.v.BaseView;
 import com.bb.hbx.bean.PaySign;
@@ -211,22 +213,17 @@ public class ZfbUtils {
         public String doInBackground(Void... params) {
             String result = "";
 //            try {
-                JSONObject jsonObject = new JSONObject();
-                HashMap<String, String> map = new HashMap<>();
-                StringBuilder builder = new StringBuilder();
-                builder.append("out_trade_no=" + paySign.getOuttradeno() + "&");
-                builder.append("trade_no=" + "20170301101350000000&");
-                builder.append("gmt_payment=" + TimeUtils.getCurrentTimeWithSecondAndSpace() + "&");
-                builder.append("totalFee=" + paySign.getTotalfee() + "&");
-                builder.append("trade_status=" + "TRADE_SUCCESS,TRADE_FINISHED");
+            JSONObject jsonObject = new JSONObject();
+            HashMap<String, String> map = new HashMap<>();
+            StringBuilder builder = new StringBuilder();
+            builder.append("out_trade_no=" + paySign.getOuttradeno() + "&");
+            builder.append("trade_no=" + "20170301101350000000&");
+            builder.append("gmt_payment=" + TimeUtils.getCurrentTimeWithSecondAndSpace() + "&");
+            builder.append("total_fee=" + Utils.fromYuanToFen2(paySign.getTotalfee()) + "&");
+            builder.append("trade_status=" + "TRADE_SUCCESS");
 
-//                map.put("out_trade_no", paySign.getOuttradeno());
-//                map.put("trade_no", "20170301101350000000");
-//                map.put("gmt_payment", TimeUtils.getCurrentTimeWithSecondAndSpace());
-//                map.put("totalFee", paySign.getTotalfee());
-//                map.put("trade_status", "TRADE_SUCCESS,TRADE_FINISHED");
-                Log.i("fancl", "jsonObject:" + builder.toString());
-                result = GenApiHashUrl.getInstance().Http_Post(builder.toString());
+            Log.i("fancl", "jsonObject:" + builder.toString());
+            result = GenApiHashUrl.getInstance().Http_Post(builder.toString());
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
@@ -242,6 +239,8 @@ public class ZfbUtils {
             if ("success".equalsIgnoreCase(aVoid)) {
                 Bundle bundle = new Bundle();
                 bundle.putString("tradeId", paySign.getOuttradeno());
+                AppManager.getInstance().finishParticularActivity(ConfirmpaymentActivity.class);
+                AppManager.getInstance().finishParticularActivity(ProductDetailActivity.class);
                 AppManager.getInstance().showActivity(PolicydetailsActivity.class, bundle);
             }
         }

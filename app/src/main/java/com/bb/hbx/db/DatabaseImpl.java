@@ -13,10 +13,13 @@ import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.LishiSearchBean;
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.Special;
+import com.bb.hbx.bean.User;
 import com.bb.hbx.bean.XhbMsg;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.id;
 
 /**
  * Created by Administrator on 2017/1/3.
@@ -127,9 +130,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists userstb");
-        db.execSQL("create table if not exists userstb(_id integer primary key autoincrement,currentUser text,hasLogined text,userId text," +
-                "sessionId text,isBClient text,name text,gender text,email text,phone text,pwd text,usericon text)");
+
     }
 
 
@@ -229,5 +230,41 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
 
         db.close();
+    }
+
+    @Override
+    public boolean updateUser(String authority) {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db == null) return false;
+
+        ContentValues values = new ContentValues();
+        values.put("authority", "1");
+        int row_count = db.update("userstb", values, null, null);
+        if (row_count != 0) {
+            return true;
+        } else
+            return false;
+    }
+
+    @Override
+    public User getUser() {
+        User user = null;
+        SQLiteDatabase db = getWritableDatabase();
+        if (db == null) return user;
+
+
+        Cursor query = db.query("userstb", null, null, null, null, null, null);
+        if (query != null) {
+            if (query.moveToFirst()) {
+                user = new User();
+                String authority = query.getString(query.getColumnIndex("authority"));
+                user.setAuthority(authority);
+                
+            }
+        }
+
+        query.close();
+        db.close();
+        return user;
     }
 }

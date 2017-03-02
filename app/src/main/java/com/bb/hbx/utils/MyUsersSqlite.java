@@ -18,5 +18,6 @@ public class MyUsersSqlite {
     {
         help = DatabaseImpl.getInstance();
         db = help.getReadableDatabase();
+
     }
 }

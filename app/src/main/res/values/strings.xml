@@ -154,6 +154,12 @@
     <string name="setting2">使用余额抵扣需要设置支付密码</string>
     <string name="next2">下次吧</string>
     <string name="setting3">去设置</string>
+    <string name="tbcs">投保城市</string>
+    <string name="cphm">车牌号码</string>
+    <string name="cphm2">请输入车牌号码</string>
+    <string name="xcwsp">新车未上牌</string>
+    <string name="lscxcl">历史查询车辆</string>
+    <string name="search">查询</string>
 
     <!-- behavior -->
 

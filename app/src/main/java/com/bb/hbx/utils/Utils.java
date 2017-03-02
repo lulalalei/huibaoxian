@@ -102,5 +102,14 @@ public class Utils {
         return fen;
     }
 
-
+    /**
+     * 元转换为分.
+     *
+     * @param yuan 元
+     * @return 分
+     */
+    public static BigDecimal fromYuanToFen2(final String yuan) {
+        final int MULTIPLIER = 100;
+        return new BigDecimal(yuan).multiply(new BigDecimal(MULTIPLIER)).setScale(2, BigDecimal.ROUND_DOWN);
+    }
 }

@@ -2,6 +2,7 @@ package com.bb.hbx.db;
 
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.LishiSearchBean;
+import com.bb.hbx.bean.User;
 
 import java.util.List;
 
@@ -25,6 +26,10 @@ public interface Database {
     //查询所有
     public List<LishiSearchBean> getListHis();
 
-    public  void addHomepageInfo(HomePageInfo info);
+    public void addHomepageInfo(HomePageInfo info);
+
+    public boolean updateUser(String authority);
+
+    public User getUser();
 
 }

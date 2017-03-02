@@ -3,6 +3,7 @@ package com.bb.hbx.activitiy;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -59,17 +60,9 @@ import java.util.Observer;
 import butterknife.BindView;
 
 
-import static android.R.attr.entries;
-import static com.bb.hbx.R.drawable.line;
-import static com.bb.hbx.R.id.clayout;
-import static com.bb.hbx.R.id.il_up1;
-import static com.bb.hbx.R.id.lin_count;
-import static com.bb.hbx.R.id.tv_quantity;
-import static com.bb.hbx.utils.Constants.beinsurer1_listkey;
 import static com.bb.hbx.utils.Constants.beinsurer1_listvalue;
-import static com.bb.hbx.utils.Constants.idType_keys;
+
 import static com.bb.hbx.utils.Constants.idTypes;
-import static com.bb.hbx.utils.StringUtils.getJsonOpt;
 
 
 /**
@@ -84,8 +77,17 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     @BindView(R.id.sl)
     ScrollView sl;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @BindView(R.id.iv_pic)
     ImageView iv_pic;
+
+    @BindView(R.id.back_iv)
+    ImageView back_iv;
+
+    @BindView(R.id.collect_iv)
+    ImageView collect_iv;
 
     @BindView(R.id.tv_name)
     TextView tv_name;
@@ -231,6 +233,18 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
 
     @Override
     public void initView() {
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -261,6 +275,8 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
         tv_buy.setOnClickListener(this);
         iv_add.setOnClickListener(this);
         iv_sub.setOnClickListener(this);
+        back_iv.setOnClickListener(this);
+        collect_iv.setOnClickListener(this);
         tv_morefeature.setOnClickListener(this);
         lin_share.setOnClickListener(this);
         il_up1.setTag(0);
@@ -366,6 +382,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
                 break;
             case R.id.tv_buy:
                 mPresenter.GetProdectDetalRequest();
+                break;
+            case R.id.back_iv:
+                finish();
+                break;
+            case R.id.collect_iv://收藏
+                
                 break;
 
         }

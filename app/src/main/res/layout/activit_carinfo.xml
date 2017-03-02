@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/A7"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/fanhui"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppear.Theme.A1_Size17" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y226"
+            android:scaleType="centerCrop"
+            android:src="@drawable/banner" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y35"
+            android:layout_marginLeft="@dimen/x36"
+            android:layout_marginTop="@dimen/y64"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tbcs"
+                android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+
+
+            <TextView
+                android:id="@+id/tv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x80"
+                android:drawablePadding="@dimen/x12"
+                android:drawableRight="@drawable/dingwei"
+                android:gravity="center"
+                android:text="杭州市"
+                android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x36">
+
+            <include layout="@layout/line_e" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y35"
+            android:layout_marginLeft="@dimen/x36"
+            android:layout_marginTop="@dimen/y35">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cphm"
+                android:textAppearance="@style/TextAppear.Theme.A4_Size14" />
+
+            <EditText
+                android:id="@+id/et_carid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x80"
+                android:background="@null"
+                android:hint="@string/cphm2"
+                android:paddingRight="@dimen/x36"
+                android:textAppearance="@style/TextAppear.Theme.A3_Size13"
+                android:textColorHint="@color/A5" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x36">
+
+            <include layout="@layout/line_e" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y30"
+            android:layout_marginLeft="@dimen/x36"
+            android:layout_marginTop="@dimen/y30"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_wei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="false"
+                android:drawableLeft="@drawable/select"
+                android:drawablePadding="@dimen/x12"
+                android:text="@string/xcwsp"
+                android:textColor="@color/A1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_lishi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/x36"
+                android:text="@string/lscxcl"
+                android:textAppearance="@style/TextAppear.Theme.A1_Size14" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y88"
+        android:layout_marginLeft="@dimen/x36"
+        android:layout_marginRight="@dimen/x36"
+        android:layout_marginTop="@dimen/y62"
+        android:background="@drawable/shape_btn_a1"
+        android:gravity="center"
+        android:text="@string/search"
+        android:textAppearance="@style/TextAppear.Theme.white_Size18" />
+
+</LinearLayout>

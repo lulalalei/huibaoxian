@@ -17,6 +17,7 @@ import com.bb.hbx.base.p.PolicydetailPresenter;
 import com.bb.hbx.base.v.PolicydetailsContract;
 import com.bb.hbx.bean.TradeDetail;
 import com.bb.hbx.bean.TradeDetailType;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.provide.PolicyFormProvide;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.StringUtils;
@@ -31,8 +32,12 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static com.alipay.sdk.app.statistic.c.A;
+
 /**
- * Created by Administrator on 2017/2/17.
+ * Created by fancl
+ * 订单(保单)详情
+ * （个险）
  */
 
 public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, PolicydetailModel>
@@ -169,7 +174,7 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
             tv_paytype.setText("已支付");
             lin_pay.setVisibility(View.VISIBLE);
             tv_confim.setText("再次购买");
-
+            DatabaseImpl.getInstance().updateUser("1");
             if (detail.getPaymentList() != null && !detail.getPaymentList().isEmpty()) {
                 for (TradeDetail.InsuredListBean.Payment payment : detail.getPaymentList()) {
                     View view = LayoutInflater.from(mContext).inflate(R.layout.item_payment, null);
@@ -220,8 +225,9 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
                     this.finish();
                 } else if (paysts == 20) {
                     this.finish();
-                    AppManager.getInstance().finishActivity(ConfirmpaymentActivity.class);
-                    AppManager.getInstance().finishActivity(ProductDetailActivity.class);
+                    AppManager.getInstance().finishParticularActivity(ConfirmpaymentActivity.class);
+                    AppManager.getInstance().finishParticularActivity(ProductDetailActivity.class);
+                    AppManager.getInstance().showActivity(HomeActivity.class, null);
                 } else if (paysts == -11) {
                     this.finish();
                     AppManager.getInstance().finishActivity(ConfirmpaymentActivity.class);
