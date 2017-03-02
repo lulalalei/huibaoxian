@@ -113,7 +113,11 @@
         <activity android:name=".activitiy.AddressManagerActivity" />
         <activity android:name=".activitiy.BuildNewAddressActivity" />
         <activity android:name=".activitiy.PurchaseDetailActivity" />
-        <activity android:name=".activitiy.HomeActivity" />
+        <activity android:name=".activitiy.HomeActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".activitiy.RealNameIdentifyActivity" />
         <activity android:name=".activitiy.RealNameCommitActivity" />
         <activity android:name=".activitiy.RealNameFinishActivity" />
