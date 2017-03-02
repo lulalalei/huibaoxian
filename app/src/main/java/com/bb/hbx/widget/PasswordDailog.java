@@ -26,12 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static com.bb.hbx.R.id.et_pwd;
-import static com.bb.hbx.R.id.le_search;
-import static com.bb.hbx.R.id.lin_cancl;
-import static com.bb.hbx.R.id.lin_pyqshare;
-import static com.bb.hbx.R.id.lin_qqshare;
-import static com.bb.hbx.R.id.lin_wxshare;
+
 
 
 /**
@@ -66,6 +61,27 @@ public class PasswordDailog extends BaseDialog implements
     }
 
 
+    public interface GetPasswordListener {
+
+        void getPassword(String password);
+    }
+
+    private GetPasswordListener listener;
+
+    public void setListener(GetPasswordListener listener) {
+        this.listener = listener;
+    }
+
+    /**
+     * @param context 上下文
+     */
+    public PasswordDailog(Context context) {
+        super(context, R.layout.passworddialog);
+        mContext = context;
+
+
+    }
+
     /**
      * @param context 上下文
      */
@@ -96,7 +112,13 @@ public class PasswordDailog extends BaseDialog implements
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     if (!TextUtils.isEmpty(et_psd.getText())) {
                         password = et_psd.getText().toString().trim();
-                        view.getverifyPayPwd(password);
+                        if (view != null) {
+                            view.getverifyPayPwd(password);
+                        }
+
+                        if (listener != null) {
+                            listener.getPassword(password);
+                        }
                     }
                 }
                 return true;
