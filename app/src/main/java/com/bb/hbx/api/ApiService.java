@@ -214,6 +214,11 @@ public interface ApiService {
     Call<Result_Api<BindingBankCard>> bindingBankCard(@Field("userId") String userId, @Field("accountName") String accountName, @Field("idNo") String idNo,
                                                       @Field("cardNo") String cardNo, @Field("bankName") String bankName);
 
+    //解绑银行卡
+    @FormUrlEncoded
+    @POST("api.do?method=releaseBankCard&type=post")
+    Call<Result_Api> releaseBankCard(@Field("userId") String userId);
+
     //提现--待测
     @FormUrlEncoded
     @POST("api.do?method=withdraw&type=post")

@@ -2,12 +2,14 @@ package com.bb.hbx.base.m;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.v.WelcomeContract;
 import com.bb.hbx.bean.User;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.utils.MyUsersSqlite;
 
 import retrofit2.Call;
@@ -41,7 +43,9 @@ public class WelcomeModel implements WelcomeContract.Model {
     public User settingUser() {
         //User user=new User();
         //boolean hasLogined = ShareSPUtils.sp.getBoolean("hasLogined", false);
-        Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+        //MyUsersSqlite.db
+        SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
         if (cursor != null) {
             if (!cursor.moveToNext())//没有数据,则首次使用,初始化部分数据
             {
@@ -94,6 +98,7 @@ public class WelcomeModel implements WelcomeContract.Model {
                     MyApplication.user.setIsBClient(false);
                 }
             }
+            db.close();
         }
         return user;
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -28,7 +30,6 @@ import com.bb.hbx.activitiy.MyOrderActivity;
 import com.bb.hbx.activitiy.PerInsuOrderActivity;
 import com.bb.hbx.activitiy.PersonInfoSettingActivity;
 import com.bb.hbx.activitiy.PresentInsuActivity;
-import com.bb.hbx.activitiy.RecommendRewardActivity;
 import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
 import com.bb.hbx.activitiy.login.LoginActivity;
@@ -38,7 +39,7 @@ import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.GetMyPageInfoBean;
 import com.bb.hbx.bean.UserInfo;
-import com.bb.hbx.utils.MyUsersSqlite;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.utils.ShareSPUtils;
 
 import butterknife.BindView;
@@ -195,7 +196,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                         call.enqueue(new Callback() {
                             @Override
                             public void onResponse(Call call, Response response) {
-                                Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+                                SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+                                Cursor cursor = db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
                                 if (cursor!=null)
                                 {
                                     if (cursor.moveToNext())
@@ -211,8 +213,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                                         //Toast.makeText(this,"插入新用户成功:"+flag,Toast.LENGTH_SHORT).show();
                                         values.clear();*/
                                         //更新表数据
-                                        MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,gender=?,phone=? where currentUser=currentUser ",
+
+                                        db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,gender=?,phone=? where currentUser=currentUser ",
                                                 new String[]{"false","","","false","0",""});
+
                                         MyApplication.user.setUserId("");
                                         MyApplication.user.setMobile("");
                                         MyApplication.user.setLoginPwd("0");
@@ -226,6 +230,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                                     }
                                 }
                                 cursor.close();
+                                db.close();
                             }
 
                             @Override
@@ -298,8 +303,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.invite_layout:
-                intent.setClass(mContext, RecommendRewardActivity.class);
-                startActivity(intent);
+                /*intent.setClass(mContext, RecommendRewardActivity.class);
+                startActivity(intent);*/
+                /*ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                Call call=service.releaseBankCard(MyApplication.user.getUserId());
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+
+                    }
+                });*/
+                View b2cView = View.inflate(mContext, R.layout.b2c_layout, null);
+                PopupWindow pw = new PopupWindow(b2cView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, false);
+                pw.setOutsideTouchable(true);
+                pw.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.b2c_bg));
+                pw.showAsDropDown(service_layout);
                 break;
             case R.id.service_layout:
                 intent.setClass(mContext, CustomServiceActivity.class);
@@ -317,7 +340,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         {
             identify_tv.setVisibility(View.VISIBLE);
             String userName=null;
-            Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+            SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+            Cursor cursor = db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
             if (cursor!=null)
             {
                 if (cursor.moveToNext())
@@ -362,6 +386,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 {
                     Toast.makeText(mContext,"cursor下一条不存在",Toast.LENGTH_SHORT);
                 }
+                db.close();
             }
             else
             {

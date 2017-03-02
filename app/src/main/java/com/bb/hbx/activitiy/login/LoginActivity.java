@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy.login;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,10 +24,10 @@ import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.cans.Can;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.LoginAnimHelp;
-import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.ShareSPUtils;
 import com.bb.hbx.widget.CountDownTextView;
 import com.bb.hbx.widget.LoginTelEdit;
@@ -332,8 +333,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                     }
                     ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, null);
                     //更新表数据
-                    MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
+                    //MyUsersSqlite.db
+                    SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+                    db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
                             new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,loginPwd,paymentPwd,null});
+                    db.close();
                     showTip("登陆成功");
 
                     MyApplication.user.setUserId(userId);

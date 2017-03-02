@@ -2,6 +2,7 @@ package com.bb.hbx.activitiy;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -20,9 +21,9 @@ import com.alibaba.sdk.android.oss.common.auth.OSSFederationToken;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.cans.Can;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.utils.CompressBitmap;
 import com.bb.hbx.utils.MyOssUtils;
-import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.ShareSPUtils;
 
 import java.io.BufferedOutputStream;
@@ -177,7 +178,8 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
     }
 
     private void updateUserInfo() {
-        Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+        SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
         if (cursor!=null)
         {
             if (cursor.moveToNext())
@@ -228,6 +230,8 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
         {
             Toast.makeText(mContext,"cursor为空",Toast.LENGTH_SHORT);
         }
+        cursor.close();
+        db.close();
     }
 
     @Override

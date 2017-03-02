@@ -27,6 +27,9 @@ public class MyUnPayInPIOAdapter extends RecyclerView.Adapter<MyUnPayInPIOAdapte
     Context mContext;
     LayoutInflater inflater;
     OnItemClickListener onMyItemClickListener;
+    int payAmountInt=0;
+    int classType=1;//1表示车险,2表示个险
+    String sts="";
 
     public MyUnPayInPIOAdapter(List<GetPolicies.PolicyListBean> list, Context mContext) {
         this.list = list;

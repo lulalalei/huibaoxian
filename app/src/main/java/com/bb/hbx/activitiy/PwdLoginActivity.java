@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,10 +23,10 @@ import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.cans.Can;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.LoginAnimHelp;
-import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.utils.ShareSPUtils;
 import com.bb.hbx.widget.LoginPswEdit;
 import com.bb.hbx.widget.LoginTelEdit;
@@ -225,8 +226,10 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                                 //Toast.makeText(mContext,"userId:"+userId+"  sessionId:"+sessionId,Toast.LENGTH_SHORT);
                                 ShareSPUtils.writeShareSp(true,userId,sessionId,"默认用户名",phone, pwd);
                                 //更新表数据
-                                MyUsersSqlite.db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
+                                SQLiteDatabase db=DatabaseImpl.getInstance().getReadableDatabase();
+                                db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
                                         new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,"1"/*pwd*/,paymentPwd,null});
+                                db.close();
                                 showTip("登陆成功");
 
                                 MyApplication.user.setUserId(userId);
