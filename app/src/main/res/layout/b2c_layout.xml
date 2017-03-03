@@ -29,37 +29,96 @@
         android:textColor="@color/white"
         android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/titleHead_tv"
+    <RelativeLayout
+        android:id="@+id/b2cContent_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp"
-        android:text="成为签约代理人"
-        android:textColor="@color/white"
-        android:textSize="21sp"
-        android:textStyle="bold" />
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/titleHead_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="55dp"
+            android:text="成为签约代理人"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/content_tv"
+        <TextView
+            android:id="@+id/content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleHead_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:text="您有升级资格"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/content_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="18dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/b2c_zhanshi" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/b2cAgree_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleHead_tv"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:text="您有升级资格"
-        android:textColor="@color/white"
-        android:textSize="12sp" />
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/agree_iv"
+            android:layout_width="54dp"
+            android:layout_height="63dp"
+            android:src="@drawable/b2c_chenggong"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="35dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/titleAgreeHead_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="升级成功"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/agree_iv"
+            android:layout_marginTop="23dp"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/titleAgreeContent_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您已升级成签约代理人"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/titleAgreeHead_tv"
+            android:layout_marginTop="7dp"/>
+        <TextView
+            android:id="@+id/makeMoney_tv"
+            android:layout_width="207dp"
+            android:layout_height="45dp"
+            android:text="马上去赚钱"
+            android:textColor="@color/A1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/titleAgreeContent_tv"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/shape_b2c_white"/>
+    </RelativeLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/content_tv"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/b2c_zhanshi" />
+
 </RelativeLayout>

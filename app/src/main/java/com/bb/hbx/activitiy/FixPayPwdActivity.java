@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +15,8 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.cans.Can;
-import com.bb.hbx.utils.MyUsersSqlite;
+import com.bb.hbx.db.DatabaseImpl;
+import com.bb.hbx.utils.AppManager;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -86,9 +88,13 @@ public class FixPayPwdActivity extends BaseActivity implements View.OnClickListe
                                         if (body.isSuccess())
                                         {
                                             //更新表数据
-                                            MyUsersSqlite.db.execSQL("update userstb set paymentPwd=? where currentUser=currentUser ",
+                                            SQLiteDatabase db = DatabaseImpl.getInstance().getReadableDatabase();
+                                            db.execSQL("update userstb set paymentPwd=? where currentUser=currentUser ",
                                                     new String[]{"1"});
                                             MyApplication.user.setPaymentPwd("1");
+                                            db.close();
+                                            AppManager.getInstance().finishParticularActivity(CheckIdentifyInForgerActivity.class);
+                                            finish();
                                         }
                                         showTip(body.getRespMsg());
                                     }
@@ -112,10 +118,14 @@ public class FixPayPwdActivity extends BaseActivity implements View.OnClickListe
                                     {
                                         if (body.isSuccess())
                                         {
+                                            SQLiteDatabase db = DatabaseImpl.getInstance().getReadableDatabase();
                                             //更新表数据
-                                            MyUsersSqlite.db.execSQL("update userstb set paymentPwd=? where currentUser=currentUser ",
+                                            db.execSQL("update userstb set paymentPwd=? where currentUser=currentUser ",
                                                     new String[]{"1"});
+                                            db.close();
                                             MyApplication.user.setPaymentPwd("1");
+                                            AppManager.getInstance().finishParticularActivity(CheckIdentifyUnderPwdActivity.class);
+                                            finish();
                                         }
                                         showTip(body.getRespMsg());
                                     }

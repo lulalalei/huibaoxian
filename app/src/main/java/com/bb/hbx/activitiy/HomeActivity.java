@@ -7,9 +7,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.db.DatabaseImpl;
@@ -22,6 +26,10 @@ import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.BottomBar;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 
 /**
@@ -236,6 +244,47 @@ public class HomeActivity extends BaseActivity {
         bb.getLocationOnScreen(location);
         pw.showAtLocation(bb, Gravity.NO_GRAVITY, AppManager.getInstance().dp2px(mContext, 18),
                 location[1] - popupHeight);
+        TextView close_tv = (TextView) b2cView.findViewById(R.id.close_tv);
+        final TextView translate_tv = (TextView) b2cView.findViewById(R.id.translate_tv);
+        TextView makeMoney_tv = (TextView) b2cView.findViewById(R.id.makeMoney_tv);
+        final RelativeLayout b2cContent_layout = (RelativeLayout) b2cView.findViewById(R.id.b2cContent_layout);
+        final RelativeLayout b2cAgree_layout = (RelativeLayout) b2cView.findViewById(R.id.b2cAgree_layout);
+        close_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pw.dismiss();
+            }
+        });
+        translate_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                b2cContent_layout.setVisibility(View.GONE);
+                b2cAgree_layout.setVisibility(View.VISIBLE);
+                translate_tv.setVisibility(View.GONE);
+
+            }
+        });
+        makeMoney_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //showTip("去赚钱");
+                Toast.makeText(HomeActivity.this,"去赚钱",Toast.LENGTH_SHORT).show();
+                ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+                Call call=service.hasUpgradeRight(MyApplication.user.getUserId());
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+
+                    }
+                });
+            }
+        });
 
     }
 

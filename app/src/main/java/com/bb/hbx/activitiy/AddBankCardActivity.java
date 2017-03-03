@@ -15,7 +15,6 @@ import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.bean.BindingBankCard;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -34,10 +33,7 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
     EditText idCard_et;
     @BindView(R.id.bankCard_et)
     EditText bankCard_et;
-    @BindView(R.id.choseBank_et)
-    EditText choseBank_et;
-    @BindView(R.id.choseBank_layout)
-    RelativeLayout choseBank_layout;
+
     @BindView(R.id.verify_tv)
     TextView verify_tv;
     @Override
@@ -54,7 +50,6 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
     public void initListener() {
         back_layout.setOnClickListener(this);
         nameInfo_iv.setOnClickListener(this);
-        choseBank_layout.setOnClickListener(this);
         verify_tv.setOnClickListener(this);
     }
 
@@ -73,48 +68,41 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
             case R.id.nameInfo_iv:
                 Toast.makeText(this,"请输入真实姓名",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.choseBank_layout:
-                Toast.makeText(this,"选择银行",Toast.LENGTH_SHORT).show();
-                break;
             case R.id.verify_tv:
 
                 String name = name_et.getText().toString();
                 String idCard = idCard_et.getText().toString();
                 String bankCard = bankCard_et.getText().toString();
-                String bank = choseBank_et.getText().toString();
                 if (!TextUtils.isEmpty(name)&& !TextUtils.isEmpty(idCard)&&!TextUtils.isEmpty(bankCard))
                 {
 
                     ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call=service.bindingBankCard(MyApplication.user.getUserId(),name,idCard,bankCard,"工商银行");
+                    Call call=service.bindingBankCard(MyApplication.user.getUserId(),name,idCard,bankCard);
                     call.enqueue(new Callback() {
                         @Override
                         public void onResponse(Call call, Response response) {
                             Result_Api body = (Result_Api) response.body();
                             boolean success = body.isSuccess();
-                            /*if (success)
-                            {
-                                Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
-                                startActivity(intent);
-                            }*/
-                            showTip(body.getRespMsg());
                             String paymentPwd = MyApplication.user.getPaymentPwd();
-                            if ("1".equals(paymentPwd))//已经设置过支付密码
+                            if (success)
                             {
-                                Intent intent = new Intent(AddBankCardActivity.this, WithdrawActivity.class);
-                                BindingBankCard bindingBean = (BindingBankCard) body.getOutput();
+                                if ("1".equals(paymentPwd))//已经设置过支付密码
+                                {
+                                    Intent intent = new Intent(AddBankCardActivity.this, WithdrawActivity.class);
+                               /* BindingBankCard bindingBean = (BindingBankCard) body.getOutput();
                                 String bankName = bindingBean.getBankName();
                                 String lastDigits = bindingBean.getLastDigits();
                                 String cardType = bindingBean.getCardType();
                                 intent.putExtra("bankName",bankName);
                                 intent.putExtra("lastDigits",lastDigits);
-                                intent.putExtra("cardType",cardType);
-                                startActivity(intent);
-                            }
-                            else
-                            {
-                                Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
-                                startActivity(intent);
+                                intent.putExtra("cardType",cardType);*/
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(AddBankCardActivity.this, SetPayPwdActivity.class);
+                                    startActivity(intent);
+                                }
                             }
                         }
 

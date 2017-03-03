@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -316,6 +315,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 if (activity != null) {
                     activity.updateViewWithCToB();
                 }
+
                 break;
             case R.id.service_layout:
                 intent.setClass(mContext, CustomServiceActivity.class);

@@ -212,7 +212,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=bindingBankCard&type=post")
     Call<Result_Api<BindingBankCard>> bindingBankCard(@Field("userId") String userId, @Field("accountName") String accountName, @Field("idNo") String idNo,
-                                                      @Field("cardNo") String cardNo, @Field("bankName") String bankName);
+                                                      @Field("cardNo") String cardNo/*, @Field("bankName") String bankName*/);
 
     //解绑银行卡
     @FormUrlEncoded
@@ -221,9 +221,8 @@ public interface ApiService {
 
     //提现--待测
     @FormUrlEncoded
-    @POST("api.do?method=withdraw&type=post")
-    Call<Result_Api> withdraw(@Field("userId") String userId,  @Field("cardNo") String cardNo,
-                              @Field("accountName") String accountName, @Field("cashAmount") String cashAmount);
+    @POST("api.do?method=applyCash&type=post")
+    Call<Result_Api> applyCash(@Field("userId") String userId,@Field("cashAmount") String cashAmount);
 
     //修改支付密码
     @FormUrlEncoded
@@ -297,6 +296,11 @@ public interface ApiService {
     @POST("api.do?method=getUserCouponsList&type=post")
     Call<Result_Api<GetUserCouponsListBean>> getUserCouponsList(@Field("userId") String userId, @Field("sts") String sts, @Field("couponType") String couponType,
                                                                 @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+
+    //判断用户是否能升B--待测
+    @FormUrlEncoded
+    @POST("api.do?method=hasUpgradeRight&type=post")
+    Call<String> hasUpgradeRight(@Field("userId") String userId);
 
 
     //获取首页数据

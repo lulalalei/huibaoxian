@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_my_bank_card"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="230dp"
     android:background="@color/A7"
     tools:context="com.bb.hbx.activitiy.MyBankCardActivity">
 
@@ -37,6 +37,7 @@
             android:gravity="center"/>
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/topbar_layout"
@@ -75,6 +76,15 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:text="解绑" />
+        
+        <ImageView
+            android:id="@+id/bankLogo_iv"
+            android:layout_width="100dp"
+            android:layout_height="93dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/gongshangyinhang"
+            android:scaleType="centerCrop"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="24dp"
