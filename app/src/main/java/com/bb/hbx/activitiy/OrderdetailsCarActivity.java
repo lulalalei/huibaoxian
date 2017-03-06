@@ -16,6 +16,7 @@ import com.bb.hbx.base.v.OrderdetailsCarContract;
 import com.bb.hbx.bean.TradeDetail;
 import com.bb.hbx.bean.TradeDetailType;
 import com.bb.hbx.db.DatabaseImpl;
+import com.bb.hbx.provide.OrderCarFormProvide;
 import com.bb.hbx.provide.PolicyFormProvide;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.TimeUtils;
@@ -34,7 +35,7 @@ import butterknife.BindView;
  */
 
 public class OrderdetailsCarActivity extends BaseActivity<OrderdetailCarPresenter, OrderdetaiCarlModel>
-        implements OrderdetailsCarContract.View, View.OnClickListener{
+        implements OrderdetailsCarContract.View, View.OnClickListener {
 
     @BindView(R.id.recyclerViewJQX)
     RecyclerView recyclerViewJQX;
@@ -88,10 +89,13 @@ public class OrderdetailsCarActivity extends BaseActivity<OrderdetailCarPresente
     LinearLayout lin_payments;
 
     private List<Item> items;
+    private List<Item> itemsSYX;
     private String tradeId = "";//订单号
     private MultiTypeAdapter adapterJQX;
+    private MultiTypeAdapter adapterSYX;
 
     private int paysts = 0;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_orderdetail_car;
@@ -111,6 +115,18 @@ public class OrderdetailsCarActivity extends BaseActivity<OrderdetailCarPresente
 
         recyclerViewJQX.addItemDecoration(divider);
         recyclerViewJQX.setAdapter(adapterJQX);
+
+        LinearLayoutManager managerSYX = new LinearLayoutManager(this);
+        recyclerViewSYX.setLayoutManager(managerSYX);
+        adapterSYX = new MultiTypeAdapter();
+        adapterSYX.applyGlobalMultiTypePool();
+        adapterSYX.register(TradeDetailType.InsureListBean.class, new OrderCarFormProvide());
+        recyclerViewSYX.setAdapter(adapterSYX);
+        RecycleViewDivider dividerSYX = new RecycleViewDivider(this, LinearLayoutManager.VERTICAL,
+                AppManager.getInstance().dp2px(this, 0.5), R.color.A6);
+
+        recyclerViewSYX.addItemDecoration(dividerSYX);
+        recyclerViewSYX.setAdapter(adapterSYX);
     }
 
     @Override
@@ -128,7 +144,7 @@ public class OrderdetailsCarActivity extends BaseActivity<OrderdetailCarPresente
         }
 
         if (!tradeId.isEmpty()) {
-            mPresenter.getTradeDetail(tradeId, "","1");
+            mPresenter.getTradeDetail(tradeId, "", "1");
         }
 
         items = new ArrayList<>();
@@ -137,6 +153,11 @@ public class OrderdetailsCarActivity extends BaseActivity<OrderdetailCarPresente
         bean.setInsureAmount(getString(R.string.bf));
         items.add(bean);
         adapterJQX.setItems(items);
+
+        itemsSYX = new ArrayList<>();
+
+
+
     }
 
     @Override
@@ -194,5 +215,20 @@ public class OrderdetailsCarActivity extends BaseActivity<OrderdetailCarPresente
         }
 
         tv_tip.setText(getString(R.string.tip2, detail.getInsurerName(), detail.getInsurerTels()));
+
+
+        TradeDetailType.InsureListBean beanSYX = new TradeDetailType.InsureListBean();
+        TradeDetailType.ExtraInsureListBean extraInsureListBean = new TradeDetailType.ExtraInsureListBean();
+        beanSYX.setInsureName("保险项");
+        beanSYX.setInsureAmount("保额");
+        extraInsureListBean.setExtraInsureAmount("保费");
+        extraInsureListBean.setExtraInsureName("不计免赔");
+        /*itemsSYX.add(extraInsureListBean);
+        itemsSYX.add(beanSYX);*/
+
+        List<TradeDetailType.InsureListBean> listBeen = detail.getTypeList().get(1).getInsureList();
+        itemsSYX.addAll(listBeen);
+        adapterSYX.setItems(itemsSYX);
     }
+
 }

@@ -1,10 +1,13 @@
 package com.bb.hbx.activitiy;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -45,6 +48,9 @@ public class RealNameIdentifyActivity extends BaseActivity implements View.OnCli
     String picPathReverse="";
     Bitmap bitmapFront;
     Bitmap bitmapReverse;
+
+    //true: 成功 false:失败
+    boolean isFlag = true;
     @Override
     public int getLayoutId() {
         return R.layout.activity_real_name_identify;
@@ -65,7 +71,19 @@ public class RealNameIdentifyActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void initdata() {
+        int code = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        int code2 = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int code3 = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
+        if (code == -1||code2 == -1||code3 == -1) {
+            //授权失败
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
+            }, 201);
+        } else {
+            //授权成功
+            isFlag = true;
+        }
     }
 
     @Override
@@ -141,6 +159,20 @@ public class RealNameIdentifyActivity extends BaseActivity implements View.OnCli
             reverse_iv.setImageBitmap(bitmapReverse);
             reverseFlag_iv.setVisibility(View.GONE);
             //bitmap.recycle();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 201) {
+            if (grantResults[0] == 0&&grantResults[1] == 0&&grantResults[2] == 0) {
+                //授权成功
+                isFlag = true;
+            } else {
+                //授权失败
+                isFlag = false;
+            }
         }
     }
 

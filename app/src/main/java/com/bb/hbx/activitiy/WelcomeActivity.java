@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.KeyEvent;
 
 import com.bb.hbx.MyApplication;
@@ -30,7 +31,8 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter, WelcomeModel
     private PermissionUtils utils;
 
     boolean isOnce = false;
-
+    //true: 成功 false:失败
+    boolean isFlag = true;
     @Override
     public int getLayoutId() {
         return R.layout.activity_welcome;
@@ -38,13 +40,24 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter, WelcomeModel
 
     @Override
     public void initView() {
-
+        int code2 = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int code3 = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (code2 == -1||code3 == -1) {
+            //授权失败
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
+            }, 201);
+        } else {
+            //授权成功
+            isFlag = true;
+        }
     }
 
     @Override
     public void initListener() {
 
     }
+
 
     @Override
     public void initdata() {
@@ -223,7 +236,15 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter, WelcomeModel
             mPresenter.getClientCtlInfo(MyApplication.user.getUserId());
 
         }
-
+        if (requestCode == 201) {
+            if (grantResults[0] == 0&&grantResults[1] == 0&&grantResults[2] == 0) {
+                //授权成功
+                isFlag = true;
+            } else {
+                //授权失败
+                isFlag = false;
+            }
+        }
     }
 
     @Override
