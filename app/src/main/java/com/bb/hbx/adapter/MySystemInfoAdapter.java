@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.GetMsgsBean;
-import com.bb.hbx.interfaces.OnItemClickListener;
+import com.bb.hbx.bean.Message;
+import com.bb.hbx.db.MyDBManagerSystemInfo;
+import com.bb.hbx.interfaces.OnItemChangeStateClickListener;
+import com.bb.hbx.utils.TimeUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,17 +26,19 @@ import butterknife.ButterKnife;
 public class MySystemInfoAdapter extends RecyclerView.Adapter<MySystemInfoAdapter.MyViewHodler>{
 
     Context mContext;
-    ArrayList<GetMsgsBean> list;
+    List<Message> list;
+    MyDBManagerSystemInfo myDBManagerSystemInfo;
     LayoutInflater inflater;
-    OnItemClickListener onMyItemClickListener;
-
-    public MySystemInfoAdapter(Context mContext, ArrayList<GetMsgsBean> list) {
+    OnItemChangeStateClickListener onMyItemClickListener;
+    ArrayList<Message> dbList;
+    public MySystemInfoAdapter(Context mContext, List<Message> list,MyDBManagerSystemInfo myDBManagerSystemInfo) {
         this.mContext = mContext;
         this.list = list;
+        this.myDBManagerSystemInfo=myDBManagerSystemInfo;
         inflater=LayoutInflater.from(mContext);
     }
 
-    public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
+    public void setOnMyItemClickListener(OnItemChangeStateClickListener onMyItemClickListener) {
         this.onMyItemClickListener = onMyItemClickListener;
     }
 
@@ -45,8 +50,8 @@ public class MySystemInfoAdapter extends RecyclerView.Adapter<MySystemInfoAdapte
 
     @Override
     public void onBindViewHolder(MyViewHodler holder, final int position) {
-        GetMsgsBean bean = list.get(position);
-        if ("0".equals(bean.getSts()))
+        dbList = myDBManagerSystemInfo.queryOne(list.get(position).getMsgId());
+        if (dbList.size()>0)
         {
             holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_white);
         }
@@ -54,10 +59,25 @@ public class MySystemInfoAdapter extends RecyclerView.Adapter<MySystemInfoAdapte
         {
             holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_a1);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*int sts = list.get(position).getSts();
+        if (2==sts)
+        {
+            holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_white);
+        }
+        else
+        {
+            holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_a1);
+        }*/
+        holder.title_tv.setText(list.get(position).getMsgTitle());
+        holder.content_tv.setText(list.get(position).getMsgContent());
+        long stringToDateNoSpace = TimeUtils.getStringToDateNoSpace(list.get(position).getMsgTime());
+        holder.time_tv.setText(TimeUtils.getDateToString(stringToDateNoSpace));
+        final MyViewHodler finalHolder=holder;
+        finalHolder.circle_tv.setTag(position);
+        finalHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onMyItemClickListener.onMyItemClickListener(position);
+                onMyItemClickListener.onMyItemChangeStateClickListener(position,finalHolder.circle_tv);
             }
         });
     }

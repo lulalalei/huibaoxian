@@ -4,27 +4,34 @@
     android:id="@+id/activity_real_name_identify"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/A7"
     tools:context="com.bb.hbx.activitiy.RealNameIdentifyActivity">
 
     <RelativeLayout
         android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:background="@color/white"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/back_iv"
-            android:src="@drawable/fanhui"
-            android:scaleType="centerCrop"
-            android:layout_marginLeft="18dp"/>
+        <RelativeLayout
+            android:id="@+id/back_layout"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="17dp"
+                android:id="@+id/back_iv"
+                android:src="@drawable/fanhui"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="18dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="实名认证"
-            android:textSize="22sp"
+            android:textSize="17sp"
             android:textColor="@color/A1"
             android:layout_centerHorizontal="true"
             android:gravity="center"/>
@@ -62,6 +69,7 @@
                     android:layout_height="190dp"
                     android:layout_centerHorizontal="true"/>
                 <ImageView
+                    android:id="@+id/frontFlag_iv"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/xiangji_shenfenzheng"
@@ -82,6 +90,7 @@
                     android:layout_height="190dp"
                     android:layout_centerHorizontal="true"/>
                 <ImageView
+                    android:id="@+id/reverseFlag_iv"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/xiangji_shenfenzheng"

@@ -398,6 +398,7 @@
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/collect_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
                 <ImageView

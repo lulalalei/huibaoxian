@@ -278,17 +278,22 @@ public interface ApiService {
     @POST("api.do?method=delInsured&type=post")
     Call<Result_Api<UpdateInsured>> delInsured(@Field("userId") String userId, @Field("insuredId") String insuredId);
 
-    //获取我的订单列表--待测
+    //获取我的订单列表--已测
     @FormUrlEncoded
     @POST("api.do?method=getTrades&type=post")
     Call<Result_Api<GetTradesBean>> getTrades(@Field("userId") String userId, @Field("tradeSts") String tradeSts,
                                               @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
 
-    //获取我的保单列表--待测
+    //获取我的保单列表--已测
     @FormUrlEncoded
     @POST("api.do?method=getPolicies&type=post")
     Call<Result_Api<GetPolicies>> getPolicies(@Field("userId") String userId, @Field("policySts") String policySts, @Field("classType") String classType,
                                               @Field("pageIndex") String pageIndex, @Field("pageSize") String pageSize);
+
+    /*//查看订单(保单)详情--待测
+    @FormUrlEncoded
+    @POST("api.do?method=getTradeDetail&type=post")
+    Call<Result_Api> getTradeDetail(@Field("userId") String userId,@Field("classType") String classType);*/
 
 
     //获取我的红包记录列表--已测
@@ -325,6 +330,17 @@ public interface ApiService {
     @POST("api.do?method=getProducts&type=post")
     Call<Result_Api<ProductBean>> getProducts(@Body RequestProduct product);
 
+
+    //获取用户消息列表
+    @FormUrlEncoded
+    @POST("api.do?method=getMsgs&type=post")
+    Call<Result_Api<MsgInfo>> getMsgsUser(@Field("userId") String userId, @Field("msgType") String msgType,
+                                      @Field("sts") String sts, @Field("pageIndex") String pageIndex);
+
+    //阅读消息
+    @FormUrlEncoded
+    @POST("api.do?method=readMsg&type=post")
+    Call<Result_Api> readMsg(@Field("userId") String userId, @Field("msgType") String msgType,@Field("msgId") String msgId);
 
     //获取消息列表
     @FormUrlEncoded

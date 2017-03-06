@@ -1,5 +1,6 @@
 package com.bb.hbx.activitiy;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -7,14 +8,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyPerOrderDetailAdapter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MyPerOrderDetailBean;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /*
 * 保单详情页面  由点击 我的--个险订单 中的条目进入*/
@@ -44,6 +51,7 @@ public class PerOrderDetailActivity extends BaseActivity implements View.OnClick
     MyPerOrderDetailAdapter adapter;
 
     ArrayList<MyPerOrderDetailBean> totalList=new ArrayList<>();
+    String detailId="";
     @Override
     public int getLayoutId() {
         return R.layout.activity_order_detail;
@@ -51,7 +59,8 @@ public class PerOrderDetailActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-
+        Intent intent = getIntent();
+        detailId = intent.getStringExtra("detailId");
     }
 
     @Override
@@ -74,14 +83,28 @@ public class PerOrderDetailActivity extends BaseActivity implements View.OnClick
             }
         };
         recyclerView.setLayoutManager(manager);
+        adapter = new MyPerOrderDetailAdapter(totalList, this);
+        recyclerView.setAdapter(adapter);
         for (int i = 0; i < 4; i++) {
             String title="人身意外伤害";
             String price=(i+1)*10+"";
             MyPerOrderDetailBean detailBean = new MyPerOrderDetailBean(title, price);
             totalList.add(detailBean);
         }
-        adapter = new MyPerOrderDetailAdapter(totalList, this);
-        recyclerView.setAdapter(adapter);
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getTradeDetail(MyApplication.user.getUserId(),"2",detailId);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+        adapter.notifyDataSetChanged();
     }
 
     @Override

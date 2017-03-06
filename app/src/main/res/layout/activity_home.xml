@@ -26,11 +26,10 @@
 
         <!--<include layout="@layout/bottom_bar" android:id="@+id/bottom1"/>-->
 
-
-        <com.bb.hbx.widget.BottomBar
-            android:id="@+id/bb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <com.bb.hbx.widget.BottomBar
+                android:id="@+id/bb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
     </LinearLayout>
 

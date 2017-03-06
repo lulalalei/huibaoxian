@@ -1,9 +1,15 @@
 package com.bb.hbx.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Created by Administrator on 2017/1/23.
  */
 
+@Entity
 public class Message {
 
 
@@ -17,6 +23,8 @@ public class Message {
      * sts : 1
      */
 
+    @Id(autoincrement = true)
+    long id;
     private String msgContent;
     private String msgId;
     private String msgLink;
@@ -24,6 +32,30 @@ public class Message {
     private String msgTitle;
     private String msgType;
     private int sts;
+
+    @Keep
+    public Message(long id, String msgContent, String msgId, String msgLink, String msgTime, String msgTitle, String msgType, int sts) {
+        this.id = id;
+        this.msgContent = msgContent;
+        this.msgId = msgId;
+        this.msgLink = msgLink;
+        this.msgTime = msgTime;
+        this.msgTitle = msgTitle;
+        this.msgType = msgType;
+        this.sts = sts;
+    }
+
+    @Generated(hash = 637306882)
+    public Message() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getMsgContent() {
         return msgContent;

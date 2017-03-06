@@ -16,6 +16,7 @@ public class MsgInfo {
      */
 
     private int pageSize;
+    private int unReadCount;
     private int totalCount;
     private List<Message> msgList;
 
@@ -25,6 +26,14 @@ public class MsgInfo {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public int getUnReadCount() {
+        return unReadCount;
+    }
+
+    public void setUnReadCount(int unReadCount) {
+        this.unReadCount = unReadCount;
     }
 
     public int getTotalCount() {

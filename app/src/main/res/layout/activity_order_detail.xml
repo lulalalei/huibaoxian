@@ -105,7 +105,7 @@
                         android:id="@+id/state_iv"
                         android:layout_width="62dp"
                         android:layout_height="62dp"
-                        android:src="@drawable/baodan_baozhangzhong"
+                        android:src="@drawable/baodan_baozhangzhongquan"
                         android:scaleType="centerCrop"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"/>

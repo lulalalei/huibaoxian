@@ -215,6 +215,7 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                                 String paymentPwd = user.getPaymentPwd();
                                 String userName = user.getNickName();
                                 String email = user.getEmail();
+                                String logo = user.getLogo();
                                 if (TextUtils.isEmpty(gender))
                                 {
                                     gender="0";
@@ -228,9 +229,9 @@ public class PwdLoginActivity extends BaseActivity<LoginPresenter, LoginModel>
                                 //更新表数据
                                 SQLiteDatabase db=DatabaseImpl.getInstance().getReadableDatabase();
                                 db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
-                                        new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,"1"/*pwd*/,paymentPwd,null});
+                                        new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,"1"/*pwd*/,paymentPwd,logo});
                                 db.close();
-                                showTip("登陆成功");
+                                showTip(body.getRespMsg());
 
                                 MyApplication.user.setUserId(userId);
                                 MyApplication.user.setMobile(phone);

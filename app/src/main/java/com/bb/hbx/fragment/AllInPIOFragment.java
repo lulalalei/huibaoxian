@@ -106,6 +106,8 @@ public class AllInPIOFragment extends BaseFragment{
             public void onMyItemClickListener(int position) {
                 //showTip("position:"+position);
                 Intent intent = new Intent(mContext, PerOrderDetailActivity.class);
+                String detailId = totalList.get(position).getDetailId();
+                intent.putExtra("detailId",detailId);
                 startActivity(intent);
             }
         });

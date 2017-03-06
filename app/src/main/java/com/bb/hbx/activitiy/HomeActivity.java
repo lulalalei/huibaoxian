@@ -76,7 +76,6 @@ public class HomeActivity extends BaseActivity<HomeActPresenter, HomeActModle> i
                 hideFragments(transaction);
                 switch (tab) {
                     case 0:
-
                         if (homeFragment == null) {
 
 

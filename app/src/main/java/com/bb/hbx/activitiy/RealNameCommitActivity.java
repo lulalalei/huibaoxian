@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.utils.MyOssUtils;
 
 import butterknife.BindView;
 
@@ -30,7 +32,13 @@ public class RealNameCommitActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-
+        Intent intent = getIntent();
+        String frontPath = intent.getStringExtra("front");
+        String reversePath = intent.getStringExtra("reverse");
+        if (!TextUtils.isEmpty(frontPath))
+        {
+            MyOssUtils myOssUtils = new MyOssUtils(getApplicationContext(), frontPath);
+        }
     }
 
     @Override

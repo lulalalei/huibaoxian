@@ -8,6 +8,7 @@ import com.bb.hbx.base.BaseActivity;
  */
 
 public class OrderdetailsCarActivity extends BaseActivity {
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_orderdetail_car;

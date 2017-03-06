@@ -76,7 +76,7 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:text="解绑" />
-        
+
         <ImageView
             android:id="@+id/bankLogo_iv"
             android:layout_width="100dp"

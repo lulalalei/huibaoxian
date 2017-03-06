@@ -1,5 +1,6 @@
 package com.bb.hbx.activitiy;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -12,8 +13,8 @@ import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.interfaces.LoginTextWatcher;
-import com.bb.hbx.utils.MyUsersSqlite;
 import com.bb.hbx.widget.LoginPswEdit;
 
 import butterknife.BindView;
@@ -76,9 +77,11 @@ public class SetLoginPwdActivity extends BaseActivity implements View.OnClickLis
                                 showTip(body.getRespMsg());
                                 if (body.isSuccess())
                                 {
+                                    SQLiteDatabase db = DatabaseImpl.getInstance().getReadableDatabase();
                                     //更新表数据
-                                    MyUsersSqlite.db.execSQL("update userstb set pwd=? where currentUser=currentUser ",
+                                    db.execSQL("update userstb set pwd=? where currentUser=currentUser ",
                                             new String[]{"1"});
+                                    db.close();
                                     MyApplication.user.setLoginPwd("1");//1表示已经设置过登录密码
                                     finish();
                                 }

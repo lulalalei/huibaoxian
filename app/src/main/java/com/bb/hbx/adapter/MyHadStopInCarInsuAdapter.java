@@ -2,6 +2,7 @@ package com.bb.hbx.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.GetPolicies;
 import com.bb.hbx.interfaces.OnItemClickListener;
+import com.bb.hbx.utils.TimeUtils;
+import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,11 +27,16 @@ import butterknife.ButterKnife;
 public class MyHadStopInCarInsuAdapter extends RecyclerView.Adapter<MyHadStopInCarInsuAdapter.MyViewHolder>{
 
     Context mContext;
-    ArrayList<String> list;
+    List<GetPolicies.PolicyListBean> list;
     LayoutInflater inflater;
     OnItemClickListener onMyItemClickListener;
+    String sts="";
+    long logJqxStartTime;
+    String jqxStartTimeBuff="";
+    long logJqxEndTime;
+    String jqxEndTimeBuff="";
 
-    public MyHadStopInCarInsuAdapter(Context mContext, ArrayList<String> list) {
+    public MyHadStopInCarInsuAdapter(Context mContext, List<GetPolicies.PolicyListBean> list) {
         this.mContext = mContext;
         this.list = list;
         inflater=LayoutInflater.from(mContext);
@@ -45,6 +54,47 @@ public class MyHadStopInCarInsuAdapter extends RecyclerView.Adapter<MyHadStopInC
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
+        sts = list.get(position).getSts();
+        holder.state_iv.setImageResource(R.drawable.baodan_yiguoqi);
+        //classType = list.get(position).getClassType();
+        String tradeDate = list.get(position).getTradeDate();
+        long logTime = TimeUtils.getStringToDateNoSpace(tradeDate);
+        String time = TimeUtils.getDateToString(logTime);
+        holder.time_tv.setText(time);
+        holder.title_tv.setText(list.get(position).getProductName());
+        holder.orderNumber_tv.setText("订单号: "+list.get(position).getTradeId());
+        if (list.get(position).getInsuredList()!=null&&list.get(position).getInsuredList().size()>0)
+        {
+            holder.insured_tv.setText("被保人: "+list.get(position).getInsuredList().get(0).getInsuredName());//被保人
+        }
+        //holder.holder_tv.setText("投保人: "+list.get(position).getApplicant());
+        String jqxStartTime = list.get(position).getJqxStartTime();
+        String jqxEndTime = list.get(position).getJqxEndTime();
+        if (TextUtils.isEmpty(jqxStartTime))
+        {
+            holder.holder_tv.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.holder_tv.setVisibility(View.VISIBLE);
+            logJqxStartTime = TimeUtils.getStringToDateNoSpace(jqxStartTime);
+            jqxStartTimeBuff = TimeUtils.getDateNoHourToString(logJqxStartTime);
+            logJqxEndTime = TimeUtils.getStringToDateNoSpace(jqxEndTime);
+            jqxEndTimeBuff = TimeUtils.getDateNoHourToString(logJqxEndTime);
+            holder.holder_tv.setText("交强险起期: "+jqxStartTimeBuff+"至"+jqxEndTimeBuff);
+        }
+        String startTime = list.get(position).getStartTime();
+        String endTime = list.get(position).getEndTime();
+        long logStartTime = TimeUtils.getStringToDateNoSpace(startTime);
+        String startTimeBuff = TimeUtils.getDateNoHourToString(logStartTime);
+        long logEndTime = TimeUtils.getStringToDateNoSpace(endTime);
+        String endTimeBuff = TimeUtils.getDateNoHourToString(logEndTime);
+        holder.timeLimit_tv.setText("商业险起期: "+startTimeBuff+"至"+endTimeBuff);
+        int payAmount = list.get(position).getPayAmount();
+        holder.price_tv.setText((payAmount/100)+"."+(payAmount/10%10)+(payAmount%10));
+        /*int commisionValue1 = list.get(position).getCommisionValue1();
+        holder.income_tv.setText((commisionValue1/100)+"."+(commisionValue1/10%10)+(commisionValue1%10));*/
+        Glide.with(mContext).load(list.get(position).getInsurerLogo()).placeholder(R.drawable.shangcheng).into(holder.logo_iv);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

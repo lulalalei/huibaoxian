@@ -2,6 +2,7 @@ package com.bb.hbx.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,9 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         //Glide.with(mContext).load(list.get(position)).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(holder.pic_iv);
+        String offUpto = list.get(position).getOffUpto();
+        int offUptoBuff = TextUtils.isEmpty(offUpto)?0:Integer.parseInt(offUpto);
+        holder.info_tv.setText("满"+((offUptoBuff / 100) + "." + (offUptoBuff / 10 % 10) + (offUptoBuff % 10))+"元可用");
         holder.price_tv.setText("¥"+list.get(position).getCouponValue());
         holder.title_tv.setText(list.get(position).getCouponName());
         holder.time_tv.setText("有效期:"+list.get(position).getEffTime()+"-"+list.get(position).getExpTime());
@@ -90,6 +94,8 @@ public class MyUnUsedInRedPAdapter extends RecyclerView.Adapter<MyUnUsedInRedPAd
         ImageView state_iv;
         @BindView(R.id.price_tv)
         TextView price_tv;
+        @BindView(R.id.info_tv)
+        TextView info_tv;
         @BindView(R.id.title_tv)
         TextView title_tv;
         @BindView(R.id.time_tv)

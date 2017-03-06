@@ -13,16 +13,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.InfoActivity;
 import com.bb.hbx.adapter.MyInfoAdapter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
-import com.bb.hbx.bean.GetMsgsBean;
+import com.bb.hbx.bean.Message;
+import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.interfaces.OnItemChangeStateClickListener;
 import com.bb.hbx.interfaces.OnItemClickListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/2/17.
@@ -31,15 +43,18 @@ import butterknife.BindView;
 public class MyInfoFragment extends BaseFragment{
 
     @BindView(R.id.scrollView)
-    ScrollView scrollView;
+    PullToRefreshScrollView scrollView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
     Context mContext;
-    ArrayList<GetMsgsBean> list=new ArrayList<>();
+    List<Message> totalList=new ArrayList<>();
     GridLayoutManager manager;
     MyInfoAdapter adapter;
     MyInfoReceiver myInfoReceiver;
+    int pageIndex=1;
+
+    int unReadCount;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -56,6 +71,21 @@ public class MyInfoFragment extends BaseFragment{
     public void initView() {
         scrollView.scrollTo(0,0);
         initReceiver();
+
+        scrollView.setMode(PullToRefreshBase.Mode.BOTH);
+        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex=1;
+                showMsgList(pageIndex);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex++;
+                showMsgList(pageIndex);
+            }
+        });
     }
 
     //注册广播接收者
@@ -74,24 +104,26 @@ public class MyInfoFragment extends BaseFragment{
                 return false;
             }
         };
-        adapter = new MyInfoAdapter(mContext, list);
+        adapter = new MyInfoAdapter(mContext, totalList);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-        for (int i = 0; i < 16; i++) {
-            GetMsgsBean msgsBean = new GetMsgsBean("1");
-            list.add(msgsBean);
-        }
-        adapter.notifyDataSetChanged();
-        scrollView.scrollTo(0,0);
+        showMsgList(pageIndex);
+        //adapter.notifyDataSetChanged();
         adapter.setOnMyItemClickListener(new OnItemChangeStateClickListener() {
             @Override
             public void onMyItemChangeStateClickListener(int position, View view) {
                 if (((Integer)position)==view.getTag())
                 {
                     //view.setVisibility(View.GONE);
+                    if (unReadCount>0)
+                    {
+                        unReadCount--;
+                    }
+                    InfoActivity.resetLabMine(unReadCount);
                     view.setBackgroundResource(R.drawable.shape_circle_white);
-                    list.get(position).setSts("0");
+                    totalList.get(position).setSts(2);
                     adapter.notifyItemChanged(position);
+                    uploadServices(totalList.get(position).getMsgId());
                 }
             }
         });
@@ -105,15 +137,68 @@ public class MyInfoFragment extends BaseFragment{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(mContext,"删除:"+position,Toast.LENGTH_SHORT).show();
-                        list.remove(position);
+                        totalList.remove(position);
                         adapter.notifyDataSetChanged();
-                        for (int i = 0; i < list.size(); i++) {
-                            Log.e("===AA==="+list.size(),"========="+list.get(i).getSts());
+                        for (int i = 0; i < totalList.size(); i++) {
+                            Log.e("===AA==="+totalList.size(),"========="+totalList.get(i).getSts());
                         }
                     }
                 });
                 dialog.setNegativeButton("取消",null);
                 dialog.show();
+            }
+        });
+    }
+
+    private void uploadServices(String msgId) {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.readMsg(MyApplication.user.getUserId(),"1",msgId);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void showMsgList(final int pageIndex) {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getMsgsUser(MyApplication.user.getUserId(),"2","0",pageIndex+"");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                MsgInfo bean = (MsgInfo) body.getOutput();
+                if (bean!=null)
+                {
+                    //List<Message> msgList = bean.getMsgList();
+                    if (pageIndex==1)
+                    {
+                        unReadCount = bean.getUnReadCount();
+                        totalList.clear();
+                    }
+                    else
+                    {
+                        unReadCount+=bean.getUnReadCount();
+                    }
+                    InfoActivity.resetLabMine(unReadCount);
+                    totalList.addAll(bean.getMsgList());
+                    adapter.notifyDataSetChanged();
+                }
+                if (scrollView.isRefreshing())
+                {
+                    scrollView.onRefreshComplete();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
             }
         });
     }
@@ -128,10 +213,13 @@ public class MyInfoFragment extends BaseFragment{
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).setSts("0");
+            for (int i = 0; i < totalList.size(); i++) {
+                totalList.get(i).setSts(2);
             }
             adapter.notifyDataSetChanged();
+            unReadCount = 0;
+            InfoActivity.resetLabMine(unReadCount);
+            uploadServices("0");
         }
     }
 }

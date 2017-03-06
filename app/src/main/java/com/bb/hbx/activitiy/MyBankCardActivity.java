@@ -1,6 +1,5 @@
 package com.bb.hbx.activitiy;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.GetBankCardList;
-import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.PasswordDailog;
 
@@ -120,11 +118,6 @@ public class MyBankCardActivity extends BaseActivity implements View.OnClickList
                                                     {
 
                                                         content_layout.setVisibility(View.GONE);
-                                                        SQLiteDatabase db = DatabaseImpl.getInstance().getReadableDatabase();
-                                                        db.execSQL("update userstb set paymentPwd=? where currentUser=currentUser ",
-                                                                new String[]{"0"});
-                                                        db.close();
-                                                        MyApplication.user.setPaymentPwd("0");
                                                         finish();
                                                         AppManager.getInstance().finishParticularActivity(WithdrawActivity.class);
 
