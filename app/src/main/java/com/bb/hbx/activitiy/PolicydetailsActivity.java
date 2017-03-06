@@ -3,7 +3,6 @@ package com.bb.hbx.activitiy;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,8 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-
-import static com.alipay.sdk.app.statistic.c.A;
 
 /**
  * Created by fancl
@@ -149,7 +146,7 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
         }
 
         if (!tradeId.isEmpty()) {
-            mPresenter.getTradeDetail(tradeId, "");
+            mPresenter.getTradeDetail(tradeId, "","2");
         }
 
         items = new ArrayList<>();

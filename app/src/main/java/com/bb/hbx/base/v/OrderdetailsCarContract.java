@@ -10,7 +10,7 @@ import retrofit2.Callback;
  * Created by Administrator on 2017/1/9.
  */
 
-public interface PolicydetailsContract {
+public interface OrderdetailsCarContract {
 
 
     interface Model extends BaseModel {
@@ -27,7 +27,7 @@ public interface PolicydetailsContract {
         void getTradeDetail(TradeDetail detail);
     }
 
-    abstract class Presenter extends BasePresenter<PolicydetailsContract.Model, PolicydetailsContract.View> {
+    abstract class Presenter extends BasePresenter<OrderdetailsCarContract.Model, OrderdetailsCarContract.View> {
 
         public abstract void getTradeDetail(String tradeId, String detailId,String classType);
 

@@ -92,7 +92,7 @@ public class PerOrderDetailActivity extends BaseActivity implements View.OnClick
             totalList.add(detailBean);
         }
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call=service.getTradeDetail(MyApplication.user.getUserId(),"2",detailId);
+        Call call=service.getTradeDetail(MyApplication.user.getUserId(),"2",detailId,"2");
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {

@@ -358,7 +358,9 @@ public class TradeDetail {
          * policyURL :
          */
 
+        //"carInfo":{"cityName":"杭州","engineNo":"123123","fuelType":"","licenseNo":"浙12345","noLicenseFlag":0,"registerDate":"20170221000000","specialCarDate":"20170228000000","specialCarFlag":1,"vehicleFrameNo":"12345","vehicleModel":"宝马"},"detailId":"156"
         private String birthday;
+        private CarInfoBean carInfo;
         private String detailId;
         private String email;
         private String gender;
@@ -383,6 +385,14 @@ public class TradeDetail {
 
         public String getDetailId() {
             return detailId;
+        }
+
+        public CarInfoBean getCarInfo() {
+            return carInfo;
+        }
+
+        public void setCarInfo(CarInfoBean carInfo) {
+            this.carInfo = carInfo;
         }
 
         public void setDetailId(String detailId) {
@@ -483,6 +493,112 @@ public class TradeDetail {
 
         public void setRelation(int relation) {
             this.relation = relation;
+        }
+
+        public static class CarInfoBean {
+            /**
+             * cityName : 杭州
+             * engineNo : 123123
+             * fuelType :
+             * licenseNo : 浙12345
+             * noLicenseFlag : 0
+             * registerDate : 20170221000000
+             * specialCarDate : 20170228000000
+             * specialCarFlag : 1
+             * vehicleFrameNo : 12345
+             * vehicleModel : 宝马
+             */
+
+            private String cityName;
+            private String engineNo;
+            private String fuelType;
+            private String licenseNo;
+            private int noLicenseFlag;
+            private String registerDate;
+            private String specialCarDate;
+            private int specialCarFlag;
+            private String vehicleFrameNo;
+            private String vehicleModel;
+
+            public String getCityName() {
+                return cityName;
+            }
+
+            public void setCityName(String cityName) {
+                this.cityName = cityName;
+            }
+
+            public String getEngineNo() {
+                return engineNo;
+            }
+
+            public void setEngineNo(String engineNo) {
+                this.engineNo = engineNo;
+            }
+
+            public String getFuelType() {
+                return fuelType;
+            }
+
+            public void setFuelType(String fuelType) {
+                this.fuelType = fuelType;
+            }
+
+            public String getLicenseNo() {
+                return licenseNo;
+            }
+
+            public void setLicenseNo(String licenseNo) {
+                this.licenseNo = licenseNo;
+            }
+
+            public int getNoLicenseFlag() {
+                return noLicenseFlag;
+            }
+
+            public void setNoLicenseFlag(int noLicenseFlag) {
+                this.noLicenseFlag = noLicenseFlag;
+            }
+
+            public String getRegisterDate() {
+                return registerDate;
+            }
+
+            public void setRegisterDate(String registerDate) {
+                this.registerDate = registerDate;
+            }
+
+            public String getSpecialCarDate() {
+                return specialCarDate;
+            }
+
+            public void setSpecialCarDate(String specialCarDate) {
+                this.specialCarDate = specialCarDate;
+            }
+
+            public int getSpecialCarFlag() {
+                return specialCarFlag;
+            }
+
+            public void setSpecialCarFlag(int specialCarFlag) {
+                this.specialCarFlag = specialCarFlag;
+            }
+
+            public String getVehicleFrameNo() {
+                return vehicleFrameNo;
+            }
+
+            public void setVehicleFrameNo(String vehicleFrameNo) {
+                this.vehicleFrameNo = vehicleFrameNo;
+            }
+
+            public String getVehicleModel() {
+                return vehicleModel;
+            }
+
+            public void setVehicleModel(String vehicleModel) {
+                this.vehicleModel = vehicleModel;
+            }
         }
 
         public static class BenListBean {

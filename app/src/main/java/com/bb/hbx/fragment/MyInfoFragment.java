@@ -152,7 +152,7 @@ public class MyInfoFragment extends BaseFragment{
 
     private void uploadServices(String msgId) {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call=service.readMsg(MyApplication.user.getUserId(),"1",msgId);
+        Call call=service.readMsg(MyApplication.user.getUserId(),"2",msgId);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {

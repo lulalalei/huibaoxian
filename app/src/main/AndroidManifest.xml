@@ -215,7 +215,8 @@
             android:exported="false"
             android:screenOrientation="behind" />
         <activity android:name=".activitiy.MyBankCardActivity" />
-        <activity android:name=".activitiy.SettingsActivity"></activity>
+        <activity android:name=".activitiy.SettingsActivity" />
+        <activity android:name=".activitiy.FeedBackActivity"></activity>
     </application>
 
 </manifest>

@@ -424,7 +424,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=getTradeDetail&type=post")
     Call<Result_Api<TradeDetail>> getTradeDetail(@Field("userId") String userId, @Field("tradeId") String tradeId,
-                                                 @Field("detailId") String detailId);
+                                                 @Field("detailId") String detailId,@Field("classType") String classType);
 
     //6.1.6.获取支付签名信息
 
