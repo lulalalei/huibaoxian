@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/A7"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y54"
+        android:gravity="center_horizontal"
+        android:text="@string/selectcar2"
+        android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+    <TextView
+        android:id="@+id/tv_nocarclick"
+        android:layout_width="@dimen/x318"
+        android:layout_height="@dimen/y88"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/y80"
+        android:layout_marginTop="@dimen/y26"
+        android:background="@drawable/shape_a1_white"
+        android:gravity="center"
+        android:text="@string/nocar"
+        android:textAppearance="@style/TextAppear.Theme.A1_Size18" />
+
+
+</LinearLayout>

@@ -46,7 +46,7 @@ public class InsurancePlanActivity extends BaseActivity {
         mCardShadowTransformer = new ShadowTransformer(vp_tb, mCardAdapter);
         mCardShadowTransformer.setCanAlpha(true);
         mCardAdapter.setTransformer(mCardShadowTransformer);
-        // mCardShadowTransformer.setCanScale(true);
+
 
         vp_tb.setAdapter(mCardAdapter);
         mCardAdapter.setPager(vp_tb);

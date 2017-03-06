@@ -25,6 +25,8 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
     private final static String NET_ERROR = "请检查网络是否正常";
     private final static String NET_OK = "数据请求正常";
 
+    private boolean isTip = true;
+
     private V view;
 
 //    private Class<T> clazz;
@@ -36,6 +38,12 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
 //
 //        }
     }
+
+    public PostCallback(V view, boolean isTip) {
+        this.view = view;
+        this.isTip = isTip;
+    }
+
 
     public PostCallback() {
 
@@ -53,21 +61,6 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
         Result_Api api = response.body();
         if (api != null) {
             if (Constants.SUCCESS.equalsIgnoreCase(api.getRespCode())) {
-
-//                if (api.getOutput() != null) {
-//
-//                    JSONObject jsonObject= null;
-//                    try {
-//                        jsonObject = new JSONObject(api.getOutput().toString());
-//                        T t = new Gson().fromJson(jsonObject.toString(), clazz);
-//                        api.setOutput(t);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//
-//                }
-
 //                if (api.getOutput() == null) {
 //                    failCallback();
 //                    throw new JsonIOException("解析出错或者数据格式返回错误");
@@ -78,7 +71,8 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
                 successCallback(api);
             } else if (view != null) {
                 failCallback();
-                view.showMsg(api.getRespMsg());
+                if (isTip)
+                    view.showMsg(api.getRespMsg());
 
             }
         } else if (view != null) {
@@ -95,6 +89,7 @@ public abstract class PostCallback<V extends BaseView> implements Callback<Resul
             view.dissmissLoading();
             view.showMsg(NET_ERROR);
         }
+        Log.i("fancl", t.getMessage());
         failCallback();
     }
 }

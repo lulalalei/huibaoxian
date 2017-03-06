@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.utils.AppManager;
 
 import butterknife.BindView;
 
@@ -73,6 +74,9 @@ public class CarInformationActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_search:
+                AppManager.getInstance().showActivity(SelectCarActivity.class, null);
+                break;
 
         }
     }

@@ -113,50 +113,6 @@ public class HomePresenter extends HomeContract.Presenter {
     }
 
 
-//    private void dealWith(HomePageInfo info) {
-//
-//
-//        items.clear();
-//
-//        //banner
-//        bannerBean = new BannerBean();
-//        bannerBean.setAds(info.getAds());
-//        items.add(bannerBean);
-//
-//        //险种Item
-//        if (info.getProductType() == null && info.getProductType().isEmpty()) {
-//            //// TODO: 2017/1/13
-//        } else {
-//            items.addAll(info.getProductType());
-//        }
-//
-//
-//        //爆款推荐专题
-//        items.add(new BKItem(R.drawable.baokuantuijian));
-//
-//
-//        //爆款推荐的产品
-//        List<Special> specialList = info.getSpecialList();
-//        List<Special> jxLists = new ArrayList<>();
-//        for (Special special : specialList) {
-//            if (special.getSpecialType() == Constants.BKTJ) {
-//                List<ProductListBean> beanList = special.getProductList();
-//                if (beanList == null || beanList.size() == 0)
-//                    return;
-//                beanList.get(beanList.size() - 1).setLine(false);
-//                items.addAll(beanList);
-//            } else {
-//                jxLists.add(special);
-//            }
-//        }
-//
-//        //精选专题
-//        items.add(new BKItem(R.drawable.jingxuanzhuanti));
-//        items.addAll(jxLists);
-//        mView.getfreshListData(items);
-//
-//
-//    }
 
 
     @Override

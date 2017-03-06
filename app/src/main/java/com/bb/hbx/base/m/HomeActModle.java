@@ -28,4 +28,10 @@ public class HomeActModle implements HomeActContract.Model {
         call.enqueue(callback);
 
     }
+
+    @Override
+    public void updateUpgradeB(String userId, Callback callback) {
+        Call call = service.updateUpgradeB(userId);
+        call.enqueue(callback);
+    }
 }

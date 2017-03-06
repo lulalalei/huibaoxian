@@ -50,6 +50,7 @@ public class FilterActivity extends BaseActivity<FilterPresenter, FilterModel> i
 
     @Override
     public int getLayoutId() {
+
         return R.layout.activit_filter;
     }
 

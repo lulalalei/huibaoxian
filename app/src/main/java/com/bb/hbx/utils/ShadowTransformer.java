@@ -10,7 +10,6 @@ import com.bb.hbx.adapter.CardAdapter;
 
 import static com.bb.hbx.R.id.cardView;
 
-
 public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPager.PageTransformer {
 
     private float mScale = 0f;//缩放比例  这里缩放是中间比两边大0.2  也就是说两边是你设定的值  中间缩放到了1.2
@@ -56,47 +55,31 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
      * @param isCanScale
      */
     public void setCanScale(boolean isCanScale) {
-//        Log.i("fancl", "setCanScale");
-//        if (!isCanScale) {
-////            // 不设置缩放的时候就把中间的选择的设置为1
-////            CardView currentCard = mAdapter.getCardViewAt(mViewPager.getCurrentItem());
-////            if (currentCard != null) {
-////                currentCard.animate().scaleY(1);
-////                currentCard.animate().scaleX(1);
-////            }
-//
-//            for (int i = 0; i < mAdapter.getRealCount(); i++) {
-//                CardView cardView = mAdapter.getCardViewAt(i);
-//                if (cardView != null) {
-//                    cardView.animate().scaleY(1);
-//                    cardView.animate().scaleX(1);
-//                }
-//            }
-//
-//        } else {
-//            // 设置缩放就设置当前选择的缩放为1+缩放值
-////            CardView currentCard = mAdapter.getCardViewAt(mViewPager.getCurrentItem());
-////            if (currentCard != null) {
-////                currentCard.animate().scaleY(1 + mScale);
-////                currentCard.animate().scaleX(1 + mScale);
-////            }
-//
-//            for (int i = 0; i < mAdapter.getRealCount(); i++) {
-//                CardView cardView = mAdapter.getCardViewAt(i);
-//                if (i == mViewPager.getCurrentItem()) {
-//                    if (cardView != null) {
-//                        cardView.animate().scaleY(1);
-//                        cardView.animate().scaleX(1);
-//                    }
-//                } else {
-//                    if (cardView != null) {
-//                        cardView.animate().scaleY(1 - mScale);
-//                        cardView.animate().scaleX(1 - mScale);
-//                    }
-//                }
-//            }
-//
-//        }
+        if (!isCanScale) {
+            // 不设置缩放的时候就把中间的选择的设置为1
+            CardView currentCard = mAdapter.getCardViewAt(mViewPager.getCurrentItem());
+            if (currentCard != null) {
+                currentCard.animate().scaleY(1);
+                currentCard.animate().scaleX(1);
+            }
+        } else {
+            // 设置缩放就设置当前选择的缩放为1+缩放值
+            //CardView currentCard = mAdapter.getCardViewAt(mViewPager.getCurrentItem());
+            for (int i = 0; i < mAdapter.getRealCount(); i++) {
+                CardView cardView = mAdapter.getCardViewAt(i);
+                if (i == mViewPager.getCurrentItem()) {
+                    if (cardView != null) {
+                        cardView.animate().scaleY(1);
+                        cardView.animate().scaleX(1);
+                    }
+                } else {
+                    if (cardView != null) {
+                        cardView.animate().scaleY(1 - mScale);
+                        cardView.animate().scaleX(1 - mScale);
+                    }
+                }
+            }
+        }
 
         mScalingEnabled = isCanScale;
     }
@@ -113,7 +96,7 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
                 CardView cardView = mAdapter.getCardViewAt(i);
                 if (cardView != null) {
                     cardView.setAlpha(1f);
-                    cardView.findViewById(R.id.lin_all).setAlpha(1f);
+
                 }
             }
 
@@ -124,12 +107,12 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
                 if (i == mViewPager.getCurrentItem()) {
                     if (cardView != null) {
                         cardView.setAlpha(1f);
-                        cardView.findViewById(R.id.lin_all).setAlpha(1f);
+
                     }
                 } else {
                     if (cardView != null) {
                         cardView.setAlpha(mAlpha);
-                        cardView.findViewById(R.id.lin_all).setAlpha(0f);
+
                     }
                 }
             }
@@ -145,60 +128,47 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        Log.i("fancl", "onPageScrolled:" + position);
         int realCurrentPosition;
         int nextPosition;
         float baseElevation = mAdapter.getBaseElevation();
         float realOffset;
-        Log.i("fancl", "mLastOffset=" + mLastOffset + "====positionOffset:" + positionOffset);
         boolean goingLeft = mLastOffset > positionOffset;
 
         // If we're going backwards, onPageScrolled receives the last position
         // instead of the current one
-        if (goingLeft) {//>>>>
-            Log.i("fancl",">>>>>>>>");
+        if (goingLeft) {
             realCurrentPosition = position + 1;
             nextPosition = position;
             realOffset = 1 - positionOffset;
-        } else {//<<<<<
-            Log.i("fancl","<<<<<");
+        } else {
             nextPosition = position + 1;
             realCurrentPosition = position;
             realOffset = positionOffset;
         }
         // Avoid crash on overscroll
-
-        realCurrentPosition = realCurrentPosition % 3;
-        nextPosition = nextPosition % 3;
         if (nextPosition > mAdapter.getRealCount() - 1
                 || realCurrentPosition > mAdapter.getRealCount() - 1) {
             return;
         }
 
-        Log.i("fancl", "realCurrentPosition:" + realCurrentPosition + "---" + "nextPosition:" + nextPosition + "-----" + realOffset);
-
         CardView currentCard = mAdapter.getCardViewAt(realCurrentPosition);
         // This might be null if a fragment is being used
         // and the views weren't created yet
+
+        Log.i("fancl", "realOffset:" + realOffset);
         if (currentCard != null) {
             //当设置可以缩放 按指定缩放设置
             if (mScalingEnabled) {
                 currentCard.setScaleX(1 - mScale * realOffset);
                 currentCard.setScaleY(1 - mScale * realOffset);
-
-
             }
             //当设置可以设置透明度的时候设置透明度
             if (mAlphaEnabled) {
-                currentCard.setAlpha(1 - mAlpha * realOffset);
-                //currentCard.findViewById(R.id.item_btn).setAlpha(1-realOffset);
+                currentCard.setAlpha(1 - realOffset + mAlpha);
             }
             currentCard.setCardElevation((baseElevation + baseElevation
                     * (CardAdapter.MAX_ELEVATION_FACTOR - 1) * (1 - realOffset)));
         }
-
-
 
         CardView nextCard = mAdapter.getCardViewAt(nextPosition);
 
@@ -207,15 +177,13 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
         if (nextCard != null) {
             //当设置可以缩放 按指定缩放设置
             if (mScalingEnabled) {
-//                nextCard.setScaleX(1 + mScale * (realOffset));
-//                nextCard.setScaleY(1 + mScale * (realOffset));
                 nextCard.setScaleX(1 - mScale * (1 - realOffset));
                 nextCard.setScaleY(1 - mScale * (1 - realOffset));
             }
             //当设置可以设置透明度的时候设置透明度
             if (mAlphaEnabled) {
                 nextCard.setAlpha(realOffset + mAlpha);
-                nextCard.findViewById(R.id.lin_all).setAlpha(realOffset);
+                nextCard.setAlpha(realOffset);
             }
             nextCard.setCardElevation((baseElevation + baseElevation
                     * (CardAdapter.MAX_ELEVATION_FACTOR - 1) * (realOffset)));
@@ -226,8 +194,6 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
 
     @Override
     public void onPageSelected(int position) {
-
-
 
     }
 

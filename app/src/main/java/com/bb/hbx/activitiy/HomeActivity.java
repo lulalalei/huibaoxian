@@ -256,9 +256,10 @@ public class HomeActivity extends BaseActivity<HomeActPresenter, HomeActModle> i
             @Override
             public void onClick(View v) {
 
-                b2cContent_layout.setVisibility(View.GONE);
-                b2cAgree_layout.setVisibility(View.VISIBLE);
-                translate_tv.setVisibility(View.GONE);
+//                b2cContent_layout.setVisibility(View.GONE);
+//                b2cAgree_layout.setVisibility(View.VISIBLE);
+//                translate_tv.setVisibility(View.GONE);
+                mPresenter.updateUpgradeB();
 
             }
         });

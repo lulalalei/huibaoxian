@@ -4,8 +4,13 @@ import com.bb.hbx.activitiy.login.LoginContract;
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
 import com.bb.hbx.bean.LishiSearchBean;
+import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.List;
+
+import retrofit2.Callback;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -24,12 +29,18 @@ public interface SearchHistoryContract {
         //删掉一个
         void deleteHistoryBean(LishiSearchBean bean);
 
+        void deleteAll();
+
+        void getHotKeys(int pageIndex, int pageSize, Callback callback);
+
     }
 
     interface View extends BaseView {
 
         //历史搜索
         void getHistoryList(List<LishiSearchBean> lists);
+
+        void notfiy();
 
 
     }
@@ -45,6 +56,8 @@ public interface SearchHistoryContract {
         //删掉一个
         public abstract void deleteBean(LishiSearchBean bean);
 
+        public abstract List<Item> getList();
 
+        public abstract  void deleteAll();
     }
 }

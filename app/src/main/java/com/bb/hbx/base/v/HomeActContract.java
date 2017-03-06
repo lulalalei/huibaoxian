@@ -22,10 +22,14 @@ public interface HomeActContract {
 
         void hasUpgradeRight(String userId, Callback callback);
 
+        void updateUpgradeB(String userId, Callback callback);
+
     }
 
 
     interface View extends BaseView {
+
+        void updateViewWithCToBTip();
 
 
     }
@@ -34,5 +38,7 @@ public interface HomeActContract {
 
 
         public abstract void hasUpgradeRight();
+
+        public abstract void updateUpgradeB();
     }
 }

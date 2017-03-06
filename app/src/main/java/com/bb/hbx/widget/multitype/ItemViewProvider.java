@@ -1,6 +1,5 @@
 package com.bb.hbx.widget.multitype;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,15 +14,14 @@ import com.bb.hbx.widget.multitype.data.Item;
 public abstract class ItemViewProvider<C extends Item, V extends RecyclerView.ViewHolder> {
 
 
-
-
-
-
-
     @NonNull
-    protected  abstract  V onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent);
+    protected abstract V onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent);
 
-    protected  abstract  void onBindViewHolder(@NonNull V holder, @NonNull C c);
+    protected abstract void onBindViewHolder(@NonNull V holder, @NonNull C c);
 
+    //获取当前的pos;
+    protected void getCurrentPositon(int position) {
+
+    }
 
 }

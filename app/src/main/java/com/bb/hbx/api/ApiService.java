@@ -22,6 +22,7 @@ import com.bb.hbx.bean.GetTotalIncomeDetail;
 import com.bb.hbx.bean.GetTradesBean;
 import com.bb.hbx.bean.GetUserCouponsListBean;
 import com.bb.hbx.bean.HomePageInfo;
+import com.bb.hbx.bean.Hotkey;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.OssBean;
@@ -222,23 +223,23 @@ public interface ApiService {
     //提现--待测
     @FormUrlEncoded
     @POST("api.do?method=applyCash&type=post")
-    Call<Result_Api> applyCash(@Field("userId") String userId,@Field("cashAmount") String cashAmount);
+    Call<Result_Api> applyCash(@Field("userId") String userId, @Field("cashAmount") String cashAmount);
 
     //修改支付密码
     @FormUrlEncoded
     @POST("api.do?method=modPayPwd&type=post")
-    Call<Result_Api> modPayPwd(@Field("userId") String userId,@Field("oldPayPwd") String oldPayPwd,@Field("newPayPwd") String newPayPwd);
+    Call<Result_Api> modPayPwd(@Field("userId") String userId, @Field("oldPayPwd") String oldPayPwd, @Field("newPayPwd") String newPayPwd);
 
 
     //忘记支付密码
     @FormUrlEncoded
     @POST("api.do?method=forgetPayPwd&type=post")
-    Call<Result_Api> forgetPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
+    Call<Result_Api> forgetPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd, @Field("smsCode") String smsCode);
 
     //设置支付密码--已测
     @FormUrlEncoded
     @POST("api.do?method=setPayPwd&type=post")
-    Call<Result_Api> setPayPwd(@Field("userId") String userId,@Field("payPwd") String payPwd,@Field("smsCode") String smsCode);
+    Call<Result_Api> setPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd, @Field("smsCode") String smsCode);
 
 
     //上传用户头像,阿里云
@@ -305,7 +306,7 @@ public interface ApiService {
     //判断用户是否能升B--待测
     @FormUrlEncoded
     @POST("api.do?method=hasUpgradeRight&type=post")
-    Call<String> hasUpgradeRight(@Field("userId") String userId);
+    Call<Result_Api<String>> hasUpgradeRight(@Field("userId") String userId);
 
 
     //获取首页数据
@@ -323,7 +324,7 @@ public interface ApiService {
     //获取系统搜索热词
     @FormUrlEncoded
     @POST("api.do?method=getHotKeys&type=post")
-    Call<String> getHotKeys(@Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
+    Call<Result_Api<Hotkey>> getHotKeys(@Field("pageIndex") int pageIndex, @Field("pageSize") int pageSize);
 
     //获取产品列表
 
@@ -435,4 +436,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=verifyPayPwd&type=post")
     Call<Result_Api> verifyPayPwd(@Field("userId") String userId, @Field("payPwd") String payPwd);
+
+    //用户升B
+    @FormUrlEncoded
+    @POST("api.do?method=updateUpgradeB&type=post")
+    Call<Result_Api> updateUpgradeB(@Field("userId") String userId);
 }

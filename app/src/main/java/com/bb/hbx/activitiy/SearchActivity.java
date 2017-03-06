@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
-import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.m.SearchHistoryModel;
@@ -29,7 +28,6 @@ import com.bb.hbx.widget.LoginTelEdit;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
 import com.bb.hbx.widget.multitype.data.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,7 +52,6 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
     @BindView(R.id.le_search)
     LoginTelEdit le_search;
 
-    private List<Item> items;
     private MultiTypeAdapter adapter;
 
 
@@ -73,7 +70,7 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
         GridLayoutManager.SpanSizeLookup spanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                Item item = items.get(position);
+                Item item = mPresenter.getList().get(position);
 
                 if (item instanceof SearchTitleBean) {
                     return 4;
@@ -137,26 +134,14 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
         searchTitleProvide2.setListener(new SearchTitleProvide2.DeleteAllSearchListener() {
             @Override
             public void deleteAll() {
-                adapter.setItems(items);
+                mPresenter.deleteAll();
             }
         });
     }
 
     @Override
     public void initdata() {
-        items = new ArrayList<>();
-        items.add(new SearchTitleBean());
-        for (int i = 0; i < 8; i++) {
-            if (i % 2 == 0) {
-                items.add(new HotSearchBean("汇保险"));
-            } else {
-                items.add(new HotSearchBean("健康人寿"));
-            }
-        }
-        items.add(new SearchTitleBean2());
-        adapter.setItems(items);
-
-        mPresenter.getHistoryList();
+        adapter.setItems(mPresenter.getList());
 
 
     }
@@ -177,6 +162,11 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
 
     }
 
+    @Override
+    public void notfiy() {
+        adapter.notifyDataSetChanged();
+    }
+
 
     public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -187,7 +177,7 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
 
             int pos = parent.getChildAdapterPosition(view);
 
-            if (items.get(pos) instanceof HotSearchBean) {
+            if (mPresenter.getList().get(pos) instanceof HotSearchBean) {
                 outRect.top = 0;
                 outRect.bottom = 0;
 
@@ -200,7 +190,7 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
 
                 if (pos > 0 && (pos - 1) / 4 == 1) {
                     outRect.top = getResources().getDimensionPixelOffset(R.dimen.y26);
-                    outRect.bottom=getResources().getDimensionPixelOffset(R.dimen.y36);
+                    outRect.bottom = getResources().getDimensionPixelOffset(R.dimen.y36);
                 }
 
                 if (pos > 0 && (pos - 1) % 4 == 0) {

@@ -1,11 +1,13 @@
 package com.bb.hbx.widget.multitype;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 
+import com.bb.hbx.R;
 import com.bb.hbx.widget.multitype.data.Item;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private LayoutInflater inflater;
 
     private TypePool delegate;
+
+
 
 
     public MultiTypeAdapter() {
@@ -59,7 +63,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void addItems(List<? extends Item> items) {
 
-        this.items.addAll((Collection)items);
+        this.items.addAll((Collection) items);
         notifyDataSetChanged();
     }
 
@@ -73,9 +77,10 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
         Item item = (Item) items.get(position);
+        getProviderByClass(onFlattenClass(item)).getCurrentPositon(position);
         getProviderByClass(onFlattenClass(item)).onBindViewHolder(holder, item);
+
     }
 
     @Override

@@ -48,7 +48,7 @@ public class HotSearchProvide extends ItemViewProvider<HotSearchBean, HotSearchP
 
         void setData(@NonNull final HotSearchBean bean) {
 
-            tv_title.setText(bean.getName());
+            tv_title.setText(bean.getKeyName());
 
         }
 

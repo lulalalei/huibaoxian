@@ -2,21 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingLeft="@dimen/x36">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/xuanzhong_chexian" />
+        android:src="@drawable/xuanzhong_chexian"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_cartype"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x36"
         android:layout_marginTop="@dimen/y42"
         android:paddingRight="@dimen/x36"
         android:singleLine="true"
@@ -28,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_cartype"
+        android:layout_marginLeft="@dimen/x36"
         android:layout_marginTop="@dimen/y26"
         android:paddingRight="@dimen/x36"
         android:singleLine="true"
@@ -35,11 +37,22 @@
         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
 
     <TextView
-        android:layout_marginTop="@dimen/y26"
+        android:id="@+id/tv_ckj_format"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_carparms"
+        android:layout_marginBottom="@dimen/y42"
+        android:layout_marginLeft="@dimen/x36"
+        android:layout_marginTop="@dimen/y26"
         android:text="@string/newcarprice"
         android:textAppearance="@style/TextAppear.Theme.A3_Size14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ckj_format">
+
+        <include layout="@layout/line_e" />
+    </LinearLayout>
 
 </RelativeLayout>

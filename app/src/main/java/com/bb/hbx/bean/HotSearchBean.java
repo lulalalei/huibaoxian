@@ -9,18 +9,34 @@ import com.bb.hbx.widget.multitype.data.Item;
 public class HotSearchBean implements Item {
 
 
-    private String name;
+    private String keyName;
 
-    public  HotSearchBean(String name){
-        this.name=name;
+    private String keyId;
+
+    private String hot;
+
+
+    public String getKeyName() {
+        return keyName;
     }
 
-
-    public String getName() {
-        return name;
+    public void setKeyName(String keyName) {
+        this.keyName = keyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getHot() {
+        return hot;
+    }
+
+    public void setHot(String hot) {
+        this.hot = hot;
+    }
+
+    public String getKeyId() {
+        return keyId;
+    }
+
+    public void setKeyId(String keyId) {
+        this.keyId = keyId;
     }
 }

@@ -19,8 +19,9 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/hotsearch"
-            android:textAppearance="@style/TextAppear.Theme.A3_Size13" />
+            android:maxLength="5"
+            android:textAppearance="@style/TextAppear.Theme.A3_Size13"
+            tools:text="@string/hotsearch" />
 
     </LinearLayout>
 
