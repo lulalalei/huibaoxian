@@ -1,10 +1,12 @@
 package com.bb.hbx.activitiy;
 
+import android.os.SystemClock;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +17,9 @@ import com.bb.hbx.R;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.base.m.HomeActModle;
+import com.bb.hbx.base.p.HomeActPresenter;
+import com.bb.hbx.base.v.HomeActContract;
 import com.bb.hbx.bean.User;
 import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.fragment.ClassFragment;
@@ -31,12 +36,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-
 /**
  * Created by Administrator on 2016/12/20.
  */
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity<HomeActPresenter, HomeActModle> implements HomeActContract.View {
 
 
     @BindView(R.id.bb)
@@ -51,7 +55,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        initState();
+        //initState();
         return R.layout.activity_home;
     }
 
@@ -85,9 +89,9 @@ public class HomeActivity extends BaseActivity {
                             transaction.show(homeFragment);
                         }
 
-                        if (pw != null && pw.isShowing()) {
-                            pw.dismiss();
-                        }
+                        mPresenter.hasUpgradeRight();
+
+
                         break;
                     case 1:
                         // 当点击了消息tab时，改变控件的图片和文字颜色
@@ -100,9 +104,8 @@ public class HomeActivity extends BaseActivity {
                             // 如果MessageFragment不为空，则直接将它显示出来
                             transaction.show(mallFragment);
                         }
-                        if (pw != null && pw.isShowing()) {
-                            pw.dismiss();
-                        }
+
+
                         break;
 
 
@@ -117,9 +120,7 @@ public class HomeActivity extends BaseActivity {
                             // 如果MessageFragment不为空，则直接将它显示出来
                             transaction.show(findFragment);
                         }
-                        if (pw != null && pw.isShowing()) {
-                            pw.dismiss();
-                        }
+
                         break;
 
                     case 3:
@@ -134,9 +135,6 @@ public class HomeActivity extends BaseActivity {
                             transaction.show(classFragment);
                         }
 
-                        if (pw != null && pw.isShowing()) {
-                            pw.dismiss();
-                        }
 
                         break;
 
@@ -154,10 +152,11 @@ public class HomeActivity extends BaseActivity {
 
                         }
 
-                        User user = DatabaseImpl.getInstance().getUser();
-                        if (!MyApplication.user.getIsBClient() && user != null && "1".equalsIgnoreCase(user.getAuthority())) {
-                            updateViewWithCToB();
-                        }
+                        mPresenter.hasUpgradeRight();
+//                        User user = DatabaseImpl.getInstance().getUser();
+//                        if (!MyApplication.user.getIsBClient() && user != null && "1".equalsIgnoreCase(user.getAuthority())) {
+//                            updateViewWithCToB();
+//                        }
                         break;
 
 
@@ -230,14 +229,13 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    PopupWindow pw;
 
     public void updateViewWithCToB() {
         View b2cView = View.inflate(mContext, R.layout.b2c_layout, null);
-        pw = new PopupWindow(b2cView,
+        final PopupWindow pw = new PopupWindow(b2cView,
                 MyApplication.widthPixels - 2 * AppManager.getInstance().dp2px(mContext, 18),
                 RelativeLayout.LayoutParams.WRAP_CONTENT, false);
-        pw.setOutsideTouchable(false);
+        pw.setOutsideTouchable(true);
         b2cView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         int popupHeight = b2cView.getMeasuredHeight();
         int[] location = new int[2];
@@ -269,24 +267,56 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //showTip("去赚钱");
-                Toast.makeText(HomeActivity.this,"去赚钱",Toast.LENGTH_SHORT).show();
-                ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                Call call=service.hasUpgradeRight(MyApplication.user.getUserId());
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
+                Toast.makeText(HomeActivity.this, "去赚钱", Toast.LENGTH_SHORT).show();
 
-                    }
 
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-
-                    }
-                });
             }
         });
 
     }
 
+    public void updateViewWithCToBTip() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SystemClock.sleep(300);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        View ppView = View.inflate(mContext, R.layout.home_tip, null);
+                        final PopupWindow popupWindowTip = new PopupWindow(ppView,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT, false);
+                        popupWindowTip.setOutsideTouchable(true);
+
+                        ppView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                        int popupWidth = ppView.getMeasuredWidth();
+                        int popupHeight = ppView.getMeasuredHeight();
+
+                        int[] location = new int[2];
+                        bb.getLocationOnScreen(location);
+                        popupWindowTip.showAtLocation(bb, Gravity.NO_GRAVITY, bb.getWidth() / 2 - popupWidth / 2,
+                                location[1] - popupHeight);
+
+                        ppView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindowTip.dismiss();
+                                updateViewWithCToB();
+                            }
+                        });
+
+
+                    }
+                });
+            }
+        }).start();
+
+
+    }
+
 
 }
+
+
