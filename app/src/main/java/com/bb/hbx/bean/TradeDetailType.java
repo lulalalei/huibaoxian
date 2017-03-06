@@ -65,6 +65,7 @@ public class TradeDetailType {
 
         private String amountUnit;
         private String desc;
+        private List<ExtraInsureListBean> extraInsureList;
         private String insureAmount;
         private String insureName;
 
@@ -99,5 +100,9 @@ public class TradeDetailType {
         public void setInsureName(String insureName) {
             this.insureName = insureName;
         }
+    }
+
+    public static class ExtraInsureListBean implements Item{
+
     }
 }
