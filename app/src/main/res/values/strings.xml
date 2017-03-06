@@ -152,7 +152,7 @@
     <string name="be">保额</string>
     <string name="dk">-%1$s抵扣</string>
     <string name="pay">支付</string>
-    <string name="tip2">温馨提示：本产品由%1$s股份有限公司承保\n联系电话:</string>
+    <string name="tip2">温馨提示：本产品由%1$s股份有限公司承保\n联系电话:%2$s</string>
     <string name="password2">请输入支付密码</string>
     <string name="losspsw2">忘记密码？</string>
     <string name="setting2">使用余额抵扣需要设置支付密码</string>
@@ -165,6 +165,9 @@
     <string name="xcwsp">新车未上牌</string>
     <string name="lscxcl">历史查询车辆</string>
     <string name="search">查询</string>
+    <string name="updateperson">升级成签约代理人</string>
+    <string name="selectcar2">请选择与您车辆最匹配的车型</string>
+    <string name="nocar">不是以上车型</string>
 
     <!-- behavior -->
 
