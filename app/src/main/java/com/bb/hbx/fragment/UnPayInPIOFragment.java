@@ -112,7 +112,7 @@ public class UnPayInPIOFragment extends BaseFragment{
 
     private void showPoliciesList(final int pageIndex) {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call=service.getPolicies(MyApplication.user.getUserId(),"0","2",pageIndex+"","10");
+        Call call=service.getPolicies(MyApplication.user.getUserId(),"20","2",pageIndex+"","10");
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
@@ -127,7 +127,7 @@ public class UnPayInPIOFragment extends BaseFragment{
                         {
                             totalList.clear();
                         }
-                        Toast.makeText(mContext,"size:"+totalList.size(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext,"size:"+totalList.size(),Toast.LENGTH_SHORT).show();
                         totalList.addAll(bean.getPolicyList());
                         myUnPayInPIOAdapter.notifyDataSetChanged();
                     }

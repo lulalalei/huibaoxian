@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
-import com.bb.hbx.bean.GetMsgsBean;
+import com.bb.hbx.bean.Message;
 import com.bb.hbx.interfaces.OnItemChangeStateClickListener;
 import com.bb.hbx.interfaces.OnItemClickListener;
+import com.bb.hbx.utils.TimeUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,12 +25,12 @@ import butterknife.ButterKnife;
 public class MyInfoAdapter extends RecyclerView.Adapter<MyInfoAdapter.MyViewHolder>{
 
     Context mContext;
-    ArrayList<GetMsgsBean> list;
+    List<Message> list;
     LayoutInflater inflater;
     OnItemChangeStateClickListener onMyItemClickListener;
     OnItemClickListener onDeleteItemClickListener;
 
-    public MyInfoAdapter(Context mContext, ArrayList<GetMsgsBean> list) {
+    public MyInfoAdapter(Context mContext, List<Message> list) {
         this.mContext = mContext;
         this.list = list;
         inflater=LayoutInflater.from(mContext);
@@ -51,15 +52,19 @@ public class MyInfoAdapter extends RecyclerView.Adapter<MyInfoAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        GetMsgsBean bean = list.get(position);
-        if ("0".equals(bean.getSts()))
+        int sts = list.get(position).getSts();
+        if (2==sts)
         {
-            holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_white);
+            holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_white);//已读
         }
         else
         {
-            holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_a1);
+            holder.circle_tv.setBackgroundResource(R.drawable.shape_circle_a1);//未读
         }
+        holder.title_tv.setText(list.get(position).getMsgTitle());
+        holder.content_tv.setText(list.get(position).getMsgContent());
+        long stringToDateNoSpace = TimeUtils.getStringToDateNoSpace(list.get(position).getMsgTime());
+        holder.time_tv.setText(TimeUtils.getDateToString(stringToDateNoSpace));
         final MyViewHolder finalHolder=holder;
         finalHolder.circle_tv.setTag(position);
         finalHolder.itemView.setOnClickListener(new View.OnClickListener() {

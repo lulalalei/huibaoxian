@@ -1,6 +1,7 @@
 package com.bb.hbx.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,12 +9,15 @@ import android.widget.ScrollView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.OrderdetailsCarActivity;
+import com.bb.hbx.activitiy.PolicydetailsActivity;
 import com.bb.hbx.adapter.MyAllInMyOrderAdapter;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.bean.GetTradesBean;
+import com.bb.hbx.interfaces.OnItemClickListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
@@ -98,6 +102,26 @@ public class AllInMyOrderFragment extends BaseFragment{
         }
         showTradesList(pageIndex);
         //adapter.notifyDataSetChanged();
+        adapter.setOnMyItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onMyItemClickListener(int position) {
+                Intent intent = new Intent();
+                String tradeId = list.get(position).getTradeId();
+                int classType = list.get(position).getClassType();
+                if (1==classType)
+                {
+                    intent.setClass(mContext, OrderdetailsCarActivity.class);
+                }
+                else
+                {
+                    intent.setClass(mContext, PolicydetailsActivity.class);
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("tradeId",tradeId);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     private void showTradesList(final int pageIndex) {

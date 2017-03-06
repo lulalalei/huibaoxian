@@ -125,11 +125,15 @@
     <string name="hj">合计 : </string>
     <string name="ysprice">(已省￥%1$s)</string>
     <string name="name">姓名 : </string>
+    <string name="cpxq">产品详情 : </string>
     <string name="idtype">证件类型 : </string>
     <string name="idnumber">证件号码 : </string>
     <string name="bznr">保障内容</string>
+    <string name="bzxq">保障详情</string>
     <string name="bxzr">保险责任 : </string>
     <string name="bfze">保费总额</string>
+    <string name="jqx">交强险 : </string>
+    <string name="syx">商业险 : </string>
     <string name="hbdk1">- 红包抵扣</string>
     <string name="yedk1">- 余额抵扣</string>
     <string name="sfje">实付金额</string>
@@ -155,6 +159,7 @@
     <string name="next2">下次吧</string>
     <string name="setting3">去设置</string>
     <string name="tbcs">投保城市</string>
+    <string name="tbcs1">投保城市 : </string>
     <string name="cphm">车牌号码</string>
     <string name="cphm2">请输入车牌号码</string>
     <string name="xcwsp">新车未上牌</string>

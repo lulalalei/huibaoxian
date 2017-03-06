@@ -13,7 +13,6 @@ import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.bb.hbx.MyApplication;
-import com.bb.hbx.cans.Can;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,9 +27,11 @@ public class MyOssUtils {
 
     Context mContext;
     String callbackAddress="http://ebao.seaway.net.cn:9003/api/ossCallback.do";
+    String imgPath;
 
-    public MyOssUtils(Context mContext) {
+    public MyOssUtils(Context mContext,String imgPath) {
         this.mContext = mContext;
+        this.imgPath=imgPath;
         updataLogo();
     }
 
@@ -39,7 +40,7 @@ public class MyOssUtils {
         OSS oss = new OSSClient(mContext,"http://img-cn-hangzhou.aliyuncs.com",getter);
 
         // 构造上传请求
-        PutObjectRequest put = new PutObjectRequest("hbx-image", "resource/images/user/logo/"+ MyApplication.user.getUserId()+".jpg", Can.getDefaultUsersIconFile()+"/20245617_095937129615_2.jpg");
+        PutObjectRequest put = new PutObjectRequest("hbx-image", "resource/images/user/logo/"+ MyApplication.user.getUserId()+".jpg", /*Can.getDefaultUsersIconFile()+"/20245617_095937129615_2.jpg"*/imgPath);
         // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
             @Override

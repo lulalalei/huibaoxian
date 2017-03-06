@@ -5,18 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.activitiy.PerOrderDetailActivity;
 import com.bb.hbx.adapter.MyUnEfficientInPIOAdapter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
-import com.bb.hbx.bean.MyPIOederBean;
+import com.bb.hbx.bean.GetPolicies;
 import com.bb.hbx.interfaces.OnItemClickListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/12/26.
@@ -30,9 +41,12 @@ public class UnEfficientInPIOFragment extends BaseFragment{
     RecyclerView recyclerView;
 
     GridLayoutManager manager;
-    ArrayList<MyPIOederBean> totalList=new ArrayList<>();
+    //MyPIOederBean
+    List<GetPolicies.PolicyListBean> totalList=new ArrayList<>();
     Context mContext;
     MyUnEfficientInPIOAdapter myUnEfficientInPIOAdapter;
+    int pageIndex=1;
+
     private static UnEfficientInPIOFragment fragment;
     public static UnEfficientInPIOFragment getInstance()
     {
@@ -56,7 +70,20 @@ public class UnEfficientInPIOFragment extends BaseFragment{
 
     @Override
     public void initView() {
+        scrollView.setMode(PullToRefreshBase.Mode.BOTH);
+        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex=1;
+                showPoliciesList(pageIndex);
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                pageIndex++;
+                showPoliciesList(pageIndex);
+            }
+        });
     }
 
     @Override
@@ -68,22 +95,13 @@ public class UnEfficientInPIOFragment extends BaseFragment{
             }
         };
         recyclerView.setLayoutManager(manager);
+        myUnEfficientInPIOAdapter = new MyUnEfficientInPIOAdapter(totalList, mContext);
+        recyclerView.setAdapter(myUnEfficientInPIOAdapter);
         if (totalList!=null&&totalList.size()>0)
         {
             totalList.clear();
         }
-        for (int i = 0; i < 16; i++) {
-            String title="户外运动保险计划:"+i;
-            String number="订单号:"+i;
-            String theInsured="被保险人:android,"+i;
-            String insuranceHolder="投保人:ios,"+i;
-            String time="保险期间:"+i;
-            String state="待支付";
-            MyPIOederBean bean = new MyPIOederBean(title, number, theInsured, insuranceHolder, time, state);
-            totalList.add(bean);
-        }
-        myUnEfficientInPIOAdapter = new MyUnEfficientInPIOAdapter(totalList, mContext);
-        recyclerView.setAdapter(myUnEfficientInPIOAdapter);
+        showPoliciesList(pageIndex);
         myUnEfficientInPIOAdapter.setOnMyItemClickListener(new OnItemClickListener() {
             @Override
             public void onMyItemClickListener(int position) {
@@ -92,5 +110,39 @@ public class UnEfficientInPIOFragment extends BaseFragment{
             }
         });
         //listView.setAdapter(myUnEfficientInPIOAdapter);
+    }
+    private void showPoliciesList(final int pageIndex) {
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getPolicies(MyApplication.user.getUserId(),"40","2",pageIndex+"","10");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                if (body!=null)
+                {
+                    GetPolicies bean = (GetPolicies) body.getOutput();
+                    if (bean!=null)
+                    {
+                        //List<GetPolicies.PolicyListBean> policyList = bean.getPolicyList();
+                        if (pageIndex==1)
+                        {
+                            totalList.clear();
+                        }
+                        Toast.makeText(mContext,"size:"+totalList.size(),Toast.LENGTH_SHORT).show();
+                        totalList.addAll(bean.getPolicyList());
+                        myUnEfficientInPIOAdapter.notifyDataSetChanged();
+                    }
+                }
+                if (scrollView.isRefreshing())
+                {
+                    scrollView.onRefreshComplete();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(mContext,"走了这shibai",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

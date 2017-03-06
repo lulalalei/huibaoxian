@@ -32,6 +32,7 @@ import com.bb.hbx.activitiy.PersonInfoSettingActivity;
 import com.bb.hbx.activitiy.PresentInsuActivity;
 import com.bb.hbx.activitiy.RedPacketActivity;
 import com.bb.hbx.activitiy.ScoreActivity;
+import com.bb.hbx.activitiy.SettingsActivity;
 import com.bb.hbx.activitiy.login.LoginActivity;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
@@ -82,6 +83,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     TextView redPacket_tv;
     @BindView(R.id.identify_layout)
     FrameLayout identify_layout;
+    @BindView(R.id.canCash_layout)
+    RelativeLayout canCash_layout;
     @BindView(R.id.redPacket_layout)
     RelativeLayout redPacket_layout;
     @BindView(R.id.notLogin_layout)
@@ -101,6 +104,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     RelativeLayout purchase_layout;
     @BindView(R.id.customers_layout)
     RelativeLayout customers_layout;
+    @BindView(R.id.collect_layout)
+    RelativeLayout collect_layout;
     @BindView(R.id.invite_layout)
     RelativeLayout invite_layout;
     @BindView(R.id.service_layout)
@@ -142,12 +147,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         pInsurance_layout.setOnClickListener(this);
         cInsurance_layout.setOnClickListener(this);
         myAsset_tv.setOnClickListener(this);
+        canCash_layout.setOnClickListener(this);
         score_layout.setOnClickListener(this);
         redPacket_layout.setOnClickListener(this);
         notLogin_layout.setOnClickListener(this);
 
         purchase_layout.setOnClickListener(this);
         customers_layout.setOnClickListener(this);
+        collect_layout.setOnClickListener(this);
         invite_layout.setOnClickListener(this);
         service_layout.setOnClickListener(this);
 
@@ -268,6 +275,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 intent.setClass(mContext, MyAssertActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.canCash_layout:
+                intent.setClass(mContext, InfoActivity.class);
+                startActivity(intent);
+                break;
             case R.id.score_layout:
                 intent.putExtra("accountScoreInt", accountScoreInt);
                 intent.setClass(mContext, ScoreActivity.class);
@@ -293,6 +304,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.customers_layout:
                 intent.setClass(mContext, CustomerManagerActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.collect_layout:
+                /*intent.setClass(mContext, MyBankCardActivity.class);
+                startActivity(intent);*/
+                intent.setClass(mContext, SettingsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.invite_layout:

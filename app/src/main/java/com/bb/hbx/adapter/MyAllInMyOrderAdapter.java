@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.R;
 import com.bb.hbx.bean.GetTradesBean;
+import com.bb.hbx.interfaces.OnItemClickListener;
 import com.bb.hbx.utils.TimeUtils;
 import com.bumptech.glide.Glide;
 
@@ -28,6 +29,7 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
     Context mContext;
     List<GetTradesBean.TradeListBean> list;
     LayoutInflater inflater;
+    OnItemClickListener onMyItemClickListener;
     int payAmountInt=0;
     int classType=1;//1表示车险,2表示个险
     String sts="";
@@ -41,6 +43,10 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
         inflater=LayoutInflater.from(mContext);
     }
 
+    public void setOnMyItemClickListener(OnItemClickListener onMyItemClickListener) {
+        this.onMyItemClickListener = onMyItemClickListener;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=inflater.inflate(R.layout.all_myorder_item,parent,false);
@@ -48,7 +54,7 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         sts = list.get(position).getSts();
         if ("10".equals(sts))
         {
@@ -113,7 +119,12 @@ public class MyAllInMyOrderAdapter extends RecyclerView.Adapter<MyAllInMyOrderAd
         int commisionValue1 = list.get(position).getCommisionValue1();
         holder.income_tv.setText((commisionValue1/100)+"."+(commisionValue1/10%10)+(commisionValue1%10));
         Glide.with(mContext).load(list.get(position).getInsurerLogo()).placeholder(R.drawable.shangcheng).into(holder.logo_iv);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMyItemClickListener.onMyItemClickListener(position);
+            }
+        });
     }
 
     @Override

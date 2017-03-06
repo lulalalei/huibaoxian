@@ -2,6 +2,7 @@ package com.bb.hbx.activitiy;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,9 +12,10 @@ import android.widget.Toast;
 
 import com.bb.hbx.R;
 import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
-import com.bb.hbx.utils.MyUsersSqlite;
+import com.bb.hbx.db.DatabaseImpl;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -60,7 +62,8 @@ public class SexActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void initdata() {
-        Cursor cursor = MyUsersSqlite.db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
+        SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from userstb where currentUser = ?", new String[]{"currentUser"});
         if (cursor!=null)
         {
             if (cursor.moveToNext())
@@ -82,11 +85,13 @@ public class SexActivity extends BaseActivity implements View.OnClickListener{
             {
                 Toast.makeText(mContext,"cursor下一条不存在",Toast.LENGTH_SHORT);
             }
+            cursor.close();
         }
         else
         {
             Toast.makeText(mContext,"cursor为空",Toast.LENGTH_SHORT);
         }
+        db.close();
     }
 
     @Override
@@ -130,10 +135,19 @@ public class SexActivity extends BaseActivity implements View.OnClickListener{
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                //更新表数据
-                MyUsersSqlite.db.execSQL("update userstb set gender=? where currentUser=currentUser ",
-                        new String[]{gender});
-                showTip("更新成功!");
+                Result_Api body = (Result_Api) response.body();
+                if (body!=null)
+                {
+                    if (body.isSuccess())
+                    {
+                        SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
+                        //更新表数据
+                        db.execSQL("update userstb set gender=? where currentUser=currentUser ",
+                                new String[]{gender});
+                        db.close();
+                    }
+                    showTip(body.getRespMsg());
+                }
             }
 
             @Override

@@ -323,6 +323,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                     String gender = user.getGender();
                     String userName = user.getNickName();
                     String email = user.getEmail();
+                    String logo = user.getLogo();
                     if (TextUtils.isEmpty(gender))
                     {
                         gender="0";
@@ -336,7 +337,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                     //MyUsersSqlite.db
                     SQLiteDatabase db= DatabaseImpl.getInstance().getReadableDatabase();
                     db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
-                            new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,loginPwd,paymentPwd,null});
+                            new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,loginPwd,paymentPwd,logo});
                     db.close();
                     showTip("登陆成功");
 

@@ -72,7 +72,6 @@ public class HomeActivity extends BaseActivity {
                 hideFragments(transaction);
                 switch (tab) {
                     case 0:
-
                         if (homeFragment == null) {
 
 

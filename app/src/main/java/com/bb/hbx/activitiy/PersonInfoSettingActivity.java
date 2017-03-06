@@ -91,7 +91,7 @@ public class PersonInfoSettingActivity extends BaseActivity implements View.OnCl
         Can.userPwd=ShareSPUtils.sp.getString("userPwd",null);
         Can.userIcon= ShareSPUtils.sp.getString("userIcon", null);
         userIcon_civ.setImageBitmap(BitmapFactory.decodeFile(Can.userIcon));
-        MyOssUtils myOssUtils = new MyOssUtils(getApplicationContext());
+        MyOssUtils myOssUtils = new MyOssUtils(getApplicationContext(),Can.getDefaultUsersIconFile()+"/20245617_095937129615_2.jpg");
         /*STSGetter getter=new STSGetter();
         OSS oss = new OSSClient(getApplicationContext(),"http://img-cn-hangzhou.aliyuncs.com",getter);
 

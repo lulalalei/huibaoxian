@@ -25,10 +25,9 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener{
     TextView myInfo_tv;
     @BindView(R.id.systemInfo_tv)
     TextView systemInfo_tv;
-    @BindView(R.id.myInfoCount_tv)
-    TextView myInfoCount_tv;
-    @BindView(R.id.systemInfoCount_tv)
-    TextView systemInfoCount_tv;
+
+    static TextView myInfoCount_tv;
+    static TextView systemInfoCount_tv;
 
     FragmentManager fragmentManager;
     MyInfoFragment myInfoFragment;
@@ -41,9 +40,39 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void initView() {
+        myInfoCount_tv= (TextView) findViewById(R.id.myInfoCount_tv);
+        systemInfoCount_tv= (TextView) findViewById(R.id.systemInfoCount_tv);
         fragmentManager = getSupportFragmentManager();
         myInfoFragment=new MyInfoFragment();
         systemInfoFragment=new SystemInfoFragment();
+
+
+    }
+
+    public static void resetLabMine(int count)
+    {
+        if (count==0)
+        {
+            myInfoCount_tv.setVisibility(View.GONE);
+        }
+        else
+        {
+            myInfoCount_tv.setVisibility(View.VISIBLE);
+            myInfoCount_tv.setText(count+"");
+        }
+    }
+
+    public static void resetLabSystem(int count)
+    {
+        if (count==0)
+        {
+            systemInfoCount_tv.setVisibility(View.GONE);
+        }
+        else
+        {
+            systemInfoCount_tv.setVisibility(View.VISIBLE);
+            systemInfoCount_tv.setText(count+"");
+        }
     }
 
     @Override
