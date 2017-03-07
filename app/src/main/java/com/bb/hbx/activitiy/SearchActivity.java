@@ -176,7 +176,8 @@ public class SearchActivity extends BaseActivity<SearchHistoryPresenter, SearchH
 
 
             int pos = parent.getChildAdapterPosition(view);
-
+            if (pos == -1)
+                return;
             if (mPresenter.getList().get(pos) instanceof HotSearchBean) {
                 outRect.top = 0;
                 outRect.bottom = 0;
