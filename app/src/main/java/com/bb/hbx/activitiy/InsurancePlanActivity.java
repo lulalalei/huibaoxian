@@ -34,6 +34,7 @@ public class InsurancePlanActivity extends BaseActivity {
     public int getLayoutId() {
         initState();
         return R.layout.activit_insuranceplan;
+
     }
 
     @Override
