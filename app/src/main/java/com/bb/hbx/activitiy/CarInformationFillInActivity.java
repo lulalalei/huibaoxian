@@ -1,9 +1,11 @@
 package com.bb.hbx.activitiy;
 
+import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 
 /**
- * Created by Administrator on 2017/3/7.
+ * Created by fancl
+ * 车险 信息填写
  */
 
 public class CarInformationFillInActivity extends BaseActivity {
@@ -11,7 +13,7 @@ public class CarInformationFillInActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.carinfomationfillin;
     }
 
     @Override
