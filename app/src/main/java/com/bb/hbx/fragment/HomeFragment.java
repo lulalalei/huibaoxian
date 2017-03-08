@@ -178,7 +178,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
             mPresenter.getMsgs();
             tv_messagecount.setVisibility(View.VISIBLE);
         } else {
-            tv_messagecount.setVisibility(View.GONE);
+            tv_messagecount.setVisibility(View.INVISIBLE);
         }
 
 
