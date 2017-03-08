@@ -24,6 +24,7 @@ public class InsurancePlanActivity extends BaseActivity {
     @BindView(R.id.vp_tb)
     ViewPager vp_tb;
 
+
     private CardPagerAdapter mCardAdapter;
     private ShadowTransformer mCardShadowTransformer;
 
