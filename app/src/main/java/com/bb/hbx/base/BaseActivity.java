@@ -1,23 +1,12 @@
 package com.bb.hbx.base;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -30,7 +19,6 @@ import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
 import com.bb.hbx.base.v.BaseView;
 import com.bb.hbx.utils.AppManager;
-import com.bb.hbx.utils.DeviceUtils;
 import com.bb.hbx.utils.InstanceUtil;
 
 import butterknife.ButterKnife;

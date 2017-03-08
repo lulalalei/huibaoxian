@@ -14,14 +14,10 @@ import android.widget.Toast;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
-import com.bb.hbx.api.ApiService;
-import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.base.m.HomeActModle;
 import com.bb.hbx.base.p.HomeActPresenter;
 import com.bb.hbx.base.v.HomeActContract;
-import com.bb.hbx.bean.User;
-import com.bb.hbx.db.DatabaseImpl;
 import com.bb.hbx.fragment.ClassFragment;
 import com.bb.hbx.fragment.FindFragment;
 import com.bb.hbx.fragment.HomeFragment;
@@ -31,9 +27,6 @@ import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.widget.BottomBar;
 
 import butterknife.BindView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**

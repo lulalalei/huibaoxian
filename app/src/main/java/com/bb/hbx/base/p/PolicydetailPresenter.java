@@ -28,8 +28,6 @@ public class PolicydetailPresenter extends PolicydetailsContract.Presenter {
                     mView.getTradeDetail((TradeDetail) api.getOutput());
 
                 }
-
-
             }
 
             @Override

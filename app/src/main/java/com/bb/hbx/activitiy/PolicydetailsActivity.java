@@ -207,8 +207,6 @@ public class PolicydetailsActivity extends BaseActivity<PolicydetailPresenter, P
         }
 
         tv_tip.setText(getString(R.string.tip2, detail.getInsurerName(), detail.getInsurerTels()));
-
-
     }
 
     @Override

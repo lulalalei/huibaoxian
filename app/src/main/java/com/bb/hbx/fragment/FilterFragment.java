@@ -3,36 +3,21 @@ package com.bb.hbx.fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
 import com.bb.hbx.R;
-import com.bb.hbx.activitiy.FilterActivity;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.base.m.Filter_itemModel;
-import com.bb.hbx.base.m.Mall_itemModel;
 import com.bb.hbx.base.p.Filter_itemPresenter;
-import com.bb.hbx.base.p.Mall_ItemPresenter;
 import com.bb.hbx.base.v.Filter_ItemContract;
-import com.bb.hbx.base.v.Mall_ItemContract;
 import com.bb.hbx.bean.Filter_tileItem;
-import com.bb.hbx.bean.HotSearchBean;
 import com.bb.hbx.bean.Insurer;
-import com.bb.hbx.bean.Product;
-import com.bb.hbx.bean.ProductListBean;
-import com.bb.hbx.bean.SearchTitleBean;
 import com.bb.hbx.bean.TypeModel;
-import com.bb.hbx.emus.DataLoadDirection;
 import com.bb.hbx.provide.Filter_titleItemProvide;
 import com.bb.hbx.provide.InsuranceCompanyProvide;
-import com.bb.hbx.provide.MallAllProvide;
-import com.bb.hbx.provide.RecommendProvide;
-import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.Constants;
-import com.bb.hbx.widget.ConditionLayout;
-import com.bb.hbx.widget.DottedLineItemDecoration;
 import com.bb.hbx.widget.freshlayout.OnPullListener;
 import com.bb.hbx.widget.freshlayout.RefreshLayout;
 import com.bb.hbx.widget.multitype.MultiTypeAdapter;
@@ -58,6 +43,11 @@ public class FilterFragment extends BaseFragment<Filter_itemPresenter, Filter_it
     private TypeModel model;
 
     private Filter_titleItemProvide provide1;
+
+
+    public FilterFragment() {
+
+    }
 
 
     public FilterFragment(TypeModel model) {

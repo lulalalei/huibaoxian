@@ -11,30 +11,379 @@
         android:id="@+id/topbar_layout"
         android:layout_width="match_parent"
         android:layout_height="44dp"
+        android:background="@color/white"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:background="@color/white">
+        android:paddingTop="10dp">
+
         <RelativeLayout
             android:id="@+id/back_layout"
             android:layout_width="40dp"
             android:layout_height="match_parent">
+
             <ImageView
+                android:id="@+id/back_iv"
                 android:layout_width="10dp"
                 android:layout_height="17dp"
-                android:id="@+id/back_iv"
-                android:src="@drawable/fanhui"
-                android:scaleType="centerCrop"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="18dp"
-                android:layout_centerVertical="true"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/fanhui" />
         </RelativeLayout>
+
         <TextView
             android:id="@+id/addBank_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="推荐奖励"
-            android:textSize="17sp"
-            android:textColor="@color/A1"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_centerHorizontal="true"/>
+            android:text="推荐奖励"
+            android:textColor="@color/A1"
+            android:textSize="17sp" />
+
     </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/sv_invitefriends"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topbar_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/yaoqinghaoyou_erweima">
+
+                <Button
+                    android:id="@+id/bt_checkerule"
+                    android:layout_width="93dp"
+                    android:layout_height="27dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/yaoqing_guize"
+                    android:text="查看奖励规则"
+                    android:textColor="@color/A4"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="144dp"
+                    android:src="@drawable/yaoqing_erweima" />
+
+                <Button
+                    android:id="@+id/btn_gotoinvitefriend"
+                    android:layout_width="305dp"
+                    android:layout_height="67dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="347dp"
+                    android:background="@drawable/anniu_yaoqing"
+                    android:paddingBottom="8dp"
+                    android:text="去邀请好友"
+                    android:textColor="@color/A1"
+                    android:textSize="27sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_xinxi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_gotoinvitefriend"
+                    android:layout_marginTop="44dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp">
+
+                        <ImageView
+                            android:id="@+id/iv_renshu"
+                            android:layout_width="24dp"
+                            android:layout_height="27dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/yaoqing_renshu" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_successinvite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_toRightOf="@id/iv_renshu"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_renshu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="成功邀请"
+                                android:textColor="#d5f5e9"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tv_inviteNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tv_renshu"
+                                android:layout_marginTop="6dp"
+                                android:text="34,556位"
+                                android:textColor="#d5f5e9"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <ImageView
+                            android:id="@+id/iv_shouyi"
+                            android:layout_width="24dp"
+                            android:layout_height="27dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/yaoqing_shouyi" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_leijishouyi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_toRightOf="@id/iv_shouyi"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_shouyi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="累计收益"
+                                android:textColor="#d5f5e9"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tv_money"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tv_shouyi"
+                                android:layout_marginTop="6dp"
+                                android:text="345.00元"
+                                android:textColor="#d5f5e9"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="355dp"
+                    android:layout_height="175dp"
+                    android:layout_below="@id/rl_xinxi"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="258dp"
+                    android:background="@drawable/yaoqinghaoyou_top3"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <FrameLayout
+
+                            android:id="@+id/fl_person2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/civ_person2"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="34dp"
+                                android:layout_marginTop="35dp"
+                                android:src="@drawable/defult1" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="24dp"
+                                android:layout_marginTop="63dp"
+                                android:src="@drawable/yaoqing_2" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tv_name_02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/fl_person2"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="邓紫棋"
+                            android:textColor="@color/A3"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_money02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_name_02"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="2500"
+                            android:textColor="@color/A3"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_money02"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="4dp"
+                            android:text="推荐收入（元）"
+                            android:textColor="@color/A5"
+                            android:textSize="11dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <FrameLayout
+                            android:id="@+id/fl_person1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/civ_person1"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginLeft="23dp"
+                                android:layout_marginTop="15dp"
+                                android:src="@drawable/defult2" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="23dp"
+                                android:layout_marginTop="63dp"
+                                android:src="@drawable/yaoqing_1" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tv_name_01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/fl_person1"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="杨幂"
+                            android:textColor="@color/A3"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_money01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_name_01"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="2800"
+                            android:textColor="@color/A2"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_money01"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:text="推荐收入（元）"
+                            android:textColor="@color/A5"
+                            android:textSize="11dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <FrameLayout
+                            android:id="@+id/fl_person3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/civ_person3"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="34dp"
+                                android:layout_marginTop="35dp"
+                                android:src="@drawable/defult3" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="24dp"
+                                android:layout_marginTop="63dp"
+                                android:src="@drawable/yaoqing_3" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tv_name_03"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/fl_person3"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="谢霆锋"
+                            android:textColor="@color/A3"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_money03"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_name_03"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="2000"
+                            android:textColor="@color/A3"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_money03"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="4dp"
+                            android:text="推荐收入（元）"
+                            android:textColor="@color/A5"
+                            android:textSize="11dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lv_invitefriends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

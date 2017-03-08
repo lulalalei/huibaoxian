@@ -170,6 +170,7 @@
         <activity android:name=".activitiy.MyAssertDetailActivity" />
         <activity android:name=".activitiy.SpecialMonthActivity" />
         <activity android:name=".activitiy.RecommendRewardActivity" />
+        <activity android:name=".activitiy.CheckRuleActivity"/>
         <activity
             android:name=".activitiy.ConfirmpaymentActivity"
             android:configChanges="orientation|keyboardHidden|navigation"

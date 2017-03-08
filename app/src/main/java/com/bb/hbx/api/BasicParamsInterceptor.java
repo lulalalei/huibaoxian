@@ -2,28 +2,22 @@ package com.bb.hbx.api;
 
 import android.util.Log;
 
-
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.utils.AppUtils;
 import com.bb.hbx.utils.Constants;
 import com.bb.hbx.utils.MD5Util;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-
 import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -54,7 +48,7 @@ public class BasicParamsInterceptor implements Interceptor {
         requestBuilder.addHeader("versionType", "2");
         requestBuilder.addHeader("deviceNo", MyApplication.DUID);
         requestBuilder.addHeader("deviceName", "10");
-        requestBuilder.addHeader("domainId", "20");
+        requestBuilder.addHeader("domainId", "10");
         requestBuilder.addHeader("sessionId", MyApplication.user.getSessionId());
 
 
