@@ -443,7 +443,7 @@ public interface ApiService {
     @POST("api.do?method=updateUpgradeB&type=post")
     Call<Result_Api> updateUpgradeB(@Field("userId") String userId);
 
-    //用户升B
+    //7.1.2.	获取车险投保地区(getAvaCarAreas)
     @FormUrlEncoded
     @POST("api.do?method=getAvaCarAreas&type=post")
     Call<Result_Api<Output_AreaBean>> getAvaCarAreas(@Field("companyCode") String companyCode, @Field("areaCode") String areaCode);
