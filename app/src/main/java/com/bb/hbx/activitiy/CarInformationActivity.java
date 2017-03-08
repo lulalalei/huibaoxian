@@ -28,7 +28,7 @@ import butterknife.BindView;
 
 /**
  * Created by fancl
- * 车险
+ * 车险 选择城市 和车牌号码
  */
 
 public class CarInformationActivity extends BaseActivity<CarInfomationPresenter, CarInfomationModel> implements
