@@ -54,7 +54,7 @@ public class BasicParamsInterceptor implements Interceptor {
         requestBuilder.addHeader("versionType", "2");
         requestBuilder.addHeader("deviceNo", MyApplication.DUID);
         requestBuilder.addHeader("deviceName", "10");
-        requestBuilder.addHeader("domainId", "10");
+        requestBuilder.addHeader("domainId", "20");
         requestBuilder.addHeader("sessionId", MyApplication.user.getSessionId());
 
 

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -45,6 +46,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.bb.hbx.R.id.topbar_layout;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -107,6 +110,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     RelativeLayout invite_layout;
     @BindView(R.id.service_layout)
     RelativeLayout service_layout;
+
+    @BindView(R.id.topbar_layout)
+    RelativeLayout topbar_layout;
     Context mContext;
 
     boolean isOnce = true;
@@ -131,6 +137,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public int getLayoutId() {
+
         return R.layout.fragment_host;
     }
 
@@ -159,6 +166,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         hasLoginShow();
         //updateMyAccount();
     }
+
+
 
 
     @Override

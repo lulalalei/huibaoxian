@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/A7"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/fanhui"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppear.Theme.A1_Size17" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginLeft="@dimen/x36"
+                android:layout_marginTop="@dimen/y30"
+                android:text="@string/update_jqx"
+                android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+            <com.bb.hbx.widget.ItemLayout3
+                android:id="@+id/il_jqx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:center_visible="false"
+                app:isline="false"
+                app:left_name3="@string/jqx2"
+                app:right_butIcon3="@drawable/xialaicon_xiangshang"
+                app:right_icon3="@drawable/xialaicon"
+                app:text3="投保">
+
+            </com.bb.hbx.widget.ItemLayout3>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginLeft="@dimen/x36"
+                android:layout_marginTop="@dimen/y30"
+                android:text="@string/update_syx"
+                android:textAppearance="@style/TextAppear.Theme.A4_Size12" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.bb.hbx.widget.ItemLayout3
+                    android:id="@+id/il_jdcssx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:center_text3="@string/bjmp"
+                    app:center_visible="true"
+                    app:isline="true"
+                    app:left_name3="@string/jdcssx"
+                    app:right_butIcon3="@drawable/xialaicon_xiangshang"
+                    app:right_icon3="@drawable/xialaicon"
+                    app:text3="投保">
+
+                </com.bb.hbx.widget.ItemLayout3>
+
+              
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y88"
+        android:layout_marginLeft="@dimen/x36"
+        android:layout_marginRight="@dimen/x36"
+        android:layout_marginTop="@dimen/y62"
+        android:background="@drawable/shape_btn_a1"
+        android:gravity="center"
+        android:text="@string/search"
+        android:textAppearance="@style/TextAppear.Theme.white_Size18" />
+
+</LinearLayout>

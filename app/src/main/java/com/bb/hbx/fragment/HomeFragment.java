@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.activitiy.CarInformationActivity;
+
 import com.bb.hbx.activitiy.InsurancePlanActivity;
-import com.bb.hbx.activitiy.PolicydetailsActivity;
 import com.bb.hbx.activitiy.SearchActivity;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.base.m.HomeModle;
@@ -21,7 +22,7 @@ import com.bb.hbx.bean.BKItem;
 import com.bb.hbx.bean.BannerBean;
 import com.bb.hbx.bean.BobaoItem;
 
-import com.bb.hbx.bean.WaitingItem;
+
 import com.bb.hbx.bean.ProductItem;
 import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
@@ -89,6 +90,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
 
     @Override
     public void initView() {
+
 
         refresh.setNeedLoadMore(false);
         refresh.setView(rel_tool);
@@ -188,8 +190,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeModle> impleme
             case R.id.lin_search:
                 //AppManager.getInstance().showActivity(SearchActivity.class, null);
 
-                //AppManager.getInstance().showActivity(InsurancePlanActivity.class, null);
-                AppManager.getInstance().showActivity(PolicydetailsActivity.class, null);
+                AppManager.getInstance().showActivity(SearchActivity.class, null);
                 break;
             case R.id.iv_xx:
                 break;

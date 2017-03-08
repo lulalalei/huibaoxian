@@ -170,6 +170,12 @@
     <string name="updateperson">升级成签约代理人</string>
     <string name="selectcar2">请选择与您车辆最匹配的车型</string>
     <string name="nocar">不是以上车型</string>
+    <string name="update_jqx">交强险调整</string>
+    <string name="update_syx">商业险调整</string>
+    <string name="bjmp">不计免赔</string>
+    <string name="jqx2">交强险</string>
+    <string name="jdcssx">机动车损失险</string>
+    <string name="dszzrx">第三者责任险</string>
 
     <!-- behavior -->
 

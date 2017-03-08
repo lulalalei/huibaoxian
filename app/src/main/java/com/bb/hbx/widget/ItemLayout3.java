@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,15 +15,13 @@ import com.bb.hbx.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.bb.hbx.R.attr.isEdit;
-import static com.bb.hbx.R.attr.isright_icon;
-import static com.bb.hbx.R.id.et_comm;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * Created by Administrator on 2017/1/20.
  */
 
-public class ItemLayout2 extends LinearLayout {
+public class ItemLayout3 extends LinearLayout {
 
 
     @BindView(R.id.tv_type)
@@ -36,11 +34,19 @@ public class ItemLayout2 extends LinearLayout {
     @BindView(R.id.tv_comm)
     TextView tv_comm;
 
+    @BindView(R.id.cb_ceter)
+    CheckBox cb_ceter;
+
+    @BindView(R.id.lin_line)
+    LinearLayout lin_line;
+
 
     private String left_name = "";//左边的标题
 
 
     private String text = "";
+
+    private String center_text3 = "";
 
 
     private int right_icon;
@@ -60,6 +66,10 @@ public class ItemLayout2 extends LinearLayout {
 
     private boolean isEnable = true;
 
+    private boolean isLine;
+
+    private boolean isCenter_visible = true;
+
 
     public boolean isEnable() {
         return isEnable;
@@ -73,34 +83,45 @@ public class ItemLayout2 extends LinearLayout {
         this.listener = listener;
     }
 
-    public ItemLayout2(Context context, AttributeSet attrs) {
+    public ItemLayout3(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ItemLayout2(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ItemLayout3(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.ItemLayout2, defStyleAttr, 0);
+                R.styleable.ItemLayout3, defStyleAttr, 0);
 
-        left_name = a.getString(R.styleable.ItemLayout2_left_name2);
-        text = a.getString(R.styleable.ItemLayout2_text2);
-        right_icon = a.getResourceId(R.styleable.ItemLayout2_right_icon2, -1);
-        right_butIcon = a.getResourceId(R.styleable.ItemLayout2_right_butIcon2, -1);
-
-        textAppearance = a.getResourceId(R.styleable.ItemLayout2_textAppearance, R.style.TextAppear_Theme_A3_Size13);
+        left_name = a.getString(R.styleable.ItemLayout3_left_name3);
+        text = a.getString(R.styleable.ItemLayout3_text3);
+        center_text3 = a.getString(R.styleable.ItemLayout3_center_text3);
+        right_icon = a.getResourceId(R.styleable.ItemLayout3_right_icon3, -1);
+        right_butIcon = a.getResourceId(R.styleable.ItemLayout3_right_butIcon3, -1);
+        isLine = a.getBoolean(R.styleable.ItemLayout3_isline, true);
+        isCenter_visible = a.getBoolean(R.styleable.ItemLayout3_center_visible, true);
+        textAppearance = a.getResourceId(R.styleable.ItemLayout3_textAppearance3, R.style.TextAppear_Theme_A3_Size14);
         a.recycle();
         init();
 
     }
 
+    public boolean isCenter_visible() {
+        return isCenter_visible;
+    }
+
+    public void setCenter_visible(boolean center_visible) {
+        isCenter_visible = center_visible;
+        setCkVisibly();
+    }
+
     private void init() {
         this.setOrientation(VERTICAL);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.line_item2, this, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.line_item3, this, false);
         addView(view);
         ButterKnife.bind(this);
         tv_comm.setTextAppearance(mContext, textAppearance);
-
+        setCkVisibly();
 
         iv_last.setOnClickListener(new OnClickListener() {
             @Override
@@ -136,10 +157,19 @@ public class ItemLayout2 extends LinearLayout {
     private void initData() {
         tv_type.setText(left_name);
         tv_comm.setText(text);
+        cb_ceter.setText(center_text3);
         iv_last.setImageResource(right_icon);
+        if (isLine)
+            lin_line.setVisibility(View.VISIBLE);
+        else
+            lin_line.setVisibility(View.GONE);
+
 
     }
 
+    public boolean isCb_ceter() {
+        return cb_ceter.isChecked();
+    }
 
     public void setLeft_name(String left_name) {
         this.left_name = left_name;
@@ -152,6 +182,18 @@ public class ItemLayout2 extends LinearLayout {
         tv_comm.setText(text);
     }
 
+    public void setCkVisibly() {
+        if (isCenter_visible)
+            cb_ceter.setVisibility(View.VISIBLE);
+        else
+            cb_ceter.setVisibility(View.GONE);
+    }
+
+
+    public void setLine(boolean line) {
+        isLine = line;
+        initData();
+    }
 
     public String getTextValue() {
         return tv_comm.getText().toString().trim();

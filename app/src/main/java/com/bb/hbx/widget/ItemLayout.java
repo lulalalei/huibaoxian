@@ -90,6 +90,7 @@ public class ItemLayout extends LinearLayout {
         right_icon = a.getResourceId(R.styleable.ItemLayout_right_icon, -1);
         right_butIcon = a.getResourceId(R.styleable.ItemLayout_right_butIcon, -1);
         isCheck = a.getBoolean(R.styleable.ItemLayout_isCheck, false);
+        a.recycle();
         init();
 
     }

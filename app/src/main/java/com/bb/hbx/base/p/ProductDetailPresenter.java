@@ -292,16 +292,18 @@ public class ProductDetailPresenter extends ProductDetailContract.Presenter impl
         if (detail != null && !detail.getPlanList().isEmpty()) {
             //index>=1;
             cruentPlan = detail.getPlanList().get(index - 1);
-            List<Benefit> benefits = cruentPlan.getClassNameList().get(0).getBenefitList();
-            observable.set(0, cruentPlan.getPlanName().trim());
-            mView.removeLinView();
-            if (benefits != null && benefits.size() > 0) {
-                for (int i = 0; i < benefits.size(); i++) {
-                    if (i > 3) {
-                        break;
+            if (cruentPlan.getClassNameList() != null && !cruentPlan.getClassNameList().isEmpty()) {
+                List<Benefit> benefits = cruentPlan.getClassNameList().get(0).getBenefitList();
+                observable.set(0, cruentPlan.getPlanName().trim());
+                mView.removeLinView();
+                if (benefits != null && benefits.size() > 0) {
+                    for (int i = 0; i < benefits.size(); i++) {
+                        if (i > 3) {
+                            break;
+                        }
+                        Benefit benefit = benefits.get(i);
+                        mView.addLinView(benefit);
                     }
-                    Benefit benefit = benefits.get(i);
-                    mView.addLinView(benefit);
                 }
             }
         }

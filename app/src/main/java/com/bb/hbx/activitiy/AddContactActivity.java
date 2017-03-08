@@ -17,18 +17,19 @@ import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
+import com.bb.hbx.base.City;
+import com.bb.hbx.base.County;
+import com.bb.hbx.base.Province;
+import com.bb.hbx.base.Street;
 import com.bb.hbx.bean.AddInsured;
 import com.bb.hbx.bean.SingleCustomBean;
 import com.bb.hbx.interfaces.LoginTextWatcher;
 import com.bb.hbx.utils.GetPhoneContactsUtil;
-import com.smarttop.library.bean.City;
-import com.smarttop.library.bean.County;
-import com.smarttop.library.bean.Province;
-import com.smarttop.library.bean.Street;
-import com.smarttop.library.utils.LogUtil;
-import com.smarttop.library.widget.AddressSelector;
-import com.smarttop.library.widget.BottomDialog;
-import com.smarttop.library.widget.OnAddressSelectedListener;
+import com.bb.hbx.utils.LogUtil;
+import com.bb.hbx.widget.adress.AddressSelector;
+import com.bb.hbx.widget.adress.BottomDialog;
+import com.bb.hbx.widget.adress.OnAddressSelectedListener;
+
 
 import butterknife.BindView;
 import retrofit2.Call;

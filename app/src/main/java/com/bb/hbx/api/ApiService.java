@@ -26,6 +26,7 @@ import com.bb.hbx.bean.Hotkey;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.OssBean;
+import com.bb.hbx.bean.Output_AreaBean;
 import com.bb.hbx.bean.PayDetail;
 import com.bb.hbx.bean.PaySign;
 import com.bb.hbx.bean.ProdectDetalRequest;
@@ -336,12 +337,12 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=getMsgs&type=post")
     Call<Result_Api<MsgInfo>> getMsgsUser(@Field("userId") String userId, @Field("msgType") String msgType,
-                                      @Field("sts") String sts, @Field("pageIndex") String pageIndex);
+                                          @Field("sts") String sts, @Field("pageIndex") String pageIndex);
 
     //阅读消息
     @FormUrlEncoded
     @POST("api.do?method=readMsg&type=post")
-    Call<Result_Api> readMsg(@Field("userId") String userId, @Field("msgType") String msgType,@Field("msgId") String msgId);
+    Call<Result_Api> readMsg(@Field("userId") String userId, @Field("msgType") String msgType, @Field("msgId") String msgId);
 
     //获取消息列表
     @FormUrlEncoded
@@ -424,7 +425,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=getTradeDetail&type=post")
     Call<Result_Api<TradeDetail>> getTradeDetail(@Field("userId") String userId, @Field("tradeId") String tradeId,
-                                                 @Field("detailId") String detailId,@Field("classType") String classType);
+                                                 @Field("detailId") String detailId, @Field("classType") String classType);
 
     //6.1.6.获取支付签名信息
 
@@ -441,4 +442,11 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=updateUpgradeB&type=post")
     Call<Result_Api> updateUpgradeB(@Field("userId") String userId);
+
+    //用户升B
+    @FormUrlEncoded
+    @POST("api.do?method=getAvaCarAreas&type=post")
+    Call<Result_Api<Output_AreaBean>> getAvaCarAreas(@Field("companyCode") String companyCode, @Field("areaCode") String areaCode);
+
+
 }

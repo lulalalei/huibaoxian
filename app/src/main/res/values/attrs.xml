@@ -123,6 +123,17 @@
         <attr name="textAppearance" format="reference"></attr>
     </declare-styleable>
 
+    <declare-styleable name="ItemLayout3">
+        <attr name="left_name3" format="string"></attr>
+        <attr name="text3" format="string"></attr>
+        <attr name="center_text3" format="string"></attr>
+        <attr name="center_visible" format="boolean"></attr>
+        <attr name="right_icon3" format="reference"></attr>
+        <attr name="right_butIcon3" format="reference"></attr>
+        <attr name="textAppearance3" format="reference"></attr>
+        <attr name="isline" format="boolean"></attr>
+    </declare-styleable>
+
     <attr name="textSize" format="dimension" />
 
     <declare-styleable name="IndexBar">

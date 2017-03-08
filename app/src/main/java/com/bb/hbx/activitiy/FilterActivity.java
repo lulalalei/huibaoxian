@@ -26,7 +26,8 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Administrator on 2017/2/14.
+ * Created by fancl on 2017/2/14.
+ * 筛选
  */
 
 public class FilterActivity extends BaseActivity<FilterPresenter, FilterModel> implements FilterContract.View {

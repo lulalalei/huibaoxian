@@ -76,7 +76,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
     @Override
     public int getCount() {
-        return Integer.MAX_VALUE;
+        return mData.size();
     }
 
     @Override
@@ -91,22 +91,11 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
                 .inflate(R.layout.layout_insure_add, container, false);
         container.addView(view);
 
-
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
 
-        if (position==pager.getCurrentItem()) {
-            cardView.animate().scaleY(1);
-            cardView.animate().scaleX(1);
-            cardView.setAlpha(1f);
-            cardView.findViewById(R.id.lin_all).setAlpha(1f);
-        } else {
-            cardView.animate().scaleY(1 - 0.1f);
-            cardView.animate().scaleX(1 - 0.1f);
-            cardView.setAlpha(0.6f);
-            cardView.findViewById(R.id.lin_all).setAlpha(0f);
-        }
-//        CircleImageView mIcon=(CircleImageView)view.findViewById(R.id.profile_image);
-//        TextView mName= (TextView) view.findViewById(R.id.name);
+
+
+
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
         }
@@ -128,7 +117,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
-        //mViews.set(position % mData.size(), null);
+
     }
 
     OnItemClickListener mOnItemClickListener;
