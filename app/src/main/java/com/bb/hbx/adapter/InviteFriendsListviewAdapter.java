@@ -7,25 +7,34 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
+import com.bb.hbx.bean.IniviteFriendsBean.UserAccountDetailRecordBean;
+import com.bb.hbx.utils.GlideUtil;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 作者：Created by Administrator on 2017/3/7 20:22
  * 邮箱：
- * 描述：
+ * 描述：邀请好友listview的适配器
  */
 public class InviteFriendsListviewAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
+    private List<UserAccountDetailRecordBean> dataList;
+    private int listNum;
 
-    public InviteFriendsListviewAdapter(Context context) {
+    public InviteFriendsListviewAdapter(Context context,List<UserAccountDetailRecordBean> dataList) {
         mInflater = LayoutInflater.from(context);
+        this.dataList = dataList;
+        listNum = dataList.size();
     }
 
     @Override
     public int getCount() {
-        return 10;
+        return listNum;
     }
 
     @Override
@@ -53,9 +62,11 @@ public class InviteFriendsListviewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.serialNumber.setText("#" + (position + 4));
-        holder.item_civ_icon.setImageResource(R.drawable.defult6);
-        holder.item_tv_name.setText("周杰伦");
-        holder.item_tv_money.setText("1800");
+        GlideUtil glideUtil = GlideUtil.getInstance();
+        glideUtil.loadImage(MyApplication.getAppContext(),holder.item_civ_icon,dataList.get(position).getUserLogo(),true);
+//        holder.item_civ_icon.setImageResource(R.drawable.defult6);
+        holder.item_tv_name.setText(dataList.get(position).getUserNickname());
+        holder.item_tv_money.setText(dataList.get(position).getAcctSum() + "");
         return convertView;
     }
 
@@ -68,5 +79,4 @@ public class InviteFriendsListviewAdapter extends BaseAdapter {
         public TextView item_tv_name;                   //姓名
         public TextView item_tv_money;                  //钱
     }
-
 }

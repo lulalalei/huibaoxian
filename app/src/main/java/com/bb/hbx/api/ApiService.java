@@ -23,6 +23,7 @@ import com.bb.hbx.bean.GetTradesBean;
 import com.bb.hbx.bean.GetUserCouponsListBean;
 import com.bb.hbx.bean.HomePageInfo;
 import com.bb.hbx.bean.Hotkey;
+import com.bb.hbx.bean.IniviteFriendsBean;
 import com.bb.hbx.bean.MessageCodeBean;
 import com.bb.hbx.bean.MsgInfo;
 import com.bb.hbx.bean.OssBean;
@@ -448,5 +449,8 @@ public interface ApiService {
     @POST("api.do?method=getAvaCarAreas&type=post")
     Call<Result_Api<Output_AreaBean>> getAvaCarAreas(@Field("companyCode") String companyCode, @Field("areaCode") String areaCode);
 
-
+    //邀请好友
+    @FormUrlEncoded
+    @POST("api.do?method=inviteFriend&type=post")
+    Call<Result_Api<IniviteFriendsBean>> getInviteFriend(@Field("userId") String userId);
 }
