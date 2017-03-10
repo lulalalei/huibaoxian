@@ -485,6 +485,12 @@ public class ProductDetailActivity extends BaseActivity<ProductDetailPresenter, 
     }
 
     @Override
+    public void setil_up1ckInvisible() {
+        il_up1.setButtonGone();
+    }
+
+
+    @Override
     public void setil_up1Textvalue(String value) {
         il_up1.setText(value);
     }
