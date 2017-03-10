@@ -239,30 +239,30 @@ public class ProductDetailPresenter extends ProductDetailContract.Presenter impl
             return;
         }
 
-//        if (mView.getTBRIDEtValue() == null || mView.getTBRIDEtValue().length() > 0) {
-//            mView.showMsg("投保人的证件号码不能为空");
-//            return;
-//        }
-//
-//        if (mView.getBBRIDEtValue() == null || mView.getBBRIDEtValue().length() > 0) {
-//            mView.showMsg("被保人的证件号码不能为空");
-//            return;
-//        }
-//
-//        if (mView.getTBRNameEtValue() == null || mView.getTBRNameEtValue().isEmpty()) {
-//            mView.showMsg("投保人的名字不能为空");
-//            return;
-//        }
-//
-//        if (mView.getTBRMobileEtValue() == null || mView.getTBRMobileEtValue().isEmpty()) {
-//            mView.showMsg("投保人的电话不能为空");
-//            return;
-//        }
-//
-//        if (mView.getBBRNameEtValue() == null || mView.getBBRNameEtValue().isEmpty()) {
-//            mView.showMsg("被保人的名字不能为空");
-//            return;
-//        }
+        if (mView.getTBRIDEtValue() == null || mView.getTBRIDEtValue().length() > 0) {
+            mView.showMsg("投保人的证件号码不能为空");
+            return;
+        }
+
+        if (mView.getBBRIDEtValue() == null || mView.getBBRIDEtValue().length() > 0) {
+            mView.showMsg("被保人的证件号码不能为空");
+            return;
+        }
+
+        if (mView.getTBRNameEtValue() == null || mView.getTBRNameEtValue().isEmpty()) {
+            mView.showMsg("投保人的名字不能为空");
+            return;
+        }
+
+        if (mView.getTBRMobileEtValue() == null || mView.getTBRMobileEtValue().isEmpty()) {
+            mView.showMsg("投保人的电话不能为空");
+            return;
+        }
+
+        if (mView.getBBRNameEtValue() == null || mView.getBBRNameEtValue().isEmpty()) {
+            mView.showMsg("被保人的名字不能为空");
+            return;
+        }
 
         ProdectDetalRequest request = new ProdectDetalRequest();
         request.setUserId(MyApplication.user.getUserId());
