@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
-import com.bb.hbx.activitiy.CarInformationActivity;
 
-import com.bb.hbx.activitiy.InsurancePlanActivity;
 import com.bb.hbx.activitiy.SearchActivity;
 import com.bb.hbx.base.BaseFragment;
 import com.bb.hbx.base.m.HomeModle;

@@ -1,11 +1,14 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.api.ApiService;
 import com.bb.hbx.api.PostCallback;
@@ -13,6 +16,7 @@ import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseActivity;
 import com.bb.hbx.bean.MessageCodeBean;
+import com.bb.hbx.utils.CheckPhoneNumUtils;
 import com.bb.hbx.widget.CountDownTextView;
 
 import butterknife.BindView;
@@ -69,9 +73,16 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.getcode_tv:
-                getcode_tv.startTime();
+                newPhoneNum = phone_et.getText().toString().trim();
+                if (newPhoneNum != null && isPhoneNum(newPhoneNum)) {
+                    getSmsCode();
+                    getcode_tv.startTime();
+                } else {
+                    Toast.makeText(getApplicationContext(),"您输入的手机号码错误，请重新输入!",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.verify_tv:
+                pushAndCheckVerify();
                 showTip("确定");
                 break;
             default:
@@ -80,13 +91,36 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
     }
 
     /**
+     * 判断输入的是否是手机号码
+     *
+     * @param phoneNum
+     * @return
+     */
+    public boolean isPhoneNum(String phoneNum) {
+        return CheckPhoneNumUtils.isMobile(phoneNum);
+    }
+
+    /**
      * 提交并验证新老验证码
      */
     public void pushAndCheckVerify() {
-        String newPhone = phone_et.getText().toString().trim();
         String newSmsCode = code_et.getText().toString().trim();
-        if (newPhone != null && newSmsCode != null) {
+        if (newPhoneNum != null && newSmsCode != null) {
+            ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+            Call call = service.updateMobile(MyApplication.user.getUserId(), oldSmsCode, null, newPhoneNum, newSmsCode);
+            call.enqueue(new PostCallback() {
+                @Override
+                public void successCallback(Result_Api api) {
+                    if (api.getOutput() != null) {
+                        Log.i("ZXY", "BindPhoneActivity.successCallback.api:" + api.getOutput().toString());
+                    }
+                }
 
+                @Override
+                public void failCallback() {
+
+                }
+            });
         }
     }
 
@@ -96,7 +130,7 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
     public void getSmsCode() {
 
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call = service.getVerifyCode("1", newPhoneNum, "13");
+        Call call = service.getVerifyCode("1", newPhoneNum, "15");
         call.enqueue(new PostCallback() {
             @Override
             public void successCallback(Result_Api api) {
