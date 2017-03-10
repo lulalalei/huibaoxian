@@ -455,12 +455,21 @@ public interface ApiService {
     @POST("api.do?method=inviteFriend&type=post")
     Call<Result_Api<IniviteFriendsBean>> getInviteFriend(@Field("userId") String userId);
 
-    //
+    //连连支付
     @FormUrlEncoded
     @POST("api.do?method=getPaymentInfo&type=post")
     Call<Result_Api<PayOrder>> getPaymentInfo(@Field("paymentId") String paymentId,
                                               @Field("userId") String userId,
                                               @Field("orderNo") String orderNo);
+
+    //修改手机号
+    @FormUrlEncoded
+    @POST("api.do?method=updateMobile&type=post")
+    Call<Result_Api> updateMobile(@Field("userId") String userId,
+                                  @Field("smsCode") String smsCode,
+                                  @Field("loginPwd") String loginPwd,
+                                  @Field("mobile") String mobile,
+                                  @Field("smsCodeNew") String smsCodeNew);
 
 
 }
