@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.base.BaseActivity;
 
@@ -15,8 +16,10 @@ public class CheckIdentifyUnderPwdActivity extends BaseActivity implements View.
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
+
     @BindView(R.id.pwd_et)
     EditText pwd_et;
+
     @BindView(R.id.verify_tv)
     TextView verify_tv;
     @Override
@@ -48,8 +51,14 @@ public class CheckIdentifyUnderPwdActivity extends BaseActivity implements View.
                 finish();
                 break;
             case R.id.verify_tv:
-                Intent intent = new Intent(this, BindPhoneActivity.class);
-                startActivity(intent);
+                String passWord = MyApplication.user.getLoginPwd();
+                String pwd = pwd_et.getText().toString().trim();
+
+                if (pwd != null ) {
+                    Intent intent = new Intent(this, BindPhoneActivity.class);
+                    intent.putExtra("pwd",pwd);
+                    startActivity(intent);
+                }
                 break;
             default:
                 break;

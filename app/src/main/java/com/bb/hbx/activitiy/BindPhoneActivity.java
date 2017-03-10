@@ -23,9 +23,9 @@ import butterknife.BindView;
 import retrofit2.Call;
 
 public class BindPhoneActivity extends BaseActivity implements View.OnClickListener {
-
-    private String oldSmsCode;          //老手机的验证码(用于使用手机验证码的方式修改绑定手机)
-    private String newPhoneNum;         //新的手机号
+    private String pwd = null;               //登陆密码(用于通过登陆密码的方式修改绑定手机)
+    private String oldSmsCode = null;           //老手机的验证码(用于使用手机验证码的方式修改绑定手机)
+    private String newPhoneNum;                 //新的手机号
     private MessageCodeBean codeBean;
 
     @BindView(R.id.back_layout)
@@ -52,6 +52,7 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
     public void initView() {
         Intent intent = getIntent();
         oldSmsCode = intent.getStringExtra("oldSmsCode");
+        pwd = intent.getStringExtra("pwd");
     }
 
     @Override
@@ -107,7 +108,7 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
         String newSmsCode = code_et.getText().toString().trim();
         if (newPhoneNum != null && newSmsCode != null) {
             ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-            Call call = service.updateMobile(MyApplication.user.getUserId(), oldSmsCode, null, newPhoneNum, newSmsCode);
+            Call call = service.updateMobile(MyApplication.user.getUserId(), oldSmsCode, pwd, newPhoneNum, newSmsCode);
             call.enqueue(new PostCallback() {
                 @Override
                 public void successCallback(Result_Api api) {

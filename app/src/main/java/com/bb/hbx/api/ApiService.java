@@ -471,5 +471,8 @@ public interface ApiService {
                                   @Field("mobile") String mobile,
                                   @Field("smsCodeNew") String smsCodeNew);
 
-
+    //赠险产品
+    @FormUrlEncoded
+    @POST("api.do?method=presentProduct&type=post")
+    Call<Result_Api<String>> getPresentProduct(@Field("userId") String userId);
 }

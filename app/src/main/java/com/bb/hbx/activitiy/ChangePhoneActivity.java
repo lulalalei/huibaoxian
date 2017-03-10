@@ -1,6 +1,7 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -27,14 +28,19 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
+
     @BindView(R.id.code_et)
     EditText code_et;
+
     @BindView(R.id.getcode_tv)
     CountDownTextView getcode_tv;
+
     @BindView(R.id.verify_tv)
     TextView verify_tv;
+
     @BindView(R.id.info_tv)
     TextView info_tv;
+
     @BindView(R.id.phone_tv)
     TextView phone_tv;
 
@@ -47,6 +53,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
     public void initView() {
         oldPhoneNum = MyApplication.user.getMobile();
         phone_tv.setText(oldPhoneNum);
+        Log.d("mima--------:",MyApplication.user.getLoginPwd());
     }
 
     @Override
