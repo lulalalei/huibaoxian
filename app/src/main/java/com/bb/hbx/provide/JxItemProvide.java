@@ -18,6 +18,7 @@ import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.bean.Special;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.GlideUtil;
+import com.bb.hbx.utils.Utils;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
 import butterknife.BindView;
@@ -91,7 +92,7 @@ public class JxItemProvide extends ItemViewProvider<Special, JxItemProvide.ViewH
 
                     tv_name.setText(bean.getProductName());
                     tv_detail.setText(bean.getProductIntro());
-                    tv_price.setText(context.getString(R.string.howPrice, bean.getMinPremium()));
+                    tv_price.setText(context.getString(R.string.howPrice, Utils.fromFenToYuan(bean.getMinPremium())));
                     tv_added.setText(bean.getCommisionValue1());
 
                     if (MyApplication.user.getIsBClient()) {
