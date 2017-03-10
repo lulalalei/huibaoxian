@@ -63,7 +63,7 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
 
     public void onStart() {
         super.onStart();
-        Log.i("fancl","111");
+
     }
 
 

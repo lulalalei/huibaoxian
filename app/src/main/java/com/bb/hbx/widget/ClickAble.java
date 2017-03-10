@@ -32,7 +32,7 @@ public class ClickAble extends ClickableSpan {
 //            Bundle bundle=new Bundle();
 //            bundle.putString("","");
 //            AppManager.getInstance().showActivity();
-        Log.i("fancl", index + "---");
+
 
 
     }

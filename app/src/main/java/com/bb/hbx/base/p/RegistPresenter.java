@@ -18,6 +18,8 @@ public class RegistPresenter extends RegistContract.Presenter {
 
     private PostCallback postCallback;
 
+    private final static String TAG=RegistPresenter.class.getSimpleName();
+
 
     @Override
     public void onAttached() {
@@ -32,7 +34,7 @@ public class RegistPresenter extends RegistContract.Presenter {
             public void successCallback(Result_Api api) {
                 if (api.getOutput() != null) {
                     MessageCodeBean mcBean = (MessageCodeBean) api.getOutput();
-                    Log.i("fancl",mcBean.getSmsCode());
+                    Log.i(TAG,mcBean.getSmsCode());
                     return;
                 }
 

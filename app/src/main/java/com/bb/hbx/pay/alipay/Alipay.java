@@ -31,6 +31,8 @@ public class Alipay implements Pay<PaySign> {
 
     private static final int SDK_PAY_FLAG = 1;
 
+    private final static String TAG = Alipay.class.getSimpleName();
+
     ReturnTask task;
 
     @SuppressLint("HandlerLeak")
@@ -51,18 +53,18 @@ public class Alipay implements Pay<PaySign> {
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
                         //Toast.makeText(PayDemoActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                        Log.i("fancl", "支付成功");
+                        Log.i(TAG, "支付成功");
                     } else {
                         // 判断resultStatus 为非"9000"则代表可能支付失败
                         // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
                         if (TextUtils.equals(resultStatus, "8000")) {
                             // Toast.makeText(PayDemoActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
-                            Log.i("fancl", "支付结果确认中");
+                            Log.i(TAG, "支付结果确认中");
 
                         } else {
                             // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
                             //Toast.makeText(PayDemoActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-                            Log.i("fancl", "支付失败" + "resultStatus:" + resultStatus);
+                            Log.i(TAG, "支付失败" + "resultStatus:" + resultStatus);
 
                             task.execute();
                         }
@@ -140,7 +142,7 @@ public class Alipay implements Pay<PaySign> {
 
 
         orderInfo += "&sign=\"" + paySign.getSign() + "\"&" + getSignType();
-        Log.i("fancl", "orderInfo:" + orderInfo);
+        Log.i(TAG, "orderInfo:" + orderInfo);
         return orderInfo;
     }
 
@@ -173,14 +175,14 @@ public class Alipay implements Pay<PaySign> {
             builder.append("total_fee=" + Utils.fromYuanToFen2(paySign.getTotalfee()) + "&");
             builder.append("trade_status=" + "TRADE_SUCCESS");
 
-            Log.i("fancl", "jsonObject:" + builder.toString());
+            Log.i(TAG, "jsonObject:" + builder.toString());
             result = GenApiHashUrl.getInstance().Http_Post(builder.toString());
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
 
 
-            Log.i("fancl", "result:" + result);
+            Log.i(TAG, "result:" + result);
             return result;
 
         }

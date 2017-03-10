@@ -21,6 +21,8 @@ import retrofit2.Response;
  */
 public class STSGetter extends OSSFederationCredentialProvider {
 
+    private final static String TAG=STSGetter.class.getSimpleName();
+
     private String endpoint="";
 
     public String getEndpoint() {
@@ -53,7 +55,7 @@ public class STSGetter extends OSSFederationCredentialProvider {
             String securityToken = ossBean.getSecurityToken();
             String expiration = ossBean.getExpiration();
             endpoint = ossBean.getEndpoint();
-             Log.i("fancl",accessKeyId+"==="+accessKeySecret+"==="+securityToken+"==="+expiration+"==="+endpoint);
+             Log.i(TAG,accessKeyId+"==="+accessKeySecret+"==="+securityToken+"==="+expiration+"==="+endpoint);
             return new OSSFederationToken(accessKeyId, accessKeySecret, securityToken, expiration);
 
     }

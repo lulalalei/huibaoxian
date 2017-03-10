@@ -155,7 +155,7 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
         // This might be null if a fragment is being used
         // and the views weren't created yet
 
-        Log.i("fancl", "realOffset:" + realOffset);
+
         if (currentCard != null) {
             //当设置可以缩放 按指定缩放设置
             if (mScalingEnabled) {

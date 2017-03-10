@@ -68,6 +68,9 @@ public interface ProductDetailContract {
 
         void setil_up1ckickenable(boolean enable);//是否可点击
 
+        void setil_up1ckInvisible();//隐藏
+
+
         void setil_up1Textvalue(String value);//设置值
 
         void setEntryView(Entry entry, int index);//取得entry 动态加载布局

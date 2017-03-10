@@ -15,12 +15,13 @@ import com.bb.hbx.utils.AppManager;
 import org.json.JSONObject;
 
 
-
 /**
  * Created by Administrator on 2017/3/9.
  */
 
 public class LianlianPay implements Pay<PayOrder> {
+
+    private final static String TAG = LianlianPay.class.getSimpleName();
 
 
     public Handler handler = new Handler() {
@@ -32,7 +33,8 @@ public class LianlianPay implements Pay<PayOrder> {
                     JSONObject objContent = BaseHelper.string2JSON(strRet);
                     String retCode = objContent.optString("ret_code");
                     String retMsg = objContent.optString("ret_msg");
-                    Log.i("fancl", "objContent=" + objContent.toString());
+
+                    Log.i(TAG, "objContent=" + objContent.toString());
 
                     // 成功
                     if (Constants.RET_CODE_SUCCESS.equals(retCode)) {

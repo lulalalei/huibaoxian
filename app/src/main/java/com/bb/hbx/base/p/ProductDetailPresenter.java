@@ -145,11 +145,13 @@ public class ProductDetailPresenter extends ProductDetailContract.Presenter impl
                         } else {
                             perids = new String[]{perid};
                             mView.setil_up1ckickenable(false);
+                            mView.setil_up1ckInvisible();
                         }
                     } else {
                         perid = "";
                         perids = new String[]{perid};
                         mView.setil_up1ckickenable(false);
+                        mView.setil_up1ckInvisible();
                     }
                     if (perids[0].length() > 2 && perids[0].indexOf("_") > 1) {
                         mView.setil_up1Textvalue(perids[0].substring(0, perids[0].indexOf("_")));
