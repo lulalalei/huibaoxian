@@ -22,19 +22,22 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class PresentInsuActivity extends BaseActivity implements View.OnClickListener{
+public class PresentInsuActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.topbar_layout)
     RelativeLayout topbar_layout;
+
     @BindView(R.id.tablayout)
     TabLayout tablayout;
+
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
-    ArrayList<PresentInsuContentFragment> fragmentList=new ArrayList<>();
-    String [] title=new String[]{"可领取","已使用","已过期"};
+    ArrayList<PresentInsuContentFragment> fragmentList = new ArrayList<>();
+    String[] title = new String[]{"可领取", "已使用", "已过期"};
 
     MyPresentInsuAdapter adapter;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_present_insu;
@@ -52,13 +55,13 @@ public class PresentInsuActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initdata() {
-        Can.presentInsuFragmentList=Can.getFragmentListInPresentInsu();
+        Can.presentInsuFragmentList = Can.getFragmentListInPresentInsu();
         tablayout.setTabMode(TabLayout.MODE_FIXED);
-        tablayout.setTabTextColors(Color.GRAY,Color.BLACK);
+        tablayout.setTabTextColors(Color.GRAY, Color.BLACK);
         for (int i = 0; i < title.length; i++) {
             PresentInsuContentFragment fragment = new PresentInsuContentFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt("position",i);
+            bundle.putInt("position", i);
             fragment.setArguments(bundle);
             fragmentList.add(fragment);
         }
@@ -66,13 +69,12 @@ public class PresentInsuActivity extends BaseActivity implements View.OnClickLis
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         tablayout.setupWithViewPager(viewPager);
-        setIndicator(this,tablayout,28,28);
+        setIndicator(this, tablayout, 28, 28);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.topbar_layout:
                 finish();
                 break;
