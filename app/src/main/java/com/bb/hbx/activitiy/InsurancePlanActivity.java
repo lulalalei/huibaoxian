@@ -57,8 +57,6 @@ public class InsurancePlanActivity extends BaseActivity {
         mCardShadowTransformer.setScale(0.1f,true);
 
         vp_tb.setCurrentItem(3);
-
-
     }
 
     @Override
