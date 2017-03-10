@@ -16,6 +16,7 @@ import com.bb.hbx.activitiy.ProductDetailActivity;
 import com.bb.hbx.bean.ProductListBean;
 import com.bb.hbx.utils.AppManager;
 import com.bb.hbx.utils.GlideUtil;
+import com.bb.hbx.utils.Utils;
 import com.bb.hbx.widget.multitype.ItemViewProvider;
 
 import butterknife.BindView;
@@ -88,7 +89,7 @@ public class BKchildItemProvide extends ItemViewProvider<ProductListBean, BKchil
             //Constants.CLIENTUSER
             tv_name.setText(bKchildItem.getProductName());
             tv_detail.setText(bKchildItem.getProductIntro());
-            tv_price_start.setText(context.getString(R.string.howPrice, bKchildItem.getMinPremium()));
+            tv_price_start.setText(context.getString(R.string.howPrice, Utils.fromFenToYuan(bKchildItem.getMinPremium())));
             tv_added.setText(bKchildItem.getCommisionValue1());
             if (MyApplication.user.getIsBClient()) {
                 tv_added.setVisibility(View.VISIBLE);
