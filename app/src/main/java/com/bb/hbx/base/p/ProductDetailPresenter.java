@@ -29,6 +29,9 @@ import java.util.Observer;
 
 
 import static android.R.attr.value;
+import static com.bb.hbx.R.id.il_beinsurer2;
+import static com.bb.hbx.R.id.il_insurer1;
+import static com.bb.hbx.R.id.il_insurer4;
 import static com.bb.hbx.utils.Constants.beinsurer1_listkey;
 import static com.bb.hbx.utils.Constants.beinsurer1_listvalue;
 import static com.bb.hbx.utils.Constants.idType_keys;
@@ -133,9 +136,16 @@ public class ProductDetailPresenter extends ProductDetailContract.Presenter impl
                         mView.setPlanView(detail.getPlanList());
                     }
 
+
                     String perid = detail.getGuaranteePeriod();
-                    if (perid != null && perid.indexOf(";") > -1) {
-                        perids = perid.split(";");
+
+                    if (perid != null) {
+                        if (perid.indexOf(";") > -1) {
+                            perids = perid.split(";");
+                        } else {
+                            perids = new String[]{perid};
+                            mView.setil_up1ckickenable(false);
+                        }
                     } else {
                         perid = "";
                         perids = new String[]{perid};
@@ -269,20 +279,16 @@ public class ProductDetailPresenter extends ProductDetailContract.Presenter impl
 
         //------------------------------------------------------------
 
-        //insured.setIdNo(il_beinsurer4.getEtValue());
-        insured.setIdNo("330621198903134673");
+        insured.setIdNo(mView.getBBRIDEtValue());
         insured.setIdType(beinsureridType);
-        //insured.setInsuredName(il_beinsurer2.getEtValue());
-        insured.setInsuredName("123");
+        insured.setInsuredName(mView.getBBRNameEtValue());
         insuredList.add(insured);
         request.setInsuredList(insuredList);
-//      request.setIdNo(il_insurer3.getEtValue());
-//      request.setMobile(il_insurer4.getEtValue());
-        request.setIdNo("330621198903134674");
-        request.setMobile("13656714459");
+        request.setMobile(mView.getTBRMobileEtValue());
+        request.setIdNo(mView.getTBRIDEtValue());
         request.setIdType(insureridType);
-        //request.setApplicant(il_insurer1.getEtValue());
-        request.setApplicant("456");
+        request.setApplicant(mView.getTBRNameEtValue());
+        request.setClassType("2");
         applyTrade(request);
 
     }
