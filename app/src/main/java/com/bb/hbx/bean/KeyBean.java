@@ -26,7 +26,10 @@ public class KeyBean extends ArrayList<String> {
                 builder.append(this.get(0) + ";");
             } else if (this.size() == 2) {
                 builder.append(this.get(0) + ";");
-                builder.append(this.get(1) + ";");
+                if (this.get(1).indexOf("_") > -1) {
+                    builder.append(this.get(1).substring(0, this.get(1).indexOf("_")) + ";");
+                } else
+                    builder.append(this.get(1) + ";");
             } else {
                 for (int i = 0; i < this.size(); i++) {
                     if (i == 0) {

@@ -54,6 +54,8 @@ public class ProdectDetalRequest {
 
     private String applicant="";//投保人姓名
 
+    private String classType="";//类型
+
     private int idType;
 
     private List<Insured> insuredList = new ArrayList<>();
@@ -241,5 +243,13 @@ public class ProdectDetalRequest {
 
     public void setApplicant(String applicant) {
         this.applicant = applicant;
+    }
+
+    public String getClassType() {
+        return classType;
+    }
+
+    public void setClassType(String classType) {
+        this.classType = classType;
     }
 }
