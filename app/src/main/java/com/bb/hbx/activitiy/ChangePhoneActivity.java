@@ -1,7 +1,6 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -24,6 +23,7 @@ import retrofit2.Call;
 public class ChangePhoneActivity extends BaseActivity implements View.OnClickListener{
 
     private String oldPhoneNum;
+    private MessageCodeBean codeBean;
 
     @BindView(R.id.back_layout)
     RelativeLayout back_layout;
@@ -63,7 +63,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         switch (v.getId())
         {
             case R.id.back_layout:
@@ -79,30 +79,42 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
             case R.id.verify_tv:
                 //showTip("确定");
                 String verifyCode = code_et.getText().toString().trim();
-                if (oldPhoneNum != null && verifyCode != null) {
-                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-                    Call call = service.updateMobile(MyApplication.user.getUserId(),verifyCode,null,null,null);
-                    call.enqueue(new PostCallback() {
-                        @Override
-                        public void successCallback(Result_Api api) {
-                            boolean isChecked = false;
-                            if (api.getOutput() != null) {
-                                isChecked = (boolean) api.getOutput();
-                            }
-                            if (isChecked) {
-                                intent.setClass(MyApplication.getAppContext(),BindPhoneActivity.class);
-                                startActivity(intent);
-                            }else {
-                                Toast.makeText(getApplicationContext(),"验证失败！",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void failCallback() {
-
-                        }
-                    });
+                String oldSmsCode;
+                if (codeBean != null) {
+                    oldSmsCode = codeBean.getSmsCode();
+                    if (verifyCode != null && verifyCode.equals(oldSmsCode)) {
+                        intent.putExtra("oldSmsCode",oldSmsCode);
+                        intent.setClass(MyApplication.getAppContext(),BindPhoneActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(),"验证码错误！",Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+//                if (oldPhoneNum != null && verifyCode != null) {
+//                    ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+//                    Call call = service.updateMobile(MyApplication.user.getUserId(),verifyCode,null,null,null);
+//                    call.enqueue(new PostCallback() {
+//                        @Override
+//                        public void successCallback(Result_Api api) {
+//                            boolean isChecked = false;
+//                            if (api.getOutput() != null) {
+//                                isChecked = (boolean) api.getOutput();
+//                            }
+//                            if (isChecked) {
+//                                intent.setClass(MyApplication.getAppContext(),BindPhoneActivity.class);
+//                                startActivity(intent);
+//                            }else {
+//                                Toast.makeText(getApplicationContext(),"验证失败！",Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void failCallback() {
+//
+//                        }
+//                    });
+//                }
 
                 break;
             case R.id.info_tv:
@@ -115,6 +127,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+
     /**
      * 获取短信验证码 老手机号，验证类型 13
      */
@@ -126,11 +139,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void successCallback(Result_Api api) {
                 if (api.getOutput() instanceof MessageCodeBean) {
-                    MessageCodeBean codeBean = (MessageCodeBean) api.getOutput();
-                    if (codeBean != null) {
-                        Log.d("SMS","-----------------" + codeBean.getSmsCode());
-                        Log.d("SMS","-----------------" + codeBean.getImgURL());
-                    }
+                    codeBean = (MessageCodeBean) api.getOutput();
                 }
             }
 

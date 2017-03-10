@@ -157,6 +157,44 @@ public class RecommendRewardActivity extends BaseActivity implements View.OnClic
      */
     public void setTopThreeView(List<UserAccountDetailRecordBean> list) {
         GlideUtil glideUtil = GlideUtil.getInstance();
+        switch(list.size()) {
+            case 1:
+                if (list.get(0) != null) {
+                    glideUtil.loadImage(mContext, civ_person1, list.get(0).getUserLogo(), true);
+                    tv_name_01.setText(list.get(0).getUserNickname());
+                    tv_money01.setText(list.get(0).getAcctSum() + "");
+                }
+                break;
+            case 2:
+                if (list.get(0) != null) {
+                    glideUtil.loadImage(mContext, civ_person1, list.get(0).getUserLogo(), true);
+                    tv_name_01.setText(list.get(0).getUserNickname());
+                    tv_money01.setText(list.get(0).getAcctSum() + "");
+                }
+                if (list.get(1) != null) {
+                    glideUtil.loadImage(mContext, civ_person2, list.get(1).getUserLogo(), true);
+                    tv_name_02.setText(list.get(1).getUserNickname());
+                    tv_money02.setText(list.get(1).getAcctSum() + "");
+                }
+                break;
+            default:
+                if (list.get(0) != null) {
+                    glideUtil.loadImage(mContext, civ_person1, list.get(0).getUserLogo(), true);
+                    tv_name_01.setText(list.get(0).getUserNickname());
+                    tv_money01.setText(list.get(0).getAcctSum() + "");
+                }
+                if (list.get(1) != null) {
+                    glideUtil.loadImage(mContext, civ_person2, list.get(1).getUserLogo(), true);
+                    tv_name_02.setText(list.get(1).getUserNickname());
+                    tv_money02.setText(list.get(1).getAcctSum() + "");
+                }
+                if (list.get(2) != null) {
+                    glideUtil.loadImage(mContext, civ_person3, list.get(2).getUserLogo(), true);
+                    tv_name_03.setText(list.get(2).getUserNickname());
+                    tv_money03.setText(list.get(2).getAcctSum() + "");
+                }
+                break;
+        }
         if (list.get(0) != null) {
             glideUtil.loadImage(mContext, civ_person1, list.get(0).getUserLogo(), true);
             tv_name_01.setText(list.get(0).getUserNickname());

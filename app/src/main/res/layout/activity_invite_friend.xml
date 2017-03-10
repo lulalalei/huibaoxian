@@ -42,7 +42,7 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <com.bb.hbx.widget.MyScrollView1
         android:id="@+id/sv_invitefriends"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -387,5 +387,5 @@
 
             </ListView>
         </LinearLayout>
-    </ScrollView>
+    </com.bb.hbx.widget.MyScrollView1>
 </RelativeLayout>
