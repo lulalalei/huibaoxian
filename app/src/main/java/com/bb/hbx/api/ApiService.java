@@ -48,6 +48,7 @@ import com.bb.hbx.bean.User;
 import com.bb.hbx.bean.UserInfo;
 import com.bb.hbx.bean.UserRegist;
 import com.bb.hbx.bean.VersionInfo;
+import com.bb.hbx.pay.llianlianpay.utils.PayOrder;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -453,4 +454,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api.do?method=inviteFriend&type=post")
     Call<Result_Api<IniviteFriendsBean>> getInviteFriend(@Field("userId") String userId);
+
+    //
+    @FormUrlEncoded
+    @POST("api.do?method=getPaymentInfo&type=post")
+    Call<Result_Api<PayOrder>> getPaymentInfo(@Field("paymentId") String paymentId,
+                                              @Field("userId") String userId,
+                                              @Field("orderNo") String orderNo);
+
+
 }

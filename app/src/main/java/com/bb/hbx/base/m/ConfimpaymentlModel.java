@@ -36,4 +36,10 @@ public class ConfimpaymentlModel implements ConfimpaymentContract.Model {
         Call call = service.verifyPayPwd(userId, payPwd);
         call.enqueue(callback);
     }
+
+    @Override
+    public void getPaymentInfo(String paymentId, String userId, String orderNo, Callback callback) {
+        Call call = service.getPaymentInfo(paymentId, userId, orderNo);
+        call.enqueue(callback);
+    }
 }

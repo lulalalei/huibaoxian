@@ -4,16 +4,13 @@ import com.bb.hbx.MyApplication;
 import com.bb.hbx.api.PostCallback;
 import com.bb.hbx.api.Result_Api;
 import com.bb.hbx.base.v.ConfimpaymentContract;
-import com.bb.hbx.base.v.PolicydetailsContract;
 import com.bb.hbx.bean.PayDetail;
 import com.bb.hbx.bean.PaySign;
-import com.bb.hbx.bean.TradeDetail;
-import com.bb.hbx.utils.ZfbUtils;
-
-import retrofit2.Callback;
-
-import static android.view.View.Z;
-import static com.bb.hbx.R.drawable.my;
+import com.bb.hbx.interfaces.Pay;
+import com.bb.hbx.pay.PayFactory;
+import com.bb.hbx.pay.alipay.Alipay;
+import com.bb.hbx.pay.llianlianpay.LianlianPay;
+import com.bb.hbx.pay.llianlianpay.utils.PayOrder;
 
 /**
  * Created by fancl.
@@ -26,6 +23,10 @@ public class ConfimpaymentPresenter extends ConfimpaymentContract.Presenter {
 
     private String payPassword = "";
 
+    private PayFactory payFactory;
+
+    private Pay pay;
+
 
     public void setPayPassword(String payPassword) {
         this.payPassword = payPassword;
@@ -36,7 +37,14 @@ public class ConfimpaymentPresenter extends ConfimpaymentContract.Presenter {
     }
 
     @Override
+    public void getPaymentInfo(String paymentId, String orderNo) {
+        mModel.getPaymentInfo(paymentId, MyApplication.user.getUserId(), orderNo, postCallback);
+    }
+
+    @Override
     public void onAttached() {
+        payFactory = new PayFactory();
+
         postCallback = new PostCallback<ConfimpaymentContract.View>(mView) {
 
             @Override
@@ -44,7 +52,16 @@ public class ConfimpaymentPresenter extends ConfimpaymentContract.Presenter {
 
                 if (api.getOutput() instanceof PaySign) {
                     PaySign paySign = (PaySign) api.getOutput();
-                    ZfbUtils.getInstance().startPay(paySign);
+                    pay = new Alipay();
+                    payFactory.setPay(pay);
+                    payFactory.factory(paySign);
+
+
+                } else if (api.getOutput() instanceof PayOrder) {
+                    PayOrder payorder = (PayOrder) api.getOutput();
+                    pay = new LianlianPay();
+                    payFactory.setPay(pay);
+                    payFactory.factory(payorder);
                 } else {//
                     mView.dissDialog();
                 }

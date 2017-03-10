@@ -45,7 +45,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
-
     compile 'com.github.promeg:tinypinyin:1.0.0'
     // ~80KB
     compile files('libs/aliyun-oss-sdk-android-2.3.0.jar')
@@ -53,4 +52,5 @@ dependencies {
     compile project(':pullToRefresh_Library')
     compile files('libs/alipaySdk-20160825.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile files('libs/SecurePay-2.6.5.jar')
 }

@@ -210,6 +210,9 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
+        <activity android:name=".activitiy.MyBankCardActivity" />
+        <activity android:name=".activitiy.SettingsActivity" />
+        <activity android:name=".activitiy.FeedBackActivity"></activity>
 
         <!-- 支付宝支付-->
         <activity
@@ -222,9 +225,26 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
-        <activity android:name=".activitiy.MyBankCardActivity" />
-        <activity android:name=".activitiy.SettingsActivity" />
-        <activity android:name=".activitiy.FeedBackActivity"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+
+
+        <!-- 连连支付-->
+        <service
+            android:name="com.yintong.secure.service.PayService"
+            >
+        </service>
+
+        <!--连连支付 LLYT SDK START -->
+        <activity
+            android:name="com.yintong.secure.activity.BaseActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+
+
+
+       <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"

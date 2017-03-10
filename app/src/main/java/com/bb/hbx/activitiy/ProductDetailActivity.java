@@ -30,6 +30,7 @@ import com.bb.hbx.bean.Entry;
 import com.bb.hbx.bean.Insured;
 import com.bb.hbx.bean.InsuredInfolBean;
 import com.bb.hbx.bean.KeyBean;
+import com.bb.hbx.bean.PayDetail;
 import com.bb.hbx.bean.Plan;
 import com.bb.hbx.bean.PriceTag;
 import com.bb.hbx.bean.ProdectDetalRequest;

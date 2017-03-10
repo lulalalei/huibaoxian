@@ -1,4 +1,6 @@
-package com.bb.hbx.utils;
+package com.bb.hbx.pay.alipay;
+
+import com.bb.hbx.utils.Base64;
 
 import java.security.KeyFactory;
 import java.security.PrivateKey;

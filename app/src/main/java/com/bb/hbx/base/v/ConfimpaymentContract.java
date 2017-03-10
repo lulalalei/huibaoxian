@@ -1,9 +1,12 @@
 package com.bb.hbx.base.v;
 
+import android.app.Activity;
+
 import com.bb.hbx.base.m.BaseModel;
 import com.bb.hbx.base.p.BasePresenter;
 import com.bb.hbx.bean.PayDetail;
 import com.bb.hbx.bean.TradeDetail;
+
 
 import retrofit2.Callback;
 
@@ -20,6 +23,8 @@ public interface ConfimpaymentContract {
         void getPaySign(PayDetail detail, Callback callback);
 
         void verifyPayPwd(String userId, String payPwd, Callback callback);
+
+        void getPaymentInfo(String paymentId, String userId, String orderNo, Callback callback);
 
     }
 
@@ -44,6 +49,7 @@ public interface ConfimpaymentContract {
         public abstract void setPayPassword(String payPassword);
 
         public abstract String getPayPassword();
+        public abstract  void getPaymentInfo(String paymentId,String orderNo);
 
     }
 }

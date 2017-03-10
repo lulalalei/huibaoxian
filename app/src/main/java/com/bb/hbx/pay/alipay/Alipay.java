@@ -1,67 +1,37 @@
-package com.bb.hbx.utils;
+package com.bb.hbx.pay.alipay;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.alipay.sdk.app.PayTask;
-import com.bb.hbx.MyApplication;
 import com.bb.hbx.activitiy.ConfirmpaymentActivity;
 import com.bb.hbx.activitiy.PolicydetailsActivity;
 import com.bb.hbx.activitiy.ProductDetailActivity;
 import com.bb.hbx.api.GenApiHashUrl;
-import com.bb.hbx.base.v.BaseView;
 import com.bb.hbx.bean.PaySign;
+import com.bb.hbx.interfaces.Pay;
+import com.bb.hbx.utils.AppManager;
+import com.bb.hbx.utils.TimeUtils;
+import com.bb.hbx.utils.Utils;
+
 import com.bb.hbx.widget.BaseAsyncTask;
 
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.jar.Attributes;
-
-import static com.alipay.sdk.app.statistic.c.s;
-import static com.bb.hbx.utils.Constants.PARTNER;
-import static com.bb.hbx.utils.Constants.RSA_PRIVATE;
-import static com.bb.hbx.utils.Constants.SELLER;
-import static com.bb.hbx.utils.Constants.SUCCESS;
-import static com.bb.hbx.utils.ShareSPUtils.mContext;
-import static org.greenrobot.greendao.async.AsyncOperation.OperationType.Load;
 
 /**
- * Created by Administrator on 2017/2/25.
+ * Created by Administrator on 2017/3/9.
  */
 
-public class ZfbUtils {
-
-
-    ReturnTask task;
-
-    private static ZfbUtils INSTANCE = null;
-
-    public static ZfbUtils getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new ZfbUtils();
-        }
-        return INSTANCE;
-    }
-
-    private ZfbUtils() {
-    }
-
+public class Alipay implements Pay<PaySign> {
 
     private static final int SDK_PAY_FLAG = 1;
+
+    ReturnTask task;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -107,6 +77,11 @@ public class ZfbUtils {
         ;
     };
 
+
+    @Override
+    public void pay(PaySign paySign) {
+        getOrderInfo(paySign);
+    }
 
     /**
      * create the order info. 创建订单信息
@@ -170,30 +145,6 @@ public class ZfbUtils {
     }
 
 
-    public void startPay(final PaySign paySign) {
-        task = new ReturnTask(paySign);
-        Runnable payRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                // 构造PayTask 对象
-                PayTask alipay = new PayTask(AppManager.getInstance().currentActivity());
-                // 调用支付接口，获取支付结果
-                String result = alipay.pay(getOrderInfo(paySign), true);
-
-                Message msg = new Message();
-                msg.what = SDK_PAY_FLAG;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-            }
-        };
-
-        // 必须异步调用
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
-    }
-
-
     private String getSignType() {
         return "sign_type=\"RSA\"";
     }
@@ -245,4 +196,6 @@ public class ZfbUtils {
             }
         }
     }
+
+
 }

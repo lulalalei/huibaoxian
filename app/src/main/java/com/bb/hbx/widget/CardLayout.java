@@ -243,6 +243,9 @@ public class CardLayout extends LinearLayout implements View.OnClickListener {
             case CARD1:
                 rel_1.setVisibility(View.VISIBLE);
                 rel.setVisibility(View.GONE);
+                if (listener != null) {
+                    listener.onclick(CARD1);
+                }
                 break;
             case CARD2:
                 rel_1.setVisibility(View.GONE);
