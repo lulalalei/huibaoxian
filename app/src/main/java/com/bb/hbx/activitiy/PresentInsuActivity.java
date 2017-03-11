@@ -72,7 +72,7 @@ public class PresentInsuActivity extends BaseActivity implements View.OnClickLis
             fragment.setArguments(bundle);
             fragmentList.add(fragment);
         }
-        getPresentProductInfo();
+//        getPresentProductInfo();
         adapter = new MyPresentInsuAdapter(getSupportFragmentManager(), fragmentList, title);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
@@ -94,9 +94,9 @@ public class PresentInsuActivity extends BaseActivity implements View.OnClickLis
     /**
      * 请求服务器获得赠险产品信息
      */
-    public void getPresentProductInfo() {
+    public void getPresentProductInfo(String sts) {
         ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
-        Call call = service.getPresentProduct(MyApplication.user.getUserId());
+        Call call = service.getPresentProduct(MyApplication.user.getUserId(),sts);
         call.enqueue(new PostCallback() {
             @Override
             public void successCallback(Result_Api api) {

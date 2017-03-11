@@ -1,7 +1,6 @@
 package com.bb.hbx.activitiy;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -53,7 +52,6 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
     public void initView() {
         oldPhoneNum = MyApplication.user.getMobile();
         phone_tv.setText(oldPhoneNum);
-        Log.d("mima--------:",MyApplication.user.getLoginPwd());
     }
 
     @Override

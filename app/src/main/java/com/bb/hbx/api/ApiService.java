@@ -471,8 +471,14 @@ public interface ApiService {
                                   @Field("mobile") String mobile,
                                   @Field("smsCodeNew") String smsCodeNew);
 
+    //修改手机号密码校验
+    @FormUrlEncoded
+    @POST("api.do?method=verifyPwd&type=post")
+    Call<Result_Api> checkVerifyPwd(@Field("userId") String userId,@Field("loginPwd") String loginPwd);
+
     //赠险产品
     @FormUrlEncoded
     @POST("api.do?method=presentProduct&type=post")
-    Call<Result_Api<String>> getPresentProduct(@Field("userId") String userId);
+    Call<Result_Api<String>> getPresentProduct(@Field("userId") String userId,@Field("sts") String sts);
+
 }

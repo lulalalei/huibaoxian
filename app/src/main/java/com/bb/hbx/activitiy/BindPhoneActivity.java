@@ -112,8 +112,10 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
             call.enqueue(new PostCallback() {
                 @Override
                 public void successCallback(Result_Api api) {
-                    if (api.getOutput() != null) {
-                        Log.i("ZXY", "BindPhoneActivity.successCallback.api:" + api.getOutput().toString());
+                    if (api.isSuccess()) {
+                        Toast.makeText(getApplicationContext(),"绑定新手机成功！",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(),"绑定新手机失败!",Toast.LENGTH_SHORT).show();
                     }
                 }
 
