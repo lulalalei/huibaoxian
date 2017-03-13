@@ -339,7 +339,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                     db.execSQL("update userstb set hasLogined=?,userId=?,sessionId=?,isBClient=?,name=?,gender=?,email=?,phone=?,pwd=?,paymentPwd=?,usericon=? where currentUser=currentUser ",
                             new String[]{"true",userId,sessionId,isBClient,userName,gender,email,phone,loginPwd,paymentPwd,logo});
                     db.close();
-                    showTip("登陆成功");
+                    showTip(body.getRespMsg());
 
                     MyApplication.user.setUserId(userId);
                     MyApplication.user.setMobile(phone);
@@ -353,7 +353,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModel> impl
                 }
                 else
                 {
-                    showTip("不存在该用户");
+                    showTip(body.getRespMsg());
                 }
             }
 
