@@ -7,14 +7,23 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.bb.hbx.MyApplication;
 import com.bb.hbx.R;
 import com.bb.hbx.adapter.MyCanReceiveInPresInsuAdapter;
+import com.bb.hbx.api.ApiService;
+import com.bb.hbx.api.Result_Api;
+import com.bb.hbx.api.RetrofitFactory;
 import com.bb.hbx.base.BaseFragment;
+import com.bb.hbx.bean.GetPresentProduct;
 import com.bb.hbx.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/2/9.
@@ -28,7 +37,7 @@ public class CanReceiveInPreInsuFragment extends BaseFragment{
     RecyclerView recyclerView;
     Context mContext;
     GridLayoutManager manager;
-    ArrayList<String> list=new ArrayList<>();
+    List<GetPresentProduct.OutputBean> list=new ArrayList<>();
     MyCanReceiveInPresInsuAdapter adapter;
     private static CanReceiveInPreInsuFragment fragment;
     public static CanReceiveInPreInsuFragment getInstance()
@@ -70,9 +79,22 @@ public class CanReceiveInPreInsuFragment extends BaseFragment{
         {
             list.clear();
         }
-        for (int i = 0; i < 6; i++) {
-            list.add("i:"+i);
-        }
+
+        ApiService service = RetrofitFactory.getINSTANCE().create(ApiService.class);
+        Call call=service.getPresentProduct(MyApplication.user.getUserId(),"1");
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Result_Api body = (Result_Api) response.body();
+                GetPresentProduct output = (GetPresentProduct) body.getOutput();
+                list.addAll(output.getOutput());
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(mContext,"fail",Toast.LENGTH_SHORT).show();
+            }
+        });
         adapter.notifyDataSetChanged();
         adapter.setOnPresentClickListener(new OnItemClickListener() {
             @Override

@@ -17,6 +17,7 @@ import com.bb.hbx.bean.GetBankCardList;
 import com.bb.hbx.bean.GetInsured;
 import com.bb.hbx.bean.GetMyPageInfoBean;
 import com.bb.hbx.bean.GetPolicies;
+import com.bb.hbx.bean.GetPresentProduct;
 import com.bb.hbx.bean.GetTotalIncomeBean;
 import com.bb.hbx.bean.GetTotalIncomeDetail;
 import com.bb.hbx.bean.GetTradesBean;
@@ -479,6 +480,6 @@ public interface ApiService {
     //赠险产品
     @FormUrlEncoded
     @POST("api.do?method=presentProduct&type=post")
-    Call<Result_Api<String>> getPresentProduct(@Field("userId") String userId,@Field("sts") String sts);
+    Call<Result_Api<GetPresentProduct>> getPresentProduct(@Field("userId") String userId, @Field("sts") String sts);
 
 }

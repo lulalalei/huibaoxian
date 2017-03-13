@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bb.hbx.R;
+import com.bb.hbx.bean.GetPresentProduct;
 import com.bb.hbx.interfaces.OnItemClickListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,13 +22,13 @@ import butterknife.ButterKnife;
 
 public class MyCanReceiveInPresInsuAdapter extends RecyclerView.Adapter<MyCanReceiveInPresInsuAdapter.MyViewHolder>{
 
-    ArrayList<String> list;
+    List<GetPresentProduct.OutputBean> list;
     Context mContext;
     LayoutInflater inflater;
     OnItemClickListener onPresentClickListener;
     OnItemClickListener onBuyClickListener;
 
-    public MyCanReceiveInPresInsuAdapter(ArrayList<String> list, Context mContext) {
+    public MyCanReceiveInPresInsuAdapter(List<GetPresentProduct.OutputBean> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
         inflater=LayoutInflater.from(mContext);
